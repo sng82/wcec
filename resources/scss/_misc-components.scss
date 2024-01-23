@@ -1,0 +1,65 @@
+
+.orange-swipe {
+    border: none;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-image: linear-gradient(to right, transparent, #e06222, transparent) 1;
+}
+
+.red-swipe {
+    border: none;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-image: linear-gradient(to right, transparent, #b91c1c, transparent) 1;
+}
+
+.blue-swipe {
+    border: none;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-image: linear-gradient(to right, transparent, #0369a1, transparent) 1;
+}
+
+.header-layer {
+    background-image: url("/resources/img/wcec-crest-blue.webp");
+    background-position: right;
+    background-repeat: no-repeat;
+}
+
+.image-banner {
+    background-size: cover;
+    background-position: center center;
+}
+
+.banner-home {
+    background-image: url('/resources/img/banners/wcec-banner.webp'); // old site
+}
+
+.banner-membership {
+    background-image: url('/resources/img/banners/membership.png');
+}
+
+.banner-supporting {
+    background-image: url('/resources/img/banners/teaching-2.webp'); // https://pixabay.com/photos/teacher-learning-school-teaching-4784916/
+}
+
+.banner-hall {
+    background-image: url('/resources/img/banners/armourers-hall-2.webp'); // https://commons.wikimedia.org/wiki/File:Armourers%27_and_Brasiers%27_Hall,_London_1.jpg
+}
+
+.banner-about {
+    background-image: url('/resources/img/banners/wcec-certificates.webp'); // old site
+}
+
+
+//@media (min-width: 1200px) {
+//    .page-title.over-banner-image {
+//        margin-top: -250px;
+//        position: absolute;
+//        background: rgba(255,255,255,0.7);
+//        padding: 15px;
+//        font-size: 4rem;
+//        z-index: 10;
+//    }
+//}
+
