@@ -1,0 +1,152 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-dd8a78f0.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/img/Ceris-Burns-colour-2-225x300.jpg": {
+    "file": "assets/Ceris-Burns-colour-2-225x300-18ad262f.jpg",
+    "src": "resources/img/Ceris-Burns-colour-2-225x300.jpg"
+  },
+  "resources/img/Chris-Luxton-2.jpg": {
+    "file": "assets/Chris-Luxton-2-cf1728a0.jpg",
+    "src": "resources/img/Chris-Luxton-2.jpg"
+  },
+  "resources/img/Elijah-Howell-286x300.jpg": {
+    "file": "assets/Elijah-Howell-286x300-e35fae74.jpg",
+    "src": "resources/img/Elijah-Howell-286x300.jpg"
+  },
+  "resources/img/ST-OLAVES-300x200.jpg": {
+    "file": "assets/ST-OLAVES-300x200-1aa87a52.jpg",
+    "src": "resources/img/ST-OLAVES-300x200.jpg"
+  },
+  "resources/img/armourers.jpg": {
+    "file": "assets/armourers-fa423c64.jpg",
+    "src": "resources/img/armourers.jpg"
+  },
+  "resources/img/banners/armourers-hall-2.webp": {
+    "file": "assets/armourers-hall-2-9288762f.webp",
+    "src": "resources/img/banners/armourers-hall-2.webp"
+  },
+  "resources/img/banners/armourers_hall.webp": {
+    "file": "assets/armourers_hall-6c8ef0e2.webp",
+    "src": "resources/img/banners/armourers_hall.webp"
+  },
+  "resources/img/banners/membership.png": {
+    "file": "assets/membership-1d9366f0.png",
+    "src": "resources/img/banners/membership.png"
+  },
+  "resources/img/banners/teaching-2.webp": {
+    "file": "assets/teaching-2-066226cd.webp",
+    "src": "resources/img/banners/teaching-2.webp"
+  },
+  "resources/img/banners/teaching.webp": {
+    "file": "assets/teaching-a3af56bc.webp",
+    "src": "resources/img/banners/teaching.webp"
+  },
+  "resources/img/banners/wc-ec-pic.webp": {
+    "file": "assets/wc-ec-pic-af158c6b.webp",
+    "src": "resources/img/banners/wc-ec-pic.webp"
+  },
+  "resources/img/banners/wcec-banner.webp": {
+    "file": "assets/wcec-banner-a5e3a019.webp",
+    "src": "resources/img/banners/wcec-banner.webp"
+  },
+  "resources/img/banners/wcec-certificates.webp": {
+    "file": "assets/wcec-certificates-5c8238e5.webp",
+    "src": "resources/img/banners/wcec-certificates.webp"
+  },
+  "resources/img/chandelier.jpg": {
+    "file": "assets/chandelier-c8e6b16f.jpg",
+    "src": "resources/img/chandelier.jpg"
+  },
+  "resources/img/supporters/cam.jpg": {
+    "file": "assets/cam-feff1a34.jpg",
+    "src": "resources/img/supporters/cam.jpg"
+  },
+  "resources/img/supporters/ceris-burns.jpg": {
+    "file": "assets/ceris-burns-49f93921.jpg",
+    "src": "resources/img/supporters/ceris-burns.jpg"
+  },
+  "resources/img/supporters/darwin-clayton.jpg": {
+    "file": "assets/darwin-clayton-3b22616b.jpg",
+    "src": "resources/img/supporters/darwin-clayton.jpg"
+  },
+  "resources/img/supporters/exclusive.jpg": {
+    "file": "assets/exclusive-ba88a1d5.jpg",
+    "src": "resources/img/supporters/exclusive.jpg"
+  },
+  "resources/img/supporters/ice.png": {
+    "file": "assets/ice-49b9ddca.png",
+    "src": "resources/img/supporters/ice.png"
+  },
+  "resources/img/supporters/lcc.png": {
+    "file": "assets/lcc-9cb98d2e.png",
+    "src": "resources/img/supporters/lcc.png"
+  },
+  "resources/img/supporters/mayflower.jpg": {
+    "file": "assets/mayflower-774f186a.jpg",
+    "src": "resources/img/supporters/mayflower.jpg"
+  },
+  "resources/img/supporters/metzger.jpg": {
+    "file": "assets/metzger-d33a324b.jpg",
+    "src": "resources/img/supporters/metzger.jpg"
+  },
+  "resources/img/supporters/pearroc.png": {
+    "file": "assets/pearroc-736fbe0b.png",
+    "src": "resources/img/supporters/pearroc.png"
+  },
+  "resources/img/supporters/quartz-media.jpg": {
+    "file": "assets/quartz-media-f16daa35.jpg",
+    "src": "resources/img/supporters/quartz-media.jpg"
+  },
+  "resources/img/supporters/tc.png": {
+    "file": "assets/tc-08168d7b.png",
+    "src": "resources/img/supporters/tc.png"
+  },
+  "resources/img/supporters/truvox.jpg": {
+    "file": "assets/truvox-4daa79ce.jpg",
+    "src": "resources/img/supporters/truvox.jpg"
+  },
+  "resources/img/wall-art.jpg": {
+    "file": "assets/wall-art-9b614f4d.jpg",
+    "src": "resources/img/wall-art.jpg"
+  },
+  "resources/img/wc-ec-logo-1000-650x176.jpg": {
+    "file": "assets/wc-ec-logo-1000-650x176-26f10c3b.jpg",
+    "src": "resources/img/wc-ec-logo-1000-650x176.jpg"
+  },
+  "resources/img/wc-ec-pic.jpeg": {
+    "file": "assets/wc-ec-pic-e364751e.jpeg",
+    "src": "resources/img/wc-ec-pic.jpeg"
+  },
+  "resources/img/wcec-crest-2.webp": {
+    "file": "assets/wcec-crest-2-18c2bdf7.webp",
+    "src": "resources/img/wcec-crest-2.webp"
+  },
+  "resources/img/wcec-crest-alt.png": {
+    "file": "assets/wcec-crest-alt-fc8848fc.png",
+    "src": "resources/img/wcec-crest-alt.png"
+  },
+  "resources/img/wcec-crest-blue.webp": {
+    "file": "assets/wcec-crest-blue-c1d5914b.webp",
+    "src": "resources/img/wcec-crest-blue.webp"
+  },
+  "resources/img/wcec-crest-small.png": {
+    "file": "assets/wcec-crest-small-7b3602e4.png",
+    "src": "resources/img/wcec-crest-small.png"
+  },
+  "resources/img/wcec-crest.png": {
+    "file": "assets/wcec-crest-a4abf811.png",
+    "src": "resources/img/wcec-crest.png"
+  },
+  "resources/img/wcec-crest.webp": {
+    "file": "assets/wcec-crest-78dcddb7.webp",
+    "src": "resources/img/wcec-crest.webp"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-1aefb37c.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}
