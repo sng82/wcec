@@ -1,9 +1,4 @@
 {
-  "resources/css/app.css": {
-    "file": "assets/app-dd8a78f0.css",
-    "isEntry": true,
-    "src": "resources/css/app.css"
-  },
   "resources/img/Ceris-Burns-colour-2-225x300.jpg": {
     "file": "assets/Ceris-Burns-colour-2-225x300-18ad262f.jpg",
     "src": "resources/img/Ceris-Burns-colour-2-225x300.jpg"
@@ -148,5 +143,10 @@
     "file": "assets/app-1aefb37c.js",
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/scss/app.scss": {
+    "file": "assets/app-c45afebe.css",
+    "isEntry": true,
+    "src": "resources/scss/app.scss"
   }
 }
