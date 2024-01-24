@@ -27,7 +27,9 @@ new class extends Component
             <div class="hidden lg:flex">
                 <div @click.away="company_open = false" class="relative" x-data="{ company_open: false }">
                     <button @click="company_open = !company_open" type="button"
-                            class="mx-1 mt-3 flex items-center justify-center uppercase rounded-full border-2 border-transparent bg-transparent px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 lg:ml-0 xl:mr-3 xl:px-6">
+                            class="mx-1 mt-3 flex items-center justify-center uppercase rounded-full border-2 border-transparent px-2 py-2
+                            {{ @request()->is('membership', 'court', 'where-we-meet', 'history', 'supporters', 'supporting', 'our-church')  ? 'bg-sky-950' : 'bg-transparent' }}
+                            hover:border-red-700 hover:bg-red-700 lg:ml-0 xl:mr-3 xl:px-6">
                         The Company
                         <svg fill="currentColor" viewBox="0 0 20 20"
                              :class="{'rotate-180': company_open, 'rotate-0': !company_open}"
@@ -71,19 +73,19 @@ new class extends Component
                     </div>
                 </div>
                 <a href="/charitable-trust" wire:navigate
-                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent bg-transparent px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
+                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent {{ @request()->is('charitable-trust')  ? 'bg-sky-950' : 'bg-transparent' }} px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
                     Charitable Trust
                 </a>
                 <a href="/chartered-practitioners" wire:navigate
-                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent bg-transparent px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
+                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent {{ @request()->is('chartered-practitioners')  ? 'bg-sky-950' : 'bg-transparent' }} px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
                     Chartered Practitioners
                 </a>
                 <a href="/about" wire:navigate
-                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent bg-transparent px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
+                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent {{ @request()->is('about')  ? 'bg-sky-950' : 'bg-transparent' }} px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
                     About
                 </a>
                 <a href="/contact" wire:navigate
-                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent bg-transparent px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
+                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent {{ @request()->is('contact')  ? 'bg-sky-950' : 'bg-transparent' }} px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
                     Contact
                 </a>
             </div>
