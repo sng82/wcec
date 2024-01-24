@@ -28,7 +28,7 @@
                     <hr class="mb-2">
                     <p>
                         Should you wish to seek a Grant please download and complete the
-                        <a href="{{ Vite::asset('resources/documents/WCEC-Charity-Grant-Application-Form.docx') }}"
+                        <a href="/documents/WCEC-Charity-Grant-Application-Form.docx"
                            target="_blank"
                            class="text-red-600 hover:text-red-700">Grant Application Form [MS Word]</a>,
                         and return to the Almoner (<a href="mailto:almoner@wc-ec.com" class="text-red-600 hover:text-red-700">almoner@wc-ec.com</a>).
