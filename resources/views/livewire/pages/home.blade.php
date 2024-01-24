@@ -48,7 +48,7 @@
                 </ul>
             </div>
             <div class="mt-2 flex justify-between">
-                <a href="#" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-red-700">
+                <a href="/charitable-trust" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-red-700">
                     Read More
                 </a>
             </div>
@@ -63,7 +63,7 @@
                 </p>
             </div>
             <div class="mt-2 flex justify-between">
-                <a href="/about.php" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-900">
+                <a href="/about" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-900">
                     About Us
                 </a>
             </div>
@@ -80,7 +80,7 @@
                 </p>
             </div>
             <div class="mt-2 flex justify-between">
-                <a href="#" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-orange-700">
+                <a href="/chartered-practitioners" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-orange-700">
                     Read More
                 </a>
                 <a href="#" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-orange-700">

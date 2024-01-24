@@ -41,7 +41,7 @@
                     <p class="mt-2" style="text-wrap:balance">Worshipful Company of Environmental Cleaners<br>
                         2 Chapel Street, Potton, Sandy, Bedfordshire, SG19 2PT
                     </p>
-                    <a href="#" class="inline-block mt-4 px-8 py-2 font-bold uppercase rounded-full border-2 border-white hover:bg-white hover:text-sky-900 transition-all duration-300">
+                    <a href="/contact" class="inline-block mt-4 px-8 py-2 font-bold uppercase rounded-full border-2 border-white hover:bg-white hover:text-sky-900 transition-all duration-300">
                         Contact Us
                     </a>
                 </div>
