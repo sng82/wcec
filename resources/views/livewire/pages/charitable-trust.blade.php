@@ -75,7 +75,7 @@
                         <hr class="mb-3">
 
                         <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="{{ Vite::asset('resources/documents/annual-reports/WC-EC-Charity-AR-2022.pdf') }}"
+                           href="/documents/annual-reports/WC-EC-Charity-AR-2022.pdf"
                            target="_blank">
                             <span class="inline-block w-7">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -87,7 +87,7 @@
                             </span>
                         </a>
                         <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="{{ Vite::asset('resources/documents/annual-reports/WC-EC-Charity-AR-2021.pdf') }}"
+                           href="documents/annual-reports/WC-EC-Charity-AR-2021.pdf"
                            download>
                             <span class="inline-block w-7">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -99,7 +99,7 @@
                             </span>
                         </a>
                         <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="{{ Vite::asset('resources/documents/annual-reports/WC-EC-Charity-AR-2020.pdf') }}"
+                           href="/documents/annual-reports/WC-EC-Charity-AR-2020.pdf"
                            download>
                             <span class="inline-block w-7">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -111,7 +111,7 @@
                             </span>
                         </a>
                         <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="{{ Vite::asset('resources/documents/annual-reports/WC-EC-Charity-AR-2019.pdf') }}"
+                           href="/documents/annual-reports/WC-EC-Charity-AR-2019.pdf"
                            download>
                             <span class="inline-block w-7">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -123,7 +123,7 @@
                             </span>
                         </a>
                         <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="{{ Vite::asset('resources/documents/annual-reports/WC-EC-Charity-AR-2018.pdf') }}"
+                           href="/documents/annual-reports/WC-EC-Charity-AR-2018.pdf"
                            download>
                             <span class="inline-block w-7">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -135,7 +135,7 @@
                             </span>
                         </a>
                         <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="{{ Vite::asset('resources/documents/annual-reports/WC-EC-Charity-AR-2017.pdf') }}"
+                           href="/documents/annual-reports/WC-EC-Charity-AR-2017.pdf"
                            download>
                             <span class="inline-block w-7">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -147,7 +147,7 @@
                             </span>
                         </a>
                         <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="{{ Vite::asset('resources/documents/annual-reports/WC-EC-Charity-AR-2016.pdf') }}"
+                           href="/documents/annual-reports/WC-EC-Charity-AR-2016.pdf"
                            download>
                             <span class="inline-block w-7">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -159,7 +159,7 @@
                             </span>
                         </a>
                         <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="{{ Vite::asset('resources/documents/annual-reports/WC-EC-Charity-AR-2015.pdf') }}"
+                           href="/documents/annual-reports/WC-EC-Charity-AR-2015.pdf"
                            download>
                             <span class="inline-block w-7">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -171,7 +171,7 @@
                             </span>
                         </a>
                         <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="{{ Vite::asset('resources/documents/annual-reports/WC-EC-Charity-AR-2014.pdf') }}"
+                           href="/documents/annual-reports/WC-EC-Charity-AR-2014.pdf"
                            download>
                             <span class="inline-block w-7">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -183,7 +183,7 @@
                             </span>
                         </a>
                         <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="{{ Vite::asset('resources/documents/annual-reports/WC-EC-Charity-AR-2013.pdf') }}"
+                           href="/documents/annual-reports/WC-EC-Charity-AR-2013.pdf"
                            download>
                             <span class="inline-block w-7">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -195,7 +195,7 @@
                             </span>
                         </a>
                         <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="{{ Vite::asset('resources/documents/annual-reports/WC-EC-Charity-AR-2012.pdf') }}"
+                           href="/documents/annual-reports/WC-EC-Charity-AR-2012.pdf"
                            download>
                             <span class="inline-block w-7">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

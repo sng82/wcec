@@ -146,7 +146,7 @@
                                 <div class="rounded-b-lg bg-sky-800 px-16 pt-8 pb-12 text-white">
                                     <h2 class="mb-3 text-2xl xl:text-3xl">Materials</h2>
                                     <hr class="mb-3">
-                                    <a href="{{ Vite::asset('resources/documents/WCEC-CP-03-05-EXPRESSION-OF-INTEREST-FORM_v5_FEB-2021.docx') }}"
+                                    <a href="/documents/WCEC-CP-03-05-EXPRESSION-OF-INTEREST-FORM_v5_FEB-2021.docx"
                                        class="flex text-sky-100 hover:text-white align-center mt-3"
                                        download>
                                         <span class="inline-block w-7">
@@ -158,7 +158,7 @@
                                             EXPRESSION OF INTEREST FORM (v5 FEB 2021)
                                         </span>
                                     </a>
-                                    <a href="{{ Vite::asset('resources/documents/WCEC-CP-02-04-GUIDE-FOR-EXPRESSION-OF-INTEREST_v4_FEB-2021.docx') }}"
+                                    <a href="/documents/WCEC-CP-02-04-GUIDE-FOR-EXPRESSION-OF-INTEREST_v4_FEB-2021.docx"
                                        class="flex text-sky-100 hover:text-white align-center mt-3"
                                        download>
                                         <span class="inline-block w-7">
@@ -250,7 +250,7 @@
                                 <div class="rounded-b-lg bg-sky-800 px-16 pt-8 pb-12 text-white">
                                     <h2 class="mb-2 text-2xl xl:text-3xl">Materials</h2>
                                     <hr class="mb-2">
-                                    <a href="{{ Vite::asset('resources/documents/WCEC-CP-05-04-ASSESSMENT-CRITERIA_v4_MAR-2021.pdf') }}"
+                                    <a href="/documents/WCEC-CP-05-04-ASSESSMENT-CRITERIA_v4_MAR-2021.pdf"
                                        class="flex text-sky-100 hover:text-white align-center mt-3"
                                        download>
                                         <span class="inline-block w-7">
@@ -263,7 +263,7 @@
                                         </span>
                                     </a>
 
-                                    <a href="{{ Vite::asset('resources/documents/APPENDIX-1-to-WCEC-CP-05-04_v2_MAR-2021.pdf') }}"
+                                    <a href="/documents/APPENDIX-1-to-WCEC-CP-05-04_v2_MAR-2021.pdf"
                                        class="flex text-sky-100 hover:text-white align-center mt-3"
                                        download>
                                         <span class="inline-block w-7">
@@ -276,7 +276,7 @@
                                         </span>
                                     </a>
 
-                                    <a href="{{ Vite::asset('resources/documents/WCEC.CP-10-03-DEFINITIONS-_v3_MAR-2021.pdf') }}"
+                                    <a href="/documents/WCEC.CP-10-03-DEFINITIONS-_v3_MAR-2021.pdf"
                                        class="flex text-sky-100 hover:text-white align-center mt-3"
                                        download>
                                         <span class="inline-block w-7">
@@ -289,7 +289,7 @@
                                         </span>
                                     </a>
 
-                                    <a href="{{ Vite::asset('resources/documents/WCEC-CP-08-04-APPEALS-PROCEDURES_v4_MAR-2021.pdf') }}"
+                                    <a href="/documents/WCEC-CP-08-04-APPEALS-PROCEDURES_v4_MAR-2021.pdf"
                                        class="flex text-sky-100 hover:text-white align-center mt-3"
                                        download>
                                         <span class="inline-block w-7">
