@@ -56,7 +56,7 @@
                                     </div>
 
                                     <button type="submit" class="bg-sky-700 text-white rounded-full px-6 py-2 mt-3 hover:bg-sky-800 active:bg-sky-900 uppercase">
-                                        {{ $submitting ? 'Sending...' : 'Send' }}
+                                        Send
                                     </button>
                                 </form>
                             </div>
