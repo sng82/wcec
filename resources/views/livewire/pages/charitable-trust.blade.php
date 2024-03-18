@@ -15,24 +15,39 @@
                         On 3 June 1997 it changed its name from Benevolent Fund to Charity Trust.
                     </p>
                     <p>
-                        The Trust was established to:
+{{--                        The Trust was established to:--}}
+                        The Trustees current priorities are:
                     </p>
                     <ul class="mb-3 ml-6 list-disc marker:text-red-700 space-y-2">
-                        <li>Help less fortunate people engaged in cleaning in industry, commerce and public service (and their wives, widows, children and other dependents) who are in need of financial support.</li>
-                        <li>Further education and training in connection with the advancement of hygiene within the community.</li>
-                        <li>Benefit other charitable institutions (where more than one of the Trustees sees fit and with the consent of the company).</li>
+                        <li>Education and training in connection with the advancement of hygiene within the community.</li>
+                        <li>Helping those less fortunate (including disadvantage and disabled) who are in need of support - in particular those engaged in cleaning in industry, commerce and public service (and their wives, widows, children and other dependents).</li>
+                        <li>Support to public servants, in particular the Armed Forces.</li>
+                        <li>Other charitable institutions.</li>
+
+{{--                        <li>Help less fortunate people engaged in cleaning in industry, commerce and public service (and their wives, widows, children and other dependents) who are in need of financial support.</li>--}}
+{{--                        <li>Further education and training in connection with the advancement of hygiene within the community.</li>--}}
+{{--                        <li>Benefit other charitable institutions (where more than one of the Trustees sees fit and with the consent of the company).</li>--}}
                     </ul>
 
 
                     <h2 class="mt-12 mb-2 text-2xl xl:text-3xl ">Applying for Grants</h2>
                     <hr class="mb-2">
-                    <p>
-                        Should you wish to seek a Grant please download and complete the
-                        <a href="/documents/WCEC-Charity-Grant-Application-Form.docx"
-                           target="_blank"
-                           class="text-red-600 hover:text-red-700">Grant Application Form [MS Word]</a>,
-                        and return to the Almoner (<a href="mailto:almoner@wc-ec.com" class="text-red-600 hover:text-red-700">almoner@wc-ec.com</a>).
-                    </p>
+                    <div class="flex flex-col xl:flex-row gap-4 xl:gap-8">
+                        <div class="rounded-2xl bg-sky-800 p-4 lg:p-8 text-white mt-2">
+                            <h3 class="mb-3 text-xl xl:text-2xl">Under £1,000</h3>
+                            <hr class="mb-3">
+                            <p>Applicants should contact the Almoner (<a href="mailto:almoner@wc-ec.com" class="text-red-600 hover:text-red-700">almoner@wc-ec.com</a>) with an outline of the request and the impact it will make.</p>
+                        </div>
+                        <div class="rounded-2xl bg-sky-800 p-4 lg:p-8 text-white mt-2">
+                            <h3 class="mb-3 text-xl xl:text-2xl">Over £1,000</h3>
+                            <hr class="mb-3">
+                            <p>Complete the
+                                <a href="/documents/WCEC-Charity-Grant-Application-Form.docx"
+                                   target="_blank"
+                                   class="text-red-600 hover:text-red-700">Grant Application Form [MS Word]</a>,
+                                and return to the Almoner (<a href="mailto:almoner@wc-ec.com" class="text-red-600 hover:text-red-700">almoner@wc-ec.com</a>).</p>
+                        </div>
+                    </div>
 
                     <h2 class="mt-12 mb-2 text-2xl xl:text-3xl ">Supporting the Trust</h2>
                     <hr class="mb-2">
@@ -49,165 +64,165 @@
                         Voluntary donations can be made by Bankers Order.
                     </p>
 
-                    <h2 class="mt-12 mb-2 text-2xl xl:text-3xl">Donations Made and Awards Granted</h2>
-                    <hr class="mb-2">
-                    <p>
-                        There are many deserving charities and we make donations specifically to the following on an annual basis, in the sum of c.£30,000.
-                    </p>
-                    <p>
-                        <a href="" class="flex text-red-600 hover:text-red-700 align-center mt-3">
-                            <span class="inline-block w-7">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                </svg>
-                            </span>
-                            <span class="inline-block">
-                                Charity Donations and Awards 2016 – 2017 [PDF]
-                            </span>
-                        </a>
-                    </p>
+{{--                    <h2 class="mt-12 mb-2 text-2xl xl:text-3xl">Donations Made and Awards Granted</h2>--}}
+{{--                    <hr class="mb-2">--}}
+{{--                    <p>--}}
+{{--                        There are many deserving charities and we make donations specifically to the following on an annual basis, in the sum of c.£30,000.--}}
+{{--                    </p>--}}
+{{--                    <p>--}}
+{{--                        <a href="" class="flex text-red-600 hover:text-red-700 align-center mt-3">--}}
+{{--                            <span class="inline-block w-7">--}}
+{{--                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">--}}
+{{--                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />--}}
+{{--                                </svg>--}}
+{{--                            </span>--}}
+{{--                            <span class="inline-block">--}}
+{{--                                Charity Donations and Awards 2016 – 2017 [PDF]--}}
+{{--                            </span>--}}
+{{--                        </a>--}}
+{{--                    </p>--}}
                 </div>
 
                 <!-- Right -->
-                <div class="flex-none w-full xl:w-96">
-                    <div class="rounded-2xl bg-sky-800 text-white px-9 py-8">
-                        <h2 class="mb-3 text-3xl">Annual Reports</h2>
-                        <hr class="mb-3">
+{{--                <div class="flex-none w-full xl:w-96">--}}
+{{--                    <div class="rounded-2xl bg-sky-800 text-white px-9 py-8">--}}
+{{--                        <h2 class="mb-3 text-3xl">Annual Reports</h2>--}}
+{{--                        <hr class="mb-3">--}}
 
-                        <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="/documents/annual-reports/WC-EC-Charity-AR-2022.pdf"
-                           target="_blank">
-                            <span class="inline-block w-7">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                        </svg>
-                                    </span>
-                            <span class="inline-block">
-                            Charity Trust Annual Report – 2022
-                            </span>
-                        </a>
-                        <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="documents/annual-reports/WC-EC-Charity-AR-2021.pdf"
-                           download>
-                            <span class="inline-block w-7">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                        </svg>
-                                    </span>
-                            <span class="inline-block">
-                            Charity Trust Annual Report – 2021
-                            </span>
-                        </a>
-                        <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="/documents/annual-reports/WC-EC-Charity-AR-2020.pdf"
-                           download>
-                            <span class="inline-block w-7">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                        </svg>
-                                    </span>
-                            <span class="inline-block">
-                            Charity Trust Annual Report – 2020
-                            </span>
-                        </a>
-                        <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="/documents/annual-reports/WC-EC-Charity-AR-2019.pdf"
-                           download>
-                            <span class="inline-block w-7">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                        </svg>
-                                    </span>
-                            <span class="inline-block">
-                            Charity Trust Annual Report – 2019
-                            </span>
-                        </a>
-                        <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="/documents/annual-reports/WC-EC-Charity-AR-2018.pdf"
-                           download>
-                            <span class="inline-block w-7">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                        </svg>
-                                    </span>
-                            <span class="inline-block">
-                            Charity Trust Annual Report – 2018
-                            </span>
-                        </a>
-                        <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="/documents/annual-reports/WC-EC-Charity-AR-2017.pdf"
-                           download>
-                            <span class="inline-block w-7">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                        </svg>
-                                    </span>
-                            <span class="inline-block">
-                            Charity Trust Annual Report – 2017
-                            </span>
-                        </a>
-                        <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="/documents/annual-reports/WC-EC-Charity-AR-2016.pdf"
-                           download>
-                            <span class="inline-block w-7">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                        </svg>
-                                    </span>
-                            <span class="inline-block">
-                            Charity Trust Annual Report – 2016
-                            </span>
-                        </a>
-                        <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="/documents/annual-reports/WC-EC-Charity-AR-2015.pdf"
-                           download>
-                            <span class="inline-block w-7">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                        </svg>
-                                    </span>
-                            <span class="inline-block">
-                            Charity Trust Annual Report – 2015
-                            </span>
-                        </a>
-                        <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="/documents/annual-reports/WC-EC-Charity-AR-2014.pdf"
-                           download>
-                            <span class="inline-block w-7">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                        </svg>
-                                    </span>
-                            <span class="inline-block">
-                            Charity Trust Annual Report – 2014
-                            </span>
-                        </a>
-                        <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="/documents/annual-reports/WC-EC-Charity-AR-2013.pdf"
-                           download>
-                            <span class="inline-block w-7">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                        </svg>
-                                    </span>
-                            <span class="inline-block">
-                            Charity Trust Annual Report – 2013
-                            </span>
-                        </a>
-                        <a class="flex text-sky-100 hover:text-white align-center mt-3"
-                           href="/documents/annual-reports/WC-EC-Charity-AR-2012.pdf"
-                           download>
-                            <span class="inline-block w-7">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                        </svg>
-                                    </span>
-                            <span class="inline-block">
-                            Charity Trust Annual Report – 2012
-                            </span>
-                        </a>
-                    </div>
-                </div>
+{{--                        <a class="flex text-sky-100 hover:text-white align-center mt-3"--}}
+{{--                           href="/documents/annual-reports/WC-EC-Charity-AR-2022.pdf"--}}
+{{--                           target="_blank">--}}
+{{--                            <span class="inline-block w-7">--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">--}}
+{{--                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />--}}
+{{--                                        </svg>--}}
+{{--                                    </span>--}}
+{{--                            <span class="inline-block">--}}
+{{--                            Charity Trust Annual Report – 2022--}}
+{{--                            </span>--}}
+{{--                        </a>--}}
+{{--                        <a class="flex text-sky-100 hover:text-white align-center mt-3"--}}
+{{--                           href="documents/annual-reports/WC-EC-Charity-AR-2021.pdf"--}}
+{{--                           download>--}}
+{{--                            <span class="inline-block w-7">--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">--}}
+{{--                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />--}}
+{{--                                        </svg>--}}
+{{--                                    </span>--}}
+{{--                            <span class="inline-block">--}}
+{{--                            Charity Trust Annual Report – 2021--}}
+{{--                            </span>--}}
+{{--                        </a>--}}
+{{--                        <a class="flex text-sky-100 hover:text-white align-center mt-3"--}}
+{{--                           href="/documents/annual-reports/WC-EC-Charity-AR-2020.pdf"--}}
+{{--                           download>--}}
+{{--                            <span class="inline-block w-7">--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">--}}
+{{--                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />--}}
+{{--                                        </svg>--}}
+{{--                                    </span>--}}
+{{--                            <span class="inline-block">--}}
+{{--                            Charity Trust Annual Report – 2020--}}
+{{--                            </span>--}}
+{{--                        </a>--}}
+{{--                        <a class="flex text-sky-100 hover:text-white align-center mt-3"--}}
+{{--                           href="/documents/annual-reports/WC-EC-Charity-AR-2019.pdf"--}}
+{{--                           download>--}}
+{{--                            <span class="inline-block w-7">--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">--}}
+{{--                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />--}}
+{{--                                        </svg>--}}
+{{--                                    </span>--}}
+{{--                            <span class="inline-block">--}}
+{{--                            Charity Trust Annual Report – 2019--}}
+{{--                            </span>--}}
+{{--                        </a>--}}
+{{--                        <a class="flex text-sky-100 hover:text-white align-center mt-3"--}}
+{{--                           href="/documents/annual-reports/WC-EC-Charity-AR-2018.pdf"--}}
+{{--                           download>--}}
+{{--                            <span class="inline-block w-7">--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">--}}
+{{--                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />--}}
+{{--                                        </svg>--}}
+{{--                                    </span>--}}
+{{--                            <span class="inline-block">--}}
+{{--                            Charity Trust Annual Report – 2018--}}
+{{--                            </span>--}}
+{{--                        </a>--}}
+{{--                        <a class="flex text-sky-100 hover:text-white align-center mt-3"--}}
+{{--                           href="/documents/annual-reports/WC-EC-Charity-AR-2017.pdf"--}}
+{{--                           download>--}}
+{{--                            <span class="inline-block w-7">--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">--}}
+{{--                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />--}}
+{{--                                        </svg>--}}
+{{--                                    </span>--}}
+{{--                            <span class="inline-block">--}}
+{{--                            Charity Trust Annual Report – 2017--}}
+{{--                            </span>--}}
+{{--                        </a>--}}
+{{--                        <a class="flex text-sky-100 hover:text-white align-center mt-3"--}}
+{{--                           href="/documents/annual-reports/WC-EC-Charity-AR-2016.pdf"--}}
+{{--                           download>--}}
+{{--                            <span class="inline-block w-7">--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">--}}
+{{--                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />--}}
+{{--                                        </svg>--}}
+{{--                                    </span>--}}
+{{--                            <span class="inline-block">--}}
+{{--                            Charity Trust Annual Report – 2016--}}
+{{--                            </span>--}}
+{{--                        </a>--}}
+{{--                        <a class="flex text-sky-100 hover:text-white align-center mt-3"--}}
+{{--                           href="/documents/annual-reports/WC-EC-Charity-AR-2015.pdf"--}}
+{{--                           download>--}}
+{{--                            <span class="inline-block w-7">--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">--}}
+{{--                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />--}}
+{{--                                        </svg>--}}
+{{--                                    </span>--}}
+{{--                            <span class="inline-block">--}}
+{{--                            Charity Trust Annual Report – 2015--}}
+{{--                            </span>--}}
+{{--                        </a>--}}
+{{--                        <a class="flex text-sky-100 hover:text-white align-center mt-3"--}}
+{{--                           href="/documents/annual-reports/WC-EC-Charity-AR-2014.pdf"--}}
+{{--                           download>--}}
+{{--                            <span class="inline-block w-7">--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">--}}
+{{--                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />--}}
+{{--                                        </svg>--}}
+{{--                                    </span>--}}
+{{--                            <span class="inline-block">--}}
+{{--                            Charity Trust Annual Report – 2014--}}
+{{--                            </span>--}}
+{{--                        </a>--}}
+{{--                        <a class="flex text-sky-100 hover:text-white align-center mt-3"--}}
+{{--                           href="/documents/annual-reports/WC-EC-Charity-AR-2013.pdf"--}}
+{{--                           download>--}}
+{{--                            <span class="inline-block w-7">--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">--}}
+{{--                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />--}}
+{{--                                        </svg>--}}
+{{--                                    </span>--}}
+{{--                            <span class="inline-block">--}}
+{{--                            Charity Trust Annual Report – 2013--}}
+{{--                            </span>--}}
+{{--                        </a>--}}
+{{--                        <a class="flex text-sky-100 hover:text-white align-center mt-3"--}}
+{{--                           href="/documents/annual-reports/WC-EC-Charity-AR-2012.pdf"--}}
+{{--                           download>--}}
+{{--                            <span class="inline-block w-7">--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">--}}
+{{--                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />--}}
+{{--                                        </svg>--}}
+{{--                                    </span>--}}
+{{--                            <span class="inline-block">--}}
+{{--                            Charity Trust Annual Report – 2012--}}
+{{--                            </span>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
             </div>
         </div>

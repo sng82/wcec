@@ -4,7 +4,7 @@ use App\Livewire\Pages\About;
 use App\Livewire\Pages\CharitableTrust;
 use App\Livewire\Pages\CharteredPractitioners;
 use App\Livewire\Pages\Contact;
-use App\Livewire\Pages\Court;
+use App\Livewire\Pages\Officers;
 use App\Livewire\Pages\Cpr\Dashboard;
 use App\Livewire\Pages\History;
 use App\Livewire\Pages\Home;
@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 // The Company Pages
 Route::get('/', Home::class)->name('home');
 Route::get('/membership', Membership::class)->name('membership');
-Route::get('/court', Court::class)->name('court');
+Route::get('/officers', Officers::class)->name('officers');
 Route::get('/where-we-meet', WhereWeMeet::class)->name('where-we-meet');
 Route::get('/history', History::class)->name('history');
 Route::get('/supporters', Supporters::class)->name('supporters');

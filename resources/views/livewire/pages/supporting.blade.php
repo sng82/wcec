@@ -11,22 +11,26 @@
                 <p>
                     It is important for the Environmental Cleaners to support the wider community. We are therefore involved in sponsorships, awards and bursaries that link to environmental cleaning:
                 </p>
-                <h2 class="mt-12 mb-2 text-2xl xl:text-3xl ">Supporting Education</h2>
+                <h2 class="mt-12 mb-2 text-2xl xl:text-3xl ">
+                    Supporting Education
+                </h2>
                 <hr class="mb-2">
                 <p>
                     The Environmental Cleaners has a charitable fund and gives grants to support educational advancement and training in the cleaning industry and more generally.
                 </p>
                 <p>
-                    To recognise the contribution made by training colleges in developing the skills of the people working in our industry, we established an annual Eric Hill Memorial Award (named after our founder). It is awarded to the college with the highest number of successful candidates in the City and Guilds’ examinations each year in Cleaning Science and Cleaning Services Supervision.
+                    To recognise the contribution made by training colleges in developing the skills of the people working in our industry, we established an annual Eric Hill Memorial Award (named after our founder).
+{{--                    To recognise the contribution made by training colleges in developing the skills of the people working in our industry, we established an annual Eric Hill Memorial Award (named after our founder). It is awarded to the college with the highest number of successful candidates in the City and Guilds’ examinations each year in Cleaning Science and Cleaning Services Supervision.--}}
                 </p>
+{{--                <p>--}}
+{{--                    We also provide support for students to undertake a foundation degree course – developed in collaboration with the British Institute of Cleaning Science (BICSc) – in Environmental Cleaning Management at Northampton University. The students’ places are funded by a donation to the University from one of our ‘late’ members, John Butler.--}}
+{{--                </p>--}}
+{{--                <p>--}}
+{{--                    The University manages these funds and also selects the students who will be supported each year. This is a unique opportunity to obtain a nationally-recognised qualification in cleaning management while working within the cleaning or allied industries, or to make a career change from another sector.--}}
+{{--                </p>--}}
                 <p>
-                    We also provide support for students to undertake a foundation degree course – developed in collaboration with the British Institute of Cleaning Science (BICSc) – in Environmental Cleaning Management at Northampton University. The students’ places are funded by a donation to the University from one of our ‘late’ members, John Butler.
-                </p>
-                <p>
-                    The University manages these funds and also selects the students who will be supported each year. This is a unique opportunity to obtain a nationally-recognised qualification in cleaning management while working within the cleaning or allied industries, or to make a career change from another sector.
-                </p>
-                <p>
-                    As a contribution to education more generally, we also provide bursaries for students of the City of London School for Girls and the Guildhall School of Music and Drama. We provide grants for prizes at the City of London School, the City of London Freemen’s School and the City of London School for Girls.
+                    As a contribution to education more generally, we also provide bursaries for students of the City of London School for Girls. We provide grants for prizes at the City of London School, the City of London Freemen’s School and the City of London School for Girls.
+{{--                    As a contribution to education more generally, we also provide bursaries for students of the City of London School for Girls and the Guildhall School of Music and Drama. We provide grants for prizes at the City of London School, the City of London Freemen’s School and the City of London School for Girls.--}}
                 </p>
 
                 <h2 class="mt-12 mb-2 text-2xl xl:text-3xl ">Supporting the Cleaning Industry</h2>

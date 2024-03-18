@@ -5,14 +5,14 @@ namespace App\Livewire\Pages;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-class Court extends Component
+class Officers extends Component
 {
-    public $title = "The Court & Office";
-    public $description = "The Court and Office";
+    public $title = "Officers";
+    public $description = "Officers";
 
     public function render()
     {
-        return view('livewire.pages.court')
+        return view('livewire.pages.officers')
             ->layout('layouts.front', [
                 'title' => $this->title,
                 'description' => $this->description

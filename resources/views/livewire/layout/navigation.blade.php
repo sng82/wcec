@@ -25,6 +25,12 @@ new class extends Component
     <nav class="flex bg-sky-900 text-white main-nav lg-text-sky-900 shadow-md">
         <div class="container mx-auto px-5 mb-3 flex justify-between font-semibold uppercase">
             <div class="hidden lg:flex">
+                <a href="/about" wire:navigate
+                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent
+                   {{ @request()->is('about')  ? 'bg-sky-950' : 'bg-transparent' }}
+                   px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
+                    About
+                </a>
                 <div @click.away="company_open = false" class="relative" x-data="{ company_open: false }">
                     <button @click="company_open = !company_open" type="button"
                             class="mx-1 mt-3 flex items-center justify-center uppercase rounded-full border-2 border-transparent px-2 py-2
@@ -51,41 +57,44 @@ new class extends Component
                             <x-dropdown-link :href="route('membership')" @class(['text-red-700' => request()->is('membership'), 'text-sky-800' => ! request()->is('membership')]) wire:navigate>
                                 Membership
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('court')" @class(['text-red-700' => request()->is('court'), 'text-sky-800' => ! request()->is('court')]) wire:navigate>
-                                The Court &amp; Office
+                            <x-dropdown-link :href="route('officers')" @class(['text-red-700' => request()->is('officers'), 'text-sky-800' => ! request()->is('officers')]) wire:navigate>
+                                Officers
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('where-we-meet')" @class(['text-red-700' => request()->is('where-we-meet'), 'text-sky-800' => ! request()->is('where-we-meet')]) wire:navigate>
-                                Where We Meet
-                            </x-dropdown-link>
+{{--                            <x-dropdown-link :href="route('where-we-meet')" @class(['text-red-700' => request()->is('where-we-meet'), 'text-sky-800' => ! request()->is('where-we-meet')]) wire:navigate>--}}
+{{--                                Where We Meet--}}
+{{--                            </x-dropdown-link>--}}
                             <x-dropdown-link :href="route('history')" @class(['text-red-700' => request()->is('history'), 'text-sky-800' => ! request()->is('history')]) wire:navigate>
                                 Our History
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('supporters')" @class(['text-red-700' => request()->is('supporters'), 'text-sky-800' => ! request()->is('supporters')]) wire:navigate>
-                                Our Supporters
-                            </x-dropdown-link>
+{{--                            <x-dropdown-link :href="route('supporters')" @class(['text-red-700' => request()->is('supporters'), 'text-sky-800' => ! request()->is('supporters')]) wire:navigate>--}}
+{{--                                Our Supporters--}}
+{{--                            </x-dropdown-link>--}}
                             <x-dropdown-link :href="route('supporting')" @class(['text-red-700' => request()->is('supporting'), 'text-sky-800' => ! request()->is('supporting')]) wire:navigate>
                                 Supporting Others
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('our-church')" @class(['text-red-700' => request()->is('our-church'), 'text-sky-800' => ! request()->is('our-church')]) wire:navigate>
-                                Our Church
-                            </x-dropdown-link>
+{{--                            <x-dropdown-link :href="route('our-church')" @class(['text-red-700' => request()->is('our-church'), 'text-sky-800' => ! request()->is('our-church')]) wire:navigate>--}}
+{{--                                Our Church--}}
+{{--                            </x-dropdown-link>--}}
                         </div>
                     </div>
                 </div>
                 <a href="/charitable-trust" wire:navigate
-                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent {{ @request()->is('charitable-trust')  ? 'bg-sky-950' : 'bg-transparent' }} px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
+                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent
+                   {{ @request()->is('charitable-trust')  ? 'bg-sky-950' : 'bg-transparent' }}
+                   px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
                     Charitable Trust
                 </a>
                 <a href="/chartered-practitioners" wire:navigate
-                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent {{ @request()->is('chartered-practitioners')  ? 'bg-sky-950' : 'bg-transparent' }} px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
+                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent
+                   {{ @request()->is('chartered-practitioners')  ? 'bg-sky-950' : 'bg-transparent' }}
+                   px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
                     Chartered Practitioners
                 </a>
-                <a href="/about" wire:navigate
-                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent {{ @request()->is('about')  ? 'bg-sky-950' : 'bg-transparent' }} px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
-                    About
-                </a>
+
                 <a href="/contact" wire:navigate
-                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent {{ @request()->is('contact')  ? 'bg-sky-950' : 'bg-transparent' }} px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
+                   class="mx-1 mt-3 flex items-center justify-center rounded-full border-2 border-transparent
+                   {{ @request()->is('contact')  ? 'bg-sky-950' : 'bg-transparent' }}
+                   px-2 py-2 text-center transition-all duration-300 hover:border-red-700 hover:bg-red-700 xl:mx-3 xl:px-6">
                     Contact
                 </a>
             </div>

@@ -55,6 +55,18 @@
     "file": "assets/chandelier-c8e6b16f.jpg",
     "src": "resources/img/chandelier.jpg"
   },
+  "resources/img/officers/gary-fage.jpg": {
+    "file": "assets/gary-fage-009eacc8.jpg",
+    "src": "resources/img/officers/gary-fage.jpg"
+  },
+  "resources/img/officers/jim-melvin.jpg": {
+    "file": "assets/jim-melvin-7673be91.jpg",
+    "src": "resources/img/officers/jim-melvin.jpg"
+  },
+  "resources/img/officers/lorraine-larman.jpg": {
+    "file": "assets/lorraine-larman-1d16df26.jpg",
+    "src": "resources/img/officers/lorraine-larman.jpg"
+  },
   "resources/img/supporters/cam.jpg": {
     "file": "assets/cam-feff1a34.jpg",
     "src": "resources/img/supporters/cam.jpg"
@@ -145,7 +157,7 @@
     "src": "resources/js/app.js"
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-c45afebe.css",
+    "file": "assets/app-907890cf.css",
     "isEntry": true,
     "src": "resources/scss/app.scss"
   }
