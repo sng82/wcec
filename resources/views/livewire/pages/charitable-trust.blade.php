@@ -36,7 +36,7 @@
                         <div class="rounded-2xl bg-sky-800 p-4 lg:p-8 text-white mt-2">
                             <h3 class="mb-3 text-xl xl:text-2xl">Under £1,000</h3>
                             <hr class="mb-3">
-                            <p>Applicants should contact the Almoner (<a href="mailto:almoner@wc-ec.com" class="text-red-600 hover:text-red-700">almoner@wc-ec.com</a>) with an outline of the request and the impact it will make.</p>
+                            <p>Applicants should contact the Almoner (<a href="mailto:almoner@wc-ec.com" class="text-orange-300 hover:text-orange-400">almoner@wc-ec.com</a>) with an outline of the request and the impact it will make.</p>
                         </div>
                         <div class="rounded-2xl bg-sky-800 p-4 lg:p-8 text-white mt-2">
                             <h3 class="mb-3 text-xl xl:text-2xl">Over £1,000</h3>
@@ -44,8 +44,8 @@
                             <p>Complete the
                                 <a href="/documents/WCEC-Charity-Grant-Application-Form.docx"
                                    target="_blank"
-                                   class="text-red-600 hover:text-red-700">Grant Application Form [MS Word]</a>,
-                                and return to the Almoner (<a href="mailto:almoner@wc-ec.com" class="text-red-600 hover:text-red-700">almoner@wc-ec.com</a>).</p>
+                                   class="text-orange-300 hover:text-orange-400">Grant Application Form [MS Word]</a>,
+                                and return to the Almoner (<a href="mailto:almoner@wc-ec.com" class="text-orange-300 hover:text-orange-400">almoner@wc-ec.com</a>).</p>
                         </div>
                     </div>
 
