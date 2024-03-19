@@ -16,6 +16,7 @@
         <livewire:layout.navigation />
         {{ $slot }}
         <livewire:layout.footer />
+        @livewire('wire-elements-modal')
     </body>
 </html>
 

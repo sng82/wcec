@@ -116,21 +116,6 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="w-full bg-slate-50 py-12 lg:py-20">
         <div class="container mx-auto px-5">
 
@@ -251,10 +236,7 @@
                     <hr class="mb-4">
                     <img src="{{ Vite::asset('resources/img/Elijah-Howell-286x300.jpg') }}"
                          class="w-full aspect-square object-cover object-top" alt="Elijah Howell">
-                    <a href="#"
-                       class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-800">
-                        Read Here
-                    </a>
+                    <button wire:click="$dispatch('openModal', { component: 'modals.why-join.elijah-howell' })" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-800">Read Here</button>
                 </div>
 
                 <div class="rounded-2xl bg-sky-800 p-4 lg:p-8 text-white">
@@ -262,10 +244,8 @@
                     <hr class="mb-4">
                     <img src="{{ Vite::asset('resources/img/Ceris-Burns-colour-2-225x300.jpg') }}"
                          class="w-full aspect-square object-cover object-top" alt="Ceris Burns">
-                    <a href="#"
-                       class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-800">
-                        Read Here
-                    </a>
+                    <button wire:click="$dispatch('openModal', { component: 'modals.why-join.ceris-burns' })" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-800">Read Here</button>
+
                 </div>
 
                 <div class="rounded-2xl bg-sky-800 p-4 lg:p-8 text-white">
@@ -273,10 +253,8 @@
                     <hr class="mb-4">
                     <img src="{{ Vite::asset('resources/img/Chris-Luxton-2.jpg') }}"
                          class="w-full aspect-square object-cover object-top" alt="Chris Luxton">
-                    <a href="#"
-                       class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-800">
-                        Read Here
-                    </a>
+                    <button wire:click="$dispatch('openModal', { component: 'modals.why-join.chris-luxton' })" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-800">Read Here</button>
+
                 </div>
 
             </div>
@@ -284,4 +262,8 @@
         </div>
     </div>
 
+{{--    @livewire('wire-elements-modal')--}}
+
 </main>
+
+
