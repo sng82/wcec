@@ -1,13 +1,13 @@
 <x-mail::message>
-# Enquiry via wc-ec.com website
+# Membership Enquiry via wc-ec.com website
 
 <strong>Name:</strong> {{ $name }}<br>
 <strong>Email:</strong> {{ $email }}<br>
-<strong>Phone:</strong> {{ $phone }}
+<strong>Grade:</strong> {{ $grade }}
 
 Message:
 <x-mail::panel>
-{{ $message }}
+{{ $detail }}
 </x-mail::panel>
 {{--<x-mail::button :url="''">--}}
 {{--Button Text--}}

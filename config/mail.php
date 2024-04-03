@@ -129,5 +129,6 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'contact_mail_recipient' => env('CONTACT_MAIL_RECIPIENT', 'sam@asapcomputers.co.uk')
+    'contact_mail_recipient' => env('CONTACT_MAIL_RECIPIENT', 'sam@asapcomputers.co.uk'),
+    'membership_enquiry_mail_recipient' => env('MEMBERSHIP_ENQUIRY_MAIL_RECIPIENT', 'sam@asapcomputers.co.uk'),
 ];

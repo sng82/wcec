@@ -5,9 +5,13 @@ namespace App\Livewire\Pages;
 use App\Mail\Contact as ContactMail;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
+use Spatie\Honeypot\Http\Livewire\Concerns\UsesSpamProtection;
+use Spatie\Honeypot\Http\Livewire\Concerns\HoneypotData;
 
 class Contact extends Component
 {
+    use UsesSpamProtection;
+
     public $title = "Contact Us";
     public $description = "Contact Us";
 
@@ -16,9 +20,17 @@ class Contact extends Component
     public $phone = '';
     public $message = '';
 
+    public HoneypotData $extraFields;
+
+    public function mount()
+    {
+        $this->extraFields = new HoneypotData();
+    }
 
     public function submit()
     {
+        $this->protectAgainstSpam();
+
         $validated = $this->validate([
             'name'      => 'required|min:2',
             'email'     => 'required|email',
@@ -29,8 +41,10 @@ class Contact extends Component
         Mail::to(Config('mail.contact_mail_recipient'))
             ->send(new ContactMail($validated));
 
-        return redirect('/contact')
-            ->with('status', 'sent');
+        session()->flash('status', 'sent');
+
+//        return redirect('/contact')
+//            ->with('status', 'sent');
     }
 
     public function render()

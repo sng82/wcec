@@ -71,47 +71,79 @@
                     </div>
                 </div>
 
-                <div class="flex-none w-full 2xl:w-96">
-                    <div class="rounded-2xl bg-red-700 text-white px-9 py-8 h-full">
-                        <h2 class="mb-3 text-3xl">Membership Enquiry</h2>
-                        <hr class="mb-3">
-                        <form action="" class="grid grid-cols-1 gap-6">
-                            <label class="block" for="name">
-                                <span>Name</span>
-                                <input id="name" type="text"
-                                       class="mt-1 block w-full rounded-md border-transparent shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50">
-                            </label>
-                            <label class="block" for="email">
-                                <span>Email</span>
-                                <input id="email" type="email"
-                                       class="mt-1 block w-full rounded-md border-transparent shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50">
-                            </label>
-                            <label class="block" for="grade">
-                                <span>Grade</span>
-                                <select id="grade"
-                                        class="text-slate-700 mt-1 block w-full rounded-md border-transparent shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50">
-                                    <option selected disabled value="">Please Select...</option>
-                                    <option value="Corporate">Corporate</option>
-                                    <option value="Pathway">Pathway</option>
-                                    <option value="Military">Military</option>
-                                </select>
-                            </label>
-                            <label class="block" for="message">
-                                <span>Message</span>
-                                <textarea id="message" rows="3"
-                                          class="mt-1 block w-full rounded-md border-transparent shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50"></textarea>
-                            </label>
-                            <button
-                                class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-red-700">
-                                Submit
-                            </button>
-
-                        </form>
+                <div id="enquiry" class="flex-none w-full 2xl:w-96">
+                    <div class="rounded-2xl bg-red-700 px-9 py-8 h-full">
+                        <h2 class="mb-3 text-3xl text-white">Membership Enquiry</h2>
+                        <hr class="mb-3 text-white">
+                        @if ( session('status') && (session('status') === 'sent') )
+                            <div class="flex py-8 text-white">
+                                <p class="text-xl w-full text-center py-4 border-b-4 border-t-4 border-red-600 mb-0">
+                                    Your message has been sent.<br>
+                                    Thanks for getting in touch.
+                                </p>
+                            </div>
+                        @else
+                            <div>
+                                <form wire:submit="submit" class="grid grid-cols-1 gap-6">
+                                    <x-honeypot livewire-model="extraFields" />
+                                    <div>
+                                        <label class="block" for="name">
+                                            <span class="text-white">Name</span>
+                                            <input wire:model="name" id="name" type="text"
+                                                   class="mt-1 block w-full rounded-md border-transparent shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50">
+                                        </label>
+                                        <div>
+                                            @error('name') <div class="text-yellow-300 mt-1">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block" for="email">
+                                            <span class="text-white">Email</span>
+                                            <input wire:model="email" id="email" type="email"
+                                                   class="mt-1 block w-full rounded-md border-transparent shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50">
+                                        </label>
+                                        <div>
+                                            @error('email') <div class="text-yellow-300 mt-1">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block" for="grade">
+                                            <span class="text-white">Grade</span>
+                                            <select wire:model="grade" id="grade"
+                                                    class="text-slate-700 mt-1 block w-full rounded-md border-transparent shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50">
+                                                <option selected disabled value="">Please Select...</option>
+                                                <option value="Corporate">Corporate</option>
+                                                <option value="Pathway">Pathway</option>
+                                                <option value="Military">Military</option>
+                                            </select>
+                                        </label>
+                                        <div>
+                                            @error('grade') <div class="text-yellow-300 mt-1">{{ $message }}</div> @enderror
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block" for="message">
+                                            <span class="text-white">Message</span>
+                                            <textarea wire:model="detail" id="detail" rows="3"
+                                                      class="mt-1 block w-full rounded-md border-transparent shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50"></textarea>
+                                        </label>
+                                        <div>
+                                            @error('detail') <div class="text-yellow-300 mt-1">{{ str_replace('detail', 'message', $message) }}</div> @enderror
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button
+                                            class="mt-4 inline-block rounded-full border-2 border-white text-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-red-700">
+                                            Submit
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        @endif
                     </div>
 
                 </div>
             </div>
-
 
         </div>
     </div>
@@ -245,7 +277,6 @@
                     <img src="{{ Vite::asset('resources/img/Ceris-Burns-colour-2-225x300.jpg') }}"
                          class="w-full aspect-square object-cover object-top" alt="Ceris Burns">
                     <button wire:click="$dispatch('openModal', { component: 'modals.why-join.ceris-burns' })" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-800">Read Here</button>
-
                 </div>
 
                 <div class="rounded-2xl bg-sky-800 p-4 lg:p-8 text-white">
@@ -254,7 +285,6 @@
                     <img src="{{ Vite::asset('resources/img/Chris-Luxton-2.jpg') }}"
                          class="w-full aspect-square object-cover object-top" alt="Chris Luxton">
                     <button wire:click="$dispatch('openModal', { component: 'modals.why-join.chris-luxton' })" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-800">Read Here</button>
-
                 </div>
 
             </div>

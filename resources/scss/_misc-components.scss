@@ -32,7 +32,8 @@
 }
 
 .banner-home {
-    background-image: url('/resources/img/banners/wcec-banner.webp'); // old site
+    //background-image: url('/resources/img/banners/wcec-banner.webp');
+    background-image: url('/resources/img/banners/officers3.webp');
 }
 
 .banner-membership {
@@ -49,6 +50,16 @@
 
 .banner-about {
     background-image: url('/resources/img/banners/wcec-certificates.webp'); // old site
+}
+
+.footer-inner {
+    background: rgb(10,58,91);
+}
+
+@media(min-width: 1280px) {
+    .footer-inner {
+        background: radial-gradient(circle, rgba(10,58,91,1) 0%, rgba(8,47,73,1) 50%);
+    }
 }
 
 
