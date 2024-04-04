@@ -150,9 +150,12 @@ new class extends Component
                                     </svg>
                                 </button>
                             @else
-                            <a href="/login"  class="flex content-center rounded-lg bg-transparent px-4 py-2 font-semibold text-sky-800 hover:bg-slate-100 hover:text-red-700 focus:shadow-outline focus:bg-gray-200 focus:outline-none">
-                                Chartered Practitioners Portal
-                            </a>
+                                <a href="/cpr-coming-soon"  class="flex content-center rounded-lg bg-transparent px-4 py-2 font-semibold text-sky-800 hover:bg-slate-100 hover:text-red-700 focus:shadow-outline focus:bg-gray-200 focus:outline-none">
+                                    Chartered Practitioners Portal
+                                </a>
+{{--                                <a href="/login"  class="flex content-center rounded-lg bg-transparent px-4 py-2 font-semibold text-sky-800 hover:bg-slate-100 hover:text-red-700 focus:shadow-outline focus:bg-gray-200 focus:outline-none">--}}
+{{--                                    Chartered Practitioners Portal--}}
+{{--                                </a>--}}
                             @endauth
                         </div>
                     </div>
@@ -217,6 +220,10 @@ new class extends Component
                                     </button>
                                 </div>
 
+                                <a href="/about" wire:navigate class="block px-4 py-3 text-sky-800 transition duration-300 hover:bg-slate-200">
+                                    About
+                                </a>
+
                                 <div @click.away="mob_company_open = false" class="relative"
                                      x-data="{ mob_company_open: false }">
                                     <button @click="mob_company_open = !mob_company_open" type="button"
@@ -249,15 +256,9 @@ new class extends Component
                                             </a>
                                             <a href="/court" wire:navigate
                                                class="block rounded-md px-4 py-2
-                                                   {{ @request()->is('court') ? 'text-red-700' : 'text-sky-800' }}
+                                                   {{ @request()->is('officers') ? 'text-red-700' : 'text-sky-800' }}
                                                    hover:bg-slate-200 hover:text-red-700">
-                                                The Court &amp; Office
-                                            </a>
-                                            <a href="/where-we-meet" wire:navigate
-                                               class="block rounded-md px-4 py-2
-                                               {{ @request()->is('where-we-meet') ? 'text-red-700' : 'text-sky-800' }}
-                                               hover:bg-slate-200 hover:text-red-700">
-                                                Where We Meet
+                                                Officers
                                             </a>
                                             <a href="/history" wire:navigate
                                                class="block rounded-md px-4 py-2
@@ -265,23 +266,11 @@ new class extends Component
                                                hover:bg-slate-200 hover:text-red-700">
                                                 Our History
                                             </a>
-                                            <a href="/supporters" wire:navigate
-                                               class="block rounded-md px-4 py-2
-                                               {{ @request()->is('supporters') ? 'text-red-700' : 'text-sky-800' }}
-                                               hover:bg-slate-200 hover:text-red-700">
-                                                Our Supporters
-                                            </a>
                                             <a href="/supporting" wire:navigate
                                                class="block rounded-md px-4 py-2
                                                {{ @request()->is('supporting') ? 'text-red-700' : 'text-sky-800' }}
                                                hover:bg-slate-200 hover:text-red-700">
                                                 Supporting Others
-                                            </a>
-                                            <a href="/our-church" wire:navigate
-                                               class="block rounded-md px-4 py-2
-                                               {{ @request()->is('our-church') ? 'text-red-700' : 'text-sky-800' }}
-                                               hover:bg-slate-200 hover:text-red-700">
-                                                Our Church
                                             </a>
                                         </div>
                                     </div>
@@ -294,9 +283,6 @@ new class extends Component
                                 <a href="/chartered-practitioners" wire:navigate class="block px-4 py-3 text-sky-800 transition duration-300 hover:bg-slate-200">
                                     Chartered Practitioners
                                 </a>
-                                <a href="/about" wire:navigate class="block px-4 py-3 text-sky-800 transition duration-300 hover:bg-slate-200">
-                                    About
-                                </a>
                                 <a href="/contact" wire:navigate class="block px-4 py-3 text-sky-800 transition duration-300 hover:bg-slate-200">
                                     Contact
                                 </a>
@@ -308,11 +294,15 @@ new class extends Component
                                 <div class="flex flex-col px-3">
                                     <a href="https://members.wc-ec.com" target="_blank"
                                        class="mt-3 rounded-full border-2 border-sky-800 bg-sky-800 px-6 py-2 text-center text-white transition-all duration-300 hover:bg-white hover:text-sky-800">
-                                        Members
+                                        LIVERY MEMBERS<br>AREA
                                     </a>
-                                    <a href="#" target="_blank"
+{{--                                    <a href="/login" target="_blank"--}}
+{{--                                       class="mt-3 rounded-full border-2 border-sky-800 bg-sky-800 px-6 py-2 text-center text-white transition-all duration-300 hover:bg-white hover:text-sky-800">--}}
+{{--                                        CHARTERED<br>PRACTITIONERS PORTAL--}}
+{{--                                    </a>--}}
+                                    <a href="/cpr-coming-soon" target="_blank"
                                        class="mt-3 rounded-full border-2 border-sky-800 bg-sky-800 px-6 py-2 text-center text-white transition-all duration-300 hover:bg-white hover:text-sky-800">
-                                        Chartered Practitioners
+                                        CHARTERED<br>PRACTITIONERS PORTAL
                                     </a>
                                 </div>
                             </div>

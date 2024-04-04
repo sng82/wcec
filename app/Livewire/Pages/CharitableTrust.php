@@ -2,7 +2,7 @@
 
 namespace App\Livewire\Pages;
 
-use Livewire\Attributes\Title;
+//use Livewire\Attributes\Title;
 use Livewire\Component;
 
 class CharitableTrust extends Component

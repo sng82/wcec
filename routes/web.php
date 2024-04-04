@@ -4,6 +4,7 @@ use App\Livewire\Pages\About;
 use App\Livewire\Pages\CharitableTrust;
 use App\Livewire\Pages\CharteredPractitioners;
 use App\Livewire\Pages\Contact;
+use App\Livewire\Pages\CprComingSoon;
 use App\Livewire\Pages\Officers;
 use App\Livewire\Pages\Cpr\Dashboard;
 use App\Livewire\Pages\History;
@@ -42,6 +43,9 @@ Route::get('/charitable-trust', CharitableTrust::class)->name('charitable-trust'
 Route::get('/chartered-practitioners', CharteredPractitioners::class)->name('chartered-practitioners');
 Route::get('/about', About::class)->name('about');
 Route::get('/contact', Contact::class)->name('contact');
+
+//temp
+Route::get('/cpr-coming-soon', CprComingSoon::class)->name('cpr-coming-soon');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/cpr/dashboard', Dashboard::class)->name('dashboard');
