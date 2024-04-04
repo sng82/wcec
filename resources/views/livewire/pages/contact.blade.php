@@ -74,7 +74,7 @@
                         @endif
 
                     </div>
-                    <div class="flex p-5 xl:mt-4">
+                    <div class="flex py-5 xl:mt-4">
                         <p>Or write to:<br><br>
                             Clerk of the Company<br>
                             Worshipful Company of Environmental Cleaners<br>

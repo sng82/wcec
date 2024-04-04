@@ -2,7 +2,7 @@
     <div class="w-full py-12 lg:py-20" >
         <div class="container mx-auto px-5">
             <div class="bg-white text-sky-950">
-                <div class="container mx-auto px-5">
+                <div class="container mx-auto">
                     <h1 class="mb-2 lg:mb-4 text-3xl font-brand md:text-4xl lg:text-5xl text-red-700">
                         Our History
                     </h1>
