@@ -10,8 +10,8 @@
                     If you are interested in finding out more about joining the Environmental Cleaners, please drop us a
                     line.
                 </p>
-                <div class="flex flex-col xl:flex-row gap-12">
-                    <div class="flex xl:w-[50%]">
+                <div class="flex flex-col xl:flex-row gap-4 xl:gap-12">
+                    <div class="flex w-full xl:w-[50%]">
                         @if ( session('status') && (session('status') === 'sent'))
                             <div class="flex self-center rounded border border-slate-200 py-24 px-12 mt-4 bg-slate-100 xl:w-full">
                                 <div class="flex rounded border border-sky-900 py-8 px-4 bg-sky-800 text-white xl:w-full shadow">
@@ -22,14 +22,14 @@
                                 </div>
                             </div>
                         @else
-                            <div class="rounded border border-slate-200 p-5 mt-4 bg-slate-100 xl:w-full">
+                            <div class="rounded border border-slate-200 p-5 mt-4 bg-slate-100 w-full">
                                 <form wire:submit="submit" class="w-full">
                                     <x-honeypot livewire-model="extraFields" />
                                     <label for="name" class="block w-full text-sky-800">
                                         Name:
                                     </label>
                                     <input type="text" wire:model="name" name="name" id="name"
-                                           class="form-input min-w-[400px] rounded border @error('email') border-red-600 @else border-slate-200 @enderror block w-full" />
+                                           class="form-input rounded border @error('email') border-red-600 @else border-slate-200 @enderror block w-full" />
                                     <div>
                                         @error('name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                                     </div>
