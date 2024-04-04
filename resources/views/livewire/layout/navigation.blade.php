@@ -254,7 +254,7 @@ new class extends Component
                                                    hover:bg-slate-200 hover:text-red-700">
                                                 Membership
                                             </a>
-                                            <a href="/court" wire:navigate
+                                            <a href="/officers" wire:navigate
                                                class="block rounded-md px-4 py-2
                                                    {{ @request()->is('officers') ? 'text-red-700' : 'text-sky-800' }}
                                                    hover:bg-slate-200 hover:text-red-700">
