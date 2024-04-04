@@ -8,10 +8,10 @@
                 <hr class="mb-2 lg:mb-4">
 
                 <div class="flex flex-col gap-4 xl:gap-8 xl:flex-row justify-center">
-                    <div class="flex flex-col justify-center w-[200px]">
+                    <div class="flex flex-col justify-center xl:w-[200px]">
                         <h2 class="text-2xl xl:text-3x">Master</h2>
                     </div>
-                    <div class="w-[370px]">
+                    <div class="w-fit md:w-[370px]">
                         <img src="{{ Vite::asset('resources/img/officers/jim-melvin.jpg') }}"
                              class="w-full aspect-square object-cover object-top" alt="Master: James Melvin">
                         <p class="mt-2">James (‘Jim’) Melvin</p>
@@ -20,10 +20,10 @@
                 <hr class="my-3">
 
                 <div class="flex flex-col gap-4 xl:gap-8 xl:flex-row justify-center">
-                    <div class="flex flex-col justify-center w-[200px]">
+                    <div class="flex flex-col justify-center xl:w-[200px]">
                         <h2 class="text-2xl xl:text-3x">Deputy Master</h2>
                     </div>
-                    <div class="w-[370px]">
+                    <div class="w-fit md:w-[370px]">
                         <img src="{{ Vite::asset('resources/img/officers/gary-fage.jpg') }}"
                              class="w-full aspect-square object-cover object-top" alt="Deputy Master: Gary G Fage">
                         <p class="mt-2">Gary G Fage</p>
@@ -32,10 +32,10 @@
                 <hr class="my-3">
 
                 <div class="flex flex-col gap-4 xl:gap-8 xl:flex-row justify-center">
-                    <div class="flex flex-col justify-center w-[200px]">
+                    <div class="flex flex-col justify-center xl:w-[200px]">
                         <h2 class="text-2xl xl:text-3x">Senior Warden</h2>
                     </div>
-                    <div class="w-[370px]">
+                    <div class="w-fit md:w-[370px]">
                         <img src="{{ Vite::asset('resources/img/officers/lorraine-larman.jpg') }}"
                              class="w-full aspect-square object-cover object-top" alt="Senior Warden: Lorraine Larman">
                         <p class="mt-2">Lorraine Larman</p>
@@ -44,21 +44,21 @@
                 <hr class="my-3">
 
                 <div class="flex flex-col gap-4 xl:gap-8 xl:flex-row justify-center">
-                    <div class="flex flex-col justify-center w-[200px]">
+                    <div class="flex flex-col justify-center xl:w-[200px]">
                         <h2 class="text-2xl xl:text-3x">Junior Warden </h2>
                     </div>
-                    <div class="w-[370px]">
+                    <div class="xl:w-[370px]">
                         <p class="mt-2">Darren Marston</p>
                     </div>
                 </div>
                 <hr class="my-3">
 
                 <div class="flex flex-col gap-4 xl:gap-8 xl:flex-row justify-center">
-                    <div class="flex flex-col justify-center w-[200px]">
+                    <div class="flex flex-col justify-center xl:w-[200px]">
                         <h2 class="text-2xl xl:text-3x">Clerk</h2>
 
                     </div>
-                    <div class="w-[370px]">
+                    <div class="xl:w-[370px]">
                         <p class="mt-2">Michael Jenkins</p>
                     </div>
                 </div>
