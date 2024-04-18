@@ -8,7 +8,7 @@ use Livewire\Component;
 class CharteredPractitioners extends Component
 {
     public $title = "Chartered Practitioners";
-    public $description = "Chartered Practitioners";
+    public $description = "The Worshipful Company of Environmental Cleaners Chartered Practitioners Register (CPR)";
 
     public function render()
     {

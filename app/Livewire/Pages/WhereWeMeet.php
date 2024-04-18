@@ -8,7 +8,7 @@ use Livewire\Component;
 class WhereWeMeet extends Component
 {
     public $title = "Where We Meet";
-    public $description = "Where We Meet";
+    public $description = "Where The Worshipful Company of Environmental Cleaners Meet";
 
     public function render()
     {

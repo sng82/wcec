@@ -13,7 +13,7 @@ class Contact extends Component
     use UsesSpamProtection;
 
     public $title = "Contact Us";
-    public $description = "Contact Us";
+    public $description = "Contact The Worshipful Company of Environmental Cleaners";
 
     public $name = '';
     public $email = '';

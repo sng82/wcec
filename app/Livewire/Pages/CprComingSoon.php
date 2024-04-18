@@ -7,7 +7,7 @@ use Livewire\Component;
 class CprComingSoon extends Component
 {
     public $title = "CPR Portal Coming Soon";
-    public $description = "CPR Portal Coming Soon";
+    public $description = "The Worshipful Company of Environmental Cleaners Chartered Practitioners Portal Coming Soon";
 
     public function render()
     {

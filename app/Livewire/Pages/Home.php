@@ -9,7 +9,7 @@ class Home extends Component
 {
 
     public $title = "The Worshipful Company of Environmental Cleaners";
-    public $description = "This is a description";
+    public $description = "The Worshipful Company of Environmental Cleaners";
 
     public function render()
     {

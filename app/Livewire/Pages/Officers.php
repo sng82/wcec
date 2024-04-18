@@ -8,7 +8,7 @@ use Livewire\Component;
 class Officers extends Component
 {
     public $title = "Officers";
-    public $description = "Officers";
+    public $description = "Officers of The Worshipful Company of Environmental Cleaners";
 
     public function render()
     {

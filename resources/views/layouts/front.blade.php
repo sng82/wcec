@@ -9,7 +9,11 @@
             <meta name="description" content="{{ $description}}">
         @endisset
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
-{{--                @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
+        @if (Str::startsWith($current = url()->current(), 'https://www.'))
+            <link rel="canonical" href="{{ str_replace('https://www.', 'https://', $current) }}">
+        @else
+            <link rel="canonical" href="{{ $current }}">
+        @endif
     </head>
     <body>
         <livewire:layout.header />

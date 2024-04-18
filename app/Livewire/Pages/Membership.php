@@ -13,7 +13,7 @@ class Membership extends Component
     use UsesSpamProtection;
 
     public $title = "Membership";
-    public $description = "Description of the membership page";
+    public $description = "Membership of the Worshipful Company of Environmental Cleaners";
 
     public $name = '';
     public $email = '';

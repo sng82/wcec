@@ -8,7 +8,7 @@ use Livewire\Component;
 class History extends Component
 {
     public $title = "Our History";
-    public $description = "Our History";
+    public $description = "The History of The Worshipful Company of Environmental Cleaners";
 
     public function render()
     {
