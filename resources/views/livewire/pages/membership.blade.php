@@ -73,7 +73,7 @@
                     </div>
                 </div>
 
-                <div id="enquiry" class="flex-none w-full 2xl:w-96">
+                <div id="enquiry" class="flex-none w-full 2xl:w-80">
                     <div class="rounded-2xl bg-red-700 px-9 py-8 h-full">
                         <h2 class="mb-3 text-3xl text-white">Membership Enquiry</h2>
                         <hr class="mb-3 text-white">
