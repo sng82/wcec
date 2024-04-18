@@ -12,7 +12,8 @@
                 </p>
                 <div class="flex flex-col xl:flex-row gap-4 xl:gap-12">
                     <div class="flex w-full xl:w-[50%]">
-                        @if ( session('status') && (session('status') === 'sent'))
+
+                        @if ( session('status') && session('status') === 'sent')
                             <div class="flex self-center rounded border border-slate-200 py-24 px-12 mt-4 bg-slate-100 xl:w-full">
                                 <div class="flex rounded border border-sky-900 py-8 px-4 bg-sky-800 text-white xl:w-full shadow">
                                     <p class="text-xl mx-auto text-center py-4 border-b-4 border-t-4 border-red-600 mb-0">
@@ -29,9 +30,11 @@
                                         Name:
                                     </label>
                                     <input type="text" wire:model="name" name="name" id="name"
-                                           class="form-input rounded border @error('email') border-red-600 @else border-slate-200 @enderror block w-full" />
+                                           class="form-input rounded border @error('name') border-red-600 @else border-slate-200 @enderror block w-full" />
                                     <div>
-                                        @error('name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                                        @error('name')
+                                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <label for="email" class="block w-full text-sky-800 mt-2">
@@ -41,28 +44,33 @@
                                            class="form-input rounded border @error('email') border-red-600 @else border-slate-200 @enderror block w-full"
                                            name="email" id="email" />
                                     <div>
-                                        @error('email') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                                        @error('email')
+                                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <label for="phone" class="block w-full text-sky-800 mt-2">
                                         Phone:
                                     </label>
                                     <input type="number" wire:model="phone"
-                                           class="form-input rounded border @error('email') border-red-600 @else border-slate-200 @enderror block w-full"
+                                           class="form-input rounded border @error('phone') border-red-600 @else border-slate-200 @enderror block w-full"
                                            name="phone" id="phone" />
                                     <div>
-                                        @error('phone') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                                        @error('phone')
+                                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <label for="message" class="block w-full text-sky-800 mt-2">
                                         Message:
                                     </label>
                                     <textarea wire:model="message"
-                                              class="form-input rounded border @error('email') border-red-600 @else border-slate-200 @enderror block w-full"
+                                              class="form-input rounded border @error('message') border-red-600 @else border-slate-200 @enderror block w-full"
                                               name="message" id="message" rows="3"></textarea>
                                     <div>
-                                        @error('message') <span
-                                            class="text-red-600 text-sm">{{ $message }}</span> @enderror
+                                        @error('message')
+                                            <span class="text-red-600 text-sm">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <button type="submit"

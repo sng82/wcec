@@ -5,7 +5,9 @@
         <div class="container mx-auto px-5">
 
             <div class="w-full">
-                <h1 class="mb-2 lg:mb-4 text-3xl font-brand md:text-4xl lg:text-5xl text-red-700" style="text-wrap:balance">
+                <h1 class="mb-2 lg:mb-4 text-3xl font-brand md:text-4xl lg:text-5xl text-red-700 text-balance"
+{{--                    style="text-wrap:balance"--}}
+                >
                     Membership
                 </h1>
             </div>

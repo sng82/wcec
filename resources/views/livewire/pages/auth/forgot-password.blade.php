@@ -37,8 +37,20 @@ new #[Layout('layouts.guest')] class extends Component
 }; ?>
 
 <div>
+    <h1 class="text-sky-900 text-2xl mb-4 border-b-4 border-red-700 pb-2">Reset Password</h1>
     <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+        <ul class="mb-3 ml-6 list-disc marker:text-red-700 space-y-2">
+            <li class="text-sky-600">
+                First login since the new Chartered Practitioners portal was launched?
+            </li>
+            <li class="text-sky-600">
+                Forgot your password?
+            </li>
+        </ul>
+        <p>
+            No problem. Just let us know the email address you registered with and we will email
+            you a password reset link that will allow you to choose a new one.
+        </p>
     </div>
 
     <!-- Session Status -->
@@ -53,7 +65,10 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
+                {{ __('Log in') }}
+            </a>
+            <x-primary-button  class="ms-3">
                 {{ __('Email Password Reset Link') }}
             </x-primary-button>
         </div>

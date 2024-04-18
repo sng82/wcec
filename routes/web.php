@@ -46,6 +46,7 @@ Route::get('/contact', Contact::class)->name('contact');
 
 //temp
 Route::get('/cpr-coming-soon', CprComingSoon::class)->name('cpr-coming-soon');
+Route::get('/register', CprComingSoon::class)->name('cpr-coming-soon');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/cpr/dashboard', Dashboard::class)->name('dashboard');

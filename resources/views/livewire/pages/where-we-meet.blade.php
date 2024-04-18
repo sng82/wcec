@@ -4,7 +4,9 @@
     <div class="w-full bg-white py-12 lg:py-20">
         <div class="container mx-auto px-5">
             <div class="bg-white text-sky-950">
-                <h1 class="mb-2 lg:mb-4 text-3xl font-brand md:text-4xl lg:text-5xl text-red-700" style="text-wrap:balance">
+                <h1 class="mb-2 lg:mb-4 text-3xl font-brand md:text-4xl lg:text-5xl text-red-700 text-balance"
+{{--                    style="text-wrap:balance"--}}
+                >
                     Where We Meet
                 </h1>
                 <hr class="mb-2 lg:mb-4">

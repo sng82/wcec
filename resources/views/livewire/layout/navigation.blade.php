@@ -108,7 +108,7 @@ new class extends Component
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2">
                                 <path fill-rule="evenodd" d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-5.5-2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0ZM10 12a5.99 5.99 0 0 0-4.793 2.39A6.483 6.483 0 0 0 10 16.5a6.483 6.483 0 0 0 4.793-2.11A5.99 5.99 0 0 0 10 12Z" clip-rule="evenodd" />
                             </svg>
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->first_name }}
                         @else
                             Log In
                         @endauth
@@ -150,12 +150,12 @@ new class extends Component
                                     </svg>
                                 </button>
                             @else
-                                <a href="/cpr-coming-soon"  class="flex content-center rounded-lg bg-transparent px-4 py-2 font-semibold text-sky-800 hover:bg-slate-100 hover:text-red-700 focus:shadow-outline focus:bg-gray-200 focus:outline-none">
-                                    Chartered Practitioners Portal
-                                </a>
-{{--                                <a href="/login"  class="flex content-center rounded-lg bg-transparent px-4 py-2 font-semibold text-sky-800 hover:bg-slate-100 hover:text-red-700 focus:shadow-outline focus:bg-gray-200 focus:outline-none">--}}
+{{--                                <a href="/cpr-coming-soon"  class="flex content-center rounded-lg bg-transparent px-4 py-2 font-semibold text-sky-800 hover:bg-slate-100 hover:text-red-700 focus:shadow-outline focus:bg-gray-200 focus:outline-none">--}}
 {{--                                    Chartered Practitioners Portal--}}
 {{--                                </a>--}}
+                                <a href="/login"  class="flex content-center rounded-lg bg-transparent px-4 py-2 font-semibold text-sky-800 hover:bg-slate-100 hover:text-red-700 focus:shadow-outline focus:bg-gray-200 focus:outline-none">
+                                    Chartered Practitioners Portal
+                                </a>
                             @endauth
                         </div>
                     </div>
@@ -296,14 +296,14 @@ new class extends Component
                                        class="mt-3 rounded-full border-2 border-sky-800 bg-sky-800 px-6 py-2 text-center text-white transition-all duration-300 hover:bg-white hover:text-sky-800">
                                         LIVERY MEMBERS<br>AREA
                                     </a>
-{{--                                    <a href="/login" target="_blank"--}}
-{{--                                       class="mt-3 rounded-full border-2 border-sky-800 bg-sky-800 px-6 py-2 text-center text-white transition-all duration-300 hover:bg-white hover:text-sky-800">--}}
-{{--                                        CHARTERED<br>PRACTITIONERS PORTAL--}}
-{{--                                    </a>--}}
-                                    <a href="/cpr-coming-soon" target="_blank"
+                                    <a href="/login" target="_blank"
                                        class="mt-3 rounded-full border-2 border-sky-800 bg-sky-800 px-6 py-2 text-center text-white transition-all duration-300 hover:bg-white hover:text-sky-800">
                                         CHARTERED<br>PRACTITIONERS PORTAL
                                     </a>
+{{--                                    <a href="/cpr-coming-soon" target="_blank"--}}
+{{--                                       class="mt-3 rounded-full border-2 border-sky-800 bg-sky-800 px-6 py-2 text-center text-white transition-all duration-300 hover:bg-white hover:text-sky-800">--}}
+{{--                                        CHARTERED<br>PRACTITIONERS PORTAL--}}
+{{--                                    </a>--}}
                                 </div>
                             </div>
 

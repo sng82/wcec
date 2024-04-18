@@ -10,6 +10,14 @@ new #[Layout('layouts.guest')] class extends Component
 {
     public LoginForm $form;
 
+    // Prevent access whilst in dev
+    public function mount()
+    {
+        if(Config::get('app.env') !== 'local') {
+            Redirect::to('/cpr-coming-soon');
+        }
+    }
+
     /**
      * Handle an incoming authentication request.
      */
