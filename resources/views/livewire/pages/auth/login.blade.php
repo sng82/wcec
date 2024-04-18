@@ -13,7 +13,9 @@ new #[Layout('layouts.guest')] class extends Component
     // Prevent access whilst in dev
     public function mount()
     {
-        if(Config::get('app.env') !== 'local') {
+        if(Config::get('app.env') !== 'local'
+//           && $request->getClientIp() !== '88.212.185.121'
+        ) {
             Redirect::to('/cpr-coming-soon');
         }
     }

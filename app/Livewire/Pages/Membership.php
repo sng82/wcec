@@ -17,7 +17,6 @@ class Membership extends Component
 
     public $name = '';
     public $email = '';
-    public $grade = '';
     public $detail = '';
 
     public HoneypotData $extraFields;
@@ -34,7 +33,6 @@ class Membership extends Component
         $validated = $this->validate([
             'name'      => 'required|min:2',
             'email'     => 'required|email',
-            'grade'     => 'required',
             'detail'    => 'required|min:10',
         ]);
 

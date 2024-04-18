@@ -2,8 +2,7 @@
 # Membership Enquiry via wc-ec.com website
 
 <strong>Name:</strong> {{ $name }}<br>
-<strong>Email:</strong> {{ $email }}<br>
-<strong>Grade:</strong> {{ $grade }}
+<strong>Email:</strong> {{ $email }}
 
 Message:
 <x-mail::panel>

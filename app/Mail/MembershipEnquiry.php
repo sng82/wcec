@@ -41,7 +41,6 @@ class MembershipEnquiry extends Mailable
             with: [
                 'name'      => $this->validated['name'],
                 'email'     => $this->validated['email'],
-                'grade'     => $this->validated['grade'],
                 'detail'    => $this->validated['detail'],
             ]
         );

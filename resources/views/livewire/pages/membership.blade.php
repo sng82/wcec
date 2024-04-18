@@ -108,21 +108,21 @@
                                             @error('email') <div class="text-yellow-300 mt-1">{{ $message }}</div> @enderror
                                         </div>
                                     </div>
-                                    <div>
-                                        <label class="block" for="grade">
-                                            <span class="text-white">Grade</span>
-                                            <select wire:model="grade" id="grade"
-                                                    class="text-slate-700 mt-1 block w-full rounded-md border-transparent shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50">
-                                                <option selected disabled value="">Please Select...</option>
-                                                <option value="Corporate">Corporate</option>
-                                                <option value="Pathway">Pathway</option>
-                                                <option value="Military">Military</option>
-                                            </select>
-                                        </label>
-                                        <div>
-                                            @error('grade') <div class="text-yellow-300 mt-1">{{ $message }}</div> @enderror
-                                        </div>
-                                    </div>
+{{--                                    <div>--}}
+{{--                                        <label class="block" for="grade">--}}
+{{--                                            <span class="text-white">Grade</span>--}}
+{{--                                            <select wire:model="grade" id="grade"--}}
+{{--                                                    class="text-slate-700 mt-1 block w-full rounded-md border-transparent shadow-sm focus:border-red-300 focus:ring focus:ring-red-200 focus:ring-opacity-50">--}}
+{{--                                                <option selected disabled value="">Please Select...</option>--}}
+{{--                                                <option value="Corporate">Corporate</option>--}}
+{{--                                                <option value="Pathway">Pathway</option>--}}
+{{--                                                <option value="Military">Military</option>--}}
+{{--                                            </select>--}}
+{{--                                        </label>--}}
+{{--                                        <div>--}}
+{{--                                            @error('grade') <div class="text-yellow-300 mt-1">{{ $message }}</div> @enderror--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                     <div>
                                         <label class="block" for="message">
                                             <span class="text-white">Message</span>
