@@ -30,9 +30,9 @@
                     </a>
 
 
-                    <a href="#" class="mt-2 hover:text-orange-500">
-                        Privacy & Cookie Policies
-                    </a>
+{{--                    <a href="#" class="mt-2 hover:text-orange-500">--}}
+{{--                        Privacy & Cookie Policies--}}
+{{--                    </a>--}}
 {{--                    <a href="#" class="mt-2 hover:text-orange-500">--}}
 {{--                        Link to fourth page--}}
 {{--                    </a>--}}
