@@ -41,7 +41,7 @@
             <div class="xl:w-1/3 hidden xl:flex justify-center items-center text-center">
                 <div class="rounded-full h-[216px] p-[4px] aspect-square bg-transparent flex items-center border-4 border-[#062437]">
                     <div class="rounded-full h-[200px] aspect-square bg-[#062437] flex items-center">
-                        <img src="{{ Vite::asset('resources/img/wcec-crest-small.png') }}" class="inline-block object-contain mx-auto h-32" style="padding-left: 10px;" alt="WCEC Logo">
+                        <img src="{{ Vite::asset('resources/img/wcec-crest-small.webp') }}" class="inline-block object-contain mx-auto h-32" style="padding-left: 10px;" alt="WCEC Logo">
                     </div>
                 </div>
             </div>
