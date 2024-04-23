@@ -8,6 +8,15 @@ new #[Layout('layouts.guest')] class extends Component
 {
     public string $email = '';
 
+
+    public function mount()
+    {
+        // Prevent access if Chartered Practitioners Portal is switched off
+        if (!Config::get('cpp.active')) {
+            Redirect::to('/cpr-coming-soon');
+        }
+    }
+
     /**
      * Send a password reset link to the provided email address.
      */
@@ -48,7 +57,7 @@ new #[Layout('layouts.guest')] class extends Component
             </li>
         </ul>
         <p>
-            No problem. Just let us know the email address you registered with and we will email
+            No problem. Just let us know the email address you're registered with and we will email
             you a password reset link that will allow you to choose a new one.
         </p>
     </div>

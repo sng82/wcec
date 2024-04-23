@@ -17,10 +17,11 @@ new #[Layout('layouts.guest')] class extends Component
     public string $password = '';
     public string $password_confirmation = '';
 
-    // Prevent access whilst in dev
+
     public function mount()
     {
-        if(Config::get('app.env') !== 'local') {
+        // Prevent access if Chartered Practitioners Portal is switched off
+        if (!Config::get('cpp.active')) {
             Redirect::to('/cpr-coming-soon');
         }
     }

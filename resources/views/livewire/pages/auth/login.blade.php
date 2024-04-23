@@ -10,12 +10,11 @@ new #[Layout('layouts.guest')] class extends Component
 {
     public LoginForm $form;
 
-    // Prevent access whilst in dev
+
     public function mount()
     {
-        if(Config::get('app.env') !== 'local'
-//           && $request->getClientIp() !== '88.212.185.121'
-        ) {
+        // Prevent access if Chartered Practitioners Portal is switched off
+        if (!Config::get('cpp.active')) {
             Redirect::to('/cpr-coming-soon');
         }
     }

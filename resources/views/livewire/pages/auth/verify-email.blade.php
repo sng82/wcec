@@ -9,6 +9,15 @@ use Livewire\Volt\Component;
 
 new #[Layout('layouts.guest')] class extends Component
 {
+
+    public function mount()
+    {
+        // Prevent access if Chartered Practitioners Portal is switched off
+        if (!Config::get('cpp.active')) {
+            Redirect::to('/cpr-coming-soon');
+        }
+    }
+
     /**
      * Send an email verification notification to the user.
      */
