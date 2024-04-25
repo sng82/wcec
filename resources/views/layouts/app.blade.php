@@ -20,11 +20,8 @@
         <meta name="msapplication-config" content="/icons/browserconfig.xml">
         <meta name="theme-color" content="#ffffff">
     </head>
-    <body>
+    <body class="cpp flex flex-col min-h-screen bg-slate-200">
         <livewire:layout.cpr-navigation />
-{{--        <livewire:layout.header />--}}
-{{--        <livewire:layout.navigation />--}}
         {{ $slot }}
-{{--        <livewire:layout.footer />--}}
     </body>
 </html>

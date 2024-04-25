@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('submission_dates', function (Blueprint $table) {
             $table->id();
-            $table->date('submission_date')->unique();
+            $table->date('submission_date');
             $table->unsignedBigInteger('updated_by');
             $table->foreign('updated_by')->references('id')->on('users');
             $table->unsignedBigInteger('deleted_by')->nullable()->default(null);

@@ -9,11 +9,14 @@
             <meta name="description" content="{{ $description}}">
         @endisset
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
-        @if (Str::startsWith($current = url()->current(), 'https://www.'))
-            <link rel="canonical" href="{{ str_replace('https://www.', 'https://', $current) }}">
-        @else
-            <link rel="canonical" href="{{ $current }}">
-        @endif
+
+        <link rel="canonical" href="{{ str_replace('https://www.', 'https://', url()->current()) }}">
+
+{{--        @if (Str::startsWith($current = url()->current(), 'https://www.'))--}}
+{{--            <link rel="canonical" href="{{ str_replace('https://www.', 'https://', $current) }}">--}}
+{{--        @else--}}
+{{--            <link rel="canonical" href="{{ $current }}">--}}
+{{--        @endif--}}
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">

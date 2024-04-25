@@ -18,10 +18,4 @@ class CharitableTrust extends Component
                 'description' => $this->description
             ]);
     }
-//    #[Title('WCEC : Charitable Trust')]
-//
-//    public function render()
-//    {
-//        return view('livewire.pages.charitable-trust');
-//    }
 }

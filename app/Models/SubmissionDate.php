@@ -20,6 +20,8 @@ class SubmissionDate extends Model
     protected $fillable = [
         'submission_date',
         'updated_by',
+        'deleted_by',
+        'deleted_at',
     ];
 
     /**
@@ -36,6 +38,7 @@ class SubmissionDate extends Model
      */
     protected $casts = [
         'submission_date' => 'date',
+        'deleted_at' => 'datetime',
     ];
 
     public function updatedBy()

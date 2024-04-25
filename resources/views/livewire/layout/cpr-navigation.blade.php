@@ -21,8 +21,8 @@ new class extends Component
 
 
 <div class="sticky top-0">
-    <nav class="flex bg-white shadow-md">
-        <div class="container mx-auto px-5 my-3 flex justify-between font-semibold uppercase">
+    <nav class="flex bg-slate-800">
+        <div class="w-full mx-auto px-5 my-3 flex justify-between font-semibold uppercase">
             <a href="/" class="flex content-center  rounded-lg uppercase bg-transparent px-4 py-2 font-semibold text-sky-900 hover:bg-slate-100 hover:text-red-700 focus:shadow-outline focus:bg-gray-200 focus:outline-none">
                 Main site
             </a>

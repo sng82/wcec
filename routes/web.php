@@ -4,6 +4,7 @@ use App\Livewire\Pages\About;
 use App\Livewire\Pages\CharitableTrust;
 use App\Livewire\Pages\CharteredPractitioners;
 use App\Livewire\Pages\Contact;
+use App\Livewire\Pages\Cpr\SubmissionDates;
 use App\Livewire\Pages\CprComingSoon;
 use App\Livewire\Pages\Officers;
 use App\Livewire\Pages\Cpr\Dashboard;
@@ -50,6 +51,7 @@ Route::get('/register', CprComingSoon::class)->name('cpr-coming-soon');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/cpr/dashboard', Dashboard::class)->name('dashboard');
+    Route::get('/cpr/submission-dates', SubmissionDates::class)->name('submission-dates');
 });
 
 //Route::view('dashboard', 'dashboard')
