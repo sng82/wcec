@@ -15,7 +15,8 @@
         "livewire/volt": "^1.0",
         "spatie/laravel-honeypot": "^4.5",
         "spatie/laravel-permission": "^6.7",
-        "wire-elements/modal": "2.0.9"
+        "wire-elements/modal": "2.0.9",
+        "ext-intl": "*"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
