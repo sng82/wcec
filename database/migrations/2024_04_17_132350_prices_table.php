@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['eoi', 'submission', 'renewal'])->default('eoi');
-            $table->decimal('price');
-            $table->date('from_date');
-            $table->date('to_date')->nullable()->default(null);
+            $table->enum('price_type', ['eoi', 'submission', 'renewal'])->default('eoi');
+            $table->decimal('amount');
+            $table->date('start_date');
+            $table->date('end_date')->nullable()->default(null);
             $table->unsignedBigInteger('updated_by');
             $table->foreign('updated_by')->references('id')->on('users');
             $table->timestamps();

@@ -4,6 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+
+/**
+ * @mixin Builder
+ */
 
 class Prices extends Model
 {
@@ -15,10 +20,11 @@ class Prices extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'price',
-        'type',
-        'from_date',
-        'to_date',
+        'amount',
+        'price_type',
+        'start_date',
+        'end_date',
+        'updated_by'
     ];
 
     /**
@@ -34,9 +40,9 @@ class Prices extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'from_date' => 'date',
-        'to_date'   => 'date',
-        'price '    => 'decimal:2',
+        'start_date' => 'date',
+        'end_date'   => 'date',
+        'amount'    => 'decimal:2',
     ];
 
     public function updatedBy()

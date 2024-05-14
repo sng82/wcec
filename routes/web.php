@@ -4,6 +4,8 @@ use App\Livewire\Pages\About;
 use App\Livewire\Pages\CharitableTrust;
 use App\Livewire\Pages\CharteredPractitioners;
 use App\Livewire\Pages\Contact;
+use App\Livewire\Pages\Cpr\AdminMembers;
+use App\Livewire\Pages\Cpr\Prices;
 use App\Livewire\Pages\Cpr\SubmissionDates;
 use App\Livewire\Pages\CprComingSoon;
 use App\Livewire\Pages\Officers;
@@ -49,14 +51,20 @@ Route::get('/contact', Contact::class)->name('contact');
 Route::get('/cpr-coming-soon', CprComingSoon::class)->name('cpr-coming-soon');
 Route::get('/register', CprComingSoon::class)->name('cpr-coming-soon');
 
-Route::group(['middleware' => ['auth']], function () {
+//Route::group(['middleware' => ['auth']], function () {
+//    Route::get('/cpr/dashboard', Dashboard::class)->name('dashboard');
+//    Route::get('/cpr/prices', Prices::class)->name('prices');
+//    Route::get('/cpr/members', AdminMembers::class)->name('members');
+//    Route::get('/cpr/submission-dates', SubmissionDates::class)->name('submission-dates');
+//});
+
+Route::group(['middleware' => ['role:admin', 'auth']], function () {
     Route::get('/cpr/dashboard', Dashboard::class)->name('dashboard');
+    Route::get('/cpr/prices', Prices::class)->name('prices');
+    Route::get('/cpr/members', AdminMembers::class)->name('members');
     Route::get('/cpr/submission-dates', SubmissionDates::class)->name('submission-dates');
 });
 
-//Route::view('dashboard', 'dashboard')
-//    ->middleware(['auth', 'verified'])
-//    ->name('dashboard');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])

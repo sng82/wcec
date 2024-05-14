@@ -174,12 +174,13 @@
     "isEntry": true
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-BsV6wX9m.css",
+    "file": "assets/app-BAbhOhqc.css",
     "src": "resources/scss/app.scss",
     "isEntry": true
   },
   "resources/scss/cpr.scss": {
-    "file": "assets/cpr-BiwSURvc.css",
+    "file": "assets/cpr-l0sNRNKZ.js",
+    "name": "cpr",
     "src": "resources/scss/cpr.scss",
     "isEntry": true
   }

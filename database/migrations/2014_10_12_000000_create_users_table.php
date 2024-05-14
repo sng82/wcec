@@ -16,17 +16,16 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->string('password');
-            $table->enum('account_type',
-                [
-                    'admin',
-                    'applicant',
-                    'accepted applicant',
-                    'blocked applicant',
-                    'member',
-                    'lapsed member'
-                ])->default('applicant');
+            $table->timestamp('submitted_at')->nullable()->default(null);
+            $table->integer('submission_count')->default(0);
+            $table->timestamp('accepted_at')->nullable()->default(null);
+            $table->unsignedBigInteger('accepted_by')->nullable()->default(null);
+            $table->timestamp('became_member_at')->nullable()->default(null);
+            $table->timestamp('membership_expires_at')->nullable()->default(null);
+            $table->timestamp('declined_at')->nullable()->default(null);
+            $table->unsignedBigInteger('declined_by')->nullable()->default(null);
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
