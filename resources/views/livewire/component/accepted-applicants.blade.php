@@ -1,4 +1,4 @@
-<div x-data="{ expanded:false }" class="rounded-lg p-4 shadow" :class="{'bg-slate-50': expanded, 'bg-white': !expanded}">
+<div x-data="{ expanded:false }" class="rounded-lg p-4 shadow overflow-x-auto" :class="{'bg-slate-50': expanded, 'bg-white': !expanded}">
     <h2 @click="expanded = ! expanded" class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2 cursor-pointer">
         <button class="float-end rounded-full bg-slate-100 text-sky-700 hover:bg-sky-100 hover:text-emerald-700">
             <svg fill="currentColor" viewBox="0 0 20 20"
@@ -27,7 +27,7 @@
         </div>
 
         @if($accepted_applicants->count() > 0)
-            <div class="mt-3 mb-2 overflow-hidden border border-sky-100 rounded-lg shadow-sm">
+            <div class="mt-3 mb-2 overflow-hidden border border-sky-100 rounded-lg shadow-sm overflow-x-auto">
                 <table class="table-auto w-full divide-y divide-teal-100">
                     <thead class="bg-sky-100">
                         <tr class="text-sky-700">
@@ -105,7 +105,9 @@
                     <option value="100">100</option>
                 </select>
             </div>
-            {{ $accepted_applicants->links() }}
+            <div class="overflow-x-auto">
+                {{ $accepted_applicants->links() }}
+            </div>
         @else
             <p class="mt-3 mb-2">No accepted applicants found.</p>
         @endif

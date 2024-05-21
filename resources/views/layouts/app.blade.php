@@ -21,10 +21,13 @@
         <meta name="theme-color" content="#ffffff">
     </head>
     <body class="cpp flex flex-col h-screen bg-slate-200 overflow-hidden">
-        <livewire:layout.cpr-navigation />
+
+    {{--    <body x-data="{ sidebar_open: $persist(true) }" class="cpp flex flex-col h-screen bg-slate-200 overflow-hidden">--}}
+{{--        <livewire:layout.cpr-navigation />--}}
         {{ $slot }}
 
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <x-livewire-alert::scripts />
+
     </body>
 </html>

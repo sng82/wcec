@@ -21,7 +21,7 @@
             </div>
         </div>
         @if($lapsed_members->count() > 0)
-            <div class="mt-3 mb-2 overflow-hidden border border-sky-100 rounded-lg shadow-sm">
+            <div class="mt-3 mb-2 overflow-hidden border border-sky-100 rounded-lg shadow-sm overflow-x-auto">
                 <table class="table-auto w-full divide-y divide-teal-100">
                     <thead class="bg-sky-100">
                         <tr class="text-sky-700">
@@ -98,7 +98,9 @@
                     <option value="100">100</option>
                 </select>
             </div>
-            {{ $lapsed_members->links() }}
+            <div class="overflow-x-auto">
+                {{ $lapsed_members->links() }}
+            </div>
         @else
             <p class="mt-3 mb-2">No lapsed members found.</p>
         @endif
