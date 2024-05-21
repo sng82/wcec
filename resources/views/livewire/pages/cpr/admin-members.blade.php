@@ -9,12 +9,9 @@
                 Members
             </h2>
             <div class="w-full flex grow flex-col gap-5">
-                <livewire:component.active-members
-{{--                    :$active_members --}}
-                />
-                <livewire:component.lapsed-members :$lapsed_members />
+                <livewire:component.active-members />
+                <livewire:component.lapsed-members />
             </div>
-
         </div>
 
         <div>
@@ -22,12 +19,11 @@
                 Applicants
             </h2>
             <div class="w-full flex grow flex-col gap-5">
-                <livewire:component.accepted-applicants :$accepted_applicants />
-                <livewire:component.pending-applicants :$applicants />
-                <livewire:component.declined-applicants :$blocked_applicants />
+                <livewire:component.accepted-applicants />
+                <livewire:component.pending-applicants />
+                <livewire:component.declined-applicants />
             </div>
         </div>
-
 
     </div>
 </div>

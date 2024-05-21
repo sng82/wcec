@@ -1,6 +1,6 @@
-<button {{ $attributes->merge([
-    'type' => 'submit',
-    'class' => 'inline-flex items-center px-4 py-2 bg-sky-800 border
+<a {{ $attributes->merge([
+
+    'class' => 'inline-flex items-center px-3 py-2 bg-sky-800 border
                 border-transparent rounded-full font-semibold text-xs
                 text-white uppercase tracking-widest
                 hover:bg-sky-900 focus:bg-sky-900 active:bg-sky-900
@@ -12,4 +12,4 @@
         <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z" />
     </svg>
     {{ $slot }}
-</button>
+</a>

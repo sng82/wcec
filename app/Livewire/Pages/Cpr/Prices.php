@@ -168,14 +168,7 @@ class Prices extends Component
     public function render()
     {
         return view('livewire.pages.cpr.prices')
-            ->layout('layouts.app'
-//                , [
-//                'title' => $this->title,
-//                'current_prices' => $this->current_prices,
-//                'upcoming_prices' => $this->upcoming_prices,
-//                'archived_prices' => $this->archived_prices,
-//            ]
-            );
+            ->layout('layouts.app');
     }
 
 

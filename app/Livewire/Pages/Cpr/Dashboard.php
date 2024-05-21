@@ -20,7 +20,7 @@ class Dashboard extends Component
         $nextSubmissionDate = SubmissionDate::where('submission_date', '>', now()->subDay())
                                             ->orderBy('submission_date', 'ASC')
                                             ->first()->submission_date;
-//        $this->nextSubmissionDate = $nextSubmissionDate->format('d/m/Y');
+
         $this->nextSubmissionDate = Carbon::parse($nextSubmissionDate)->toFormattedDayDateString();
 
         $this->nextSubmissionDateDifference = Carbon::parse($nextSubmissionDate)->diffForHumans();
@@ -32,19 +32,14 @@ class Dashboard extends Component
                                           ->get();
     }
 
+    public function openMember($id)
+    {
+        $this->redirect('member-edit/' . $id);
+    }
+
     public function render()
     {
-//        $nextSubmissionDate = SubmissionDate::where('submission_date', '>', now()->subDay())
-//                                            ->orderBy('submission_date', 'ASC')
-//                                            ->first()->submission_date;
-
         return view('livewire.pages.cpr.dashboard')
-            ->layout('layouts.app'
-//                , [
-//                'title' => $this->title,
-//                'nextSubmissionDate' => $this->nextSubmissionDate,
-//                'nextSubmissionDateDifference' => $this->nextSubmissionDateDifference,
-//            ]
-            );
+            ->layout('layouts.app');
     }
 }

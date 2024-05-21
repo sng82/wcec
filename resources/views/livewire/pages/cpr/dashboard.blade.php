@@ -49,21 +49,22 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-red-100">
                                 @foreach($expiring_memberships as $member)
-                                    <tr wire:key="{{ $member->id }}">
-                                        <td class="px-4 py-2  text-slate-500">
+                                    <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})" class="cursor-pointer text-slate-500 hover:text-sky-600 hover:bg-slate-100">
+                                        <td class="px-4 py-2">
                                             {{ $member->first_name . ' ' . $member->last_name }}
                                         </td>
-                                        <td class="px-4 py-2 text-slate-500">
+                                        <td class="px-4 py-2">
                                             {{ $member->email }}
                                         </td>
                                         <td class="px-4 py-2 text-red-700">
                                             {{ \Carbon\Carbon::parse($member->membership_expires_at)->toFormattedDayDateString() }}
+                                            ({{ \Carbon\Carbon::parse(now()->format('y-m-d'))->diff($member->membership_expires_at->format('y-m-d'), \Carbon\CarbonInterface::DIFF_ABSOLUTE) }})
                                         </td>
-                                        <td class="px-4 py-2 text-slate-500">
-                                            <x-edit-button class="ms-3">
-                                                {{ __('View/Edit') }}
-                                            </x-edit-button>
-                                        </td>
+{{--                                        <td class="px-4 py-1">--}}
+{{--                                            <x-edit-button class="ms-3">--}}
+{{--                                                {{ __('View/Edit') }}--}}
+{{--                                            </x-edit-button>--}}
+{{--                                        </td>--}}
                                     </tr>
                                 @endforeach
                             </tbody>

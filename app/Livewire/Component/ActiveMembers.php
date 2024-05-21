@@ -2,14 +2,18 @@
 
 namespace App\Livewire\Component;
 
-use Livewire\Component;
 use App\Models\User;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class ActiveMembers extends Component
 {
+    use WithPagination;
 
     public $sort_column_name = 'membership_expires_at';
     public $sort_column_direction = 'asc';
+    public $search = '';
+    public $per_page = 10;
 
     public function sortBy($column_name)
     {
@@ -21,12 +25,18 @@ class ActiveMembers extends Component
         $this->sort_column_name = $column_name;
     }
 
+    public function openMember($id)
+    {
+        $this->redirect('member-edit/' . $id);
+    }
+
     public function render()
     {
         return view('livewire.component.active-members', [
             'active_members' => User::role('member')
+                                    ->search($this->search)
                                     ->orderBy($this->sort_column_name, $this->sort_column_direction)
-                                    ->get(),
+                                    ->paginate($this->per_page),
         ]);
     }
 }

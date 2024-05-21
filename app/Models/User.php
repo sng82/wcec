@@ -65,6 +65,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    public function scopeSearch($query, $value)
+    {
+        $query->where('first_name', 'like', "%{$value}%")
+              ->orWhere('last_name', 'like', "%{$value}%")
+              ->orWhere('email', 'like', "%{$value}%");
+    }
+
     public function acceptedBy(): BelongsTo
     {
         return $this->belongsTo(__CLASS__, 'accepted_by');

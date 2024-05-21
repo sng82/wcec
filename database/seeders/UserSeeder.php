@@ -55,7 +55,7 @@ class UserSeeder extends Seeder
 //            $user->assignRole('member');
 //        });
 
-        User::factory()->count(30)->create()->each(function ($user) {
+        User::factory()->count(300)->create()->each(function ($user) {
 
             $became_member_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d H:i:s');
             $accepted_at = Carbon::parse($became_member_at)->subDays(fake()->numberBetween(1,30))->format('Y-m-d H:i:s');
