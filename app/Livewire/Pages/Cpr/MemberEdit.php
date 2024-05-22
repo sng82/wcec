@@ -51,6 +51,12 @@ class MemberEdit extends Component
 
     public function update()
     {
+        $this->validate([
+            'first_name'    => 'required|min:2',
+            'last_name'     => 'required|min:2',
+            'email'         => 'required|email',
+        ]);
+
         try {
             $this->member->update([
                 'first_name'   => $this->first_name,

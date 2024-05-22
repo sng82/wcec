@@ -2,19 +2,24 @@
 
     <livewire:cpr.sidebar />
 
-    <div class="right w-full flex flex-col grow overflow-y-auto">
+    <div class="right w-full flex flex-col grow min-w-80 overflow-y-auto">
 
         <livewire:layout.cpr-navigation />
 
-        <div class="flex flex-col p-6 gap-5">
+        <div class="flex flex-col p-3 xl:p-6 gap-5">
 
             <div class="flex flex-col content-center mt-8 mb-6">
-                <img src="{{ Vite::asset('resources/img/wcec-crest-small.webp') }}" class="inline-block object-contain h-16 lg:h-28" alt="WCEC Logo">
-                <h2 class="text-center mx-auto mt-6 text-sky-900 text-2xl border-b-4 border-red-700 pb-2">Chartered Practitioners Portal</h2>
+
+                <img src="{{ Vite::asset('resources/img/wcec-crest-small.webp') }}"
+                             class="inline-block object-contain h-16 lg:h-28" alt="WCEC Logo">
+
+                <h2 class="text-center mx-auto mt-6 text-sky-900 text-3xl border-b-4 border-red-700 pb-2">
+                    <span class="">Chartered Practitioners Portal</span>
+                </h2>
             </div>
 
             @if (Auth::user()->hasRole('admin'))
-                <div class="bg-slate-50 rounded-lg p-6 shadow">
+                <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
                     <p class="mb-4">
                         Hi, {{ Auth::user()->first_name }},
                     </p>
@@ -28,7 +33,7 @@
     {{--                @dd($this->all())--}}
                 </div>
 
-                <div class="bg-slate-50 rounded-lg p-6 shadow">
+                <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
                     @if($expiring_memberships->count() > 0)
                         <p class="mb-4 text-red-700">
                             {{ $expiring_memberships->count() . 'x' }}
@@ -48,7 +53,7 @@
                                         <th scope="col" class="px-4 py-2 text-left">
                                             Membership Expires
                                         </th>
-                                        <th scope="col"></th>
+
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-red-100">

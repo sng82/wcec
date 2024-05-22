@@ -2,29 +2,29 @@
 
     <livewire:cpr.sidebar  />
 
-    <div class="right w-full flex flex-col grow overflow-y-auto">
+    <div class="right w-full flex flex-col grow min-w-80 overflow-y-auto">
 
         <livewire:layout.cpr-navigation />
 
-        <div class="flex flex-col p-6 gap-5">
+        <div class="flex flex-col p-3 xl:p-6 gap-5">
 
             {{--        @dump($upcoming_prices)--}}
             {{--        @dump($upcoming_prices->count())--}}
 
             @if($upcoming_prices->first())
-                <div class="bg-sky-50 rounded-lg p-6 shadow">
+                <div class="bg-sky-50 rounded-lg p-3 xl:p-4 shadow">
                     <h2 class="text-2xl text-sky-800 border-b-4 border-sky-600 mb-3 pb-2">
                         Scheduled Price Changes
                     </h2>
                     <p class="mb-4">These prices will automatically replace the current prices on the dates shown.</p>
-                    <div class="overflow-hidden border border-sky-100 rounded-lg shadow-sm">
+                    <div class="overflow-hidden border border-sky-100 rounded-lg shadow-sm overflow-x-auto">
                         <table class="table-auto w-full divide-y divide-sky-100">
                             <thead class="bg-sky-100">
                                 <tr class="text-sky-700">
-                                    <th scope="col" class="px-4 py-2 text-left">Type</th>
-                                    <th scope="col" class="px-4 py-2 text-left">Amount</th>
-                                    <th scope="col" class="px-4 py-2 text-left">Start Date</th>
-                                    <th scope="col"></th>
+                                    <th scope="col" class="px-4 py-2 text-left min-w-56">Type</th>
+                                    <th scope="col" class="px-4 py-2 text-left min-w-28">Amount</th>
+                                    <th scope="col" class="px-4 py-2 text-left min-w-44">Start Date</th>
+                                    <th scope="col" class=" min-w-28"></th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-sky-100">
@@ -56,19 +56,19 @@
                 </div>
             @endif
 
-            <div class="bg-teal-50 rounded-lg p-6 shadow">
+            <div class="bg-teal-50 rounded-lg p-3 xl:p-4 shadow">
                 <h2 class="text-2xl text-sky-800 border-b-4 border-teal-600 mb-3 pb-2">
                     Current Prices
                 </h2>
                 @if($current_prices->count() > 0)
-                    <div class="overflow-hidden border border-teal-100 rounded-lg shadow-sm">
+                    <div class="overflow-hidden border border-teal-100 rounded-lg shadow-sm overflow-x-auto">
                         <table class="table-auto w-full divide-y divide-teal-100">
                             <thead class="bg-teal-100">
-                                <tr class="text-teal-700">
-                                    <th scope="col" class="px-4 py-2 text-left">Type</th>
-                                    <th scope="col" class="px-4 py-2 text-left">Amount</th>
-                                    <th scope="col" class="px-4 py-2 text-left">Start Date</th>
-                                    <th scope="col" class="px-4 py-2 text-left">End Date</th>
+                                <tr class="text-teal-700 divide-x divide-teal-200">
+                                    <th scope="col" class="px-4 py-2 text-left min-w-56">Type</th>
+                                    <th scope="col" class="px-4 py-2 text-left min-w-28">Amount</th>
+                                    <th scope="col" class="px-4 py-2 text-left min-w-44">Start Date</th>
+                                    <th scope="col" class="px-4 py-2 text-left min-w-44">End Date</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-teal-100">
@@ -93,14 +93,14 @@
 
                     </div>
                 @else
-                    <div class="bg-white rounded-lg p-4 shadow border border-slate-200">
+                    <div class="bg-white rounded-lg p-3 xl:p-4 shadow border border-slate-200">
                         <p>No current prices found!</p>
                     </div>
 
                 @endif
             </div>
 
-            <div class="bg-white rounded-lg p-6 shadow">
+            <div class="bg-white rounded-lg p-3 xl:p-4 shadow">
                 <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 mb-3 pb-2">
                     New Price
                 </h2>
@@ -108,7 +108,7 @@
                     Schedule price updates for the future here.
                 </p>
 
-                <div class="bg-slate-50 rounded-lg p-4 pt-0 shadow border border-slate-200">
+                <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pt-0 shadow border border-slate-200">
                     <form wire:submit="create">
                         <div class="flex flex-col xl:flex-row">
                             <div class="mt-4">
@@ -170,21 +170,21 @@
                 </ul>
             </div>
 
-            <div class="bg-amber-50 block rounded-lg p-6 shadow">
+            <div class="bg-amber-50 block rounded-lg p-3 xl:p-4 shadow">
                 <h2 class="text-2xl text-sky-800 border-b-4 border-amber-600 mb-3 pb-2">
                     Historic Prices
                 </h2>
                 <p class="mb-4">An archive of prices as they were at various points in the past.</p>
 
                 @if($archived_prices->count() > 0)
-                    <div class="overflow-hidden border border-amber-100 rounded-lg shadow-sm">
+                    <div class="overflow-hidden border border-amber-100 rounded-lg shadow-sm overflow-x-auto">
                         <table class="table-auto w-full divide-y divide-amber-100">
                             <thead class="bg-amber-100">
                                 <tr class="text-amber-700">
-                                    <th scope="col" class="px-4 py-2 text-left">Type</th>
-                                    <th scope="col" class="px-4 py-2 text-left">Amount</th>
-                                    <th scope="col" class="px-4 py-2 text-left">Start Date</th>
-                                    <th scope="col" class="px-4 py-2 text-left">End Date</th>
+                                    <th scope="col" class="px-4 py-2 text-left min-w-56">Type</th>
+                                    <th scope="col" class="px-4 py-2 text-left min-w-28">Amount</th>
+                                    <th scope="col" class="px-4 py-2 text-left min-w-44">Start Date</th>
+                                    <th scope="col" class="px-4 py-2 text-left min-w-44">End Date</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-amber-100">
@@ -199,7 +199,6 @@
                                         <td class="px-4 py-2">
                                             {{ \Carbon\Carbon::parse($price->start_date)->toFormattedDayDateString() }}
                                         </td>
-
                                         <td class="px-4 py-2">
                                             {{ $price->end_date !== null ? \Carbon\Carbon::parse($price->end_date)->toFormattedDayDateString() : 'N/A' }}
                                         </td>
@@ -209,7 +208,7 @@
                         </table>
                     </div>
                 @else
-                    <div class="bg-white rounded-lg p-4 shadow border border-slate-200">
+                    <div class="bg-white rounded-lg p-3 xl:p-4 shadow border border-slate-200">
                         <p>No archived prices found.</p>
                     </div>
                 @endif

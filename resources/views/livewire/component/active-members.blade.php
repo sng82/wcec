@@ -1,4 +1,4 @@
-<div x-data="{ expanded:true }" class="rounded-lg p-4 shadow" :class="{'bg-slate-50': expanded, 'bg-white': !expanded}">
+<div x-data="{ expanded:true }" class="rounded-lg p-3 xl:p-4 shadow" :class="{'bg-slate-50': expanded, 'bg-white': !expanded}">
     <h2 @click="expanded = ! expanded" class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2 cursor-pointer">
         <button class="float-end rounded-full bg-slate-100 text-sky-700 hover:bg-sky-100 hover:text-emerald-700">
             <svg fill="currentColor" viewBox="0 0 20 20"
@@ -15,10 +15,13 @@
     <div x-show="expanded" x-collapse>
         <div class="grid justify-end">
             <div class="flex flex-row items-center mt-3">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6 mr-2 text-slate-400">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 mr-2 text-slate-400">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
-                <input wire:model.live.debounce.300ms="search" type="text" placeholder='search...' class="rounded-lg border border-slate-200 placeholder:font-normal placeholder:italic placeholder:text-slate-300 focus:border-sky-200 focus:ring-sky-100 focus:ring-4 ">
+                <input wire:model.live.debounce.300ms="search" type="text" placeholder='search...'
+                       class="rounded-lg border border-slate-200 py-1
+                       placeholder:font-normal placeholder:italic placeholder:text-slate-300
+                       focus:border-sky-200 focus:ring-sky-100 focus:ring-4 ">
             </div>
         </div>
         @if($active_members->count() > 0)
