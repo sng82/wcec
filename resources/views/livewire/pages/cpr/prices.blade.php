@@ -114,7 +114,7 @@
                             <div class="mt-4">
                                 <x-input-label for="price_type" :value="__('Type')" class="mb-2"/>
                                 <select wire:model="price_type" name="price_type" id="price_type"
-                                        class="block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                        class="block w-full border-gray-300 focus:border-indigo-500 focus:ring-sky-500 rounded-md shadow-sm"
                                         required>
                                     <option value="">Please select...</option>
                                     <option value="eoi">Expression of Interest</option>
@@ -129,7 +129,7 @@
                                     <span class="flex items-center pr-1 font-bold text-slate-400">£</span>
                                     <input wire:model="amount" type="number" name="amount" id="amount"
                                            placeholder="00.00"
-                                           class="block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
+                                           class="block w-full border-gray-300 focus:border-indigo-500 focus:ring-sky-500 rounded-md shadow-sm"
                                            min="0" step="any" required>
                                 </div>
 

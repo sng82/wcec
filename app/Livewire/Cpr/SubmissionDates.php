@@ -52,9 +52,9 @@ class SubmissionDates extends Component
         $this->reset('date');
 
         $this->alert('success', 'Submission Date Added.', [
-            'position' => 'center',
+            'position' => 'top-end',
             'timer' => 2000,
-            'showConfirmButton' => true,
+            'showConfirmButton' => false,
             'confirmButtonColor' => '#10b981',
         ]);
 
@@ -69,15 +69,15 @@ class SubmissionDates extends Component
                 'deleted_at' => now(),
             ]);
             $this->alert('info', 'Submission Date Deleted.', [
-                'position' => 'center',
-                'timer' => 3000,
-                'showConfirmButton' => true,
+                'position' => 'top-end',
+                'timer' => 2000,
+                'showConfirmButton' => false,
                 'confirmButtonColor' => '#06b6d4',
             ]);
         } catch(\Exception $e) {
             $this->alert('error', 'Unable to delete - somebody may have beaten you to it!', [
                 'position' => 'center',
-                'timer' => 100000,
+                'timer' => null,
                 'showConfirmButton' => true,
                 'confirmButtonColor' => '#dc2626',
             ]);

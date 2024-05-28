@@ -30,7 +30,18 @@ class UserSeeder extends Seeder
         });
 
         // Pending applicant
-        User::factory()->count(12)->create()->each(function ($user) {
+        User::factory()->count(4)->create()->each(function ($user) {
+            $user->assignRole('applicant');
+            $user->eoi_fee_paid = true;
+            $user->submission_fee_paid = true;
+            $user->save();
+        });
+        User::factory()->count(3)->create()->each(function ($user) {
+            $user->assignRole('applicant');
+            $user->eoi_fee_paid = true;
+            $user->save();
+        });
+        User::factory()->count(2)->create()->each(function ($user) {
             $user->assignRole('applicant');
         });
 
@@ -39,11 +50,13 @@ class UserSeeder extends Seeder
             $user->assignRole('accepted applicant');
             $user->accepted_at = fake()->dateTimeBetween('-20 days', '-1 days')->format('Y-m-d H:i:s');
             $user->accepted_by = 1;
+            $user->eoi_fee_paid = true;
+            $user->submission_fee_paid = true;
             $user->save();
         });
 
         // Blocked applicant
-        User::factory()->count(2)->create()->each(function ($user) {
+        User::factory()->count(25)->create()->each(function ($user) {
             $user->assignRole('blocked applicant');
             $user->declined_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d H:i:s');
             $user->declined_by = 1;
@@ -60,6 +73,8 @@ class UserSeeder extends Seeder
             $user->accepted_by = 1;
             $user->membership_expires_at = fake()->dateTimeBetween('+60 days', '+364 days')->format('Y-m-d');
             $user->became_member_at = Carbon::parse($became_member_at)->format('Y-m-d');
+            $user->eoi_fee_paid = true;
+            $user->submission_fee_paid = true;
             $user->save();
         });
 
@@ -73,11 +88,13 @@ class UserSeeder extends Seeder
             $user->accepted_by = 1;
             $user->membership_expires_at = fake()->dateTimeBetween('+1 days', '+30 days')->format('Y-m-d');
             $user->became_member_at = Carbon::parse($became_member_at)->format('Y-m-d');
+            $user->eoi_fee_paid = true;
+            $user->submission_fee_paid = true;
             $user->save();
         });
 
         // Lapsed member
-        User::factory()->count(6)->create()->each(function ($user) {
+        User::factory()->count(45)->create()->each(function ($user) {
             $became_member_at = fake()->dateTimeBetween('-18 years', '-11 years')->format('Y-m-d H:i:s');
             $accepted_at = Carbon::parse($became_member_at)->subDays(fake()->numberBetween(1,30))->format('Y-m-d H:i:s');
 
@@ -86,6 +103,8 @@ class UserSeeder extends Seeder
             $user->accepted_by = 1;
             $user->membership_expires_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d');
             $user->became_member_at = Carbon::parse($became_member_at)->format('Y-m-d');
+            $user->eoi_fee_paid = true;
+            $user->submission_fee_paid = true;
             $user->save();
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Cpr;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Livewire\Component;
 //use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -19,7 +20,8 @@ class MemberEdit extends Component
     public $last_name;
     public $email;
     public $role;
-    public $roles;
+    public $membership_type;
+//    public $roles;
     public $submitted_at;
     public $submission_count;
     public $accepted_at;
@@ -41,7 +43,7 @@ class MemberEdit extends Component
                 'Member not found',
                 [
                     'position' => 'center',
-                    'timer' => 100000,
+                    'timer' => null,
                     'showConfirmButton' => true,
                     'confirmButtonColor' => '#dc2626',
                 ],
@@ -59,22 +61,23 @@ class MemberEdit extends Component
 
         try {
             $this->member->update([
-                'first_name'   => $this->first_name,
-                'last_name'    => $this->last_name,
-                'email'        => $this->email,
+                'first_name'   => trim($this->first_name),
+                'last_name'    => trim($this->last_name),
+                'email'        => trim(Str::of($this->email)->lower()),
             ]);
 
             $this->alert('info', 'Member updated successfully', [
-                'position' => 'top-right',
-                'timer' => 1500,
+                'position' => 'top-end',
+                'timer' => 2000,
+                'toast' => true,
                 'showConfirmButton' => false,
                 'confirmButtonColor' => '#06b6d4',
             ]);
 
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             $this->alert('error', 'Unable to update. ' . $e->getMessage(), [
                 'position' => 'center',
-                'timer' => 100000,
+                'timer' => null,
                 'showConfirmButton' => true,
                 'confirmButtonColor' => '#dc2626',
             ]);
@@ -88,17 +91,18 @@ class MemberEdit extends Component
         $this->last_name = $this->member->last_name;
         $this->email = $this->member->email;
         $this->role = $this->member->roles->pluck('id')[0] ?? '';
-        $this->roles = Role::get();
+//        $this->membership_type = $this->member->roles->pluck('name')[0] ?? '';
+//        $this->roles = Role::get();
 
-        $this->submitted_at = $this->member->submitted_at;
+//        $this->submitted_at = $this->member->submitted_at?->format('Y-m-d H:i:s');
         $this->submission_count = $this->member->submission_count;
-        $this->accepted_at = $this->member->accepted_at;
-        $this->accepted_by = $this->member->accepted_by;
-        $this->became_member_at = $this->member->became_member_at;
-        $this->membership_expires_at = $this->member->membership_expires_at;
-        $this->declined_at = $this->member->declined_at;
-        $this->declined_by = $this->member->declined_by;
-        $this->created_at = $this->member->created_at;
+//        $this->accepted_at = $this->member->accepted_at?->format('Y-m-d H:i:s');
+//        $this->accepted_by = $this->member->accepted_by;
+//        $this->became_member_at = $this->member->became_member_at?->format('Y-m-d');
+        $this->membership_expires_at = $this->member->membership_expires_at?->format('Y-m-d');
+//        $this->declined_at = $this->member->declined_at?->format('Y-m-d H:i:s');
+//        $this->declined_by = $this->member->declined_by;
+//        $this->created_at = $this->member->created_at?->format('Y-m-d H:i:s');
 
         return view('livewire.pages.cpr.member-edit')->layout('layouts.app');
     }

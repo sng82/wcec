@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class PendingApplicants extends Component
 {
-    public $sort_column_name = 'created_at';
+    public $sort_column_name = 'submission_fee_paid';
     public $sort_column_direction = 'desc';
     public $search = '';
     public $per_page = 10;

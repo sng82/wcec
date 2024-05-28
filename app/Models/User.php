@@ -37,6 +37,8 @@ class User extends Authenticatable
         'declined_at',
         'declined_by',
         'password',
+        'eoi_fee_paid',
+        'submission_fee_paid',
     ];
 
     /**

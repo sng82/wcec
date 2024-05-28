@@ -1,39 +1,30 @@
-<div x-data="{ expanded:false }" class="rounded-lg p-3 xl:p-4 shadow" :class="{'bg-slate-50': expanded, 'bg-white': !expanded}">
-    <h2 @click="expanded = ! expanded" class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2 cursor-pointer">
-        <button class="float-end rounded-full bg-slate-100 text-sky-700 hover:bg-sky-100 hover:text-emerald-700">
-            <svg fill="currentColor" viewBox="0 0 20 20"
-                 :class="{'rotate-180': expanded, 'rotate-0': !expanded}"
-                 class="inline h-8 w-8 transform transition-transform duration-200">
-                <path fill-rule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clip-rule="evenodd"></path>
-            </svg>
-        </button>
+<div class="rounded-lg p-3 xl:p-4 shadow bg-slate-50">
+    <h2 class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2">
         Pending Applicants
     </h2>
-    <div x-show="expanded" x-collapse >
-        <div class="grid grid-flow-row lg:grid-flow-col">
-            <div class="flex items-center mt-3">
-                <p class="">Applicants who have not yet had a submission accepted.</p>
-            </div>
-            <div class="grid justify-end mt-3 lg:pl-5">
-                <div class="flex flex-row items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 mr-2 text-slate-400">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
-                    <input wire:model.live.debounce.300ms="search" type="text" placeholder='search...'
-                           class="rounded-lg border border-slate-200 py-1
-                       placeholder:font-normal placeholder:italic placeholder:text-slate-300
-                       focus:border-sky-200 focus:ring-sky-100 focus:ring-4 ">
-                </div>
+    <div class="grid grid-flow-row lg:grid-flow-col">
+        <div class="flex items-center mt-3">
+            <p class="">Applicants who have not yet had a submission accepted.</p>
+        </div>
+        <div class="grid justify-end mt-3 lg:pl-5">
+            <div class="flex flex-row items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 mr-2 text-slate-400">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                </svg>
+                <input wire:model.live.debounce.300ms="search" type="text" placeholder='search...'
+                       class="rounded-lg border border-slate-200 py-1
+                   placeholder:font-normal placeholder:italic placeholder:text-slate-300
+                   focus:border-sky-200 focus:ring-sky-100 focus:ring-4 ">
             </div>
         </div>
-        @if($applicants->count() > 0)
-            <div class="mt-3 mb-2 overflow-hidden border border-sky-100 rounded-lg shadow-sm overflow-x-auto">
-                <table class="table-auto w-full divide-y divide-sky-100">
-                    <thead class="bg-sky-100">
-                        <tr class="text-sky-700 divide-x divide-sky-200">
-                            <th wire:click="sortBy('last_name')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'last_name' ? 'bg-sky-200' : ''  }}">
+    </div>
+    @if($applicants->count() > 0)
+        <div class="mt-3 mb-2 overflow-hidden border border-sky-100 rounded-lg shadow-sm overflow-x-auto">
+            <table class="table-auto w-full divide-y divide-sky-100">
+                <thead class="bg-sky-100">
+                    <tr class="text-sky-700 divide-x divide-sky-200">
+                        <th wire:click="sortBy('last_name')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'last_name' ? 'bg-sky-200' : ''  }}">
+                            <div class="flex flex-row justify-between gap-1 content-center">
                                 <span class="{{ $sort_column_name === 'last_name' ? 'text-sky-700' : 'text-slate-500'  }}">
                                     Name
                                 </span>
@@ -45,8 +36,10 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </span>
-                            </th>
-                            <th wire:click="sortBy('email')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'email' ? 'bg-sky-200' : ''  }}">
+                            </div>
+                        </th>
+                        <th wire:click="sortBy('email')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'email' ? 'bg-sky-200' : ''  }}">
+                            <div class="flex flex-row justify-between gap-1 content-center">
                                 <span class="{{ $sort_column_name === 'email' ? 'text-sky-700' : 'text-slate-500'  }}">
                                     Email
                                 </span>
@@ -58,8 +51,41 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </span>
-                            </th>
-                            <th wire:click="sortBy('created_at')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'created_at' ? 'bg-sky-200' : ''  }}">
+                            </div>
+                        </th>
+                        <th wire:click="sortBy('eoi_fee_paid')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'eoi_fee_paid' ? 'bg-sky-200' : ''  }}">
+                            <div class="flex flex-row justify-between gap-1 content-center">
+                                <span class="{{ $sort_column_name === 'eoi_fee_paid' ? 'text-sky-700' : 'text-slate-500'  }}">
+                                    EOI Fee
+                                </span>
+                                <span class="float-right flex flex-col font-normal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'eoi_fee_paid' && $sort_column_direction === 'asc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'eoi_fee_paid' && $sort_column_direction === 'asc' ? '' : 'text-slate-400' }}">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'eoi_fee_paid' && $sort_column_direction === 'desc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'eoi_fee_paid' && $sort_column_direction === 'desc' ? '' : 'text-slate-400' }}">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </th>
+                        <th wire:click="sortBy('submission_fee_paid')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'submission_fee_paid' ? 'bg-sky-200' : ''  }}">
+                            <div class="flex flex-row justify-between gap-1 content-center">
+                                <span class="{{ $sort_column_name === 'submission_fee_paid' ? 'text-sky-700' : 'text-slate-500'  }}">
+                                    Submission Fee
+                                </span>
+                                <span class="float-right flex flex-col font-normal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'submission_fee_paid' && $sort_column_direction === 'asc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'submission_fee_paid' && $sort_column_direction === 'asc' ? '' : 'text-slate-400' }}">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'submission_fee_paid' && $sort_column_direction === 'desc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'submission_fee_paid' && $sort_column_direction === 'desc' ? '' : 'text-slate-400' }}">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </span>
+                            </div>
+
+                        </th>
+                        <th wire:click="sortBy('created_at')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'created_at' ? 'bg-sky-200' : ''  }}">
+                            <div class="flex flex-row justify-between gap-1 content-center">
                                 <span class="{{ $sort_column_name === 'created_at' ? 'text-sky-700' : 'text-slate-500'  }}">
                                     Added
                                 </span>
@@ -71,47 +97,52 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </span>
-                            </th>
-{{--                            <th scope="col" class="px-4 py-2 text-left"></th>--}}
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-sky-100">
+                    @foreach($applicants as $member)
+                        <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})" class="cursor-pointer text-slate-500 hover:text-sky-600 hover:bg-slate-100">
+                            <td class="px-4 py-2">
+                                {{ $member->first_name . ' ' . $member->last_name }}
+                            </td>
+                            <td class="px-4 py-2">
+                                {{ $member->email }}
+                            </td>
+                            <td class="px-4 py-1">
+                                <span class="py-1 px-6 inline rounded-full w-96 {{ $member->eoi_fee_paid ? 'text-emerald-500 bg-emerald-100' : 'text-slate-500 bg-slate-200' }}">
+                                    {{ $member->eoi_fee_paid ? 'Paid' : 'Not Paid' }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-1">
+                                <span class="py-1 px-6 rounded-full  {{ $member->submission_fee_paid ? 'text-emerald-500 bg-emerald-100' : 'text-slate-500 bg-slate-200' }}">
+                                    {{ $member->submission_fee_paid ? 'Paid' : 'Not Paid' }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-2">
+                                {{ \Carbon\Carbon::parse($member->created_at)->toDayDateTimeString() }}
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-sky-100">
-                        @foreach($applicants as $member)
-                            <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})" class="cursor-pointer text-slate-500 hover:text-sky-600 hover:bg-slate-100">
-                                <td class="px-4 py-2">
-                                    {{ $member->first_name . ' ' . $member->last_name }}
-                                </td>
-                                <td class="px-4 py-2">
-                                    {{ $member->email }}
-                                </td>
-                                <td class="px-4 py-2">
-                                    {{ \Carbon\Carbon::parse($member->created_at)->toDayDateTimeString() }}
-                                </td>
-{{--                                <td class="px-4 py-1 text-slate-500">--}}
-{{--                                    <x-edit-button :href="route('member-edit', $member->id)" class="ms-3">--}}
-{{--                                        {{ __('View/Edit') }}--}}
-{{--                                    </x-edit-button>--}}
-{{--                                </td>--}}
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-            <div class="flex flex-row justify-end items-center gap-4 my-3 text-base">
-                <label for="per_page">Per Page</label>
-                <select wire:model.live="per_page" name="per_page" id="per_page" class="rounded-lg border border-slate-300 focus:border-sky-200 focus:ring-sky-100 focus:ring-4">
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="50">50</option>
-                    <option value="100">100</option>
-                </select>
-            </div>
-            <div class="overflow-x-auto">
-                {{ $applicants->links() }}
-            </div>
-        @else
-            <p class="mt-3 mb-2">No unaccepted applicants found.</p>
-        @endif
-    </div>
+        <div class="flex flex-row justify-end items-center gap-4 my-3 text-base">
+            <label for="per_page">Per Page</label>
+            <select wire:model.live="per_page" name="per_page" id="per_page" class="rounded-lg border border-slate-300 focus:border-sky-200 focus:ring-sky-100 focus:ring-4">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+        <div class="overflow-x-auto">
+            {{ $applicants->links() }}
+        </div>
+    @else
+        <p class="mt-3 mb-2">No unaccepted applicants found.</p>
+    @endif
+
 </div>

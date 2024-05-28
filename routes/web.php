@@ -5,6 +5,7 @@ use App\Livewire\Pages\CharitableTrust;
 use App\Livewire\Pages\CharteredPractitioners;
 use App\Livewire\Pages\Contact;
 use App\Livewire\Pages\Cpr\AdminMembers;
+use App\Livewire\Pages\Cpr\MemberAdd;
 use App\Livewire\Pages\Cpr\MemberEdit;
 use App\Livewire\Pages\Cpr\Prices;
 use App\Livewire\Pages\Cpr\SubmissionDates;
@@ -65,6 +66,7 @@ Route::group(['middleware' => ['role:admin', 'auth']], function () {
     Route::get('/cpr/members', AdminMembers::class)->name('members');
     Route::get('/cpr/submission-dates', SubmissionDates::class)->name('submission-dates');
     Route::get('/cpr/member-edit/{id}', MemberEdit::class)->name('member-edit');
+    Route::get('/cpr/member-add', MemberAdd::class)->name('member-add');
 });
 
 

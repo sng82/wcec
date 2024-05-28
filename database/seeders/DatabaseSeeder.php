@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
 
         Prices::factory()->create([
             'price_type' => 'renewal',
-            'amount'     => 150.00,
+            'amount'     => 110.00,
             'start_date'  => '2017-01-01',
             'end_date'    => '2020-01-01 23:59:59',
             'updated_by' => 1
@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
 
         Prices::factory()->create([
             'price_type' => 'renewal',
-            'amount'     => 175.00,
+            'amount'     => 125.00,
             'start_date'  => '2020-01-02',
             'end_date'    => '2024-03-01 23:59:59',
             'updated_by' => 1
@@ -91,7 +91,7 @@ class DatabaseSeeder extends Seeder
 
         Prices::factory()->create([
             'price_type' => 'renewal',
-            'amount'     => 200.00,
+            'amount'     => 150.00,
             'start_date'  => '2024-03-02',
             'updated_by' => 1
         ]);

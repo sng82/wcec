@@ -24,6 +24,8 @@ return new class extends Migration
             $table->timestamp('membership_expires_at')->nullable()->default(null);
             $table->timestamp('declined_at')->nullable()->default(null);
             $table->unsignedBigInteger('declined_by')->nullable()->default(null);
+            $table->boolean('eoi_fee_paid')->default(false);
+            $table->boolean('submission_fee_paid')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

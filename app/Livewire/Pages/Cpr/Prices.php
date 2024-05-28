@@ -86,9 +86,9 @@ class Prices extends Component
         $this->flash(
             'success',
             'Price Added.', [
-                'position' => 'center',
+                'position' => 'top-end',
                 'timer' => 2000,
-                'showConfirmButton' => true,
+                'showConfirmButton' => false,
                 'confirmButtonColor' => '#10b981',
             ],
             request()->header('Referer')
@@ -115,9 +115,9 @@ class Prices extends Component
             $this->flash(
                 'info',
                 'Scheduled Price Deleted.', [
-                    'position' => 'center',
-                    'timer' => 3000,
-                    'showConfirmButton' => true,
+                    'position' => 'top-end',
+                    'timer' => 2000,
+                    'showConfirmButton' => false,
                     'confirmButtonColor' => '#06b6d4',
                 ],
                 request()->header('Referer')
@@ -128,7 +128,7 @@ class Prices extends Component
 
             $this->alert('error', $messageToDisplay, [
                 'position' => 'center',
-                'timer' => 100000,
+                'timer' => null,
                 'showConfirmButton' => true,
                 'confirmButtonColor' => '#dc2626',
             ]);
