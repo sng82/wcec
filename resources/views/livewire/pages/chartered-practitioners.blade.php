@@ -52,7 +52,7 @@
                             Click here to get started joining the Chartered Practitioners Register.
                         </p>
 
-                        <a href="/cpr-coming-soon" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-900">
+                        <a href="/cpr-eoi" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-900">
                             Apply
                         </a>
 {{--                        <a href="#" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-900">--}}

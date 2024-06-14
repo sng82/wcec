@@ -42,6 +42,8 @@ new #[Layout('layouts.guest')] class extends Component
 
         event(new Registered($user = User::create($validated)));
 
+        $user->assignRole('applicant');
+
         Auth::login($user);
 
         $this->redirect(RouteServiceProvider::HOME, navigate: true);
@@ -50,7 +52,10 @@ new #[Layout('layouts.guest')] class extends Component
 
 <div>
 
-    <h1 class="text-sky-900 text-2xl mb-4 border-b-4 border-red-700 pb-2">Expression of Interest</h1>
+    <h1 class="text-sky-900 text-2xl mb-4 border-b-4 border-red-700 pb-2">Register</h1>
+    <p class="mb-4">
+        The first step to joining the Chartered Practitioners Register is to create an account with us...
+    </p>
 
     <form wire:submit="register">
         <!-- First Name -->

@@ -17,7 +17,7 @@
                             x-text="tab"></li>
                     </template>
                     <li>
-                        <button wire:click="addMember" class="rounded-full bg-sky-700 text-white px-5 py-1 hover:bg-sky-600">
+                        <button wire:click="addMember" title="Add new member/applicant" class="rounded-full bg-sky-700 text-white px-5 py-1 hover:bg-sky-600">
                             Add New
                         </button>
                     </li>
@@ -28,16 +28,16 @@
                         <livewire:component.active-members />
                     </div>
                     <div x-show="activeTab===1">
-                        <livewire:component.lapsed-members />
-                    </div>
-                    <div x-show="activeTab===2">
                         <livewire:component.accepted-applicants />
                     </div>
+                    <div x-show="activeTab===2">
+                        <livewire:component.pending-applicants :$pending_waiting_approval_count />
+                    </div>
                     <div x-show="activeTab===3">
-                        <livewire:component.pending-applicants />
+                        <livewire:component.declined-applicants />
                     </div>
                     <div x-show="activeTab===4">
-                        <livewire:component.declined-applicants />
+                        <livewire:component.lapsed-members />
                     </div>
                 </div>
 
@@ -75,11 +75,11 @@
         return {
             activeTab: 0,
             tabs: [
-                "Active Members ({{ $active_member_count }})",
-                "Lapsed Members ({{ $lapsed_member_count }})",
-                "Accepted Applicants ({{ $accepted_applicant_count }})",
-                "Pending Applicants ({{ $pending_applicant_count . '/' . $pending_waiting_approval_count }})",
-                "Declined Applicants ({{ $blocked_applicant_count }})",
+                "Active Members [{{ $active_member_count }}]",
+                "Accepted Applicants [{{ $accepted_applicant_count }}]",
+                "Pending Applicants [{{ $pending_waiting_approval_count . '/' . $pending_applicant_count }}]",
+                "Declined Applicants [{{ $blocked_applicant_count }}]",
+                "Lapsed Members [{{ $lapsed_member_count }}]",
             ]
         };
     };

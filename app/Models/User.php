@@ -28,6 +28,9 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email',
+        'phone_1',
+        'phone_2',
+        'phone_3',
         'submitted_at',
         'submission_count',
         'accepted_at',
@@ -82,5 +85,10 @@ class User extends Authenticatable
     public function declinedBy(): BelongsTo
     {
         return $this->belongsTo(__CLASS__, 'declined_by');
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
     }
 }

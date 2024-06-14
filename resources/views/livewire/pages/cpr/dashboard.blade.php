@@ -29,8 +29,6 @@
                         <span class="font-bold">{{ $nextSubmissionDate }}</span>
                         ({{ $nextSubmissionDateDifference }}).
                     </p>
-
-    {{--                @dd($this->all())--}}
                 </div>
 
                 <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
@@ -84,6 +82,72 @@
                         <p class="mb-4">No memberships are due to expire within the next 30 days.</p>
                     @endif
                 </div>
+            @endif
+
+            @if (Auth::user()->hasRole('applicant'))
+                <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
+                    <p class="mb-2">
+                        Hi, {{ Auth::user()->first_name }},
+                    </p>
+                    <p class="mb-2">
+                        The following steps need to be completed to progress your application:
+                    </p>
+                    <div class="bg-white rounded-lg border border-slate-100 shadow-lg p4 mb-12">
+                        <table class="table-auto w-full divide-y divide-sky-100">
+                            <thead class="bg-sky-100">
+                                <tr class="text-sky-700 divide-x divide-sky-200">
+                                    <th class="px-4 py-2"></th>
+                                    <th class="px-4 py-2"></th>
+                                    <th class="px-4 py-2">Complete?</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-sky-100 text-slate-600">
+                                <tr>
+                                    <td class="px-4 py-2">
+                                        Complete Expression of Interest form
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <a href="{{ route('applicant-eoi') }}" class="rounded-full px-6 py-1 bg-sky-900 text-white hover:bg-sky-800">
+                                            View/Edit
+                                        </a>
+{{--                                        <button class="rounded-full px-6 py-1 bg-sky-900 text-white hover:bg-sky-800">--}}
+{{--                                            View/Edit--}}
+{{--                                        </button>--}}
+                                    </td>
+                                    <td class="px-4 py-2">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2">
+                                        Provide documentation to accompany your Expression of Interest
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <button class="rounded-full px-6 py-1 bg-sky-900 text-white hover:bg-sky-800">
+                                            View/Edit
+                                        </button>
+                                    </td>
+                                    <td class="px-4 py-2">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="px-4 py-2">
+                                        Pay Expression of Interest Fee
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <button class="rounded-full px-6 py-1 bg-sky-900 text-white hover:bg-sky-800">
+                                            View/Edit
+                                        </button>
+                                    </td>
+                                    <td class="px-4 py-2">
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
             @endif
 
         </div>

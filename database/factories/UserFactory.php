@@ -20,20 +20,31 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $gender = $this->faker->randomElement(['male', 'female']);
+        $first_name = $this->faker->firstName($gender);
+        $last_name = $this->faker->lastName($gender);
+        $email = (fake()->numberBetween(1,2) > 1 ? $first_name : $first_name[0])
+                 . (fake()->numberBetween(1,3) > 1
+                        ? fake()->randomElement(['','','','','-','_','.'])
+                        : fake()->randomLetter()
+                 )
+                 . $last_name
+                 . (fake()->numberBetween(1,3) > 1
+                        ? fake()->randomElement(['','','','','','01','1','2','3'])
+                        : fake()->numberBetween(1970,2006)
+                 )
+                 . '@example'
+                 . fake()->randomElement(['.co.uk','.co.uk','.co.uk','.co.uk','.com','.com','.org','.org.uk']);
+
         return [
-            'first_name' => fake()->firstName(),
-            'last_name' => fake()->lastName(),
-            'email' => fake()->unique()->safeEmail(),
+//            'title' => fake()->title($gender),
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'email' => strtolower($email),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-//            'account_type' => $this->faker->randomElement([
-//                'admin',
-//                'applicant',
-//                'accepted applicant',
-//                'blocked applicant',
-//                'member',
-//                'lapsed member'
-//            ]),
+            'phone_1' => fake()->phoneNumber(),
+            'phone_2' => fake()->numberBetween(1,2) > 1 ? fake()->phoneNumber() : null,
             'remember_token' => Str::random(10),
         ];
     }

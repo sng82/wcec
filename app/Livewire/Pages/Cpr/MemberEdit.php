@@ -90,7 +90,7 @@ class MemberEdit extends Component
         $this->first_name = $this->member->first_name;
         $this->last_name = $this->member->last_name;
         $this->email = $this->member->email;
-        $this->role = $this->member->roles->pluck('id')[0] ?? '';
+        $this->role = $this->member->roles->pluck('name')[0] ?? '';
 //        $this->membership_type = $this->member->roles->pluck('name')[0] ?? '';
 //        $this->roles = Role::get();
 
@@ -104,6 +104,7 @@ class MemberEdit extends Component
 //        $this->declined_by = $this->member->declined_by;
 //        $this->created_at = $this->member->created_at?->format('Y-m-d H:i:s');
 
-        return view('livewire.pages.cpr.member-edit')->layout('layouts.app');
+        return view('livewire.pages.cpr.member-edit')
+            ->layout('layouts.app');
     }
 }

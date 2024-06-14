@@ -19,6 +19,9 @@ class MemberAdd extends Component
     public $first_name;
     public $last_name;
     public $email;
+    public $phone_1;
+    public $phone_2;
+    public $phone_3;
     public $role;
     public $eoi_fee_paid;
     public $submission_fee_paid;
@@ -28,18 +31,28 @@ class MemberAdd extends Component
 
     public function save()
     {
+//        dump($this->first_name);
+//        dd($this->role);
+
         $this->validate([
             'first_name'    => 'required|min:2',
             'last_name'     => 'required|min:2',
             'email'         => 'required|email',
+            'phone_1'       => 'nullable|numeric',
+            'phone_2'       => 'nullable|numeric',
+            'phone_3'       => 'nullable|numeric',
             'role'          => ['required', Rule::in(Role::get()->pluck('name'))],
         ]);
 
         try {
+
             $new_user = User::create([
                 'first_name'            => trim($this->first_name),
                 'last_name'             => trim($this->last_name),
                 'email'                 => trim(Str::of($this->email)->lower()),
+                'phone_1'               => trim($this->phone_1),
+                'phone_2'               => trim($this->phone_2),
+                'phone_3'               => trim($this->phone_3),
                 'eoi_fee_paid'          => $this->eoi_fee_paid ? 1 : 0,
                 'submission_fee_paid'   => $this->submission_fee_paid ? 1 : 0,
                 'password'              => Str::random(12),

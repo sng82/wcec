@@ -16,7 +16,11 @@ export default {
                 sans: ['Poppins', 'sans-serif'],
                 brand: ['Cinzel', 'serif'],
             },
+            listStyleType: {
+                square: 'square',
+            }
         },
+
     },
 
     plugins: [forms],

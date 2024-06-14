@@ -4,7 +4,9 @@
     </h2>
     <div class="grid grid-flow-row lg:grid-flow-col">
         <div class="flex items-center mt-3">
-            <p class="">Applicants who have not yet had a submission accepted.</p>
+            <p class="">{{ $applicants->count() }} Applicants have not yet had a submission accepted.
+                Of these, {{ $pending_waiting_approval_count }} {{ $pending_waiting_approval_count === 1 ? 'is' : 'are' }}
+                ready to be assessed.</p>
         </div>
         <div class="grid justify-end mt-3 lg:pl-5">
             <div class="flex flex-row items-center">
@@ -99,11 +101,14 @@
                                 </span>
                             </div>
                         </th>
+                        <th scope="col" class="px-4 py-2 text-left">
+
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-sky-100">
                     @foreach($applicants as $member)
-                        <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})" class="cursor-pointer text-slate-500 hover:text-sky-600 hover:bg-slate-100">
+                        <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})" class="cursor-pointer {{ $member->eoi_fee_paid && $member->submission_fee_paid ? 'bg-green-50 hover:bg-green-100 hover:text-green-600' : 'hover:bg-slate-100 hover:text-sky-600' }} ">
                             <td class="px-4 py-2">
                                 {{ $member->first_name . ' ' . $member->last_name }}
                             </td>
@@ -122,6 +127,11 @@
                             </td>
                             <td class="px-4 py-2">
                                 {{ \Carbon\Carbon::parse($member->created_at)->toDayDateTimeString() }}
+                            </td>
+                            <td class="px-4 py-1">
+                                @if($member->eoi_fee_paid && $member->submission_fee_paid)
+                                    <a href="#" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess</a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

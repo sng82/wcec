@@ -8,7 +8,8 @@
         @isset($description)
             <meta name="description" content="{{ $description}}">
         @endisset
-        @vite(['resources/scss/app.scss', 'resources/scss/cpr.scss', 'resources/js/app.js'])
+        @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+{{--        @vite(['resources/scss/app.scss', 'resources/scss/cpr.scss', 'resources/js/app.js'])--}}
 
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">

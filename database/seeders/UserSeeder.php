@@ -17,12 +17,21 @@ class UserSeeder extends Seeder
     {
         // Me
         $me = User::factory()->create([
+//            'title'        => 'Mr.',
             'first_name'   => 'Sam',
             'last_name'    => 'Green',
             'email'        => 'sam@asapcomputers.co.uk',
             'password'     => Hash::make('asap3434'),
         ]);
         $me->assignRole('admin');
+
+        $test_applicant = User::factory()->create([
+           'first_name'   => 'Test',
+           'last_name'    => 'Applicant',
+           'email'        => 'software-callback@asapcomputers.co.uk',
+           'password'     => Hash::make('asap3434'),
+        ]);
+        $test_applicant->assignRole('applicant');
 
         // Random admins
         User::factory()->count(3)->create()->each(function ($user) {
@@ -64,7 +73,7 @@ class UserSeeder extends Seeder
         });
 
         // Active member, not expiring anytime soon
-        User::factory()->count(295)->create()->each(function ($user) {
+        User::factory()->count(95)->create()->each(function ($user) {
             $became_member_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d H:i:s');
             $accepted_at = Carbon::parse($became_member_at)->subDays(fake()->numberBetween(1,30))->format('Y-m-d H:i:s');
 

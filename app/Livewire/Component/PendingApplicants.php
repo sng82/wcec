@@ -11,6 +11,7 @@ class PendingApplicants extends Component
     public $sort_column_direction = 'desc';
     public $search = '';
     public $per_page = 10;
+    public $pending_waiting_approval_count;
 
     public function sortBy($column_name)
     {

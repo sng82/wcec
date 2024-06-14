@@ -4,7 +4,7 @@
     </h2>
     <div class="grid grid-flow-row lg:grid-flow-col">
         <div class="flex items-center mt-3">
-            <p class="">Applicants that will become members on the next submission date.</p>
+            <p class="">Applicants that have been accepted and will become members on the next submission date.</p>
         </div>
         <div class="grid justify-end mt-3 lg:pl-5">
             <div class="flex flex-row items-center">

@@ -62,11 +62,12 @@ class RolesAndPermissionsSeeder extends Seeder
                 'delete submission dates',
             ]);
 
-        Role::create(['name' => 'member']);
-        Role::create(['name' => 'lapsed member']);
+//        Role::create(['name' => 'new applicant']);
         Role::create(['name' => 'applicant']);
         Role::create(['name' => 'accepted applicant']);
         Role::create(['name' => 'blocked applicant']);
+        Role::create(['name' => 'member']);
+        Role::create(['name' => 'lapsed member']);
 
     }
 }

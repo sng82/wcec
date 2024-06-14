@@ -28,22 +28,13 @@
                 </div>
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
 
-                @if($role === 2 || $role === 3)
+                @if($role === 'member' || $role === 'lapsed member')
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                         <x-admin-input-label for="membership_expires_at" :value="__('Membership Expiry')" class="w-48" />
                         <x-text-input wire:model="membership_expires_at" id="membership_expires_at" class="block" type="date" name="membership_expires_at" required autofocus autocomplete="membership_expires_at" />
                     </div>
                     <x-input-error :messages="$errors->get('membership_expires_at')" class="mt-2" />
                 @endif
-
-{{--                <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">--}}
-{{--                    <x-admin-input-label for="role" :value="__('Membership Level')" class="w-48" />--}}
-{{--                    <select wire:model="role" class="border-gray-300 focus:border-indigo-500 focus:ring-sky-500 rounded-md shadow-sm">--}}
-{{--                        @foreach($roles as $r)--}}
-{{--                            <option wire:key="{{ $r->id }}" value="{{ $r->id }}" @if($role === $r->id) selected @endif >{{ Str::of($r->name)->title() }}</option>--}}
-{{--                        @endforeach--}}
-{{--                    </select>--}}
-{{--                </div>--}}
 
                 <div class="flex flex-col lg:flex-row lg:items-center mt-6 gap-1">
                     <span class="w-48"></span>
@@ -66,7 +57,7 @@
                 </div>
 
                 {{-- Member or Lapsed member --}}
-                @if($role === 2 || $role === 3)
+                @if($role === 'member' || $role === 'lapsed member')
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
                             Became Member:
@@ -80,7 +71,7 @@
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
-                            Membership {{ $role === 2 ? 'Expires' : 'Expired' }}:
+                            Membership {{ $role === 'member' ? 'Expires' : 'Expired' }}:
                         </span>
                         <span>
                             {{ \Carbon\Carbon::parse($membership_expires_at)->toFormattedDayDateString() }}
@@ -89,11 +80,11 @@
                 @endif
 
                 {{-- Lapsed Member --}}
-                @if($role === 3)
+                @if($role === 'lapsed member')
                 @endif
 
                 {{-- Pending Applicant --}}
-                @if($role === 4)
+                @if($role === 'applicant')
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
                             Created:
@@ -113,7 +104,7 @@
                 @endif
 
                 {{-- Accepted Applicant --}}
-                @if($role === 5)
+                @if($role === 'accepted applicant')
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
                             Application Accepted:
@@ -134,7 +125,7 @@
                 @endif
 
                 {{-- Blocked Applicant --}}
-                @if($role === 6)
+                @if($role === 'blocked applicant')
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
                             Application Declined:
