@@ -28,8 +28,11 @@ return new class extends Migration
             $table->timestamp('membership_expires_at')->nullable()->default(null);
             $table->timestamp('declined_at')->nullable()->default(null);
             $table->unsignedBigInteger('declined_by')->nullable()->default(null);
-            $table->boolean('eoi_fee_paid')->default(false);
-            $table->boolean('submission_fee_paid')->default(false);
+            $table->string('eoi_status')->nullable()->default(null);
+            $table->boolean('registration_fee_paid')->default(false);
+            $table->string('application_status')->nullable()->default(null);
+            $table->boolean('application_fee_paid')->default(false);
+            $table->string('registration_pathway')->default('standard');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

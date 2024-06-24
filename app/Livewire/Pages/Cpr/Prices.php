@@ -28,7 +28,7 @@ class Prices extends Component
         return [
             'price_type' => [
                 'required',
-                Rule::in(['eoi', 'submission', 'renewal'])
+                Rule::in(['registration', 'application', 'renewal'])
             ],
             'amount' => 'required|numeric',
             'start_date' => 'required|date',
@@ -159,8 +159,8 @@ class Prices extends Component
 
         $this->archived_prices = ModelsPrices::with('updatedBy')
                                              ->where('end_date', '<', now())
-                                             ->orderByDesc('end_date')
                                              ->orderBy('price_type')
+                                             ->orderByDesc('end_date')
                                              ->orderByDesc('start_date')
                                              ->get();
     }

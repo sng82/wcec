@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\Permission\Traits\HasRoles;
+use Laravel\Cashier\Billable;
 
 /**
  * @mixin Builder
@@ -17,7 +18,25 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasRoles, Notifiable;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable, Billable;
+
+//    public mixed $first_name;
+//    public mixed $last_name;
+//    public mixed $email;
+//    public mixed $phone_1;
+//    public mixed $phone_2;
+//    public mixed $phone_3;
+//    public mixed $eoi_status;
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -39,19 +58,11 @@ class User extends Authenticatable
         'membership_expires_at',
         'declined_at',
         'declined_by',
+        'eoi_status',
+        'registration_fee_paid',
+        'application_status',
+        'application_fee_paid',
         'password',
-        'eoi_fee_paid',
-        'submission_fee_paid',
-    ];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
     ];
 
     /**

@@ -34,20 +34,23 @@ class UserSeeder extends Seeder
         $test_applicant->assignRole('applicant');
 
         // Random admins
-        User::factory()->count(3)->create()->each(function ($user) {
-            $user->assignRole('admin');
-        });
+//        User::factory()->count(3)->create()->each(function ($user) {
+//            $user->assignRole('admin');
+//            $user->eoi_status = 'n/a';
+//            $user->application_status = 'n/a';
+//            $user->save();
+//        });
 
         // Pending applicant
         User::factory()->count(4)->create()->each(function ($user) {
             $user->assignRole('applicant');
-            $user->eoi_fee_paid = true;
-            $user->submission_fee_paid = true;
+            $user->registration_fee_paid = true;
+            $user->application_fee_paid = true;
             $user->save();
         });
         User::factory()->count(3)->create()->each(function ($user) {
             $user->assignRole('applicant');
-            $user->eoi_fee_paid = true;
+            $user->registration_fee_paid = true;
             $user->save();
         });
         User::factory()->count(2)->create()->each(function ($user) {
@@ -59,8 +62,10 @@ class UserSeeder extends Seeder
             $user->assignRole('accepted applicant');
             $user->accepted_at = fake()->dateTimeBetween('-20 days', '-1 days')->format('Y-m-d H:i:s');
             $user->accepted_by = 1;
-            $user->eoi_fee_paid = true;
-            $user->submission_fee_paid = true;
+            $user->eoi_status = 'accepted';
+            $user->registration_fee_paid = true;
+            $user->application_status = 'accepted';
+            $user->application_fee_paid = true;
             $user->save();
         });
 
@@ -80,10 +85,12 @@ class UserSeeder extends Seeder
             $user->assignRole('member');
             $user->accepted_at = $accepted_at;
             $user->accepted_by = 1;
+            $user->eoi_status = 'accepted';
             $user->membership_expires_at = fake()->dateTimeBetween('+60 days', '+364 days')->format('Y-m-d');
             $user->became_member_at = Carbon::parse($became_member_at)->format('Y-m-d');
-            $user->eoi_fee_paid = true;
-            $user->submission_fee_paid = true;
+            $user->registration_fee_paid = true;
+            $user->application_status = 'accepted';
+            $user->application_fee_paid = true;
             $user->save();
         });
 
@@ -95,10 +102,12 @@ class UserSeeder extends Seeder
             $user->assignRole('member');
             $user->accepted_at = $accepted_at;
             $user->accepted_by = 1;
+            $user->eoi_status = 'accepted';
             $user->membership_expires_at = fake()->dateTimeBetween('+1 days', '+30 days')->format('Y-m-d');
             $user->became_member_at = Carbon::parse($became_member_at)->format('Y-m-d');
-            $user->eoi_fee_paid = true;
-            $user->submission_fee_paid = true;
+            $user->registration_fee_paid = true;
+            $user->application_status = 'accepted';
+            $user->application_fee_paid = true;
             $user->save();
         });
 
@@ -110,10 +119,12 @@ class UserSeeder extends Seeder
             $user->assignRole('lapsed member');
             $user->accepted_at = $accepted_at;
             $user->accepted_by = 1;
+            $user->eoi_status = 'accepted';
             $user->membership_expires_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d');
             $user->became_member_at = Carbon::parse($became_member_at)->format('Y-m-d');
-            $user->eoi_fee_paid = true;
-            $user->submission_fee_paid = true;
+            $user->registration_fee_paid = true;
+            $user->application_status = 'accepted';
+            $user->application_fee_paid = true;
             $user->save();
         });
     }

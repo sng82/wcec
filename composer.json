@@ -6,8 +6,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "ext-intl": "*",
+        "ext-zip": "*",
         "guzzlehttp/guzzle": "^7.2",
         "jantinnerezo/livewire-alert": "^3.0",
+        "laravel/cashier": "^15.3",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8",
@@ -15,8 +18,7 @@
         "livewire/volt": "^1.0",
         "spatie/laravel-honeypot": "^4.5",
         "spatie/laravel-permission": "^6.7",
-        "wire-elements/modal": "^2.0",
-        "ext-intl": "*"
+        "wire-elements/modal": "^2.0"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",

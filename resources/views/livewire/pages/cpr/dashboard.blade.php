@@ -1,156 +1,43 @@
 <div class="flex h-full w-full overflow-y-auto">
 
-    <livewire:cpr.sidebar />
+    <livewire:cpr.sidebar/>
 
     <div class="right w-full flex flex-col grow min-w-80 overflow-y-auto">
 
-        <livewire:layout.cpr-navigation />
+        <livewire:layout.cpr-navigation/>
 
         <div class="flex flex-col p-3 xl:p-6 gap-5">
 
             <div class="flex flex-col content-center mt-8 mb-6">
 
                 <img src="{{ Vite::asset('resources/img/wcec-crest-small.webp') }}"
-                             class="inline-block object-contain h-16 lg:h-28" alt="WCEC Logo">
+                     class="inline-block object-contain h-16 lg:h-28" alt="WCEC Logo">
 
                 <h2 class="text-center mx-auto mt-6 text-sky-900 text-3xl border-b-4 border-red-700 pb-2">
                     <span class="">Chartered Practitioners Portal</span>
                 </h2>
             </div>
 
-            @if (Auth::user()->hasRole('admin'))
-                <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
-                    <p class="mb-4">
-                        Hi, {{ Auth::user()->first_name }},
-                    </p>
-
-                    <p class="">
-                        The next Submission Date is
-                        <span class="font-bold">{{ $nextSubmissionDate }}</span>
-                        ({{ $nextSubmissionDateDifference }}).
-                    </p>
-                </div>
-
-                <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
-                    @if($expiring_memberships->count() > 0)
-                        <p class="mb-4 text-red-700">
-                            {{ $expiring_memberships->count() . 'x' }}
-                            {{ Str::of('membership')->plural($expiring_memberships->count()) }}
-                            due to expire within the next 30 days:
-                        </p>
-                        <div class="mt-3 mb-2 overflow-hidden border border-red-100 rounded-lg shadow-sm overflow-x-auto">
-                            <table class="table-auto w-full divide-y divide-red-100">
-                                <thead class="bg-red-100">
-                                    <tr class="text-red-700 divide-x divide-red-200">
-                                        <th scope="col" class="px-4 py-2 text-left">
-                                            Name
-                                        </th>
-                                        <th scope="col" class="px-4 py-2 text-left">
-                                            Email
-                                        </th>
-                                        <th scope="col" class="px-4 py-2 text-left">
-                                            Membership Expires
-                                        </th>
-
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-red-100">
-                                    @foreach($expiring_memberships as $member)
-                                        <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})" class="cursor-pointer text-slate-500 hover:text-sky-600 hover:bg-slate-100">
-                                            <td class="px-4 py-2">
-                                                {{ $member->first_name . ' ' . $member->last_name }}
-                                            </td>
-                                            <td class="px-4 py-2">
-                                                {{ $member->email }}
-                                            </td>
-                                            <td class="px-4 py-2 text-red-700">
-                                                {{ \Carbon\Carbon::parse($member->membership_expires_at)->toFormattedDayDateString() }}
-                                                ({{ \Carbon\Carbon::parse(now()->format('y-m-d'))->diff($member->membership_expires_at->format('y-m-d'), \Carbon\CarbonInterface::DIFF_ABSOLUTE) }})
-                                            </td>
-    {{--                                        <td class="px-4 py-1">--}}
-    {{--                                            <x-edit-button class="ms-3">--}}
-    {{--                                                {{ __('View/Edit') }}--}}
-    {{--                                            </x-edit-button>--}}
-    {{--                                        </td>--}}
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-
-                        </div>
-                    @else
-                        <p class="mb-4">No memberships are due to expire within the next 30 days.</p>
-                    @endif
-                </div>
+            @if ($logged_in_user->hasRole('admin'))
+                <x-admin-dashboard :$logged_in_user
+                                   :$next_submission_date
+                                   :$next_submission_date_difference
+                                   :$submitted_eois
+                                   :$submitted_submissions
+                                   :$expiring_memberships
+                />
             @endif
 
             @if (Auth::user()->hasRole('applicant'))
-                <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
-                    <p class="mb-2">
-                        Hi, {{ Auth::user()->first_name }},
-                    </p>
-                    <p class="mb-2">
-                        The following steps need to be completed to progress your application:
-                    </p>
-                    <div class="bg-white rounded-lg border border-slate-100 shadow-lg p4 mb-12">
-                        <table class="table-auto w-full divide-y divide-sky-100">
-                            <thead class="bg-sky-100">
-                                <tr class="text-sky-700 divide-x divide-sky-200">
-                                    <th class="px-4 py-2"></th>
-                                    <th class="px-4 py-2"></th>
-                                    <th class="px-4 py-2">Complete?</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-sky-100 text-slate-600">
-                                <tr>
-                                    <td class="px-4 py-2">
-                                        Complete Expression of Interest form
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        <a href="{{ route('applicant-eoi') }}" class="rounded-full px-6 py-1 bg-sky-900 text-white hover:bg-sky-800">
-                                            View/Edit
-                                        </a>
-{{--                                        <button class="rounded-full px-6 py-1 bg-sky-900 text-white hover:bg-sky-800">--}}
-{{--                                            View/Edit--}}
-{{--                                        </button>--}}
-                                    </td>
-                                    <td class="px-4 py-2">
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2">
-                                        Provide documentation to accompany your Expression of Interest
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        <button class="rounded-full px-6 py-1 bg-sky-900 text-white hover:bg-sky-800">
-                                            View/Edit
-                                        </button>
-                                    </td>
-                                    <td class="px-4 py-2">
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="px-4 py-2">
-                                        Pay Expression of Interest Fee
-                                    </td>
-                                    <td class="px-4 py-2">
-                                        <button class="rounded-full px-6 py-1 bg-sky-900 text-white hover:bg-sky-800">
-                                            View/Edit
-                                        </button>
-                                    </td>
-                                    <td class="px-4 py-2">
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
+                <x-applicant-dashboard :$logged_in_user
+                                       :$next_submission_date_difference
+                                       :$next_submission_date
+                                       :$registration_fee
+                                       :$application_fee
+                />
             @endif
 
         </div>
-    </div>
 
+    </div>
 </div>

@@ -4,9 +4,12 @@
     </h2>
     <div class="grid grid-flow-row lg:grid-flow-col">
         <div class="flex items-center mt-3">
-            <p class="">{{ $applicants->count() }} Applicants have not yet had a submission accepted.
-                Of these, {{ $pending_waiting_approval_count }} {{ $pending_waiting_approval_count === 1 ? 'is' : 'are' }}
-                ready to be assessed.</p>
+            <p class="">{{ $applicants->count() }} Applicants who have not yet been accepted.
+                Of these:<br>
+                {{ $pending_eoi_submitted_count }} {{ $pending_eoi_submitted_count === 1 ? 'is' : 'are' }}
+                waiting for their Expression of Interest to be assessed.<br>
+                {{ $pending_waiting_approval_count }} {{ $pending_waiting_approval_count === 1 ? 'is' : 'are' }}
+                waiting for their application to be assessed.</p>
         </div>
         <div class="grid justify-end mt-3 lg:pl-5">
             <div class="flex flex-row items-center">
@@ -55,38 +58,7 @@
                                 </span>
                             </div>
                         </th>
-                        <th wire:click="sortBy('eoi_fee_paid')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'eoi_fee_paid' ? 'bg-sky-200' : ''  }}">
-                            <div class="flex flex-row justify-between gap-1 content-center">
-                                <span class="{{ $sort_column_name === 'eoi_fee_paid' ? 'text-sky-700' : 'text-slate-500'  }}">
-                                    EOI Fee
-                                </span>
-                                <span class="float-right flex flex-col font-normal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'eoi_fee_paid' && $sort_column_direction === 'asc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'eoi_fee_paid' && $sort_column_direction === 'asc' ? '' : 'text-slate-400' }}">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'eoi_fee_paid' && $sort_column_direction === 'desc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'eoi_fee_paid' && $sort_column_direction === 'desc' ? '' : 'text-slate-400' }}">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                    </svg>
-                                </span>
-                            </div>
-                        </th>
-                        <th wire:click="sortBy('submission_fee_paid')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'submission_fee_paid' ? 'bg-sky-200' : ''  }}">
-                            <div class="flex flex-row justify-between gap-1 content-center">
-                                <span class="{{ $sort_column_name === 'submission_fee_paid' ? 'text-sky-700' : 'text-slate-500'  }}">
-                                    Submission Fee
-                                </span>
-                                <span class="float-right flex flex-col font-normal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'submission_fee_paid' && $sort_column_direction === 'asc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'submission_fee_paid' && $sort_column_direction === 'asc' ? '' : 'text-slate-400' }}">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'submission_fee_paid' && $sort_column_direction === 'desc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'submission_fee_paid' && $sort_column_direction === 'desc' ? '' : 'text-slate-400' }}">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                                    </svg>
-                                </span>
-                            </div>
-
-                        </th>
-                        <th wire:click="sortBy('created_at')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'created_at' ? 'bg-sky-200' : ''  }}">
+                        <th wire:click="sortBy('created_at')" scope="col" class="px-4 py-2 text-left cursor-pointer min-w-44 {{ $sort_column_name === 'created_at' ? 'bg-sky-200' : ''  }}">
                             <div class="flex flex-row justify-between gap-1 content-center">
                                 <span class="{{ $sort_column_name === 'created_at' ? 'text-sky-700' : 'text-slate-500'  }}">
                                     Added
@@ -101,37 +73,108 @@
                                 </span>
                             </div>
                         </th>
-                        <th scope="col" class="px-4 py-2 text-left">
+                        <th wire:click="sortBy('registration_fee_paid')" scope="col" class="px-4 py-2 text-left cursor-pointer min-w-32 {{ $sort_column_name === 'registration_fee_paid' ? 'bg-sky-200' : '' }}">
+                            <div class="flex flex-row justify-between gap-1 content-center">
+                                <span class="{{ $sort_column_name === 'registration_fee_paid' ? 'text-sky-700' : 'text-slate-500'  }}">
+                                    Registration Fee
+                                </span>
+                                <span class="float-right flex flex-col font-normal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'registration_fee_paid' && $sort_column_direction === 'asc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'registration_fee_paid' && $sort_column_direction === 'asc' ? '' : 'text-slate-400' }}">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'registration_fee_paid' && $sort_column_direction === 'desc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'registration_fee_paid' && $sort_column_direction === 'desc' ? '' : 'text-slate-400' }}">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </th>
+                        <th wire:click="sortBy('application_fee_paid')" scope="col" class="px-4 py-2 text-left cursor-pointer min-w-32 {{ $sort_column_name === 'application_fee_paid' ? 'bg-sky-200' : ''  }}">
+                            <div class="flex flex-row justify-between gap-1 content-center">
+                                <span class="{{ $sort_column_name === 'application_fee_paid' ? 'text-sky-700' : 'text-slate-500'  }}">
+                                    Application Fee
+                                </span>
+                                <span class="float-right flex flex-col font-normal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'application_fee_paid' && $sort_column_direction === 'asc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'application_fee_paid' && $sort_column_direction === 'asc' ? '' : 'text-slate-400' }}">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'application_fee_paid' && $sort_column_direction === 'desc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'application_fee_paid' && $sort_column_direction === 'desc' ? '' : 'text-slate-400' }}">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </span>
+                            </div>
 
+                        </th>
+                        <th scope="col" class="px-4 py-2 text-left">
+                            Registration Status
+                        </th>
+                        <th scope="col" class="px-4 py-2 text-left">
+                            Application Status
+                        </th>
+                        <th scope="col" class="px-4 py-2 text-left">
+                            Actions
                         </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-sky-100">
                     @foreach($applicants as $member)
-                        <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})" class="cursor-pointer {{ $member->eoi_fee_paid && $member->submission_fee_paid ? 'bg-green-50 hover:bg-green-100 hover:text-green-600' : 'hover:bg-slate-100 hover:text-sky-600' }} ">
+                        <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})" class="cursor-pointer hover:bg-slate-100 hover:text-sky-600">
                             <td class="px-4 py-2">
                                 {{ $member->first_name . ' ' . $member->last_name }}
                             </td>
                             <td class="px-4 py-2">
                                 {{ $member->email }}
                             </td>
-                            <td class="px-4 py-1">
-                                <span class="py-1 px-6 inline rounded-full w-96 {{ $member->eoi_fee_paid ? 'text-emerald-500 bg-emerald-100' : 'text-slate-500 bg-slate-200' }}">
-                                    {{ $member->eoi_fee_paid ? 'Paid' : 'Not Paid' }}
-                                </span>
-                            </td>
-                            <td class="px-4 py-1">
-                                <span class="py-1 px-6 rounded-full  {{ $member->submission_fee_paid ? 'text-emerald-500 bg-emerald-100' : 'text-slate-500 bg-slate-200' }}">
-                                    {{ $member->submission_fee_paid ? 'Paid' : 'Not Paid' }}
-                                </span>
-                            </td>
                             <td class="px-4 py-2">
                                 {{ \Carbon\Carbon::parse($member->created_at)->toDayDateTimeString() }}
                             </td>
                             <td class="px-4 py-1">
-                                @if($member->eoi_fee_paid && $member->submission_fee_paid)
-                                    <a href="#" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess</a>
+                                <span class="py-1 px-3 inline rounded-full w-96 {{ $member->registration_fee_paid ? 'text-emerald-500 bg-emerald-100' : 'text-slate-500 bg-slate-200' }}">
+                                    {{ $member->registration_fee_paid ? 'Paid' : 'Not Paid' }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-1">
+                                <span class="py-1 px-3 rounded-full  {{ $member->application_fee_paid ? 'text-emerald-500 bg-emerald-100' : 'text-slate-500 bg-slate-200' }}">
+                                    {{ $member->application_fee_paid ? 'Paid' : 'Not Paid' }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-2">
+                                @if ($member->eoi_status === 'accepted')
+                                    Complete.
+                                @elseif ($member->eoi_status === 'submitted' && $member->registration_fee_paid)
+                                    Ready for assessment.
+                                @elseif($member->eoi_status === 'submitted' && !$member->registration_fee_paid)
+                                    Submitted. Awaiting payment.
+                                @elseif($member->eoi_status !== 'submitted' && $member->registration_fee_paid)
+                                    Paid. Awaiting submission.
+                                @else
+                                    Unpaid. Awaiting submission.
                                 @endif
+                            </td>
+                            <td class="px-4 py-2">
+                                @if ($member->eoi_status !== 'accepted')
+                                    N/A
+                                @elseif ($member->application_status === 'accepted')
+                                    Complete.
+                                @elseif ($member->application_status === 'submitted' && $member->application_fee_paid)
+                                    Ready for assessment.
+                                @elseif($member->application_status === 'submitted' && !$member->application_fee_paid)
+                                    Submitted. Awaiting payment.
+                                @elseif($member->application_status !== 'submitted' && $member->application_fee_paid)
+                                    Paid. Awaiting submission.
+                                @else
+                                    Unpaid. Awaiting submission.
+                                @endif
+                            </td>
+
+                            <td class="px-4 py-1">
+                                @if ($member->application_status === 'submitted' && $member->application_fee_paid)
+                                    <a href="#" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess</a>
+                                @elseif ($member->eoi_status === 'submitted' && $member->registration_fee_paid)
+                                    <a href="#" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess</a>
+                                @else
+                                    N/A
+                                @endif
+
                             </td>
                         </tr>
                     @endforeach

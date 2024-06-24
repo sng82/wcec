@@ -31,7 +31,7 @@
                                 @foreach($upcoming_prices as $price)
                                     <tr wire:key="{{ $price->id }}">
                                         <td class="px-4 py-2 text-slate-500">
-                                            {{ $price->price_type === 'eoi' ? 'Expression of Interest' : Str::of($price->price_type)->headline() }}
+                                            {{ Str::of($price->price_type)->headline() }}
                                         </td>
                                         <td class="px-4 py-2">
                                             {{ Number::currency($price->amount, 'GBP') }}
@@ -75,7 +75,7 @@
                                 @foreach($current_prices as $price)
                                     <tr wire:key="{{ $price->id }}">
                                         <td class="px-4 py-2  text-slate-500">
-                                            {{ $price->price_type === 'eoi' ? 'Expression of Interest' : Str::of($price->price_type)->headline() }}
+                                            {{ Str::of($price->price_type)->headline() }}
                                         </td>
                                         <td class="px-4 py-2 text-slate-500">
                                             {{ Number::currency($price->amount, 'GBP') }}
@@ -117,8 +117,8 @@
                                         class="block w-full border-gray-300 focus:border-indigo-500 focus:ring-sky-500 rounded-md shadow-sm"
                                         required>
                                     <option value="">Please select...</option>
-                                    <option value="eoi">Expression of Interest</option>
-                                    <option value="submission">Submission</option>
+                                    <option value="registration">Registration</option>
+                                    <option value="application">Application</option>
                                     <option value="renewal">Renewal</option>
                                 </select>
                             </div>
@@ -191,7 +191,7 @@
                                 @foreach($archived_prices as $price)
                                     <tr wire:key="{{ $price->id }}">
                                         <td class="px-4 py-2">
-                                            {{ $price->price_type === 'eoi' ? 'Expression of Interest' : Str::of($price->price_type)->headline() }}
+                                            {{ Str::of($price->price_type)->headline() }}
                                         </td>
                                         <td class="px-4 py-2">
                                             {{ Number::currency($price->amount, 'GBP') }}

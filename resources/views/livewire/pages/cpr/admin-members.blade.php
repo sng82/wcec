@@ -31,7 +31,7 @@
                         <livewire:component.accepted-applicants />
                     </div>
                     <div x-show="activeTab===2">
-                        <livewire:component.pending-applicants :$pending_waiting_approval_count />
+                        <livewire:component.pending-applicants :$pending_waiting_approval_count :$pending_eoi_submitted_count />
                     </div>
                     <div x-show="activeTab===3">
                         <livewire:component.declined-applicants />
@@ -77,7 +77,7 @@
             tabs: [
                 "Active Members [{{ $active_member_count }}]",
                 "Accepted Applicants [{{ $accepted_applicant_count }}]",
-                "Pending Applicants [{{ $pending_waiting_approval_count . '/' . $pending_applicant_count }}]",
+                "Pending Applicants [{{ $pending_applicant_count . '/' . $pending_eoi_submitted_count . '/' . $pending_waiting_approval_count }}]",
                 "Declined Applicants [{{ $blocked_applicant_count }}]",
                 "Lapsed Members [{{ $lapsed_member_count }}]",
             ]

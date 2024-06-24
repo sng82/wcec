@@ -89,22 +89,22 @@
                     <hr class="my-6">
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
-                        <x-admin-input-label for="eoi_fee_paid" :value="__('EOI Fee Paid')" class="w-48" />
+                        <x-admin-input-label for="registration_fee_paid" :value="__('Registration Fee Paid')" class="w-48" />
                         <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                            <input wire:model="eoi_fee_paid" type="checkbox" name="eoi_fee_paid" id="eoi_fee_paid"
+                            <input wire:model="registration_fee_paid" type="checkbox" name="registration_fee_paid" id="registration_fee_paid"
                                    class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50 cursor-pointer"/>
-                            <label for="eoi_fee_paid" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-200 border border-gray-300 cursor-pointer"></label>
+                            <label for="registration_fee_paid" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-200 border border-gray-300 cursor-pointer"></label>
     {{--                        <span> - Only relevant if membership level is 'Applicant'</span>--}}
                         </div>
                         <span class="text-sm text-gray-700 italic">Only relevant if Membership Level = Applicant.</span>
                     </div>
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-5 gap-1">
-                        <x-admin-input-label for="submission_fee_paid" :value="__('Submission Fee Paid')" class="w-48" />
+                        <x-admin-input-label for="application_fee_paid" :value="__('Application Fee Paid')" class="w-48" />
                         <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                            <input wire:model="submission_fee_paid" type="checkbox" name="submission_fee_paid" id="submission_fee_paid"
+                            <input wire:model="application_fee_paid" type="checkbox" name="application_fee_paid" id="application_fee_paid"
                                    class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50 cursor-pointer"/>
-                            <label for="submission_fee_paid" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-200 border border-gray-300 cursor-pointer"></label>
+                            <label for="application_fee_paid" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-200 border border-gray-300 cursor-pointer"></label>
                         </div>
                         <span class="text-sm text-gray-700 italic">Only relevant if Membership Level = Applicant.</span>
                     </div>

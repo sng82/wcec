@@ -20,7 +20,7 @@ new class extends Component
 ?>
 
 <div class="sticky top-0 z-10">
-    <nav class="flex bg-slate-900">
+    <nav class="flex bg-slate-700">
         <div class="w-full mx-auto my-2 flex justify-end font-semibold uppercase pr-2">
             <button wire:click="logout"
                     class="flex flex-row content-center gap-2 rounded-lg uppercase bg-transparent pt-1 pl-3 pr-2

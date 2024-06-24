@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StripeController;
 use App\Livewire\Pages\About;
 use App\Livewire\Pages\CharitableTrust;
 use App\Livewire\Pages\CharteredPractitioners;
@@ -7,13 +8,18 @@ use App\Livewire\Pages\Contact;
 use App\Livewire\Pages\Cpr\AdminMembers;
 use App\Livewire\Pages\Cpr\ApplicantDocuments;
 use App\Livewire\Pages\Cpr\ApplicantEoi;
+use App\Livewire\Pages\Cpr\ApplicantFees;
 use App\Livewire\Pages\Cpr\ApplicantHelp;
 use App\Livewire\Pages\Cpr\MemberAdd;
 use App\Livewire\Pages\Cpr\MemberEdit;
+//use App\Livewire\Pages\Cpr\Payment;
+use App\Livewire\Pages\Cpr\PaymentCancel;
+use App\Livewire\Pages\Cpr\PaymentSuccess;
 use App\Livewire\Pages\Cpr\Prices;
+use App\Livewire\Pages\Cpr\StripePayment;
 use App\Livewire\Pages\Cpr\SubmissionDates;
 use App\Livewire\Pages\CprComingSoon;
-use App\Livewire\Pages\CprEoi;
+//use App\Livewire\Pages\CprEoi;
 use App\Livewire\Pages\Officers;
 use App\Livewire\Pages\Cpr\Dashboard;
 use App\Livewire\Pages\History;
@@ -53,21 +59,20 @@ Route::get('/chartered-practitioners', CharteredPractitioners::class)->name('cha
 Route::get('/about', About::class)->name('about');
 Route::get('/contact', Contact::class)->name('contact');
 
-//Route::get('/cpr-eoi', CprEoi::class)->name('cpr-eoi');
 
 //temp
 Route::get('/cpr-coming-soon', CprComingSoon::class)->name('cpr-coming-soon');
 Route::get('/register', CprComingSoon::class)->name('cpr-coming-soon');
 
+Route::get('/cpr/payment-success', PaymentSuccess::class)->name('payment-success');
+Route::get('/cpr/payment-cancel', PaymentCancel::class)->name('payment-cancel');
+
+// Routes accessible to all logged-in users.
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/cpr/dashboard', Dashboard::class)->name('dashboard');
-//    Route::get('/cpr/prices', Prices::class)->name('prices');
-//    Route::get('/cpr/members', AdminMembers::class)->name('members');
-//    Route::get('/cpr/submission-dates', SubmissionDates::class)->name('submission-dates');
 });
 
 Route::group(['middleware' => ['role:admin', 'auth']], function () {
-//    Route::get('/cpr/dashboard', Dashboard::class)->name('dashboard');
     Route::get('/cpr/prices', Prices::class)->name('prices');
     Route::get('/cpr/members', AdminMembers::class)->name('members');
     Route::get('/cpr/submission-dates', SubmissionDates::class)->name('submission-dates');
@@ -79,7 +84,10 @@ Route::group(['middleware' => ['role:applicant', 'auth']], function () {
     Route::get('/cpr/applicant-documents', ApplicantDocuments::class)->name('applicant-documents');
     Route::get('/cpr/applicant-help', ApplicantHelp::class)->name('applicant-help');
     Route::get('/cpr/applicant-eoi', ApplicantEoi::class)->name('applicant-eoi');
+    Route::get('/cpr/applicant-fees', ApplicantFees::class)->name('applicant-fees');
 });
+
+Route::post('/stripe/webhook', [StripeController::class, 'webhook'])->name('stripe.webhook');
 
 
 Route::view('profile', 'profile')

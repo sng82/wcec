@@ -1,7 +1,7 @@
 <nav
     x-data="{ sidebar_open: $persist(true) }"
     aria-label="Sidebar"
-    class="h-full flex flex-shrink-0 bg-slate-800 overflow-y-auto transition duration-500 w-fit"
+    class="h-full flex flex-shrink-0 bg-slate-600 overflow-y-auto transition duration-500 w-fit"
 {{--    :class="{ 'w-fit' : sidebar_open , 'w-12' : !sidebar_open }"--}}
 >
     <div class=" w-full flex sticky-top space-y-2 flex-col">
@@ -49,11 +49,11 @@
                         {{ __('Prices') }}
                     </x-sidebar-link>
 
-                    <x-sidebar-link href="#"
-                                    class="text-red-500"
-                                    icon="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">
-                        {{ __('Applicant Submissions') }}
-                    </x-sidebar-link>
+{{--                    <x-sidebar-link href="#"--}}
+{{--                                    class="text-red-500"--}}
+{{--                                    icon="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z">--}}
+{{--                        {{ __('Applicant Submissions') }}--}}
+{{--                    </x-sidebar-link>--}}
 
                     <x-sidebar-link :href="route('submission-dates')"
                                     :active="request()->routeIs('submission-dates')"
@@ -91,35 +91,46 @@
                 @endif
 
                 @if(Auth::user()->hasRole('applicant'))
+                    @if(Auth::user()->eoi_status !== 'submitted')
+                        <x-sidebar-link :href="route('applicant-eoi')"
+                                        :active="request()->routeIs('applicant-eoi')"
+                                        title="Expression of Interest"
+                                        icon="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+                                        wire:navigate>
+                            {{ __('Expression of Interest') }}
+                        </x-sidebar-link>
+                    @endif
 
-                    <x-sidebar-link :href="route('applicant-eoi')"
-                                    :active="request()->routeIs('applicant-eoi')"
-                                    icon="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-                                    wire:navigate>
-                        {{ __('Expression of Interest') }}
-                    </x-sidebar-link>
+{{--                    <x-sidebar-link :href="route('applicant-documents')"--}}
+{{--                                    :active="request()->routeIs('applicant-documents')"--}}
+{{--                                    icon="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"--}}
+{{--                                    wire:navigate>--}}
+{{--                        {{ __('My Documents') }}--}}
+{{--                    </x-sidebar-link>--}}
 
-                    <x-sidebar-link :href="route('applicant-documents')"
-                                    :active="request()->routeIs('applicant-documents')"
-                                    icon="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13"
-                                    wire:navigate>
-                        {{ __('My Documents') }}
-                    </x-sidebar-link>
+{{--                    <x-sidebar-link :href="route('applicant-fees')"--}}
+{{--                                    :active="request()->routeIs('applicant-fees')"--}}
+{{--                                    title="Fees"--}}
+{{--                                    icon="M14.121 7.629A3 3 0 0 0 9.017 9.43c-.023.212-.002.425.028.636l.506 3.541a4.5 4.5 0 0 1-.43 2.65L9 16.5l1.539-.513a2.25 2.25 0 0 1 1.422 0l.655.218a2.25 2.25 0 0 0 1.718-.122L15 15.75M8.25 12H12m9 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"--}}
+{{--                                    wire:navigate >--}}
+{{--                        {{ __('Fees Payable') }}--}}
+{{--                    </x-sidebar-link>--}}
 
-                    <x-sidebar-link href="#">
-                        {{ __('Pay Submission Fee') }}
-                    </x-sidebar-link>
+{{--                    <x-sidebar-link href="#">--}}
+{{--                        {{ __('Pay Submission Fee') }}--}}
+{{--                    </x-sidebar-link>--}}
 
-                    <x-sidebar-link href="#">
-                        {{ __('My Application') }}
-                    </x-sidebar-link>
+{{--                    <x-sidebar-link href="#">--}}
+{{--                        {{ __('My Application') }}--}}
+{{--                    </x-sidebar-link>--}}
 
-                    <x-sidebar-link href="#">
-                        {{ __('Complete Application') }}
-                    </x-sidebar-link>
+{{--                    <x-sidebar-link href="#">--}}
+{{--                        {{ __('Complete Application') }}--}}
+{{--                    </x-sidebar-link>--}}
 
                     <x-sidebar-link :href="route('applicant-help')"
                                     :active="request()->routeIs('applicant-help')"
+                                    title="Help"
                                     icon="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"
                                     wire:navigate>
                         {{ __('Help') }}
@@ -143,7 +154,7 @@
                     </x-sidebar-link>
 
                     <x-sidebar-link href="#">
-                        {{ __('Pay Submission Fee') }}
+                        {{ __('Pay Application Fee') }}
                     </x-sidebar-link>
 
                     <x-sidebar-link href="#">

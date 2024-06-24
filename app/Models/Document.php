@@ -2,12 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
+//use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
+/**
+ * @mixin Builder
+ */
 
 class Document extends Model
 {
-    use HasFactory;
+//    use HasFactory;
+
+//    public mixed $file_name;
+//    public mixed $user_id;
+
+
     protected $table = 'documents';
     protected $fillable = [
         'title',

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use Laravel\Cashier\Cashier;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Set default password requirements for users
         Password::defaults(function () {
             $rule = Password::min(8);
 
@@ -27,5 +29,8 @@ class AppServiceProvider extends ServiceProvider
                 ? $rule->letters()->numbers()->uncompromised()
                 : $rule;
         });
+
+        // https://laravel.com/docs/11.x/billing#tax-configuration
+        Cashier::calculateTaxes();
     }
 }

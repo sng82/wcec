@@ -23,8 +23,8 @@ class MemberAdd extends Component
     public $phone_2;
     public $phone_3;
     public $role;
-    public $eoi_fee_paid;
-    public $submission_fee_paid;
+    public $registration_fee_paid;
+    public $application_fee_paid;
     public $send_email;
 //    public $membership_type;
     public $roles;
@@ -53,8 +53,8 @@ class MemberAdd extends Component
                 'phone_1'               => trim($this->phone_1),
                 'phone_2'               => trim($this->phone_2),
                 'phone_3'               => trim($this->phone_3),
-                'eoi_fee_paid'          => $this->eoi_fee_paid ? 1 : 0,
-                'submission_fee_paid'   => $this->submission_fee_paid ? 1 : 0,
+                'registration_fee_paid'          => $this->registration_fee_paid ? 1 : 0,
+                'application_fee_paid'   => $this->application_fee_paid ? 1 : 0,
                 'password'              => Str::random(12),
                 'membership_expires_at' => $this->role === 'member' ? Carbon::parse(now())->addYear()->format('Y-m-d') : null,
                 'accepted_at'           => $this->role === 'member' ? now() : null,

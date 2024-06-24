@@ -74,12 +74,19 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500" href="{{ route('login') }}" wire:navigate>
-                {{ __('Log in') }}
-            </a>
+
             <x-primary-button  class="ms-3">
                 {{ __('Email Password Reset Link') }}
             </x-primary-button>
+        </div>
+        <hr class="mt-4">
+        <div class="flex items-center justify-between mt-4">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500" href="{{ route('login') }}" wire:navigate>
+                {{ __('Log in') }}
+            </a>
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500" href="{{ route('register') }}" wire:navigate>
+                {{ __('Register') }}
+            </a>
         </div>
     </form>
 </div>

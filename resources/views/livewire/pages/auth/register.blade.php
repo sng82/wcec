@@ -52,7 +52,7 @@ new #[Layout('layouts.guest')] class extends Component
 
 <div>
 
-    <h1 class="text-sky-900 text-2xl mb-4 border-b-4 border-red-700 pb-2">Register</h1>
+    <h1 class="text-sky-900 text-2xl mb-4 border-b-4 border-red-700 pb-2">Create Account</h1>
     <p class="mb-4">
         The first step to joining the Chartered Practitioners Register is to create an account with us...
     </p>
@@ -66,7 +66,7 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
 
         <!-- First Name -->
-        <div>
+        <div class="mt-4">
             <x-input-label for="last_name" :value="__('Last Name')" />
             <x-text-input wire:model="last_name" id="last_name" class="block mt-1 w-full" type="text" name="last_name" required autofocus autocomplete="last_name" />
             <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
@@ -102,14 +102,14 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-between mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500" href="{{ route('login') }}" wire:navigate>
-                {{ __('Already registered?') }}
+                {{ __('Already have an account?') }}
             </a>
-
             <x-primary-button class="ms-4">
-                {{ __('Register') }}
+                {{ __('Create') }}
             </x-primary-button>
         </div>
+
     </form>
 </div>

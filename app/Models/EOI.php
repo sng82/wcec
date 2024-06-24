@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+//use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
 class EOI extends Model
 {
 //    use HasFactory;
+
+//    public mixed $id;
 
     protected $table = 'expression_of_interests';
 
