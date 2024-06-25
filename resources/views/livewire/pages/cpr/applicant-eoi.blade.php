@@ -509,7 +509,7 @@
                         </span>
 
                     </div>
-                    @if(Config('app.env') !== 'Production')
+                    @if (config('app.env') !== 'Production')
                         @dump($errors)
                     @endif
                 @endif

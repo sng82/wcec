@@ -18,7 +18,7 @@
                     </h2>
                     <p class="mb-4">These prices will automatically replace the current prices on the dates shown.</p>
                     <div class="overflow-hidden border border-sky-100 rounded-lg shadow-sm overflow-x-auto">
-                        <table class="table-auto w-full divide-y divide-sky-100">
+                        <table class="table-auto w-full divide-y divide-sky-100 text-sm">
                             <thead class="bg-sky-100">
                                 <tr class="text-sky-700">
                                     <th scope="col" class="px-4 py-2 text-left min-w-56">Type</th>

@@ -102,4 +102,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Document::class);
     }
+
+    public function eoi()
+    {
+        return $this->hasOne(Eoi::class);
+    }
 }

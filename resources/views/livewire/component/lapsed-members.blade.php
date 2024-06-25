@@ -15,7 +15,7 @@
     </div>
     @if($lapsed_members->count() > 0)
         <div class="mt-3 mb-2 overflow-hidden border border-sky-100 rounded-lg shadow-sm overflow-x-auto">
-            <table class="table-auto w-full divide-y divide-sky-100">
+            <table class="table-auto w-full divide-y divide-sky-100 text-sm">
                 <thead class="bg-sky-100">
                     <tr class="text-sky-700 divide-x divide-sky-200">
                         <th wire:click="sortBy('last_name')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'last_name' ? 'bg-sky-200' : ''  }}">

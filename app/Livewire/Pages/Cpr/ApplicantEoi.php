@@ -83,6 +83,37 @@ class ApplicantEoi extends Component
         $this->phone_1      = $this->user->phone_1;
         $this->phone_2      = $this->user->phone_2;
         $this->phone_3      = $this->user->phone_3;
+
+        $this->eoi = EOI::where('user_id', $this->user->id)?->first();
+
+        if ($this->eoi) {
+            $this->eoi_id = $this->eoi->id;
+            $this->current_role = $this->eoi->current_role;
+            $this->employment_history = $this->eoi->employment_history;
+            $this->qualifications = $this->eoi->qualifications;
+            $this->training = $this->eoi->training;
+
+            $this->existing_cv = Document::where('user_id', $this->user->id)
+                                         ->where('eoi_id', $this->eoi->id)
+                                         ->where('doc_type', 'cv')
+                                         ->first();
+
+            $this->existing_job_description = Document::where('user_id', $this->user->id)
+                                                      ->where('eoi_id', $this->eoi->id)
+                                                      ->where('doc_type', 'job_description')
+                                                      ->first();
+
+            $this->existing_qualification_certificates = Document::where('user_id', $this->user->id)
+                                                                 ->where('eoi_id', $this->eoi->id)
+                                                                 ->where('doc_type', 'qualification_certificate')
+                                                                 ->get();
+
+            $this->existing_training_certificates = Document::where('user_id', $this->user->id)
+                                                            ->where('eoi_id', $this->eoi->id)
+                                                            ->where('doc_type', 'training_certificate')
+                                                            ->get();
+        }
+
     }
 
     public function downloadFile(Document $document)
@@ -174,6 +205,7 @@ class ApplicantEoi extends Component
 
     public function save($submit = false)
     {
+
         $this->validate([
             'first_name'                    => 'required|min:2',
             'last_name'                     => 'required|min:2',
@@ -301,18 +333,39 @@ class ApplicantEoi extends Component
     {
         $this->save(true);
 
+        if ($this->eoi) {
+            // The EoI has been worked on and saved prior to this submission,
+            // so there may be documents that have already been saved.
+            $cv_doc = Document::where('eoi_id', $this->eoi->id)->where('doc_type', 'cv')->first();
+            if (!$cv_doc) {
+                $this->validate([
+                    'cv' => 'required|file|mimes:pdf,doc,docx|max:2048'
+                ]);
+            }
+
+            $job_desc_doc = Document::where('eoi_id', $this->eoi->id)->where('doc_type', 'job_description')->first();
+            if (!$job_desc_doc) {
+                $this->validate([
+                    'current_role' => 'required_without:job_description',
+                ] , [
+                    'current_role.required_without' => 'Either a Job Description document OR a description of your current role is required.',
+                ]);
+            }
+
+        }
+
         $this->validate([
-            'cv'                            => 'required_without_all:existing_cv|file|mimes:pdf,doc,docx|max:2048',
-            'current_role'                  => 'required_without_all:job_description,existing_job_description',
+//            'cv'                            => 'sometimes|required|file|mimes:pdf,doc,docx|max:2048',
+//            'current_role'                  => 'required_without_all:job_description,existing_job_description',
             'qualification_certificates.*'  => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'training_certificates.*'       => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'employment_history'            => 'required|min:3',
             'qualifications'                => 'required|min:3',
             'training'                      => 'required|min:3',
         ], [
-            'current_role.required_without_all' => 'Either a Job Description document OR a description of your current role is required.',
-            'qualifications.required'       => 'Please provide details of qualifications. Type \'N/A\' if you have nothing to add here.',
-            'training'                      => 'Please provide details of training undertaken. Type \'N/A\' if you have nothing to add here.',
+//            'current_role.required_without_all' => 'Either a Job Description document OR a description of your current role is required.',
+            'qualifications.required'           => 'Please provide details of qualifications. Type \'N/A\' if you have nothing to add here.',
+            'training'                          => 'Please provide details of training undertaken. Type \'N/A\' if you have nothing to add here.',
         ]);
 
         $this->user->update(['eoi_status' => 'submitted']);
@@ -335,35 +388,35 @@ class ApplicantEoi extends Component
 
     public function render()
     {
-        $this->eoi = EOI::where('user_id', $this->user->id)?->first();
-
-        if ($this->eoi) {
-            $this->eoi_id = $this->eoi->id;
-            $this->current_role = $this->eoi->current_role;
-            $this->employment_history = $this->eoi->employment_history;
-            $this->qualifications = $this->eoi->qualifications;
-            $this->training = $this->eoi->training;
-
-            $this->existing_cv = Document::where('user_id', $this->user->id)
-                                         ->where('eoi_id', $this->eoi->id)
-                                         ->where('doc_type', 'cv')
-                                         ->first();
-
-            $this->existing_job_description = Document::where('user_id', $this->user->id)
-                                                      ->where('eoi_id', $this->eoi->id)
-                                                      ->where('doc_type', 'job_description')
-                                                      ->first();
-
-            $this->existing_qualification_certificates = Document::where('user_id', $this->user->id)
-                                                                 ->where('eoi_id', $this->eoi->id)
-                                                                 ->where('doc_type', 'qualification_certificate')
-                                                                 ->get();
-
-            $this->existing_training_certificates = Document::where('user_id', $this->user->id)
-                                                            ->where('eoi_id', $this->eoi->id)
-                                                            ->where('doc_type', 'training_certificate')
-                                                            ->get();
-        }
+//        $this->eoi = EOI::where('user_id', $this->user->id)?->first();
+//
+//        if ($this->eoi) {
+//            $this->eoi_id = $this->eoi->id;
+//            $this->current_role = $this->eoi->current_role;
+//            $this->employment_history = $this->eoi->employment_history;
+//            $this->qualifications = $this->eoi->qualifications;
+//            $this->training = $this->eoi->training;
+//
+//            $this->existing_cv = Document::where('user_id', $this->user->id)
+//                                         ->where('eoi_id', $this->eoi->id)
+//                                         ->where('doc_type', 'cv')
+//                                         ->first();
+//
+//            $this->existing_job_description = Document::where('user_id', $this->user->id)
+//                                                      ->where('eoi_id', $this->eoi->id)
+//                                                      ->where('doc_type', 'job_description')
+//                                                      ->first();
+//
+//            $this->existing_qualification_certificates = Document::where('user_id', $this->user->id)
+//                                                                 ->where('eoi_id', $this->eoi->id)
+//                                                                 ->where('doc_type', 'qualification_certificate')
+//                                                                 ->get();
+//
+//            $this->existing_training_certificates = Document::where('user_id', $this->user->id)
+//                                                            ->where('eoi_id', $this->eoi->id)
+//                                                            ->where('doc_type', 'training_certificate')
+//                                                            ->get();
+//        }
 
         return view('livewire.pages.cpr.applicant-eoi')
             ->layout('layouts.app');

@@ -10,6 +10,7 @@ use App\Livewire\Pages\Cpr\ApplicantDocuments;
 use App\Livewire\Pages\Cpr\ApplicantEoi;
 use App\Livewire\Pages\Cpr\ApplicantFees;
 use App\Livewire\Pages\Cpr\ApplicantHelp;
+use App\Livewire\Pages\Cpr\AssessEoi;
 use App\Livewire\Pages\Cpr\MemberAdd;
 use App\Livewire\Pages\Cpr\MemberEdit;
 //use App\Livewire\Pages\Cpr\Payment;
@@ -78,6 +79,7 @@ Route::group(['middleware' => ['role:admin', 'auth']], function () {
     Route::get('/cpr/submission-dates', SubmissionDates::class)->name('submission-dates');
     Route::get('/cpr/member-edit/{id}', MemberEdit::class)->name('member-edit');
     Route::get('/cpr/member-add', MemberAdd::class)->name('member-add');
+    Route::get('/cpr/assess-eoi/{id}', AssessEoi::class)->name('assess-eoi');
 });
 
 Route::group(['middleware' => ['role:applicant', 'auth']], function () {
