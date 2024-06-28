@@ -25,6 +25,14 @@ class UserSeeder extends Seeder
         ]);
         $me->assignRole('admin');
 
+        $testAdmin = User::factory()->create([
+            'first_name'   => 'Dan',
+            'last_name'    => 'Jones',
+            'email'        => 'danjones@test.co.uk',
+            'password'     => Hash::make('admin-test'),
+        ]);
+        $testAdmin->assignRole('admin');
+
         $test_applicant = User::factory()->create([
            'first_name'   => 'Test',
            'last_name'    => 'Applicant',
@@ -32,6 +40,14 @@ class UserSeeder extends Seeder
            'password'     => Hash::make('asap3434'),
         ]);
         $test_applicant->assignRole('applicant');
+
+        $test_applicant2 = User::factory()->create([
+            'first_name'   => 'James',
+            'last_name'    => 'Smith',
+            'email'        => 'jamessmith@test.co.uk',
+            'password'     => Hash::make('applicant-test'),
+        ]);
+        $test_applicant2->assignRole('applicant');
 
         // Random admins
 //        User::factory()->count(3)->create()->each(function ($user) {
