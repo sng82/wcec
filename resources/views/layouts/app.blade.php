@@ -11,8 +11,7 @@
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
 {{--        @vite(['resources/scss/app.scss', 'resources/scss/cpr.scss', 'resources/js/app.js'])--}}
 
-{{--        <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">--}}
-{{--        <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>--}}
+
 
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
@@ -24,7 +23,7 @@
         <meta name="msapplication-config" content="/icons/browserconfig.xml">
         <meta name="theme-color" content="#ffffff">
     </head>
-    <body class="cpp flex flex-col h-screen bg-slate-200 overflow-hidden">
+    <body class="cpp flex flex-col h-screen bg-slate-300 overflow-hidden">
 
     {{--    <body x-data="{ sidebar_open: $persist(true) }" class="cpp flex flex-col h-screen bg-slate-200 overflow-hidden">--}}
 {{--        <livewire:layout.cpr-navigation />--}}

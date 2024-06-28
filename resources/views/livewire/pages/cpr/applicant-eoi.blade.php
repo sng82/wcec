@@ -6,7 +6,24 @@
 
         <livewire:layout.cpr-navigation/>
 
-        <form wire:submit="save" class="py-4 px-6" x-data="{
+{{--        <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">--}}
+{{--        <style>--}}
+{{--            .trix-block h1 {--}}
+{{--                font-size: 20px;--}}
+{{--                font-weight: bolder;--}}
+{{--            }--}}
+{{--            .trix-block ul li {--}}
+{{--                list-style: circle;--}}
+{{--                margin-left: 20px;--}}
+{{--            }--}}
+{{--            .trix-block ol li {--}}
+{{--                list-style: decimal;--}}
+{{--                margin-left: 20px;--}}
+{{--            }--}}
+{{--        </style>--}}
+        <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
+
+        <form wire:submit="saveProgress" class="py-4 px-6" x-data="{
             init() {
                 Livewire.hook('commit', ({ succeed }) => {
                     succeed(() => {
@@ -22,7 +39,7 @@
             }
         }">
 
-            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 mt-6 border border-slate-200 shadow">
+            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
                 <h1 class="text-3xl text-sky-800 border-b-4 border-red-600 pb-2 mb-4">
                     Expression of Interest
                 </h1>
@@ -36,7 +53,7 @@
                 </p>
             </div>
 
-            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-200 shadow">
+            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
                 <h2 class="text-xl text-white bg-sky-900 border-b border-sky-900 p-2 pl-7 mb-3 -ml-7 shadow rounded-lg font-semibold">
                     Your Details
                 </h2>
@@ -88,7 +105,7 @@
                 <x-cpr-input-error :messages="$errors->get('phone_3')" class="mt-2 ml-48"/>
             </div>
 
-            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-200 shadow">
+            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
                 <h2 class="text-xl text-white bg-sky-900 border-b border-sky-900 p-2 pl-7 mb-3 -ml-7 shadow rounded-lg font-semibold">
                     Curriculum Vitae
                 </h2>
@@ -151,7 +168,7 @@
                 @endif
             </div>
 
-            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-200 shadow">
+            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
                 <h2 class="text-xl text-white bg-sky-900 border-b border-sky-900 p-2 pl-7 mb-3 -ml-7 shadow rounded-lg font-semibold">
                     Current Employment &amp; Position
                 </h2>
@@ -220,13 +237,21 @@
                         If you do not have a formal document, please provide a description of your current role instead:
                     </label>
 
-                    <textarea wire:model="current_role" name="current_role" rows="6" id="current_role"
-                              class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block mt-3 w-full"></textarea>
+                    <div wire:ignore class="mt-4">
+                        <trix-editor
+                            class="formatted-content trix-block bg-white px-3 py-6 shadow-md shadow-slate-300"
+                            x-data
+                            x-on:trix-change.self="$dispatch('input', event.target.value)"
+                            wire:model.debounce.1000ms="current_role"
+                            wire:key="current_role"
+                        ></trix-editor>
+                    </div>
+
                     <x-cpr-input-error :messages="$errors->get('current_role')" class="mt-3"/>
                 @endif
             </div>
 
-            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-200 shadow">
+            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
                 <h2 class="text-xl text-white bg-sky-900 border-b border-sky-900 p-2 pl-7 mb-3 -ml-7 shadow rounded-lg font-semibold">
                     Employment History
                 </h2>
@@ -238,22 +263,26 @@
                     and professional commitment.
                 </label>
 
-{{--                <div class="pt-4">--}}
-{{--                    <input wire:model="employment_history" type="hidden">--}}
-{{--                    <trix-editor input="" class="trix-content"></trix-editor>--}}
-{{--                </div>--}}
+{{--                <input type="hidden" wire:model="employment_history" id="employment_history_trix_content">--}}
 
+                <div wire:ignore class="mt-4">
+                    <trix-editor
+                        class="formatted-content trix-block bg-white px-3 py-6 shadow-md shadow-slate-300"
+                        x-data
+                        x-on:trix-change.self="$dispatch('input', event.target.value)"
+                        wire:model.debounce.1000ms="employment_history"
+                        wire:key="employment_history"
+                    ></trix-editor>
+                </div>
 
-
-
-                <textarea wire:model="employment_history" name="employment_history" rows="12"
-                          id="employment_history"
-                          class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full mt-3"></textarea>
+{{--                <textarea wire:model="employment_history" name="employment_history" rows="12"--}}
+{{--                          id="employment_history"--}}
+{{--                          class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full mt-3"></textarea>--}}
 
                 <x-cpr-input-error :messages="$errors->get('employment_history')" class="mt-2"/>
             </div>
 
-            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-200 shadow">
+            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
                 <h2 class="text-xl text-white bg-sky-900 border-b border-sky-900 p-2 pl-7 mb-3 -ml-7 shadow rounded-lg font-semibold">
                     Education
                 </h2>
@@ -261,8 +290,18 @@
                     Provide details of all higher education qualifications, including non-cleaning subjects:
                 </label>
 
-                <textarea wire:model="qualifications" name="qualifications" rows="6" id="qualifications"
-                          class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full mt-3"></textarea>
+                <div wire:ignore class="mt-4">
+                    <trix-editor
+                        class="formatted-content trix-block bg-white px-3 py-6 shadow-md shadow-slate-300"
+                        x-data
+                        x-on:trix-change.self="$dispatch('input', event.target.value)"
+                        wire:model.debounce.1000ms="qualifications"
+                        wire:key="qualifications"
+                    ></trix-editor>
+                </div>
+
+{{--                <textarea wire:model="qualifications" name="qualifications" rows="6" id="qualifications"--}}
+{{--                          class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full mt-3"></textarea>--}}
                 <x-cpr-input-error :messages="$errors->get('qualifications')" class="mt-2"/>
 
                 <p class="my-4">
@@ -376,15 +415,26 @@
                 <x-files-renamed-notice/>
             </div>
 
-            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-200 shadow">
+            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
                 <h2 class="text-xl text-white bg-sky-900 border-b border-sky-900 p-2 pl-7 mb-3 -ml-7 shadow rounded-lg font-semibold">
                     Training
                 </h2>
                 <label for="training" class="mt-4">
                     Provide details of training courses you have undertaken in the last 5 years:
                 </label>
-                <textarea wire:model="training" name="training" rows="6" id="training"
-                          class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full mt-3"></textarea>
+
+                <div wire:ignore class="mt-4">
+                    <trix-editor
+                        class="formatted-content trix-block bg-white px-3 py-6 shadow-md shadow-slate-300"
+                        x-data
+                        x-on:trix-change.self="$dispatch('input', event.target.value)"
+                        wire:model.debounce.1000ms="training"
+                        wire:key="training"
+                    ></trix-editor>
+                </div>
+
+{{--                <textarea wire:model="training" name="training" rows="6" id="training"--}}
+{{--                          class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full mt-3"></textarea>--}}
 
                 <x-cpr-input-error :messages="$errors->get('training')" class="mt-2"/>
 

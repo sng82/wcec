@@ -67,7 +67,9 @@ class ApplicantEoi extends Component
 
         // Prevent access if user has already submitted their EoI.
         if($this->user->eoi_status === 'submitted' || $this->user->eoi_status === 'accepted') {
-            return $this->flash('error', 'This Expression of Interest has already been submitted.',
+            return $this->flash(
+                'error',
+                'This Expression of Interest has already been submitted.',
                 [
                     'position' => 'center',
                     'timer' => null,
@@ -84,7 +86,7 @@ class ApplicantEoi extends Component
         $this->phone_2      = $this->user->phone_2;
         $this->phone_3      = $this->user->phone_3;
 
-        $this->eoi = EOI::where('user_id', $this->user->id)?->first();
+        $this->eoi = EOI::where('user_id', $this->user->id)?->latest()->first();
 
         if ($this->eoi) {
             $this->eoi_id = $this->eoi->id;
@@ -119,16 +121,20 @@ class ApplicantEoi extends Component
     public function downloadFile(Document $document)
     {
         $file_loc = 'public/submitted_documents/' . Auth::id() . '/' . $document->file_name;
-        if (storage::disk('local')->exists($file_loc)) {
+        if (Storage::disk('local')->exists($file_loc)) {
             return Storage::download($file_loc);
         }
-        $this->alert('error', 'Error', [
-            'position' => 'center',
-            'timer' => null,
-            'text' => 'Unable to download file. It has probably been deleted.',
-            'showConfirmButton' => true,
-            'confirmButtonColor' => '#dc2626',
-        ]);
+        $this->alert(
+            'error',
+            'Error',
+            [
+                'position' => 'center',
+                'timer' => null,
+                'text' => 'Unable to download file. It has probably been deleted.',
+                'showConfirmButton' => true,
+                'confirmButtonColor' => '#dc2626',
+            ]
+        );
     }
 
     public function downloadFiles($doc_type)
@@ -180,7 +186,7 @@ class ApplicantEoi extends Component
         }
 
         $document->delete();
-        $this->save();
+        $this->saveProgress();
     }
 
     public function deleteFiles($doc_type)
@@ -200,12 +206,11 @@ class ApplicantEoi extends Component
             $document->delete();
         }
 
-        $this->save();
+        $this->saveProgress();
     }
 
-    public function save($submit = false)
+    public function saveProgress($submit = false)
     {
-
         $this->validate([
             'first_name'                    => 'required|min:2',
             'last_name'                     => 'required|min:2',
@@ -214,11 +219,6 @@ class ApplicantEoi extends Component
             'job_description'               => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'qualification_certificates.*'  => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'training_certificates.*'       => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-//            'training_certificates'         => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-//            'qualification_certificates'    => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-//            'phone_3'                       => 'nullable|numeric',
-//            'phone_2'                       => 'nullable|numeric',
-//            'phone_1'                       => 'required|numeric',
         ]);
 
         try {
@@ -231,7 +231,7 @@ class ApplicantEoi extends Component
                 'phone_3'    => $this->phone_3,
             ]);
 
-            $eoi = EOI::updateOrCreate([
+            $this->eoi = EOI::updateOrCreate([
                 'user_id' => $this->user->id,
             ], [
                 'user_id'               => $this->user->id,
@@ -250,12 +250,12 @@ class ApplicantEoi extends Component
                 Document::updateOrCreate([
                     'user_id'       => $this->user->id,
                     'doc_type'      => 'cv',
-                    'eoi_id'        => $eoi->id,
+                    'eoi_id'        => $this->eoi->id,
                 ], [
                     'user_id'       => $this->user->id,
                     'file_name'     => $filename,
                     'doc_type'      => 'cv',
-                    'eoi_id'        => $eoi->id,
+                    'eoi_id'        => $this->eoi->id,
                 ]);
             }
 
@@ -268,12 +268,12 @@ class ApplicantEoi extends Component
                 Document::updateOrCreate([
                     'user_id'       => $this->user->id,
                     'doc_type'      => 'job_description',
-                    'eoi_id'        => $eoi->id,
+                    'eoi_id'        => $this->eoi->id,
                 ], [
                     'user_id'       => $this->user->id,
                     'file_name'     => $filename,
                     'doc_type'      => 'job_description',
-                    'eoi_id'        => $eoi->id,
+                    'eoi_id'        => $this->eoi->id,
                 ]);
             }
 
@@ -287,7 +287,7 @@ class ApplicantEoi extends Component
                     Document::create([
                         'user_id'       => $this->user->id,
                         'doc_type'      => 'qualification_certificate',
-                        'eoi_id'        => $eoi->id,
+                        'eoi_id'        => $this->eoi->id,
                         'file_name'     => $filename,
                     ]);
                 }
@@ -303,7 +303,7 @@ class ApplicantEoi extends Component
                     Document::create([
                         'user_id'       => $this->user->id,
                         'doc_type'      => 'training_certificate',
-                        'eoi_id'        => $eoi->id,
+                        'eoi_id'        => $this->eoi->id,
                         'file_name'     => $filename,
                     ]);
                 }
@@ -331,28 +331,27 @@ class ApplicantEoi extends Component
 
     public function saveAndSubmit()
     {
-        $this->save(true);
+        $this->saveProgress(true);
 
-        if ($this->eoi) {
-            // The EoI has been worked on and saved prior to this submission,
-            // so there may be documents that have already been saved.
-            $cv_doc = Document::where('eoi_id', $this->eoi->id)->where('doc_type', 'cv')->first();
-            if (!$cv_doc) {
-                $this->validate([
-                    'cv' => 'required|file|mimes:pdf,doc,docx|max:2048'
-                ]);
-            }
 
-            $job_desc_doc = Document::where('eoi_id', $this->eoi->id)->where('doc_type', 'job_description')->first();
-            if (!$job_desc_doc) {
-                $this->validate([
-                    'current_role' => 'required_without:job_description',
-                ] , [
-                    'current_role.required_without' => 'Either a Job Description document OR a description of your current role is required.',
-                ]);
-            }
-
+        // The EoI has been worked on and saved prior to this submission,
+        // so there may be documents that have already been saved.
+        $cv_doc = Document::where('eoi_id', $this->eoi->id)->where('doc_type', 'cv')->first();
+        if (!$cv_doc) {
+            $this->validate([
+                'cv' => 'required|file|mimes:pdf,doc,docx|max:2048'
+            ]);
         }
+
+        $job_desc_doc = Document::where('eoi_id', $this->eoi->id)->where('doc_type', 'job_description')->first();
+        if (!$job_desc_doc) {
+            $this->validate([
+                'current_role' => 'required_without:job_description',
+            ] , [
+                'current_role.required_without' => 'Either a Job Description document OR a description of your current role is required.',
+            ]);
+        }
+
 
         $this->validate([
 //            'cv'                            => 'sometimes|required|file|mimes:pdf,doc,docx|max:2048',
@@ -368,19 +367,22 @@ class ApplicantEoi extends Component
             'training'                          => 'Please provide details of training undertaken. Type \'N/A\' if you have nothing to add here.',
         ]);
 
+        $this->eoi->update(['submitted_at' => now()]);
         $this->user->update(['eoi_status' => 'submitted']);
 
-        $extended_message = 'Please pay your registration fee to progress your application.';
-        if ($this->user->registration_fee_paid) {
-            $extended_message = 'We\'ll be in touch soon';
-        }
+        $extended_message = $this->user->registration_fee_paid
+            ? 'We\'ll be in touch soon.'
+            : 'Please pay your registration fee to progress your application.';
 
         return $this->flash(
-            'info', 'Expression Of Interest Submitted. ' . $extended_message , [
-            'position'          => 'top-end',
-            'timer'             => 8000,
-            'showConfirmButton' => true,
-        ],
+            'success',
+            'Expression Of Interest Submitted. ' . $extended_message ,
+            [
+                'position'           => 'center',
+                'timer'              => null,
+                'showConfirmButton'  => true,
+                'confirmButtonColor' => '#10b981',
+            ],
             route('dashboard')
         );
 

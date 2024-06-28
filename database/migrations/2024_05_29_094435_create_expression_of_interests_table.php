@@ -18,6 +18,8 @@ return new class extends Migration
             $table->longText('qualifications')->nullable()->default(null);
             $table->longText('training')->nullable()->default(null);
             $table->dateTime('submitted_at')->nullable()->default(null);
+            $table->longText('feedback')->nullable()->default(null);
+            $table->longText('notes')->nullable()->default(null);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

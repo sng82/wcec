@@ -15,6 +15,7 @@ export default {
             fontFamily: {
                 sans: ['Poppins', 'sans-serif'],
                 brand: ['Cinzel', 'serif'],
+                serif: ['Noto', 'serif'],
             },
             listStyleType: {
                 square: 'square',

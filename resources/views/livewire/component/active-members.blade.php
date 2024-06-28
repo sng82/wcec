@@ -70,7 +70,10 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-sky-100 text-slate-600">
                         @foreach($active_members as $member)
-                            <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})" class="cursor-pointer {{ $member->membership_expires_at < now()->addDays(30) ? 'bg-red-100 hover:bg-red-200 hover:text-red-600' : 'hover:bg-slate-100 hover:text-sky-600' }}">
+                            <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})" class="cursor-pointer
+                                odd:bg-white even:bg-slate-50 hover:bg-slate-100 hover:text-sky-600
+{{--                            {{ $member->membership_expires_at < now()->addDays(30) ? 'bg-red-100 hover:bg-red-200 hover:text-red-600' : 'hover:bg-slate-100 hover:text-sky-600' }}--}}
+                            ">
                                 <td class="px-4 py-2">
                                     {{ $member->first_name . ' ' . $member->last_name }}
                                 </td>

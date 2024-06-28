@@ -29,7 +29,7 @@ class MemberAdd extends Component
 //    public $membership_type;
     public $roles;
 
-    public function save()
+    public function saveUser()
     {
 //        dump($this->first_name);
 //        dd($this->role);
@@ -46,6 +46,10 @@ class MemberAdd extends Component
 
         try {
 
+            $password = config('app.env') === 'production'
+                ? Str::random(12)
+                : 'wceccpr1';
+
             $new_user = User::create([
                 'first_name'            => trim($this->first_name),
                 'last_name'             => trim($this->last_name),
@@ -53,9 +57,9 @@ class MemberAdd extends Component
                 'phone_1'               => trim($this->phone_1),
                 'phone_2'               => trim($this->phone_2),
                 'phone_3'               => trim($this->phone_3),
-                'registration_fee_paid'          => $this->registration_fee_paid ? 1 : 0,
-                'application_fee_paid'   => $this->application_fee_paid ? 1 : 0,
-                'password'              => Str::random(12),
+                'registration_fee_paid' => $this->registration_fee_paid ? 1 : 0,
+                'application_fee_paid'  => $this->application_fee_paid ? 1 : 0,
+                'password'              => $password,
                 'membership_expires_at' => $this->role === 'member' ? Carbon::parse(now())->addYear()->format('Y-m-d') : null,
                 'accepted_at'           => $this->role === 'member' ? now() : null,
                 'accepted_by'           => $this->role === 'member' ? auth()->user()->id : null,
@@ -67,11 +71,14 @@ class MemberAdd extends Component
             //@todo: send email if option selected
 
             return $this->flash(
-                'info', 'User added successfully', [
+                'success',
+                'User added successfully',
+                [
                     'position' => 'top-end',
                     'timer' => 2000,
                     'showConfirmButton' => false,
-                ], 'cpr/members'
+                ],
+                'cpr/members'
             );
 
 //            $this->alert('info', 'User added successfully', [

@@ -68,7 +68,8 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-sky-100">
                     @foreach($lapsed_members as $member)
-                        <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})" class="cursor-pointer text-slate-500 hover:text-sky-600 hover:bg-slate-100">
+                        <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})"
+                            class="cursor-pointer odd:bg-white even:bg-slate-50 text-slate-500 hover:text-sky-600 hover:bg-slate-100">
                             <td class="px-4 py-2">
                                 {{ $member->first_name . ' ' . $member->last_name }}
                             </td>

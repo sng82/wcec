@@ -96,7 +96,7 @@
                                 @endif
                             </td>
                             <td class="px-4 py-1">
-                                <a href="{{ route('assess-eoi',[$member->id]) }}" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess&nbsp;EoI</a>
+                                <a href="{{ route('assess-eoi',[$member->eoi->id]) }}" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess&nbsp;EoI</a>
 
 {{--                                <a href="#" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess</a>--}}
                             </td>
@@ -202,7 +202,7 @@
         <div class="mt-3 mb-2 overflow-hidden border border-red-100 rounded-lg shadow-sm overflow-x-auto">
             <table class="table-auto w-full divide-y divide-red-100">
                 <thead class="bg-red-100">
-                    <tr class="text-red-700 divide-x divide-red-200">
+                    <tr class="text-red-900 divide-x divide-red-200">
                         <th scope="col" class="px-4 py-2 text-left">
                             Name
                         </th>

@@ -8,6 +8,7 @@ class ApplicantHelp extends Component
 {
     public function render()
     {
-        return view('livewire.pages.cpr.applicant-help');
+        return view('livewire.pages.cpr.applicant-help')
+            ->layout('layouts.app');
     }
 }

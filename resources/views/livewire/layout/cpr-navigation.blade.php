@@ -21,7 +21,9 @@ new class extends Component
 
 <div class="sticky top-0 z-10">
     <nav class="flex bg-slate-700">
-        <div class="w-full mx-auto my-2 flex justify-end font-semibold uppercase pr-2">
+        <div class="w-full mx-auto my-2 flex justify-between items-center font-semibold uppercase pr-2">
+            <span class="text-white ml-3">WCEC CPP - {{ auth()->user()->getRoleNames()->first() }}</span>
+
             <button wire:click="logout"
                     class="flex flex-row content-center gap-2 rounded-lg uppercase bg-transparent pt-1 pl-3 pr-2
                     font-normal text-red-500 transition-all ease-in-out duration-500

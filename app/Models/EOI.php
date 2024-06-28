@@ -24,5 +24,12 @@ class EOI extends Model
         'employment_history',
         'qualifications',
         'training',
+        'feedback',
+        'notes'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

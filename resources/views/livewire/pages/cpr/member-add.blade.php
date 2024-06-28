@@ -35,7 +35,7 @@
 
     {{--            {{ Spatie\Permission\Models\Role::get()->pluck('name') }}--}}
 
-                <form wire:submit="save">
+                <form wire:submit="saveUser">
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                         <x-admin-input-label for="first_name" :value="__('First Name')" class="lg:w-48" />
                         <x-text-input wire:model="first_name" id="first_name" class="block w-full lg:w-96" type="text" name="first_name" required autofocus autocomplete="given-name" />

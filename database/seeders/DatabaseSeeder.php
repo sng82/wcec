@@ -8,6 +8,7 @@ use App\Models\SubmissionDate;
 //use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        //dump(Storage::allFiles('/public/submitted_documents'));
+
+        // Delete old files
+        Storage::deleteDirectory('/public/submitted_documents');
+
+
         $this->call([
             RolesAndPermissionsSeeder::class,
             UserSeeder::class,

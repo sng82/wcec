@@ -13,7 +13,7 @@
     <p class="mb-2">
         Welcome to the Chartered Practitioners Portal.
     </p>
-    <hr class="mb-2">
+    <hr class="my-4">
     <p class="mb-2">
         Joining the Chartered Practitioners Register is a 4 step process:
     </p>
@@ -32,15 +32,16 @@
     <p class="mb-2">
         Track your progression in the table below.
     </p>
-    <hr class="mb-2">
-    <p class="mt-6 mb-2">
-        This page and the left-hand menu will change as you progress towards inclusion within on the Chartered Practitioners Register.
+    <hr class="my-4">
+    <p class="mb-2">
+        This page and the options available to you within the left-hand menu will update as your application progresses. You'll recieve emails informing you of important milestones, but it's advised to log in to the Chartered Practitioners Portal and check progress on occasion.
     </p>
-    <hr class="mb-2">
-    <p class="mt-6 mb-4">
-        Accepted applicants are admitted to the Chartered Practitioners Register on several dates each year. The next admission date is
-{{--        around {{ $nextSubmissionDateDifference }}: --}}
-        <span class="font-bold">{{ $next_submission_date ?? '' }}</span>.
+    <hr class="my-4">
+    <p class="mb-2">
+        Accepted applicants will be added to the Chartered Practitioners Register on the next admission date.
+    </p>
+    <p class="mb-2">
+        the next admission date is <span class="font-bold">{{ $next_submission_date ?? '' }}</span>.
     </p>
 </div>
 
@@ -70,8 +71,8 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                     <th class="px-4 py-2">#</th>
                     <th class="px-4 py-2">Step</th>
                     <th class="px-4 py-2">Status</th>
-                    <th class="px-4 py-2 min-w-60">Notes</th>
-                    <th class="px-4 py-2">Action</th>
+                    <th class="px-4 py-2 min-w-72">Notes</th>
+                    <th class="px-4 py-2 min-w-40">Action</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-sky-100 text-slate-600">
@@ -104,7 +105,7 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                     <td class="px-4 py-2">
                         @if(! $logged_in_user->registration_fee_paid)
                             <button wire:click="payFee('registration')"
-                                    class="bg-fuchsia-600 hover:bg-fuchsia-700 w-fit pl-4 pr-1 gap-2 py-1 text-white rounded-full flex flex-row"
+                                    class="bg-fuchsia-600 hover:bg-fuchsia-700 focus:cursor-wait w-fit pl-4 pr-1 gap-2 py-1 text-white rounded-full flex flex-row"
                             >
                                 Pay Now
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -194,7 +195,7 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                     <td class="px-4 py-2">
                         @if(! $logged_in_user->application_fee_paid)
                             <button wire:click="payFee('application')"
-                                    class="bg-fuchsia-600 hover:bg-fuchsia-700 w-fit pl-4 pr-1 gap-2 py-1 text-white rounded-full flex flex-row"
+                                    class="bg-fuchsia-600 hover:bg-fuchsia-700 focus:cursor-wait w-fit pl-4 pr-1 gap-2 py-1 text-white rounded-full flex flex-row"
                             >
                                 Pay Now
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

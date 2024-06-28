@@ -133,7 +133,7 @@
                                 ($member->application_status === 'submitted' && $member->application_fee_paid) ||
                                 ($member->eoi_status === 'submitted' && $member->registration_fee_paid)
                                 ? 'bg-emerald-50 hover:bg-emerald-200 hover:text-emerald-600'
-                                : 'hover:bg-slate-100 hover:text-sky-600'
+                                : 'odd:bg-white even:bg-slate-50 hover:bg-slate-100 hover:text-sky-600'
                              }}
                              "
                         >
@@ -169,7 +169,7 @@
                                 @if ($member->application_status === 'submitted' && $member->application_fee_paid)
                                     <a href="#" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess&nbsp;Application</a>
                                 @elseif ($member->eoi_status === 'submitted' && $member->registration_fee_paid)
-                                    <a href="{{ route('assess-eoi',[$member->id]) }}" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess&nbsp;EoI</a>
+                                    <a href="{{ route('assess-eoi',[$member->eoi->id]) }}" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess&nbsp;EoI</a>
                                 @else
                                     N/A
                                 @endif
