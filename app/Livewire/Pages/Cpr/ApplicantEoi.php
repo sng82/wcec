@@ -3,16 +3,20 @@
 namespace App\Livewire\Pages\Cpr;
 
 use App\Models\EOI;
+
 //use App\Models\Prices;
 use App\Models\User;
 use App\Models\Document;
+
 //use Carbon\Carbon;
 use Carbon\Carbon;
+
 //use Illuminate\Routing\Route;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
+
 //use Illuminate\Support\Str;
 //use Illuminate\Validation\Rule;
 //use Illuminate\Validation\Rules\Password;
@@ -66,34 +70,35 @@ class ApplicantEoi extends Component
         $this->user = Auth::user();
 
         // Prevent access if user has already submitted their EoI.
-        if($this->user->eoi_status === 'submitted' || $this->user->eoi_status === 'accepted') {
+        if ($this->user->eoi_status === 'submitted' || $this->user->eoi_status === 'accepted') {
             return $this->flash(
                 'error',
                 'This Expression of Interest has already been submitted.',
                 [
-                    'position' => 'center',
-                    'timer' => null,
-                    'showConfirmButton' => true,
+                    'position'           => 'center',
+                    'timer'              => null,
+                    'showConfirmButton'  => true,
                     'confirmButtonColor' => '#dc2626',
                 ],
-                'cpr/dashboard');
+                'cpr/dashboard'
+            );
         }
 
-        $this->first_name   = $this->user->first_name;
-        $this->last_name    = $this->user->last_name;
-        $this->email        = $this->user->email;
-        $this->phone_1      = $this->user->phone_1;
-        $this->phone_2      = $this->user->phone_2;
-        $this->phone_3      = $this->user->phone_3;
+        $this->first_name = $this->user->first_name;
+        $this->last_name  = $this->user->last_name;
+        $this->email      = $this->user->email;
+        $this->phone_1    = $this->user->phone_1;
+        $this->phone_2    = $this->user->phone_2;
+        $this->phone_3    = $this->user->phone_3;
 
         $this->eoi = EOI::where('user_id', $this->user->id)?->latest()->first();
 
         if ($this->eoi) {
-            $this->eoi_id = $this->eoi->id;
-            $this->current_role = $this->eoi->current_role;
+            $this->eoi_id             = $this->eoi->id;
+            $this->current_role       = $this->eoi->current_role;
             $this->employment_history = $this->eoi->employment_history;
-            $this->qualifications = $this->eoi->qualifications;
-            $this->training = $this->eoi->training;
+            $this->qualifications     = $this->eoi->qualifications;
+            $this->training           = $this->eoi->training;
 
             $this->existing_cv = Document::where('user_id', $this->user->id)
                                          ->where('eoi_id', $this->eoi->id)
@@ -115,7 +120,6 @@ class ApplicantEoi extends Component
                                                             ->where('doc_type', 'training_certificate')
                                                             ->get();
         }
-
     }
 
     public function downloadFile(Document $document)
@@ -128,10 +132,10 @@ class ApplicantEoi extends Component
             'error',
             'Error',
             [
-                'position' => 'center',
-                'timer' => null,
-                'text' => 'Unable to download file. It has probably been deleted.',
-                'showConfirmButton' => true,
+                'position'           => 'center',
+                'timer'              => null,
+                'text'               => 'Unable to download file. It has probably been deleted.',
+                'showConfirmButton'  => true,
                 'confirmButtonColor' => '#dc2626',
             ]
         );
@@ -139,10 +143,10 @@ class ApplicantEoi extends Component
 
     public function downloadFiles($doc_type)
     {
-        $zip = new ZipArchive;
+        $zip         = new ZipArchive;
         $zipFileName = $this->user->first_name . '_' . $this->user->last_name . '_' . str($doc_type)->title() . 's_' . Carbon::parse(now())->format('YmdHisu') . '.zip';
 
-        if ($zip->open(public_path($zipFileName), ZipArchive::CREATE) === TRUE) {
+        if ($zip->open(public_path($zipFileName), ZipArchive::CREATE) === true) {
             $documents = Document::where('user_id', Auth::user()->id)
                                  ->where('eoi_id', $this->eoi_id)
                                  ->where('doc_type', $doc_type)
@@ -156,13 +160,14 @@ class ApplicantEoi extends Component
             }
 
             $zip->close();
+
             return response()->download(public_path($zipFileName))->deleteFileAfterSend();
         }
 
         $this->alert('error', 'Unable to download files', [
-            'position' => 'center',
-            'timer' => null,
-            'showConfirmButton' => true,
+            'position'           => 'center',
+            'timer'              => null,
+            'showConfirmButton'  => true,
             'confirmButtonColor' => '#dc2626',
         ]);
     }
@@ -171,11 +176,12 @@ class ApplicantEoi extends Component
     {
         if ($document->user_id !== Auth::id()) {
             $this->alert('error', 'You do not have permission to delete this file', [
-                'position' => 'center',
-                'timer' => null,
-                'showConfirmButton' => true,
+                'position'           => 'center',
+                'timer'              => null,
+                'showConfirmButton'  => true,
                 'confirmButtonColor' => '#dc2626',
             ]);
+
             return null;
         }
 
@@ -186,7 +192,7 @@ class ApplicantEoi extends Component
         }
 
         $document->delete();
-        $this->saveProgress();
+        $this->saveProgress(false);
     }
 
     public function deleteFiles($doc_type)
@@ -206,19 +212,20 @@ class ApplicantEoi extends Component
             $document->delete();
         }
 
-        $this->saveProgress();
+        $this->saveProgress(false);
     }
 
-    public function saveProgress($submit = false)
+    public function saveProgress($skip_feedback = false)
     {
+
         $this->validate([
-            'first_name'                    => 'required|min:2',
-            'last_name'                     => 'required|min:2',
-            'email'                         => 'required|email',
-            'cv'                            => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'job_description'               => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'qualification_certificates.*'  => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'training_certificates.*'       => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'first_name'                   => 'required|min:2',
+            'last_name'                    => 'required|min:2',
+            'email'                        => 'required|email',
+            'cv'                           => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'job_description'              => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'qualification_certificates.*' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'training_certificates.*'      => 'nullable|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
         try {
@@ -234,11 +241,11 @@ class ApplicantEoi extends Component
             $this->eoi = EOI::updateOrCreate([
                 'user_id' => $this->user->id,
             ], [
-                'user_id'               => $this->user->id,
-                'current_role'          => $this->current_role,
-                'employment_history'    => $this->employment_history,
-                'qualifications'        => $this->qualifications,
-                'training'              => $this->training,
+                'user_id'            => $this->user->id,
+                'current_role'       => $this->current_role,
+                'employment_history' => $this->employment_history,
+                'qualifications'     => $this->qualifications,
+                'training'           => $this->training,
             ]);
 
             if (null !== $this->cv) {
@@ -248,14 +255,14 @@ class ApplicantEoi extends Component
                 $this->cv->storeAs(path: 'public/submitted_documents/' . $this->user->id, name: $filename);
 
                 Document::updateOrCreate([
-                    'user_id'       => $this->user->id,
-                    'doc_type'      => 'cv',
-                    'eoi_id'        => $this->eoi->id,
+                    'user_id'  => $this->user->id,
+                    'doc_type' => 'cv',
+                    'eoi_id'   => $this->eoi->id,
                 ], [
-                    'user_id'       => $this->user->id,
-                    'file_name'     => $filename,
-                    'doc_type'      => 'cv',
-                    'eoi_id'        => $this->eoi->id,
+                    'user_id'   => $this->user->id,
+                    'file_name' => $filename,
+                    'doc_type'  => 'cv',
+                    'eoi_id'    => $this->eoi->id,
                 ]);
             }
 
@@ -266,14 +273,14 @@ class ApplicantEoi extends Component
                 $this->job_description->storeAs(path: 'public/submitted_documents/' . $this->user->id, name: $filename);
 
                 Document::updateOrCreate([
-                    'user_id'       => $this->user->id,
-                    'doc_type'      => 'job_description',
-                    'eoi_id'        => $this->eoi->id,
+                    'user_id'  => $this->user->id,
+                    'doc_type' => 'job_description',
+                    'eoi_id'   => $this->eoi->id,
                 ], [
-                    'user_id'       => $this->user->id,
-                    'file_name'     => $filename,
-                    'doc_type'      => 'job_description',
-                    'eoi_id'        => $this->eoi->id,
+                    'user_id'   => $this->user->id,
+                    'file_name' => $filename,
+                    'doc_type'  => 'job_description',
+                    'eoi_id'    => $this->eoi->id,
                 ]);
             }
 
@@ -282,13 +289,14 @@ class ApplicantEoi extends Component
                     $filename = 'Qualification_Certificate_' . $this->user->first_name . '_' . $this->user->last_name . '_' . Carbon::parse(now())->format('YmdHisu');
                     $filename .= '.' . $qualification_certificate->getClientOriginalExtension();
 
-                    $qualification_certificate->storeAs(path: 'public/submitted_documents/' . $this->user->id, name: $filename);
+                    $qualification_certificate->storeAs(path: 'public/submitted_documents/' . $this->user->id,
+                        name: $filename);
 
                     Document::create([
-                        'user_id'       => $this->user->id,
-                        'doc_type'      => 'qualification_certificate',
-                        'eoi_id'        => $this->eoi->id,
-                        'file_name'     => $filename,
+                        'user_id'   => $this->user->id,
+                        'doc_type'  => 'qualification_certificate',
+                        'eoi_id'    => $this->eoi->id,
+                        'file_name' => $filename,
                     ]);
                 }
             }
@@ -298,56 +306,61 @@ class ApplicantEoi extends Component
                     $filename = 'Training_Certificate_' . $this->user->first_name . '_' . $this->user->last_name . '_' . Carbon::parse(now())->format('YmdHisu');
                     $filename .= '.' . $training_certificate->getClientOriginalExtension();
 
-                    $training_certificate->storeAs(path: 'public/submitted_documents/' . $this->user->id, name: $filename);
+                    $training_certificate->storeAs(path: 'public/submitted_documents/' . $this->user->id,
+                        name: $filename);
 
                     Document::create([
-                        'user_id'       => $this->user->id,
-                        'doc_type'      => 'training_certificate',
-                        'eoi_id'        => $this->eoi->id,
-                        'file_name'     => $filename,
+                        'user_id'   => $this->user->id,
+                        'doc_type'  => 'training_certificate',
+                        'eoi_id'    => $this->eoi->id,
+                        'file_name' => $filename,
                     ]);
                 }
             }
 
-            if (!$submit) {
+            if ($skip_feedback !== true) {
                 return $this->flash(
                     'info', 'Expression Of Interest Saved', [
-                        'position'          => 'top-end',
-                        'timer'             => 2000,
-                        'showConfirmButton' => false,
-                    ],
-                    request()?->header('Referer')
+                    'position'          => 'top-end',
+                    'timer'             => 2000,
+                    'showConfirmButton' => false,
+                ],
+                    '/cpr/dashboard'
+//                    request()?->header('Referer')
                 );
             }
         } catch (Exception $e) {
             $this->alert('error', $e->getMessage(), [
-                'position' => 'center',
-                'timer' => null,
-                'showConfirmButton' => true,
+                'position'           => 'center',
+                'timer'              => null,
+                'showConfirmButton'  => true,
                 'confirmButtonColor' => '#dc2626',
             ]);
         }
     }
 
-    public function saveAndSubmit()
+    public function submitEoI()
     {
-        $this->saveProgress(true);
+        $cv_doc = null;
+        $job_desc_doc = null;
+        if ($this->eoi) {
+            // The EoI may have been worked on and saved prior to this submission,
+            // so there may be documents that have already been saved.
+            $cv_doc = Document::where('eoi_id', $this->eoi->id)->where('doc_type', 'cv')->first();
 
+            $job_desc_doc = Document::where('eoi_id', $this->eoi->id)->where('doc_type', 'job_description')->first();
+        }
 
-        // The EoI has been worked on and saved prior to this submission,
-        // so there may be documents that have already been saved.
-        $cv_doc = Document::where('eoi_id', $this->eoi->id)->where('doc_type', 'cv')->first();
         if (!$cv_doc) {
             $this->validate([
                 'cv' => 'required|file|mimes:pdf,doc,docx|max:2048'
             ]);
         }
 
-        $job_desc_doc = Document::where('eoi_id', $this->eoi->id)->where('doc_type', 'job_description')->first();
         if (!$job_desc_doc) {
             $this->validate([
                 'current_role' => 'required_without:job_description',
-            ] , [
+            ], [
                 'current_role.required_without' => 'Either a Job Description document OR a description of your current role is required.',
             ]);
         }
@@ -356,16 +369,18 @@ class ApplicantEoi extends Component
         $this->validate([
 //            'cv'                            => 'sometimes|required|file|mimes:pdf,doc,docx|max:2048',
 //            'current_role'                  => 'required_without_all:job_description,existing_job_description',
-            'qualification_certificates.*'  => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'training_certificates.*'       => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'employment_history'            => 'required|min:3',
-            'qualifications'                => 'required|min:3',
-            'training'                      => 'required|min:3',
+            'qualification_certificates.*' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'training_certificates.*'      => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'employment_history'           => 'required|min:3',
+            'qualifications'               => 'required|min:3',
+            'training'                     => 'required|min:3',
         ], [
 //            'current_role.required_without_all' => 'Either a Job Description document OR a description of your current role is required.',
-            'qualifications.required'           => 'Please provide details of qualifications. Type \'N/A\' if you have nothing to add here.',
-            'training'                          => 'Please provide details of training undertaken. Type \'N/A\' if you have nothing to add here.',
+            'qualifications.required' => 'Please provide details of qualifications. Type \'N/A\' if you have nothing to add here.',
+            'training'                => 'Please provide details of training undertaken. Type \'N/A\' if you have nothing to add here.',
         ]);
+
+        $this->saveProgress(true);
 
         $this->eoi->update(['submitted_at' => now()]);
         $this->user->update(['eoi_status' => 'submitted']);
@@ -376,7 +391,7 @@ class ApplicantEoi extends Component
 
         return $this->flash(
             'success',
-            'Expression Of Interest Submitted. ' . $extended_message ,
+            'Expression Of Interest Submitted. <br>' . $extended_message,
             [
                 'position'           => 'center',
                 'timer'              => null,
@@ -385,7 +400,6 @@ class ApplicantEoi extends Component
             ],
             route('dashboard')
         );
-
     }
 
     public function render()

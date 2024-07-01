@@ -6,21 +6,6 @@
 
         <livewire:layout.cpr-navigation/>
 
-{{--        <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">--}}
-{{--        <style>--}}
-{{--            .trix-block h1 {--}}
-{{--                font-size: 20px;--}}
-{{--                font-weight: bolder;--}}
-{{--            }--}}
-{{--            .trix-block ul li {--}}
-{{--                list-style: circle;--}}
-{{--                margin-left: 20px;--}}
-{{--            }--}}
-{{--            .trix-block ol li {--}}
-{{--                list-style: decimal;--}}
-{{--                margin-left: 20px;--}}
-{{--            }--}}
-{{--        </style>--}}
         <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 
         <form wire:submit="saveProgress" class="py-4 px-6" x-data="{
@@ -39,7 +24,7 @@
             }
         }">
 
-            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
+            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mt-6 mb-6 border border-slate-300 shadow shadow-slate-400">
                 <h1 class="text-3xl text-sky-800 border-b-4 border-red-600 pb-2 mb-4">
                     Expression of Interest
                 </h1>
@@ -52,6 +37,8 @@
                     button (bottom of the page). You will no longer be able to make edits after this point.
                 </p>
             </div>
+
+            <x-files-renamed-notice/>
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
                 <h2 class="text-xl text-white bg-sky-900 border-b border-sky-900 p-2 pl-7 mb-3 -ml-7 shadow rounded-lg font-semibold">
@@ -155,7 +142,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <x-files-renamed-notice/>
+{{--                    <x-files-renamed-notice/>--}}
                 @else
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                         <x-admin-input-label for="cv" :value="__('Current CV')" class="w-48"/>
@@ -164,7 +151,7 @@
                                name="cv"/>
                     </div>
                     <x-cpr-input-error :messages="$errors->get('cv')" class="mt-2 ml-48"/>
-                    <x-files-renamed-notice/>
+{{--                    <x-files-renamed-notice/>--}}
                 @endif
             </div>
 
@@ -222,7 +209,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <x-files-renamed-notice/>
+{{--                    <x-files-renamed-notice/>--}}
                 @else
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                         <x-admin-input-label for="job_description" :value="__('Job Description')" class="w-48"/>
@@ -231,24 +218,31 @@
                                name="job_description"/>
                     </div>
                     <x-cpr-input-error :messages="$errors->get('job_description')" class="mt-2 ml-48"/>
-                    <x-files-renamed-notice/>
-
-                    <label for="current_role" class="block mt-4">
-                        If you do not have a formal document, please provide a description of your current role instead:
-                    </label>
-
-                    <div wire:ignore class="mt-4">
-                        <trix-editor
-                            class="formatted-content trix-block bg-white px-3 py-6 shadow-md shadow-slate-300"
-                            x-data
-                            x-on:trix-change.self="$dispatch('input', event.target.value)"
-                            wire:model.debounce.1000ms="current_role"
-                            wire:key="current_role"
-                        ></trix-editor>
-                    </div>
-
-                    <x-cpr-input-error :messages="$errors->get('current_role')" class="mt-3"/>
+{{--                    <x-files-renamed-notice/>--}}
                 @endif
+
+                <label for="current_role" class="block mt-4">
+                    If you do not have a formal document, please provide a description of your current role instead:
+                </label>
+
+                <div wire:ignore class="mt-4">
+                    <input id="current_role" type="hidden" value="{{ $this->current_role }}" wire:model="current_role">
+                    <trix-editor input="current_role" class="trix-block" style="min-height: 200px;" ></trix-editor>
+
+                    @script
+                    <script>
+                        let trixEditor = document.getElementById("current_role")
+
+                        addEventListener("trix-blur", function (event) {
+                            @this.set('current_role', trixEditor.getAttribute('value'))
+                        })
+                    </script>
+                    @endscript
+                </div>
+
+
+
+                <x-cpr-input-error :messages="$errors->get('current_role')" class="mt-3"/>
             </div>
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
@@ -263,21 +257,20 @@
                     and professional commitment.
                 </label>
 
-{{--                <input type="hidden" wire:model="employment_history" id="employment_history_trix_content">--}}
-
                 <div wire:ignore class="mt-4">
-                    <trix-editor
-                        class="formatted-content trix-block bg-white px-3 py-6 shadow-md shadow-slate-300"
-                        x-data
-                        x-on:trix-change.self="$dispatch('input', event.target.value)"
-                        wire:model.debounce.1000ms="employment_history"
-                        wire:key="employment_history"
-                    ></trix-editor>
-                </div>
+                    <input id="employment_history" type="hidden" value="{{ $this->employment_history }}" wire:model="employment_history">
+                    <trix-editor input="employment_history" class="trix-block" style="min-height: 200px;" ></trix-editor>
 
-{{--                <textarea wire:model="employment_history" name="employment_history" rows="12"--}}
-{{--                          id="employment_history"--}}
-{{--                          class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full mt-3"></textarea>--}}
+                    @script
+                    <script>
+                        let trixEditor = document.getElementById("employment_history")
+
+                        addEventListener("trix-blur", function (event) {
+                            @this.set('employment_history', trixEditor.getAttribute('value'))
+                        })
+                    </script>
+                    @endscript
+                </div>
 
                 <x-cpr-input-error :messages="$errors->get('employment_history')" class="mt-2"/>
             </div>
@@ -291,25 +284,26 @@
                 </label>
 
                 <div wire:ignore class="mt-4">
-                    <trix-editor
-                        class="formatted-content trix-block bg-white px-3 py-6 shadow-md shadow-slate-300"
-                        x-data
-                        x-on:trix-change.self="$dispatch('input', event.target.value)"
-                        wire:model.debounce.1000ms="qualifications"
-                        wire:key="qualifications"
-                    ></trix-editor>
+                    <input id="qualifications" type="hidden" value="{{ $this->qualifications }}" wire:model="qualifications">
+                    <trix-editor input="qualifications" class="trix-block" style="min-height: 200px;" ></trix-editor>
+
+                    @script
+                    <script>
+                        let trixEditor = document.getElementById("qualifications")
+
+                        addEventListener("trix-blur", function (event) {
+                            @this.set('qualifications', trixEditor.getAttribute('value'))
+                        })
+                    </script>
+                    @endscript
                 </div>
 
-{{--                <textarea wire:model="qualifications" name="qualifications" rows="6" id="qualifications"--}}
-{{--                          class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full mt-3"></textarea>--}}
                 <x-cpr-input-error :messages="$errors->get('qualifications')" class="mt-2"/>
 
                 <p class="my-4">
                     You must supply copy certificates for these and bring the originals along to the
                     interview:
                 </p>
-
-{{--                <span class="w-full block h-0 mb-6"></span>--}}
 
                 @if($existing_qualification_certificates?->count() > 0)
                     <div class="mt-3 mb-2 overflow-hidden border border-slate-200 rounded-lg shadow-sm overflow-x-auto">
@@ -412,7 +406,7 @@
                 </div>
                 <x-cpr-input-error :messages="$errors->get('qualification_certificates')" class="mt-2 ml-48"/>
 
-                <x-files-renamed-notice/>
+{{--                <x-files-renamed-notice/>--}}
             </div>
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
@@ -424,17 +418,19 @@
                 </label>
 
                 <div wire:ignore class="mt-4">
-                    <trix-editor
-                        class="formatted-content trix-block bg-white px-3 py-6 shadow-md shadow-slate-300"
-                        x-data
-                        x-on:trix-change.self="$dispatch('input', event.target.value)"
-                        wire:model.debounce.1000ms="training"
-                        wire:key="training"
-                    ></trix-editor>
-                </div>
+                    <input id="training" type="hidden" value="{{ $this->training }}" wire:model="training">
+                    <trix-editor input="training" class="trix-block" style="min-height: 200px;" ></trix-editor>
 
-{{--                <textarea wire:model="training" name="training" rows="6" id="training"--}}
-{{--                          class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full mt-3"></textarea>--}}
+                    @script
+                    <script>
+                        let trixEditor = document.getElementById("training")
+
+                        addEventListener("trix-blur", function (event) {
+                            @this.set('training', trixEditor.getAttribute('value'))
+                        })
+                    </script>
+                    @endscript
+                </div>
 
                 <x-cpr-input-error :messages="$errors->get('training')" class="mt-2"/>
 
@@ -542,7 +538,7 @@
                 </div>
                 <x-cpr-input-error :messages="$errors->get('training_certificates')" class="mt-2 ml-48"/>
 
-                <x-files-renamed-notice/>
+{{--                <x-files-renamed-notice/>--}}
             </div>
 
             <div class="bg-slate-800 text-white rounded-3xl xl:rounded-[50px] p-3 xl:py-4 lg:px-6 xl:px-12 mt-6 border border-slate-200 shadow">
@@ -565,7 +561,9 @@
                 @endif
 
                 <div class="flex flex-col lg:flex-row items-center mt-3 gap-1">
-                    <button class="bg-sky-500 text-white rounded-full px-6 py-4 mt-8 lg:mt-0 hover:bg-sky-600 uppercase w-48 font-bold text-lg flex flex-row items-center justify-center gap-2">
+                    <button type="button"
+                            wire:click="saveProgress()"
+                            class="bg-sky-500 text-white rounded-full px-6 py-4 mt-8 lg:mt-0 hover:bg-sky-600 uppercase w-48 font-bold text-lg flex flex-row items-center justify-center gap-2">
                         Save
                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                              height="24" fill="none" viewBox="0 0 24 24">
@@ -586,7 +584,8 @@
                 <hr class="my-4">
 
                 <div class="flex flex-col lg:flex-row items-center mt-3 mb-3 gap-1">
-                    <button wire:click.prevent="saveAndSubmit"
+                    <button type="button"
+                            wire:click="submitEoI"
                             wire:confirm="You cannot edit your Expression of Interest once submitted.\n\n Please confirm you are ready to proceed with your submission:"
                             class="bg-fuchsia-500 text-white rounded-full px-6 py-4 mt-8 lg:mt-0 hover:bg-fuchsia-600 uppercase w-48 font-bold text-lg flex flex-row items-center justify-center gap-2">
                         Submit

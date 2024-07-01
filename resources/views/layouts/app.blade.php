@@ -8,8 +8,8 @@
         @isset($description)
             <meta name="description" content="{{ $description}}">
         @endisset
-        @vite(['resources/scss/app.scss', 'resources/js/app.js'])
-{{--        @vite(['resources/scss/app.scss', 'resources/scss/cpr.scss', 'resources/js/app.js'])--}}
+{{--        @vite(['resources/scss/app.scss', 'resources/js/app.js'])--}}
+        @vite(['resources/scss/app.scss', 'resources/scss/cpr.scss', 'resources/js/app.js'])
 
 
 
@@ -23,10 +23,10 @@
         <meta name="msapplication-config" content="/icons/browserconfig.xml">
         <meta name="theme-color" content="#ffffff">
     </head>
-    <body class="cpp flex flex-col h-screen bg-slate-300 overflow-hidden">
-
-    {{--    <body x-data="{ sidebar_open: $persist(true) }" class="cpp flex flex-col h-screen bg-slate-200 overflow-hidden">--}}
-{{--        <livewire:layout.cpr-navigation />--}}
+    <body class="cpp flex flex-col h-screen
+    bg-slate-300
+{{--    bg-gradient-to-br from-slate-300 to-slate-400--}}
+    overflow-hidden">
         {{ $slot }}
 
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

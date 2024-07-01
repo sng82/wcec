@@ -19,13 +19,25 @@ class EOI extends Model
     protected $table = 'expression_of_interests';
 
     protected $fillable = [
-        'user_id',
         'current_role',
         'employment_history',
         'qualifications',
         'training',
+        'submitted_at',
         'feedback',
-        'notes'
+        'notes',
+        'user_id',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'submitted_at' => 'datetime',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function user()
