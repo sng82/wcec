@@ -4,9 +4,12 @@ namespace App\Livewire\Component;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class LapsedMembers extends Component
 {
+    use WithPagination;
+
     public $sort_column_name = 'last_name';
     public $sort_column_direction = 'asc';
     public $search = '';
@@ -34,14 +37,6 @@ class LapsedMembers extends Component
                                     ->search($this->search)
                                     ->orderBy($this->sort_column_name, $this->sort_column_direction)
                                     ->paginate($this->per_page),
-//            'lapsed_members' => User::role('lapsed member')
-//                                    ->where(function ($query) {
-//                                        $query->where('first_name', 'like', '%' . $this->search . '%')
-//                                              ->orWhere('last_name', 'like', '%' . $this->search . '%')
-//                                              ->orWhere('email', 'like', '%' . $this->search . '%');
-//                                    })
-//                                    ->orderBy($this->sort_column_name, $this->sort_column_direction)
-//                                    ->get(),
         ]);
     }
 }

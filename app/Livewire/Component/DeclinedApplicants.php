@@ -4,9 +4,12 @@ namespace App\Livewire\Component;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class DeclinedApplicants extends Component
 {
+    use WithPagination;
+
     public $sort_column_name = 'declined_at';
     public $sort_column_direction = 'asc';
     public $search = '';
@@ -31,17 +34,9 @@ class DeclinedApplicants extends Component
     {
         return view('livewire.component.declined-applicants', [
             'blocked_applicants' => User::role('blocked applicant')
-                                         ->search($this->search)
-                                         ->orderBy($this->sort_column_name, $this->sort_column_direction)
-                                         ->paginate($this->per_page),
-//            'blocked_applicants' => User::role('blocked applicant')
-//                                        ->where(function ($query) {
-//                                            $query->where('first_name', 'like', '%' . $this->search . '%')
-//                                                  ->orWhere('last_name', 'like', '%' . $this->search . '%')
-//                                                  ->orWhere('email', 'like', '%' . $this->search . '%');
-//                                        })
-//                                        ->orderBy($this->sort_column_name, $this->sort_column_direction)
-//                                        ->get(),
+                                        ->search($this->search)
+                                        ->orderBy($this->sort_column_name, $this->sort_column_direction)
+                                        ->paginate($this->per_page),
         ]);
     }
 }

@@ -6,10 +6,10 @@
 
         <livewire:layout.cpr-navigation />
 
-        <div class="flex flex-col px-3 xl:px-6 mt-3">
+        <div class="flex flex-col px-3 xl:px-6 ">
 
             <div x-data="tabSwitch()">
-                <ul class="flex flex-col lg:flex-row justify-center items-center my-4 gap-0 lg:gap-6">
+                <ul class="flex flex-col xl:flex-row justify-center items-center my-6 gap-0 xl:gap-3 2xl:gap-8">
                     <template x-for="(tab, index) in tabs" :key="index">
                         <li class="cursor-pointer pt-1 text-sky-800 border-b-2 text-center"
                             :class="activeTab===index ? 'text-sky-800 border-red-600' : 'text-slate-400 hover:text-sky-600 border-transparent '"
@@ -18,7 +18,7 @@
                     </template>
                     <li>
                         <button wire:click="addMember" title="Add new member/applicant" class="rounded-full bg-sky-700 text-white px-5 py-1 hover:bg-sky-600">
-                            Add New
+                            Add&nbsp;New
                         </button>
                     </li>
                 </ul>

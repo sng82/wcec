@@ -4,9 +4,12 @@ namespace App\Livewire\Component;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class AcceptedApplicants extends Component
 {
+    use WithPagination;
+
     public $sort_column_name = 'accepted_at';
     public $sort_column_direction = 'asc';
     public $search = '';
@@ -31,17 +34,9 @@ class AcceptedApplicants extends Component
     {
         return view('livewire.component.accepted-applicants', [
             'accepted_applicants' => User::role('accepted applicant')
-                                ->search($this->search)
-                                ->orderBy($this->sort_column_name, $this->sort_column_direction)
-                                ->paginate($this->per_page),
-//            'accepted_applicants' => User::role('accepted applicant')
-//                                         ->where(function ($query) {
-//                                             $query->where('first_name', 'like', '%' . $this->search . '%')
-//                                                   ->orWhere('last_name', 'like', '%' . $this->search . '%')
-//                                                   ->orWhere('email', 'like', '%' . $this->search . '%');
-//                                         })
-//                                         ->orderBy($this->sort_column_name, $this->sort_column_direction)
-//                                         ->get(),
+                                         ->search($this->search)
+                                         ->orderBy($this->sort_column_name, $this->sort_column_direction)
+                                         ->paginate($this->per_page),
         ]);
     }
 }

@@ -4,12 +4,18 @@
     </h2>
     <div class="grid grid-flow-row lg:grid-flow-col">
         <div class="flex items-center mt-3">
+            <div>
             <p class="">{{ $applicants->count() }} Applicants who have not yet been accepted.
-                Of these:<br>
-                {{ $pending_eoi_submitted_count }} {{ $pending_eoi_submitted_count === 1 ? 'is' : 'are' }}
-                waiting for their Expression of Interest to be assessed.<br>
-                {{ $pending_waiting_approval_count }} {{ $pending_waiting_approval_count === 1 ? 'is' : 'are' }}
-                waiting for their application to be assessed.</p>
+                Of these:
+            </p>
+            <ul class="list-square marker:text-sky-600 list-inside ml-1">
+                <li>{{ $pending_eoi_submitted_count }} {{ $pending_eoi_submitted_count === 1 ? 'is' : 'are' }}
+                    waiting for their Expression of Interest to be assessed.</li>
+                <li>{{ $pending_waiting_approval_count }} {{ $pending_waiting_approval_count === 1 ? 'is' : 'are' }}
+                    waiting for their application to be assessed.</li>
+            </ul>
+            </div>
+
         </div>
         <div class="grid justify-end mt-3 lg:pl-5">
             <div class="flex flex-row items-center">
@@ -181,7 +187,7 @@
         </div>
 
         <div class="flex flex-row justify-end items-center gap-4 my-3 text-base">
-            <label for="per_page">Per Page</label>
+            <label class="text-sm" for="per_page">Per Page</label>
             <select wire:model.live="per_page" name="per_page" id="per_page" class="rounded-lg border border-slate-300 focus:border-sky-200 focus:ring-sky-100 focus:ring-4">
                 <option value="10">10</option>
                 <option value="20">20</option>

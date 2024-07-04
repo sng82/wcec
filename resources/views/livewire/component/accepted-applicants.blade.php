@@ -96,7 +96,7 @@
         </div>
 
         <div class="flex flex-row justify-end items-center gap-4 my-3 text-base">
-            <label for="per_page">Per Page</label>
+            <label class="text-sm" for="per_page">Per Page</label>
             <select wire:model.live="per_page" name="per_page" id="per_page" class="rounded-lg border border-slate-300 focus:border-sky-200 focus:ring-sky-100 focus:ring-4">
                 <option value="10">10</option>
                 <option value="20">20</option>
