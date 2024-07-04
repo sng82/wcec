@@ -548,7 +548,7 @@
 {{--                <x-files-renamed-notice/>--}}
             </div>
 
-            <div class="bg-slate-800 text-white rounded-3xl xl:rounded-[50px] p-3 xl:py-4 lg:px-6 xl:px-12 mt-6 border border-slate-200 shadow">
+            <div class="bg-slate-800 text-white rounded-3xl xl:rounded-[50px] p-3 xl:py-4 px-4 lg:px-6 xl:px-12 mt-6 border border-slate-200 shadow">
                 @if($errors->any())
                     <div class="rounded-lg bg-red-500 px-4 py-2 border border-red-600 mt-3 flex flex-row items-center gap-4 text-white text-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -575,7 +575,7 @@
 {{--                            hover:from-cyan-400 hover:to-blue-600--}}
                             hover:from-blue-500 hover:to-cyan-500
                             text-white rounded-full px-6 py-4 mt-8 lg:mt-0
-                            uppercase w-48 font-bold text-lg flex flex-row items-center justify-center gap-2">
+                            uppercase w-48 shrink-0 font-bold text-lg flex flex-row items-center justify-center gap-2">
                         Save
                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                              height="24" fill="none" viewBox="0 0 24 24">
@@ -583,7 +583,7 @@
                                   d="M11 16h2m6.707-9.293-2.414-2.414A1 1 0 0 0 16.586 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7.414a1 1 0 0 0-.293-.707ZM16 20v-6a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v6h8ZM9 4h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V4Z"/>
                         </svg>
                     </button>
-                    <ul class="my-6 ml-12 list-square marker:text-sky-400 space-y-1 max-w-2xl xl:max-w-fit">
+                    <ul class="my-6 ml-5 lg:ml-12 list-square marker:text-sky-400 space-y-1 max-w-2xl xl:max-w-fit">
                         <li>All changes you have made above will be saved.</li>
                         <li>Your Expression of Interest <span class="font-semibold text-sky-400">WILL NOT</span> be
                             submitted for assessment.
@@ -602,9 +602,8 @@
                             class="
                             bg-gradient-to-r from-fuchsia-500 to-purple-500
                             hover:from-purple-500 hover:to-fuchsia-500
-{{--                            hover:from-fuchsia-400 hover:to-purple-600--}}
                             text-white rounded-full px-6 py-4 mt-8 lg:mt-0
-                            uppercase w-48 font-bold text-lg flex flex-row items-center justify-center gap-2">
+                            uppercase w-48 shrink-0 font-bold text-lg flex flex-row items-center justify-center gap-2">
                         Submit
                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                              height="24" style="transform: rotate(90deg);" fill="none" viewBox="0 0 24 24">
@@ -612,7 +611,7 @@
                                   stroke-width="1.5" d="m12 18-7 3 7-18 7 18-7-3Zm0 0v-5"/>
                         </svg>
                     </button>
-                    <ul class="my-6 ml-12 list-square marker:text-fuchsia-400 space-y-1 max-w-2xl xl:max-w-fit">
+                    <ul class="my-6 ml-5 lg:ml-12 list-square marker:text-fuchsia-400 space-y-1 max-w-2xl xl:max-w-fit">
                         <li>All changes you have made above will be saved.</li>
                         <li>Your Expression of Interest <span class="font-semibold text-red-400">WILL</span> be
                             submitted for assessment.
