@@ -6,12 +6,12 @@
     'application_fee',
 ])
 
-<div {{ $attributes->class(['bg-slate-50 rounded-lg p-3 xl:p-4 shadow']) }}>
-    <p class="mb-2">
+<div {{ $attributes->class(['bg-slate-100 rounded-lg p-3 xl:p-4 shadow']) }}>
+    <p class="my-2">
         Hi, {{ $logged_in_user->first_name }},
     </p>
     <p class="mb-2">
-        Welcome to the Chartered Practitioners Portal.
+        Welcome to the Chartered Practitioners Portal...
     </p>
     <hr class="my-4">
     <p class="mb-2">

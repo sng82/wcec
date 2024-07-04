@@ -12,30 +12,30 @@
                     Expression of Interest: <span class="text-fuchsia-500">{{ $applicant->first_name . ' ' . $applicant->last_name }}</span>
                 </h1>
 
-                <p class="mb-1 text-slate-500">Current Role:</p>
+                <p class="mb-1 font-bold text-slate-500">Current Role</p>
                 <div class="trix-block border border-slate-200 px-3 py-6 bg-white text-slate-700 rounded shadow-inner shadow-slate-400 mb-6">
                     {!! empty($eoi->current_role) ? 'N/A' : $eoi->current_role !!}
                 </div>
 
-                <p class="mb-1 text-slate-500">Employment History:</p>
+                <p class="mb-1 font-bold text-slate-500">Employment History</p>
                 <div class="trix-block border border-slate-200 px-3 py-6 bg-white text-slate-700 rounded shadow-inner shadow-slate-400 mb-6">
                     {!! empty($eoi->employment_history) ? 'N/A' : $eoi->employment_history !!}
 {{--                    {{ empty($eoi->employment_history) ? 'N/A' : $eoi->employment_history }}--}}
                 </div>
 
-                <p class="mb-1 text-slate-500">Qualifications:</p>
+                <p class="mb-1 font-bold text-slate-500">Qualifications</p>
                 <div class="trix-block border border-slate-200 px-3 py-6 bg-white text-slate-700 rounded shadow-inner shadow-slate-400 mb-6">
                     {!! empty($eoi->qualifications) ? 'N/A' : $eoi->qualifications !!}
                 </div>
 
-                <p class="mb-1 text-slate-500">Training:</p>
+                <p class="mb-1 font-bold text-slate-500">Training</p>
                 <div class="trix-block border border-slate-200 px-3 py-6 bg-white text-slate-700 rounded shadow-inner shadow-slate-400 mb-6">
                     {!! empty($eoi->training) ? 'N/A' : $eoi->training !!}
                 </div>
 
                 <div class="flex gap-4 items-center">
                     <span>
-                        Download as a PDF:
+                        Download as PDF:
                     </span>
                     <button wire:click="buildPDF" class="rounded-full text-white bg-fuchsia-500 hover:bg-fuchsia-600 px-4 py-1 flex items-center gap-2">
                         <span>
@@ -169,8 +169,8 @@
 
                 </form>
 
-                <div class="rounded-lg bg-gradient-to-r from-sky-500 to-teal-500 text-white p-4 mt-6">
-                    <h3 class="text-lg font-bold text-sky-200">Statuses</h3>
+                <div class="rounded-lg bg-gradient-to-r from-sky-500 to-teal-500 text-white p-4 mt-6 mb-2">
+                    <h3 class="text-lg font-bold text-sky-200">EoI Statuses</h3>
                     <ul class="mt-0 ml-5 list-disc marker:text-white space-y-2 text-sm">
                         <li>
                             <span class="font-bold text-slate-600">Submitted</span>
@@ -196,7 +196,7 @@
                         <li>
                             <span class="font-bold text-slate-600">Rejected</span>
                             <ul class="ml-8 list-square marker:text-slate-200">
-                                <li>Select this status if the submitted EoI is unacceptable and you <span class="font-bold text-slate-600">DO NOT</span> want to allow the applicant to make amendments and resubmit.</li>
+                                <li>Select this status if the submitted EoI is unacceptable and you <span class="font-bold text-red-600">DO NOT</span> want to allow the applicant to make amendments and resubmit.</li>
                                 <li>An email including the feedback you supply will automatically be sent to the applicant.</li>
                                 <li>This will terminate the applicants CPR application.</li>
                             </ul>
@@ -205,13 +205,11 @@
 
                     <hr class="my-4">
                     <h3 class="text-lg font-bold text-sky-200">Feedback</h3>
-                    <p class="mt-0 text-sm">Feedback is only required if status is set to <span class="font-bold text-slate-600">Unaccepted</span> or <span class="font-bold text-slate-600">Rejected</span>. In these scenarios, the feedback you provide will be made available to the applicant.</p>
+                    <p class="mt-0 text-sm">When the EoI Status is set to <span class="font-bold text-slate-600">Unaccepted</span> or <span class="font-bold text-slate-600">Rejected</span>, the feedback you provide here will be made available to the applicant.</p>
 
                     <hr class="my-4">
                     <h3 class="text-lg font-bold text-sky-200">Assessor Notes</h3>
-                    <p class="mt-0 text-sm">Optional. Only visible to CPP admins so can include private observations, such as why an EoI is deemed unacceptable. Assessor Notes will remain visible if/when an EoI is resubmitted</p>
-
-
+                    <p class="mt-0 text-sm">Optional. Only visible to CPP admins so can include private observations, such as why an EoI was unacceptable. Assessor Notes will remain visible if/when an EoI is resubmitted</p>
                 </div>
 
             </div>

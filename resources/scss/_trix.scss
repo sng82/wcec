@@ -70,8 +70,26 @@ trix-toolbar {
         border: none !important;
     }
 
+    .trix-button-group {
+        border-radius: 5px;
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+    }
+
     .trix-button {
         background: #e0f2fe;
+
+        &:not([disabled]) {
+            &:hover {
+                background: #bae6fd;
+            }
+        }
+
+        &:first-of-type {
+            border-radius: 4px 0 0 4px;
+        }
+        &:last-of-type {
+            border-radius: 0 4px 4px 0;
+        }
     }
 
 }

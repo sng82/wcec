@@ -8,8 +8,7 @@
 
         <div class="flex flex-col p-3 xl:p-6 gap-5">
 
-            <div class="flex flex-col content-center mt-8 mb-6">
-
+            <div class="flex flex-col content-center mt-8 mb-2">
                 <img src="{{ Vite::asset('resources/img/wcec-crest-small.webp') }}"
                      class="inline-block object-contain h-16 lg:h-28" alt="WCEC Logo">
 

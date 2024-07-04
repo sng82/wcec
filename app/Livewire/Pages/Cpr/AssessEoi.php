@@ -31,7 +31,7 @@ class AssessEoi extends Component
 
             $this->feedback     = $this->eoi->feedback;
             $this->notes        = $this->eoi->notes;
-            $this->documents    = $this->applicant->documents;
+            $this->documents    = $this->applicant->documents->sortBy('doc_type');
             $this->eoi_status   = $this->applicant->eoi_status;
 
         } catch (\Exception $e) {
@@ -46,33 +46,12 @@ class AssessEoi extends Component
                 ],
                 'cpr/members');
         }
-
-//        $id = Route::current()?->parameter('id');
-//        $this->eoi = Eoi::find($id);
-//        $this->applicant = User::find($this->eoi->user_id);
-//
-//        if (! $this->applicant) {
-//            return $this->flash(
-//                'error',
-//                'Applicant not found',
-//                [
-//                    'position' => 'center',
-//                    'timer' => null,
-//                    'showConfirmButton' => true,
-//                    'confirmButtonColor' => '#dc2626',
-//                ],
-//                'cpr/members');
-//        }
-//
-//        $this->feedback     = $this->eoi->feedback;
-//        $this->notes        = $this->eoi->notes;
-//        $this->documents    = $this->applicant->documents;
-//        $this->eoi_status   = $this->applicant->eoi_status;
     }
 
     public function buildPDF()
     {
-        $file_loc = config('app.url').'/cpr/print-eoi/' . $this->eoi->id;
+        $obfuscation_key = rtrim(base64_encode($this->eoi->updated_at),"=");
+        $file_loc = config('app.url').'/cpr/print-eoi/' . $this->eoi->id . '/' . $obfuscation_key;
         $html = file_get_contents($file_loc);
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadHTML($html);

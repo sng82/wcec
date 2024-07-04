@@ -341,46 +341,45 @@ class ApplicantEoi extends Component
 
     public function submitEoI()
     {
+        $this->saveProgress(true);
+
+        // Gather all files requiring validation into these arrays so that they
+        // can all be validated together and any/all errors can be displayed at
+        // the same time.
+        $to_be_validated = [];
+        $validation_messages = [];
+
         $cv_doc = null;
         $job_desc_doc = null;
         if ($this->eoi) {
             // The EoI may have been worked on and saved prior to this submission,
-            // so there may be documents that have already been saved.
+            // so there may be documents that have been previously saved.
             $cv_doc = Document::where('eoi_id', $this->eoi->id)->where('doc_type', 'cv')->first();
-
             $job_desc_doc = Document::where('eoi_id', $this->eoi->id)->where('doc_type', 'job_description')->first();
         }
 
         if (!$cv_doc) {
-            $this->validate([
-                'cv' => 'required|file|mimes:pdf,doc,docx|max:2048'
-            ]);
+            $to_be_validated['cv'] = 'required|file|mimes:pdf,doc,docx|max:2048';
         }
 
         if (!$job_desc_doc) {
-            $this->validate([
-                'current_role' => 'required_without:job_description',
-            ], [
-                'current_role.required_without' => 'Either a Job Description document OR a description of your current role is required.',
-            ]);
+            $to_be_validated['current_role'] = 'required_without:job_description';
+            $validation_messages['current_role.required_without'] = 'Either a Job Description document OR a description of your current role is required.';
         }
 
+        $to_be_validated['qualification_certificates']  = 'nullable|file|mimes:pdf,doc,docx|max:2048';
+        $to_be_validated['training_certificates.*']     = 'nullable|file|mimes:pdf,doc,docx|max:2048';
+        $to_be_validated['employment_history']          = 'required|min:3';
+        $to_be_validated['qualifications']              = 'required|min:3';
+        $to_be_validated['training']                    = 'required|min:3';
 
-        $this->validate([
-//            'cv'                            => 'sometimes|required|file|mimes:pdf,doc,docx|max:2048',
-//            'current_role'                  => 'required_without_all:job_description,existing_job_description',
-            'qualification_certificates.*' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'training_certificates.*'      => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'employment_history'           => 'required|min:3',
-            'qualifications'               => 'required|min:3',
-            'training'                     => 'required|min:3',
-        ], [
-//            'current_role.required_without_all' => 'Either a Job Description document OR a description of your current role is required.',
-            'qualifications.required' => 'Please provide details of qualifications. Type \'N/A\' if you have nothing to add here.',
-            'training'                => 'Please provide details of training undertaken. Type \'N/A\' if you have nothing to add here.',
-        ]);
+        $validation_messages['qualifications.required'] = 'Please provide details of qualifications. Type \'N/A\' if you have nothing to add here.';
+        $validation_messages['training']                = 'Please provide details of training undertaken. Type \'N/A\' if you have nothing to add here.';
 
-        $this->saveProgress(true);
+        $this->validate($to_be_validated, $validation_messages);
+
+
+//        $this->saveProgress(true);
 
         $this->eoi->update(['submitted_at' => now()]);
         $this->user->update(['eoi_status' => 'submitted']);
@@ -391,12 +390,14 @@ class ApplicantEoi extends Component
 
         return $this->flash(
             'success',
-            'Expression Of Interest Submitted. <br>' . $extended_message,
+            'Expression Of Interest Submitted.',
             [
+                'text'               => $extended_message,
                 'position'           => 'center',
                 'timer'              => null,
                 'showConfirmButton'  => true,
                 'confirmButtonColor' => '#10b981',
+                'width'              => '500'
             ],
             route('dashboard')
         );

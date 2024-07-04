@@ -6,6 +6,7 @@ use App\Models\EOI;
 use App\Models\User;
 use Livewire\Component;
 use Route;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PrintEoi extends Component
 {
@@ -15,27 +16,27 @@ class PrintEoi extends Component
     public function mount()
     {
         $id = Route::current()->parameter('id');
-        $this->eoi = EOI::find($id);
+        $obfuscation_key = Route::current()->parameter('obfuscation_key') . '==';
+
+        $this->eoi = EOI::where('id', $id)
+                        ->where('updated_at', base64_decode($obfuscation_key))
+                        ->first();
+
+        if (! $this->eoi) {
+            throw new NotFoundHttpException();
+        }
+
         $this->applicant = User::find($this->eoi->user_id);
 
-//        if (! $this->applicant) {
-//            return $this->flash(
-//                'error',
-//                'Member not found',
-//                [
-//                    'position' => 'center',
-//                    'timer' => null,
-//                    'showConfirmButton' => true,
-//                    'confirmButtonColor' => '#dc2626',
-//                ],
-//                'cpr/members');
-//        }
-//
-//        $this->eoi = $this->applicant->eoi;
+        if (! $this->applicant) {
+            throw new NotFoundHttpException();
+        }
+
     }
 
     public function render()
     {
-        return view('livewire.pages.cpr.print-eoi')->layout('layouts.bare');
+        return view('livewire.pages.cpr.print-eoi')
+            ->layout('layouts.bare');
     }
 }

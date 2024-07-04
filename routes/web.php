@@ -18,7 +18,7 @@ use App\Livewire\Pages\Cpr\PaymentCancel;
 use App\Livewire\Pages\Cpr\PaymentSuccess;
 use App\Livewire\Pages\Cpr\Prices;
 use App\Livewire\Pages\Cpr\PrintEoi;
-use App\Livewire\Pages\Cpr\StripePayment;
+//use App\Livewire\Pages\Cpr\StripePayment;
 use App\Livewire\Pages\Cpr\SubmissionDates;
 use App\Livewire\Pages\CprComingSoon;
 //use App\Livewire\Pages\CprEoi;
@@ -90,7 +90,7 @@ Route::group(['middleware' => ['role:applicant', 'auth']], function () {
     Route::get('/cpr/applicant-fees', ApplicantFees::class)->name('applicant-fees');
 });
 
-Route::get('/cpr/print-eoi/{id}', PrintEoi::class)->name('print-eoi');
+Route::get('/cpr/print-eoi/{id}/{obfuscation_key}', PrintEoi::class)->name('print-eoi');
 
 Route::post('/stripe/webhook', [StripeController::class, 'webhook'])->name('stripe.webhook');
 

@@ -52,28 +52,28 @@
                     <x-text-input wire:model="first_name" id="first_name" class="block w-full lg:w-96" type="text"
                                   name="first_name" required autofocus autocomplete="first_name"/>
                 </div>
-                <x-cpr-input-error :messages="$errors->get('first_name')" class="mt-2 ml-48"/>
+                <x-cpr-input-error :messages="$errors->get('first_name')" class="mt-2 lg:pl-1 lg:ml-48"/>
 
                 <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                     <x-admin-input-label for="last_name" :value="__('Last Name')" class="w-48"/>
                     <x-text-input wire:model="last_name" id="last_name" class="block w-full lg:w-96" type="text"
                                   name="last_name" required autocomplete="last_name"/>
                 </div>
-                <x-cpr-input-error :messages="$errors->get('last_name')" class="mt-2 ml-48"/>
+                <x-cpr-input-error :messages="$errors->get('last_name')" class="mt-2 lg:pl-1 lg:ml-48"/>
 
                 <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                     <x-admin-input-label for="email" :value="__('Business Email')" class="w-48"/>
                     <x-text-input wire:model="email" id="email" class="block w-full lg:w-[500px]" type="email"
                                   name="email" required autocomplete="email"/>
                 </div>
-                <x-cpr-input-error :messages="$errors->get('email')" class="mt-2 ml-48"/>
+                <x-cpr-input-error :messages="$errors->get('email')" class="mt-2 lg:pl-1 lg:ml-48"/>
 
                 <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                     <x-admin-input-label for="phone_1" :value="__('Business Phone')" class="w-48"/>
                     <x-text-input wire:model="phone_1" id="phone_1" class="block w-full lg:w-60" type="text"
                                   name="phone_1" required autocomplete="phone_1"/>
                 </div>
-                <x-cpr-input-error :messages="$errors->get('phone_1')" class="mt-2"/>
+                <x-cpr-input-error :messages="$errors->get('phone_1')" class="mt-2 lg:pl-1 lg:ml-48"/>
 
                 <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                     <x-admin-input-label for="phone_2" :value="__('Business Phone 2')" class="w-48"/>
@@ -81,7 +81,7 @@
                                   name="phone_2" autocomplete="phone_2"/>
                     <span class="text-sm text-gray-700 italic"> - optional</span>
                 </div>
-                <x-cpr-input-error :messages="$errors->get('phone_2')" class="mt-2 ml-48"/>
+                <x-cpr-input-error :messages="$errors->get('phone_2')" class="mt-2 lg:pl-1 lg:ml-48"/>
 
                 <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                     <x-admin-input-label for="phone_3" :value="__('Business Phone 3')" class="w-48"/>
@@ -89,7 +89,7 @@
                                   name="phone_3" autocomplete="phone_3"/>
                     <span class="text-sm text-gray-700 italic"> - optional</span>
                 </div>
-                <x-cpr-input-error :messages="$errors->get('phone_3')" class="mt-2 ml-48"/>
+                <x-cpr-input-error :messages="$errors->get('phone_3')" class="mt-2 lg:pl-1 lg:ml-48"/>
             </div>
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
@@ -150,9 +150,10 @@
                                class="block w-full lg:w-96 cursor-pointer rounded-lg border border-solid border-secondary-500 bg-white bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-sky-600 hover:file:bg-sky-700 file:px-3  file:py-[0.32rem] file:text-surface file:text-white focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
                                name="cv"/>
                     </div>
-                    <x-cpr-input-error :messages="$errors->get('cv')" class="mt-2 ml-48"/>
+                    <x-cpr-input-error :messages="$errors->get('cv')" class="mt-2 lg:pl-1 lg:ml-48"/>
 {{--                    <x-files-renamed-notice/>--}}
                 @endif
+                <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .doc, .docx, .pdf</p>
             </div>
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
@@ -209,19 +210,21 @@
                             </tbody>
                         </table>
                     </div>
-{{--                    <x-files-renamed-notice/>--}}
-                @else
-                    <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
-                        <x-admin-input-label for="job_description" :value="__('Job Description')" class="w-48"/>
-                        <input type="file" wire:model="job_description" id="job_description"
-                               class="block w-full lg:w-96 cursor-pointer rounded-lg border border-solid border-secondary-500 bg-white bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-sky-600 hover:file:bg-sky-700 file:px-3  file:py-[0.32rem] file:text-surface file:text-white focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
-                               name="job_description"/>
-                    </div>
-                    <x-cpr-input-error :messages="$errors->get('job_description')" class="mt-2 ml-48"/>
-{{--                    <x-files-renamed-notice/>--}}
-                @endif
 
-                <label for="current_role" class="block mt-4">
+{{--                @else--}}
+                @endif
+                <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
+                    <x-admin-input-label for="job_description" :value="__('Job Description')" class="w-48"/>
+                    <input type="file" wire:model="job_description" id="job_description"
+                           class="block w-full lg:w-96 cursor-pointer rounded-lg border border-solid border-secondary-500 bg-white bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-sky-600 hover:file:bg-sky-700 file:px-3  file:py-[0.32rem] file:text-surface file:text-white focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                           name="job_description"/>
+                </div>
+                <x-cpr-input-error :messages="$errors->get('job_description')" class="mt-2 lg:pl-1 lg:ml-48"/>
+                <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .doc, .docx, .pdf</p>
+
+{{--                @endif--}}
+
+                <label for="current_role" class="block mt-6">
                     If you do not have a formal document, please provide a description of your current role instead:
                 </label>
 
@@ -240,9 +243,7 @@
                     @endscript
                 </div>
 
-
-
-                <x-cpr-input-error :messages="$errors->get('current_role')" class="mt-3"/>
+                <x-cpr-input-error :messages="$errors->get('current_role')" class="mt-2"/>
             </div>
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
@@ -404,7 +405,9 @@
                            name="qualification_certificates" multiple/>
                     <span class="text-sm text-gray-700 italic"> - You can add multiple files at once, or add them one at a time.</span>
                 </div>
-                <x-cpr-input-error :messages="$errors->get('qualification_certificates')" class="mt-2 ml-48"/>
+                <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .doc, .docx, .pdf</p>
+
+                <x-cpr-input-error :messages="$errors->get('qualification_certificates')" class="mt-2 mt-2 lg:pl-1 lg:ml-48"/>
 
 {{--                <x-files-renamed-notice/>--}}
             </div>
@@ -531,12 +534,16 @@
 
                 <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                     <x-admin-input-label for="training_certificates" :value="__('Training Certificates')" class="w-48"/>
+
                     <input type="file" wire:model="training_certificates" id="training_certificates"
-                           class="block w-full lg:w-96 cursor-pointer rounded-lg border border-solid border-secondary-500 bg-white bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-sky-600 hover:file:bg-sky-700 file:px-3  file:py-[0.32rem] file:text-surface file:text-white focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                           class="block w-full lg:w-96 cursor-pointer rounded-lg border border-solid border-secondary-500 bg-white bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-sky-600 hover:file:bg-sky-700 file:px-3 file:py-[0.32rem] file:text-surface file:text-white focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
                            name="training_certificates" multiple/>
+
                     <span class="text-sm text-gray-700 italic"> - You can add multiple files at once, or add them one at a time.</span>
                 </div>
-                <x-cpr-input-error :messages="$errors->get('training_certificates')" class="mt-2 ml-48"/>
+                <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .doc, .docx, .pdf</p>
+
+                <x-cpr-input-error :messages="$errors->get('training_certificates')" class="mt-2 lg:pl-1 lg:ml-48"/>
 
 {{--                <x-files-renamed-notice/>--}}
             </div>
@@ -563,7 +570,12 @@
                 <div class="flex flex-col lg:flex-row items-center mt-3 gap-1">
                     <button type="button"
                             wire:click="saveProgress()"
-                            class="bg-sky-500 text-white rounded-full px-6 py-4 mt-8 lg:mt-0 hover:bg-sky-600 uppercase w-48 font-bold text-lg flex flex-row items-center justify-center gap-2">
+                            class="
+                            bg-gradient-to-r from-cyan-500 to-blue-500
+{{--                            hover:from-cyan-400 hover:to-blue-600--}}
+                            hover:from-blue-500 hover:to-cyan-500
+                            text-white rounded-full px-6 py-4 mt-8 lg:mt-0
+                            uppercase w-48 font-bold text-lg flex flex-row items-center justify-center gap-2">
                         Save
                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                              height="24" fill="none" viewBox="0 0 24 24">
@@ -587,7 +599,12 @@
                     <button type="button"
                             wire:click="submitEoI"
                             wire:confirm="You cannot edit your Expression of Interest once submitted.\n\n Please confirm you are ready to proceed with your submission:"
-                            class="bg-fuchsia-500 text-white rounded-full px-6 py-4 mt-8 lg:mt-0 hover:bg-fuchsia-600 uppercase w-48 font-bold text-lg flex flex-row items-center justify-center gap-2">
+                            class="
+                            bg-gradient-to-r from-fuchsia-500 to-purple-500
+                            hover:from-purple-500 hover:to-fuchsia-500
+{{--                            hover:from-fuchsia-400 hover:to-purple-600--}}
+                            text-white rounded-full px-6 py-4 mt-8 lg:mt-0
+                            uppercase w-48 font-bold text-lg flex flex-row items-center justify-center gap-2">
                         Submit
                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                              height="24" style="transform: rotate(90deg);" fill="none" viewBox="0 0 24 24">
