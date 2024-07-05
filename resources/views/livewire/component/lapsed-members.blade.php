@@ -63,13 +63,15 @@
                                 </span>
                             </div>
                         </th>
-{{--                            <th scope="col" class="px-4 py-2 text-left"></th>--}}
+                        <th scope="col" class="px-4 py-2 text-left">
+                            Actions
+                        </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-sky-100">
                     @foreach($lapsed_members as $member)
-                        <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})"
-                            class="cursor-pointer odd:bg-white even:bg-slate-50 text-slate-500 hover:text-sky-600 hover:bg-slate-100">
+                        <tr wire:key="{{ $member->id }}"
+                            class="odd:bg-white even:bg-slate-50 text-slate-500 hover:text-sky-600 hover:bg-slate-100">
                             <td class="px-4 py-2">
                                 {{ $member->first_name . ' ' . $member->last_name }}
                             </td>
@@ -79,11 +81,11 @@
                             <td class="px-4 py-2">
                                 {{ \Carbon\Carbon::parse($member->membership_expires_at)->toFormattedDayDateString() }}
                             </td>
-{{--                                <td class="px-4 py-1 text-slate-500">--}}
-{{--                                    <x-edit-button :href="route('member-edit', $member->id)" class="ms-3">--}}
-{{--                                        {{ __('View/Edit') }}--}}
-{{--                                    </x-edit-button>--}}
-{{--                                </td>--}}
+                            <td class="px-4 py-1">
+                                <x-edit-button :href="route('member-edit', $member->id)" class="">
+                                    {{ __('View/Edit') }}
+                                </x-edit-button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

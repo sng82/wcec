@@ -31,7 +31,7 @@
                         <livewire:component.accepted-applicants />
                     </div>
                     <div x-show="activeTab===2">
-                        <livewire:component.pending-applicants :$pending_waiting_approval_count :$pending_eoi_submitted_count />
+                        <livewire:component.pending-applicants :$pending_waiting_approval_count :$pending_eoi_submitted_count :$pending_applicant_count />
                     </div>
                     <div x-show="activeTab===3">
                         <livewire:component.declined-applicants />

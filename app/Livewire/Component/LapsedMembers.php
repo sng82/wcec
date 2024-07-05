@@ -25,10 +25,10 @@ class LapsedMembers extends Component
         $this->sort_column_name = $column_name;
     }
 
-    public function openMember($id)
-    {
-        $this->redirect('member-edit/' . $id);
-    }
+//    public function openMember($id)
+//    {
+//        $this->redirect('member-edit/' . $id);
+//    }
 
     public function render()
     {

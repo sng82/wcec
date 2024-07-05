@@ -12,6 +12,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Route;
 use Barryvdh\DomPDF\Facade\Pdf;
+use ZipArchive;
 
 class AssessEoi extends Component
 {
@@ -85,7 +86,36 @@ class AssessEoi extends Component
 
     public function downloadFiles()
     {
-//        @todo
+        try {
+            $zip         = new ZipArchive;
+            $zipFileName = $this->eoi->user()->first_name . '_' . $this->eoi->user()->last_name . '_Documents_' . Carbon::parse(now())->format('YmdHisu') . '.zip';
+
+            if ($zip->open(public_path($zipFileName), ZipArchive::CREATE) === true) {
+                $documents = Document::where('eoi_id', $this->eoi->id)->get();
+
+                foreach ($documents as $document) {
+                    $zip->addFile(
+                        storage_path('app/public/submitted_documents/' . $this->eoi->id . '/' . $document->file_name),
+                        $document->file_name
+                    );
+                }
+
+                $zip->close();
+
+                return response()->download(public_path($zipFileName))->deleteFileAfterSend();
+            }
+        } catch (\Exception $e) {
+
+            error_log('Admin EoI Files download failed | ' . $e->getMessage());
+
+            $this->alert('error', 'Unable to download files', [
+                'position'           => 'center',
+                'timer'              => null,
+                'showConfirmButton'  => true,
+                'confirmButtonColor' => '#dc2626',
+            ]);
+        }
+        return false;
     }
 
     public function assess()

@@ -5,7 +5,7 @@
     <div class="grid grid-flow-row lg:grid-flow-col">
         <div class="flex items-center mt-3">
             <div>
-            <p class="">{{ $applicants->count() }} Applicants who have not yet been accepted.
+            <p class="">{{ $pending_applicant_count }} Applicants who have not yet been accepted.
                 Of these:
             </p>
             <ul class="list-square marker:text-sky-600 list-inside ml-1">
@@ -121,11 +121,24 @@
                                     </svg>
                                 </span>
                             </div>
+                        </th>
+                        <th wire:click="sortBy('application_status')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'application_status' ? 'bg-sky-300' : '' }}">
+                            <span class="{{ $sort_column_name === 'application_status' ? 'text-sky-700' : 'text-slate-500'  }}">
+                                Application Status
+                            </span>
+                            <span class="float-right flex flex-col font-normal">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'application_status' && $sort_column_direction === 'asc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'application_status' && $sort_column_direction === 'asc' ? '' : 'text-slate-400' }}">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'application_status' && $sort_column_direction === 'desc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'application_status' && $sort_column_direction === 'desc' ? '' : 'text-slate-400' }}">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </span>
+                        </th>
 
-                        </th>
-                        <th scope="col" class="px-4 py-2 text-left">
-                            Application Status
-                        </th>
+{{--                        <th scope="col" class="px-4 py-2 text-left">--}}
+{{--                            Application Status--}}
+{{--                        </th>--}}
                         <th scope="col" class="px-4 py-2 text-left">
                             Actions
                         </th>
@@ -133,12 +146,12 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-sky-100">
                     @foreach($applicants as $member)
-                        <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})"
-                            class="cursor-pointer
+                        <tr wire:key="{{ $member->id }}"
+                            class="bg-gradient-to-r
                              {{
                                 ($member->application_status === 'submitted' && $member->application_fee_paid) ||
                                 ($member->eoi_status === 'submitted' && $member->registration_fee_paid)
-                                ? 'bg-emerald-50 hover:bg-emerald-200 hover:text-emerald-600'
+                                ? 'bg-gradient-to-r from-fuchsia-200 via-white hover:via-fuchsia-100 to-white hover:to-fuchsia-50 hover:text-fuchsia-600'
                                 : 'odd:bg-white even:bg-slate-50 hover:bg-slate-100 hover:text-sky-600'
                              }}
                              "
@@ -151,7 +164,6 @@
                             </td>
                             <td class="px-4 py-2">
                                 {{ \Carbon\Carbon::parse($member->created_at)->format('d/m/Y H:i')}}
-{{--                                {{ \Carbon\Carbon::parse($member->created_at)->toDayDateTimeString() }}--}}
                             </td>
                             <td class="px-4 py-1">
                                 <span class="py-1 px-3 inline rounded-full w-96 {{ $member->registration_fee_paid ? 'text-emerald-500 bg-emerald-100' : 'text-slate-400 bg-slate-100' }}">
@@ -172,13 +184,20 @@
                             </td>
 
                             <td class="px-4 py-1">
-                                @if ($member->application_status === 'submitted' && $member->application_fee_paid)
-                                    <a href="#" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess&nbsp;Application</a>
-                                @elseif ($member->eoi_status === 'submitted' && $member->registration_fee_paid)
-                                    <a href="{{ route('assess-eoi',[$member->eoi->id]) }}" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess&nbsp;EoI</a>
-                                @else
-                                    N/A
-                                @endif
+                                <div class="flex flex-row gap-1">
+                                    <x-edit-button :href="route('member-edit', $member->id)" class="">
+                                        {{ __('View/Edit') }}
+                                    </x-edit-button>
+                                    @if ($member->application_status === 'submitted' && $member->application_fee_paid)
+                                        <x-edit-button-fuchsia :href="www.google.com" class="">
+                                            Assess&nbsp;Application
+                                        </x-edit-button-fuchsia>
+                                    @elseif ($member->eoi_status === 'submitted' && $member->registration_fee_paid)
+                                        <x-edit-button-fuchsia :href="route('assess-eoi',[$member->eoi->id])" class="">
+                                            Assess&nbsp;EoI
+                                        </x-edit-button-fuchsia>
+                                    @endif
+                                </div>
                             </td>
                         </tr>
                     @endforeach

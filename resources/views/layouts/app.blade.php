@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{
-                    isset($title)
-                    ? 'WCEC | ' . $title
-                    : 'WCEC | Chartered Practitioners Portal'
+            isset($title)
+                ? 'WCEC | ' . $title
+                : 'WCEC | Chartered Practitioners Portal'
         }}</title>
         @isset($description)
             <meta name="description" content="{{ $description}}">

@@ -65,13 +65,13 @@
                                     </span>
                                 </div>
                             </th>
-{{--                            <th scope="col" class="px-4 py-2 text-left"></th>--}}
+                            <th scope="col" class="px-4 py-2 text-left">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-sky-100 text-slate-600">
                         @foreach($active_members as $member)
-                            <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})" class="cursor-pointer
-                                odd:bg-white even:bg-slate-50 hover:bg-slate-100 hover:text-sky-600
+                            <tr wire:key="{{ $member->id }}"
+                                class="odd:bg-white even:bg-slate-50 hover:bg-slate-100 hover:text-sky-600
 {{--                            {{ $member->membership_expires_at < now()->addDays(30) ? 'bg-red-100 hover:bg-red-200 hover:text-red-600' : 'hover:bg-slate-100 hover:text-sky-600' }}--}}
                             ">
                                 <td class="px-4 py-2">
@@ -83,11 +83,11 @@
                                 <td class="px-4 py-2 {{ $member->membership_expires_at < now()->addDays(30) ? 'text-red-700 font-semibold' : '' }} ">
                                     {{ \Carbon\Carbon::parse($member->membership_expires_at)->toFormattedDayDateString() }}
                                 </td>
-{{--                                <td class="px-4 py-1">--}}
-{{--                                    <x-edit-button :href="route('member-edit', $member->id)" class="ms-3">--}}
-{{--                                        {{ __('View/Edit') }}--}}
-{{--                                    </x-edit-button>--}}
-{{--                                </td>--}}
+                                <td class="px-4 py-1">
+                                    <x-edit-button :href="route('member-edit', $member->id)" class="">
+                                        {{ __('View/Edit') }}
+                                    </x-edit-button>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
