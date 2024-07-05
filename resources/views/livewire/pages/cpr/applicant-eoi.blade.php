@@ -8,7 +8,7 @@
 
         <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 
-        <form wire:submit="saveProgress" class="py-4 px-6" x-data="{
+        <form wire:submit="saveProgress" class="py-4 p-3 xl:p-6" x-data="{
             init() {
                 Livewire.hook('commit', ({ succeed }) => {
                     succeed(() => {
@@ -40,8 +40,34 @@
 
             <x-files-renamed-notice/>
 
+            @if(!empty ($eoi->feedback))
+                <div class="bg-gradient-to-r from-purple-500 via-violet-400 to-indigo-500
+                            rounded-lg shadow-lg shadow-slate-400
+{{--                            outline outline-3 outline-purple-400 outline-offset-4--}}
+                            p-5 mt-6 text-white">
+
+                    <div class="flex flex-row items-center mb-3 gap-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-8 min-w-8">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                        </svg>
+                        <h2 class="text-xl text-indigo-50">
+                            Your Expression of Interest was not accepted
+                        </h2>
+                    </div>
+
+                    <span class="w-full block border-b-2 border-purple-200 mb-3"></span>
+
+
+                    <p class="mb-4 text-purple-100">
+                        The assessor provided the following feedback:
+                    </p>
+
+                    {!! $eoi->feedback; !!}
+                </div>
+            @endif
+
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
-                <h2 class="text-xl text-white bg-sky-900 border-b border-sky-900 p-2 pl-7 mb-3 -ml-7 shadow rounded-lg font-semibold">
+                <h2 class="text-xl font-semibold text-white bg-sky-900 border-b border-sky-900 p-2 py-3 xl:py-2 pl-3 xl:pl-7 mb-3 -mx-3 -mt-3 xl:mt-0 xl:-ml-7 xl:-mr-0 shadow rounded-t-lg xl:rounded-lg">
                     Your Details
                 </h2>
                 <p class="mt-4">
@@ -93,7 +119,7 @@
             </div>
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
-                <h2 class="text-xl text-white bg-sky-900 border-b border-sky-900 p-2 pl-7 mb-3 -ml-7 shadow rounded-lg font-semibold">
+                <h2 class="text-xl font-semibold text-white bg-sky-900 border-b border-sky-900 p-2 py-3 xl:py-2 pl-3 xl:pl-7 mb-3 -mx-3 -mt-3 xl:mt-0 xl:-ml-7 xl:-mr-0 shadow rounded-t-lg xl:rounded-lg">
                     Curriculum Vitae
                 </h2>
                 @if($existing_cv)
@@ -157,7 +183,7 @@
             </div>
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
-                <h2 class="text-xl text-white bg-sky-900 border-b border-sky-900 p-2 pl-7 mb-3 -ml-7 shadow rounded-lg font-semibold">
+                <h2 class="text-xl font-semibold text-white bg-sky-900 border-b border-sky-900 p-2 py-3 xl:py-2 pl-3 xl:pl-7 mb-3 -mx-3 -mt-3 xl:mt-0 xl:-ml-7 xl:-mr-0 shadow rounded-t-lg xl:rounded-lg">
                     Current Employment &amp; Position
                 </h2>
 
@@ -247,7 +273,7 @@
             </div>
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
-                <h2 class="text-xl text-white bg-sky-900 border-b border-sky-900 p-2 pl-7 mb-3 -ml-7 shadow rounded-lg font-semibold">
+                <h2 class="text-xl font-semibold text-white bg-sky-900 border-b border-sky-900 p-2 py-3 xl:py-2 pl-3 xl:pl-7 mb-3 -mx-3 -mt-3 xl:mt-0 xl:-ml-7 xl:-mr-0 shadow rounded-t-lg xl:rounded-lg">
                     Employment History
                 </h2>
                 <label for="employment_history" class="my-4">
@@ -277,7 +303,7 @@
             </div>
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
-                <h2 class="text-xl text-white bg-sky-900 border-b border-sky-900 p-2 pl-7 mb-3 -ml-7 shadow rounded-lg font-semibold">
+                <h2 class="text-xl font-semibold text-white bg-sky-900 border-b border-sky-900 p-2 py-3 xl:py-2 pl-3 xl:pl-7 mb-3 -mx-3 -mt-3 xl:mt-0 xl:-ml-7 xl:-mr-0 shadow rounded-t-lg xl:rounded-lg">
                     Education
                 </h2>
                 <label for="qualifications" class="mt-4">
@@ -413,7 +439,7 @@
             </div>
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
-                <h2 class="text-xl text-white bg-sky-900 border-b border-sky-900 p-2 pl-7 mb-3 -ml-7 shadow rounded-lg font-semibold">
+                <h2 class="text-xl font-semibold text-white bg-sky-900 border-b border-sky-900 p-2 py-3 xl:py-2 pl-3 xl:pl-7 mb-3 -mx-3 -mt-3 xl:mt-0 xl:-ml-7 xl:-mr-0 shadow rounded-t-lg xl:rounded-lg">
                     Training
                 </h2>
                 <label for="training" class="mt-4">

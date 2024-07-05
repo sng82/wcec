@@ -3,9 +3,11 @@
 namespace App\Livewire\Pages\Cpr;
 
 use App;
+use App\Models\Document;
 use App\Models\EOI;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Route;
@@ -62,14 +64,28 @@ class AssessEoi extends Component
         }, $filename);
     }
 
-    public function downloadFile()
+    public function downloadFile(Document $document)
     {
-
+        $file_loc = 'public/submitted_documents/' . $document->user_id . '/' . $document->file_name;
+        if (Storage::disk('local')->exists($file_loc)) {
+            return Storage::download($file_loc);
+        }
+        $this->alert(
+            'error',
+            'Error',
+            [
+                'position'           => 'center',
+                'timer'              => null,
+                'text'               => 'Unable to download file. It has probably been deleted.',
+                'showConfirmButton'  => true,
+                'confirmButtonColor' => '#dc2626',
+            ]
+        );
     }
 
     public function downloadFiles()
     {
-
+//        @todo
     }
 
     public function assess()

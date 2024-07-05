@@ -88,7 +88,7 @@
                                             {{ $document->file_name }}
                                         </td>
                                         <td class="px-4 py-1">
-                                            <button wire:click.prevent="downloadFile"
+                                            <button wire:click.prevent="downloadFile({{$document->id}})"
                                                     class="text-white rounded-full bg-sky-700 px-4 py-1 hover:bg-sky-800 flex flex-row gap-2 items-center">
                                                 <span>
                                                     Download

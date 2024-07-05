@@ -9,14 +9,14 @@
         <div class="flex flex-col h-full justify-between">
             <div class="flex flex-col ">
 
-                <div class="flex flex-col content-center w-full h-12 px-3 mb-2 ">
+                <div class="flex flex-col content-center w-full h-12 mb-2 ">
                     <button
                         @click="sidebar_open = !sidebar_open" title="Expand/Shrink Menu"
-                        class="flex content-center py-2 mt-2 font-semibold transition-all ease-in-out duration-500 text-white hover:text-cyan-400"
+                        class="flex content-center py-2 px-3 mt-2 font-semibold transition-all ease-in-out duration-500 text-white hover:text-cyan-400"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                              viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                             class="transform transition-transform duration-200 w-5 h-5"
+                             class="transform transition-transform duration-200 w-6 h-6"
                              :class="{'rotate-180' : sidebar_open, 'rotate-0' : !sidebar_open }">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
                         </svg>

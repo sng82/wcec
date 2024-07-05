@@ -367,11 +367,11 @@ class ApplicantEoi extends Component
             $validation_messages['current_role.required_without'] = 'Either a Job Description document OR a description of your current role is required.';
         }
 
-        $to_be_validated['qualification_certificates']  = 'nullable|file|mimes:pdf,doc,docx|max:2048';
-        $to_be_validated['training_certificates.*']     = 'nullable|file|mimes:pdf,doc,docx|max:2048';
-        $to_be_validated['employment_history']          = 'required|min:3';
-        $to_be_validated['qualifications']              = 'required|min:3';
-        $to_be_validated['training']                    = 'required|min:3';
+        $to_be_validated['qualification_certificates.*']    = 'nullable|file|mimes:pdf,doc,docx|max:2048';
+        $to_be_validated['training_certificates.*']         = 'nullable|file|mimes:pdf,doc,docx|max:2048';
+        $to_be_validated['employment_history']              = 'required|min:3';
+        $to_be_validated['qualifications']                  = 'required|min:3';
+        $to_be_validated['training']                        = 'required|min:3';
 
         $validation_messages['qualifications.required'] = 'Please provide details of qualifications. Type \'N/A\' if you have nothing to add here.';
         $validation_messages['training']                = 'Please provide details of training undertaken. Type \'N/A\' if you have nothing to add here.';
