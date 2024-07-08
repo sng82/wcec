@@ -102,7 +102,7 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                         @endif
                     </td>
                     <td class="px-4 py-2 italic text-sm">
-                        {{ $logged_in_user->registration_fee_paid ? 'This fee has been paid.' : ' This £' . $registration_fee->amount . ' has not yet been paid. Your Expression of Interest will not be assessed before this payment is made.' }}
+                        {{ $logged_in_user->registration_fee_paid ? 'This fee has been paid.' : ' This £' . $registration_fee->amount . ' fee has not yet been paid. Your Expression of Interest will not be assessed before this payment is made.' }}
                     </td>
                     <td class="px-4 py-2">
                         @if(! $logged_in_user->registration_fee_paid)

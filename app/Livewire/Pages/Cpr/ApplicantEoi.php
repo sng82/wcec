@@ -3,23 +3,13 @@
 namespace App\Livewire\Pages\Cpr;
 
 use App\Models\EOI;
-
-//use App\Models\Prices;
 use App\Models\User;
 use App\Models\Document;
-
-//use Carbon\Carbon;
 use Carbon\Carbon;
-
-//use Illuminate\Routing\Route;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
-
-//use Illuminate\Support\Str;
-//use Illuminate\Validation\Rule;
-//use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
