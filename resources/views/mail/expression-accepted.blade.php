@@ -1,7 +1,7 @@
 <x-mail::message>
 # Expression of Interest
 
-Dear {{$user->first_name . ' ' . $user->last_name}},<br>
+Dear {{$user->first_name . ' ' . $user->last_name}},<br><br>
 Your Expression of Interest has been assessed and accepted.<br>
 You may now continue with your application.
 

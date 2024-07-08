@@ -1,7 +1,7 @@
 <x-mail::message>
 # Expression of Interest
 
-Dear {{$user->first_name . ' ' . $user->last_name}},<br>
+Dear {{$user->first_name . ' ' . $user->last_name}},<br><br>
 Your Expression of Interest has been assessed and unfortunately, rejected.<br>
 The assessor provided the following feedback:
 
@@ -11,7 +11,6 @@ The assessor provided the following feedback:
 {!! $eoi->feedback !!}
 </x-mail::panel>
 
-
-Thank you for your interest in the Chartered Practitioners Register,<br>
+<br><br>Thank you for your interest in the Chartered Practitioners Register,<br>
 {{ config('app.name') }}
 </x-mail::message>

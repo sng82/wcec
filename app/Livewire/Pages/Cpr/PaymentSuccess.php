@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
+use Log;
 use Stripe\StripeClient;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -64,7 +65,7 @@ class PaymentSuccess extends Component
             );
 
         } catch (\Exception $e) {
-            error_log('Payment Error: ' . $e->getMessage());
+            Log::error('Payment Error: ' . $e->getMessage());
 
             return $this->flash(
                 'error',

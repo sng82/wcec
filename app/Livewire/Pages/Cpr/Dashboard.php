@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
+use Log;
 use Stripe\StripeClient;
 
 class Dashboard extends Component
@@ -22,7 +23,7 @@ class Dashboard extends Component
 
     public $submitted_eois = '';
 
-    public $submitted_submissions = '';
+    public $submitted_applications = '';
 
     public $expiring_memberships = '';
 
@@ -33,14 +34,21 @@ class Dashboard extends Component
 
     public function mount()
     {
-        $nextSubmissionDate = SubmissionDate::where('submission_date', '>', now()->subDay())
-                                            ->orderBy('submission_date', 'ASC')
-                                            ->first()->submission_date;
+        $this->getSubmissionDate();
+        $this->getEOIs();
+        $this->getApplications();
+        $this->getExpiringMemberships();
+        $this->getApplicationFee();
+        $this->getRegistrationFee();
+    }
 
-        $this->next_submission_date = Carbon::parse($nextSubmissionDate)->toFormattedDayDateString();
+    public function openMember($id)
+    {
+        $this->redirect('member-edit/' . $id);
+    }
 
-        $this->next_submission_date_difference = Carbon::parse($nextSubmissionDate)->diffForHumans();
-
+    public function getEOIs()
+    {
         $this->submitted_eois = User::role('applicant')
                                     ->where('registration_fee_paid', true)
                                     ->where('eoi_status', 'submitted')
@@ -49,42 +57,60 @@ class Dashboard extends Component
                                               ->orWhere('application_status', '');
                                     })
                                     ->get();
+    }
 
-        $this->submitted_submissions = User::role('applicant')
-                                           ->where('registration_fee_paid', true)
-                                           ->where('eoi_status', 'accepted')
-                                           ->where('application_fee_paid', true)
-                                           ->where('application_status', 'submitted')
-                                           ->get();
+    public function getApplications()
+    {
+        $this->submitted_applications = User::role('applicant')
+                                            ->where('registration_fee_paid', true)
+                                            ->where('eoi_status', 'accepted')
+                                            ->where('application_fee_paid', true)
+                                            ->where('application_status', 'submitted')
+                                            ->get();
+    }
 
+    public function getExpiringMemberships()
+    {
         $this->expiring_memberships = User::role('member')
                                           ->where('membership_expires_at', '>', now())
                                           ->where('membership_expires_at', '<', now()->addDays(30))
                                           ->orderBy('membership_expires_at', 'ASC')
                                           ->get();
-
-        $this->application_fee = Prices::where('price_type', 'application')
-                               ->where('start_date', '<=', now())
-                               ->where(function($query) {
-                                   $query->where('end_date', '>', now())
-                                         ->orWhere('end_date', null);
-                               })
-                               ->orderBy('start_date')
-                               ->first();
-
-        $this->registration_fee = Prices::where('price_type', 'registration')
-                                      ->where('start_date', '<=', now())
-                                      ->where(function($query) {
-                                          $query->where('end_date', '>', now())
-                                                ->orWhere('end_date', null);
-                                      })
-                                      ->orderBy('start_date')
-                                      ->first();
     }
 
-    public function openMember($id)
+    public function getApplicationFee()
     {
-        $this->redirect('member-edit/' . $id);
+        $this->application_fee = Prices::where('price_type', 'application')
+                                       ->where('start_date', '<=', now())
+                                       ->where(function($query) {
+                                           $query->where('end_date', '>', now())
+                                                 ->orWhere('end_date', null);
+                                       })
+                                       ->orderBy('start_date')
+                                       ->first();
+    }
+
+    public function getRegistrationFee()
+    {
+        $this->registration_fee = Prices::where('price_type', 'registration')
+                                        ->where('start_date', '<=', now())
+                                        ->where(function($query) {
+                                            $query->where('end_date', '>', now())
+                                                  ->orWhere('end_date', null);
+                                        })
+                                        ->orderBy('start_date')
+                                        ->first();
+    }
+
+    public function getSubmissionDate()
+    {
+        $nextSubmissionDate = SubmissionDate::where('submission_date', '>', now()->subDay())
+                                            ->orderBy('submission_date', 'ASC')
+                                            ->first()->submission_date;
+
+        $this->next_submission_date = Carbon::parse($nextSubmissionDate)->toFormattedDayDateString();
+
+        $this->next_submission_date_difference = Carbon::parse($nextSubmissionDate)->diffForHumans();
     }
 
     public function payFee($price_type)
@@ -146,7 +172,7 @@ class Dashboard extends Component
             if (Config('app.env') !== 'Production') {
                 $err_message = $e->getMessage();
             } else {
-                error_log($e->getMessage());
+                Log::error($e->getMessage());
             }
 
             $this->alert('error', 'Ayo: ' . $err_message, [

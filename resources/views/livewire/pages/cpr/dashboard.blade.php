@@ -22,7 +22,7 @@
                                    :$next_submission_date
                                    :$next_submission_date_difference
                                    :$submitted_eois
-                                   :$submitted_submissions
+                                   :$submitted_applications
                                    :$expiring_memberships
                 />
             @endif

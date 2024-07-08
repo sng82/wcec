@@ -31,7 +31,12 @@ class AdminMembers extends Component
         $this->redirect('member-add');
     }
 
-    public function render()
+    public function mount()
+    {
+        $this->getCounts();
+    }
+
+    public function getCounts()
     {
         $this->active_member_count = User::role('member')->count();
         $this->lapsed_member_count = User::role('lapsed member')->count();
@@ -49,7 +54,10 @@ class AdminMembers extends Component
                                                     ->count() ?? 0;
         $this->pending_applicant_count = User::role('applicant')->count();
         $this->blocked_applicant_count = User::role('blocked applicant')->count();
+    }
 
+    public function render()
+    {
         return view('livewire.pages.cpr.admin-members')
             ->layout('layouts.app');
     }

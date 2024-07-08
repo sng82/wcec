@@ -139,7 +139,7 @@
 
                 <form wire:submit="assess">
 
-                    <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
+                    <div class="flex flex-col lg:flex-row lg:items-center mt-3">
                         <x-admin-input-label for="eoi_status" :value="__('EoI Status')" class="lg:w-48 shrink-0"/>
                         <select wire:model="eoi_status" name="eoi_status" id="eoi_status"
                                 class="block w-48 border-gray-300 focus:border-indigo-500 focus:ring-sky-500 rounded-md shadow-sm"
@@ -151,19 +151,19 @@
                         </select>
                     </div>
 
-                    <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
+                    <div class="flex flex-col lg:flex-row lg:items-center mt-3">
                         <x-admin-input-label for="feedback" :value="__('Feedback')" class="lg:w-48 shrink-0"/>
                         <textarea wire:model="feedback" name="current_role" rows="3" id="current_role"
                                   class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full"></textarea>
                     </div>
 
-                    <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
+                    <div class="flex flex-col lg:flex-row lg:items-center mt-3">
                         <x-admin-input-label for="notes" :value="__('Assessor Notes')" class="lg:w-48 shrink-0"/>
                         <textarea wire:model="notes" name="notes" rows="3" id="notes"
                                   class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full"></textarea>
                     </div>
 
-                    <button class="mt-4 text-lg py-2 px-12 bg-fuchsia-500 hover:bg-fuchsia-600 text-white rounded-full lg:ml-48">
+                    <button class="mt-4 text-lg py-2 px-12 bg-fuchsia-500 hover:bg-fuchsia-600 focus:cursor-wait text-white rounded-full lg:ml-48">
                         Save
                     </button>
 

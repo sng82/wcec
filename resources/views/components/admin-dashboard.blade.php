@@ -3,7 +3,7 @@
     'next_submission_date',
     'next_submission_date_difference',
     'submitted_eois',
-    'submitted_submissions',
+    'submitted_applications',
     'expiring_memberships',
 ])
 
@@ -25,7 +25,7 @@
     </p>
 </div>
 
-<div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
+<div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow" wire:poll.15s="getEOIs">
     <h2 class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2 mb-2">
         Expressions of Interest
     </h2>
@@ -110,11 +110,11 @@
     @endif
 </div>
 
-<div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
+<div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow" wire:poll.15s="getApplications">
     <h2 class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2 mb-2">
         Applications
     </h2>
-    @if($submitted_submissions->count() > 0)
+    @if($submitted_applications->count() > 0)
         <p class="mb-4">
             Applicants who are waiting for their Expression of Interest to be assessed:
         </p>
@@ -152,7 +152,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-sky-100">
-                    @foreach($submitted_submissions as $member)
+                    @foreach($submitted_applications as $member)
                         <tr wire:key="{{ $member->id }}" wire:click="openMember({{ $member->id }})" class="cursor-pointer hover:bg-slate-100 hover:text-sky-600">
                             <td class="px-4 py-2">
                                 {{ $member->first_name . ' ' . $member->last_name }}

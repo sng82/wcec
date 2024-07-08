@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
+use Log;
 use Route;
 //use Barryvdh\DomPDF\Facade\Pdf;
 use ZipArchive;
@@ -138,13 +139,13 @@ class AssessEoi extends Component
 
         } catch (\Exception $e) {
 
-            error_log('Admin EoI Files download failed | ' . $e->getMessage());
+            Log::error('Admin EoI Files download failed | ' . $e->getMessage());
 
             $err_message = 'Unable to download files';
             if (Config('app.env') !== 'Production') {
                 $err_message = $e->getMessage();
             } else {
-                error_log($e->getMessage());
+                Log::error($e->getMessage());
             }
 
             $this->alert(
@@ -163,32 +164,72 @@ class AssessEoi extends Component
 
     public function assess()
     {
-        $user = User::find($this->eoi->user_id);
+        try {
+            $user = User::find($this->eoi->user_id);
 
-        $this->eoi->update([
-            'feedback' => $this->feedback,
-            'notes' => $this->notes,
-        ]);
+            $this->eoi->update([
+                'feedback' => $this->feedback,
+                'notes' => $this->notes,
+            ]);
 
-        $user->update([
-            'eoi_status' => $this->eoi_status,
-        ]);
+            $user->update([
+                'eoi_status' => $this->eoi_status,
+            ]);
 
-        switch ($this->eoi_status) {
-            case 'accepted':
-                Mail::to($user->email)
-                    ->send(new App\Mail\ExpressionAccepted($user));
-                
-                break;
-            case 'unaccepted':
-                Mail::to($user->email)
-                    ->send(new App\Mail\ExpressionUnaccepted($user, $this->eoi));
-                break;
-            case 'rejected':
-                Mail::to($user->email)
-                    ->send(new App\Mail\ExpressionRejected($user, $this->eoi));
-                break;
+            $mail_sent = false;
+
+            switch ($this->eoi_status) {
+                case 'accepted':
+                    Mail::to($user->email)->send(new App\Mail\ExpressionAccepted($user));
+                    $mail_sent = true;
+                    break;
+                case 'unaccepted':
+                    Mail::to($user->email)->send(new App\Mail\ExpressionUnaccepted($user, $this->eoi));
+                    $mail_sent = true;
+                    break;
+                case 'rejected':
+                    Mail::to($user->email)->send(new App\Mail\ExpressionRejected($user, $this->eoi));
+                    $mail_sent = true;
+                    break;
+            }
+
+            if ($mail_sent) {
+                return $this->flash(
+                    'success',
+                    'Mail Sent To applicant',
+                    [
+                        'position' => 'top-end',
+                        'timer' => 2000,
+                        'showConfirmButton' => false,
+                    ],
+                    route('dashboard')
+                );
+            }
+        } catch (\Exception $e) {
+            Log::error('Admin EoI Sending Email failed | ' . $e->getMessage());
+            return $this->flash(
+                'error',
+                'Mail NOT Sent To applicant',
+                [
+                    'position' => 'center',
+                    'timer' => null,
+                    'showConfirmButton' => true,
+                    'confirmButtonColor' => '#dc2626',
+                ],
+                route('dashboard')
+            );
         }
+
+        return $this->flash(
+            'success',
+            'Expression of Interest saved successfully',
+            [
+                'position' => 'top-end',
+                'timer' => 2000,
+                'showConfirmButton' => false,
+            ],
+            route('dashboard')
+        );
     }
 
     public function render()

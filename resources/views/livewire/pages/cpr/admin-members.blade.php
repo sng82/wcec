@@ -2,17 +2,17 @@
 
     <livewire:cpr.sidebar/>
 
-    <div class="right w-full flex flex-col grow min-w-80 overflow-y-auto">
+    <div class="right w-full flex flex-col grow min-w-80 overflow-y-scroll">
 
         <livewire:layout.cpr-navigation />
 
-        <div class="flex flex-col px-3 xl:px-6 ">
+        <div class="flex flex-col px-3 xl:px-6">
 
             <div x-data="tabSwitch()">
                 <ul class="flex flex-col xl:flex-row justify-center items-center my-6 gap-0 xl:gap-3 2xl:gap-8">
                     <template x-for="(tab, index) in tabs" :key="index">
                         <li class="cursor-pointer pt-1 text-sky-800 border-b-2 text-center"
-                            :class="activeTab===index ? 'text-sky-800 border-red-600' : 'text-slate-400 hover:text-sky-600 border-transparent '"
+                            :class="activeTab === index ? 'text-sky-800 border-red-600' : 'text-slate-400 hover:text-sky-600 border-transparent '"
                             @click="activeTab = index"
                             x-text="tab"></li>
                     </template>
@@ -23,7 +23,7 @@
                     </li>
                 </ul>
 
-                <div class="w-full bg-white mx-auto border rounded-lg">
+                <div class="w-full bg-white mx-auto border rounded-lg mb-6">
                     <div x-show="activeTab===0">
                         <livewire:component.active-members />
                     </div>
@@ -31,7 +31,11 @@
                         <livewire:component.accepted-applicants />
                     </div>
                     <div x-show="activeTab===2">
-                        <livewire:component.pending-applicants :$pending_waiting_approval_count :$pending_eoi_submitted_count :$pending_applicant_count />
+                        <livewire:component.pending-applicants
+                            :$pending_waiting_approval_count
+                            :$pending_eoi_submitted_count
+                            :$pending_applicant_count
+                        />
                     </div>
                     <div x-show="activeTab===3">
                         <livewire:component.declined-applicants />
@@ -44,29 +48,6 @@
             </div>
         </div>
 
-{{--        <div class="flex flex-col p-3 xl:p-6 gap-5">--}}
-
-{{--            <div>--}}
-{{--                <h2 class="text-2xl text-sky-800 mb-2">--}}
-{{--                    Members--}}
-{{--                </h2>--}}
-{{--                <div class="w-full flex grow flex-col gap-5">--}}
-{{--                    <livewire:component.active-members />--}}
-{{--                    <livewire:component.lapsed-members />--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
-{{--            <div>--}}
-{{--                <h2 class="text-2xl text-sky-800 mb-2">--}}
-{{--                    Applicants--}}
-{{--                </h2>--}}
-{{--                <div class="w-full flex grow flex-col gap-5">--}}
-{{--                    <livewire:component.accepted-applicants />--}}
-{{--                    <livewire:component.pending-applicants />--}}
-{{--                    <livewire:component.declined-applicants />--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
     </div>
 </div>
 
@@ -82,6 +63,5 @@
                 "Lapsed Members [{{ $lapsed_member_count }}]",
             ]
         };
-    };
+    }
 </script>
-
