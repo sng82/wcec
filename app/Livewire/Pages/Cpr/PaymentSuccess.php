@@ -45,11 +45,13 @@ class PaymentSuccess extends Component
                 $user->save();
 
 //                 @todo: Send email to user & admins confirming purchase
-                $admins = User::role('admin')->get();
-                foreach ($admins as $admin) {
-                    Mail::to($admin->email)
+//                $admins = User::role('admin')->get();
+//                foreach ($admins as $admin) {
+//                    Mail::to($admin->email)
+//                        ->send(new CPRFeePaidAdminNotification($order));
+//                }
+                Mail::to('sam@asapcomputers.co.uk')
                         ->send(new CPRFeePaidAdminNotification($order));
-                }
             }
 
             return $this->flash(
