@@ -139,8 +139,8 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                                 </span>
                             </div>
                         @else
-                            <div class="flex items-center text-red-600">
-                                <span class="text-lg font-semibold me-3 border-2 border-red-600 rounded-full px-4">
+                            <div class="flex items-center text-amber-500">
+                                <span class="text-lg font-semibold me-3 border-2 border-amber-500 rounded-full px-4">
                                    Incomplete
                                 </span>
                             </div>

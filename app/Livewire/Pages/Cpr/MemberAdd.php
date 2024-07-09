@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Pages\Cpr;
 
+use App\Mail\NewUserLoginInstructions;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -68,7 +70,9 @@ class MemberAdd extends Component
 
             $new_user->assignRole($this->role);
 
-            //@todo: send email if option selected
+            if ($this->send_email) {
+                Mail::to($new_user->email)->send(new NewUserLoginInstructions($new_user));
+            }
 
             return $this->flash(
                 'success',

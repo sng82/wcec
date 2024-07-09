@@ -50,15 +50,18 @@ new #[Layout('layouts.guest')] class extends Component
     <div class="mb-4 text-sm text-gray-600">
         <ul class="mb-3 ml-6 list-disc marker:text-red-700 space-y-2">
             <li class="text-sky-600">
-                First login since the new Chartered Practitioners portal was launched?
+                Forgot your password?
             </li>
             <li class="text-sky-600">
-                Forgot your password?
+                Haven't logged in since the new Chartered Practitioners portal was launched?
+            </li>
+            <li class="text-sky-600">
+                An account was created for you and you've received an email asking you to set a password?
             </li>
         </ul>
         <p>
-            No problem. Just let us know the email address you're registered with and we will email
-            you a password reset link that will allow you to choose a new one.
+            No problem. If any of the above are true, just let us know the email address you're registered with and we will email
+            you a link to set a new password.
         </p>
     </div>
 

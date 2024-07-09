@@ -38,37 +38,37 @@
                 <form wire:submit="saveUser">
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                         <x-admin-input-label for="first_name" :value="__('First Name')" class="lg:w-48" />
-                        <x-text-input wire:model="first_name" id="first_name" class="block w-full lg:w-96" type="text" name="first_name" required autofocus autocomplete="given-name" />
+                        <x-text-input wire:model="first_name" id="first_name" class="block w-full lg:w-96" type="text" name="first_name" required autofocus autocomplete="new-name" />
                     </div>
                     <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                         <x-admin-input-label for="last_name" :value="__('Last Name')" class="w-48" />
-                        <x-text-input wire:model="last_name" id="last_name" class="block w-full lg:w-96" type="text" name="last_name" required autocomplete="family-name" />
+                        <x-text-input wire:model="last_name" id="last_name" class="block w-full lg:w-96" type="text" name="last_name" required autocomplete="new-name" />
                     </div>
                     <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                         <x-admin-input-label for="email" :value="__('Email')" class="w-48" />
-                        <x-text-input wire:model="email" id="email" class="block w-full lg:w-[500px]" type="email" name="email" required autocomplete="email" />
+                        <x-text-input wire:model="email" id="email" class="block w-full lg:w-[500px]" type="email" name="email" required autocomplete="new-email" />
                     </div>
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                         <x-admin-input-label for="phone_1" :value="__('Phone (Primary)')" class="w-48" />
-                        <x-text-input wire:model="phone_1" id="phone_1" class="block w-full lg:w-60" type="text" name="phone_1" autocomplete="phone" />
+                        <x-text-input wire:model="phone_1" id="phone_1" class="block w-full lg:w-60" type="text" name="phone_1" autocomplete="off" />
                     </div>
                     <x-input-error :messages="$errors->get('phone_1')" class="mt-2" />
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                         <x-admin-input-label for="phone_2" :value="__('Phone (2)')" class="w-48" />
-                        <x-text-input wire:model="phone_2" id="phone_2" class="block w-full lg:w-60" type="text" name="phone_2" />
+                        <x-text-input wire:model="phone_2" id="phone_2" class="block w-full lg:w-60" type="text" name="phone_2" autocomplete="off"  />
                     </div>
                     <x-input-error :messages="$errors->get('phone_2')" class="mt-2" />
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                         <x-admin-input-label for="phone_3" :value="__('Phone (3)')" class="w-48" />
-                        <x-text-input wire:model="phone_3" id="phone_3" class="block w-full lg:w-60" type="text" name="phone_3" />
+                        <x-text-input wire:model="phone_3" id="phone_3" class="block w-full lg:w-60" type="text" name="phone_3" autocomplete="off"  />
                     </div>
                     <x-input-error :messages="$errors->get('phone_3')" class="mt-2" />
 
