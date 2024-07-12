@@ -17,18 +17,17 @@ class MemberAdd extends Component
     use LivewireAlert;
 
     public int $id = 0;
-//    public $member;
+//    public $registrant;
     public $first_name;
     public $last_name;
     public $email;
-    public $phone_1;
-    public $phone_2;
-    public $phone_3;
+    public $phone_main;
+    public $phone_mobile;
     public $role;
     public $registration_fee_paid;
-    public $application_fee_paid;
+    public $submission_fee_paid;
     public $send_email;
-//    public $membership_type;
+//    public $registration_type;
     public $roles;
 
     public function saveUser()
@@ -40,9 +39,8 @@ class MemberAdd extends Component
             'first_name'    => 'required|min:2',
             'last_name'     => 'required|min:2',
             'email'         => 'required|email',
-            'phone_1'       => 'nullable|numeric',
-            'phone_2'       => 'nullable|numeric',
-            'phone_3'       => 'nullable|numeric',
+            'phone_main'    => 'nullable|numeric',
+            'phone_mobile'  => 'nullable|numeric',
             'role'          => ['required', Rule::in(Role::get()->pluck('name'))],
         ]);
 
@@ -53,19 +51,18 @@ class MemberAdd extends Component
                 : 'wceccpr1';
 
             $new_user = User::create([
-                'first_name'            => trim($this->first_name),
-                'last_name'             => trim($this->last_name),
-                'email'                 => trim(Str::of($this->email)->lower()),
-                'phone_1'               => trim($this->phone_1),
-                'phone_2'               => trim($this->phone_2),
-                'phone_3'               => trim($this->phone_3),
-                'registration_fee_paid' => $this->registration_fee_paid ? 1 : 0,
-                'application_fee_paid'  => $this->application_fee_paid ? 1 : 0,
-                'password'              => $password,
-                'membership_expires_at' => $this->role === 'member' ? Carbon::parse(now())->addYear()->format('Y-m-d') : null,
-                'accepted_at'           => $this->role === 'member' ? now() : null,
-                'accepted_by'           => $this->role === 'member' ? auth()->user()->id : null,
-                'became_member_at'      => $this->role === 'member' ? now() : null,
+                'first_name'                => trim($this->first_name),
+                'last_name'                 => trim($this->last_name),
+                'email'                     => trim(Str::of($this->email)->lower()),
+                'phone_main'                => trim($this->phone_main),
+                'phone_mobile'              => trim($this->phone_mobile),
+                'registration_fee_paid'     => $this->registration_fee_paid ? 1 : 0,
+                'submission_fee_paid'       => $this->submission_fee_paid ? 1 : 0,
+                'password'                  => $password,
+                'registration_expires_at'   => $this->role === 'registrant' ? Carbon::parse(now())->addYear()->format('Y-m-d') : null,
+                'submission_accepted_at'    => $this->role === 'registrant' ? now() : null,
+                'submission_accepted_by'               => $this->role === 'registrant' ? auth()->user()->id : null,
+                'became_registrant_at'      => $this->role === 'registrant' ? now() : null,
             ]);
 
             $new_user->assignRole($this->role);

@@ -43,8 +43,8 @@ class UserFactory extends Factory
             'email' => strtolower($email),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'phone_1' => fake()->phoneNumber(),
-            'phone_2' => fake()->numberBetween(1,2) > 1 ? fake()->phoneNumber() : null,
+            'phone_main' => fake()->phoneNumber(),
+            'phone_mobile' => fake()->numberBetween(1,2) > 1 ? fake()->phoneNumber() : null,
             'remember_token' => Str::random(10),
         ];
     }

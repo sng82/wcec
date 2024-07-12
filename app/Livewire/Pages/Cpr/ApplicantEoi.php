@@ -30,9 +30,8 @@ class ApplicantEoi extends Component
     public $first_name;
     public $last_name;
     public $email;
-    public $phone_1;
-    public $phone_2;
-    public $phone_3;
+    public $phone_main;
+    public $phone_mobile;
     public $current_role;
     public $employment_history;
     public $qualifications;
@@ -77,9 +76,8 @@ class ApplicantEoi extends Component
         $this->first_name = $this->user->first_name;
         $this->last_name  = $this->user->last_name;
         $this->email      = $this->user->email;
-        $this->phone_1    = $this->user->phone_1;
-        $this->phone_2    = $this->user->phone_2;
-        $this->phone_3    = $this->user->phone_3;
+        $this->phone_main    = $this->user->phone_main;
+        $this->phone_mobile    = $this->user->phone_mobile;
 
         $this->eoi = EOI::where('user_id', $this->user->id)?->latest()->first();
 
@@ -207,7 +205,6 @@ class ApplicantEoi extends Component
 
     public function saveProgress($skip_feedback = false)
     {
-
         $this->validate([
             'first_name'                   => 'required|min:2',
             'last_name'                    => 'required|min:2',
@@ -220,12 +217,11 @@ class ApplicantEoi extends Component
 
         try {
             User::findOrFail($this->user->id)?->update([
-                'first_name' => $this->first_name,
-                'last_name'  => $this->last_name,
-                'email'      => $this->email,
-                'phone_1'    => $this->phone_1,
-                'phone_2'    => $this->phone_2,
-                'phone_3'    => $this->phone_3,
+                'first_name'    => $this->first_name,
+                'last_name'     => $this->last_name,
+                'email'         => $this->email,
+                'phone_main'    => $this->phone_main,
+                'phone_mobile'  => $this->phone_mobile,
             ]);
 
             $this->eoi = EOI::updateOrCreate([

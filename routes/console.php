@@ -21,22 +21,22 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::call(function () {
-    $next_submission_date = SubmissionDate::where('submission_date', '>=', date('Y-m-d'))
-                                          ->orderBy('submission_date', 'desc')
-                                          ->first()->submission_date;
+    $next_admission_date = SubmissionDate::where('admission_date', '>=', date('Y-m-d'))
+                                          ->orderBy('admission_date', 'desc')
+                                          ->first()->admission_date;
 
-    if ($next_submission_date === date('Y-m-d')) {
+    if ($next_admission_date === date('Y-m-d')) {
         $users_to_update = User::where('application_status', 'accepted')
                                ->where('registration_fee_paid', 1)
                                ->where('application_fee_paid', 1)
-                               ->whereNull('became_member_at')
-                               ->whereNull('membership_expires_at')
+                               ->whereNull('became_registrant_at')
+                               ->whereNull('registration_expires_at')
                                ->get();
         foreach ($users_to_update as $user) {
             $user->removeRole('accepted_applicant');
-            $user->assignRole('member');
-            $user->became_member_at = date('Y-m-d');
-            $user->membership_expires_at = date('Y-m-d', strtotime('+1 year'));
+            $user->assignRole('registrant');
+            $user->became_registrant_at = date('Y-m-d');
+            $user->registration_expires_at = date('Y-m-d', strtotime('+1 year'));
             $user->save();
         }
     }

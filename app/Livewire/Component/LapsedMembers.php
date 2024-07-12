@@ -25,15 +25,15 @@ class LapsedMembers extends Component
         $this->sort_column_name = $column_name;
     }
 
-//    public function openMember($id)
-//    {
-//        $this->redirect('member-edit/' . $id);
-//    }
+    public function searchFilter()
+    {
+        $this->resetPage();
+    }
 
     public function render()
     {
         return view('livewire.component.lapsed-members', [
-            'lapsed_members' => User::role('lapsed member')
+            'lapsed_registrants' => User::role('lapsed registrant')
                                     ->search($this->search)
                                     ->orderBy($this->sort_column_name, $this->sort_column_direction)
                                     ->paginate($this->per_page),

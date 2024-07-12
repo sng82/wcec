@@ -39,8 +39,8 @@ class PaymentSuccess extends Component
                 if ($order->product_name === 'registration') {
                     $user->registration_fee_paid = true;
                 }
-                if ($order->product_name === 'application') {
-                    $user->application_fee_paid = true;
+                if ($order->product_name === 'submission') {
+                    $user->submission_fee_paid = true;
                 }
                 $user->save();
 

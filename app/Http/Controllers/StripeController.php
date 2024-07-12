@@ -16,8 +16,8 @@ class StripeController extends Controller
 {
     public function webhook()
     {
-        $stripe             = new StripeClient(Config('cashier.secret'));
-        $endpoint_secret    = Config('cashier.webhook.secret');
+        $stripe             = new StripeClient(Config('stripe.secret'));
+        $endpoint_secret    = Config('stripe.webhook.secret');
         $payload            = @file_get_contents('php://input');
         $sig_header         = $_SERVER['HTTP_STRIPE_SIGNATURE'];
         $event              = null;
@@ -55,8 +55,8 @@ class StripeController extends Controller
                     if ($order->product_name === 'registration') {
                         $user->registration_fee_paid = true;
                     }
-                    if ($order->product_name === 'application') {
-                        $user->application_fee_paid = true;
+                    if ($order->product_name === 'submission') {
+                        $user->submission_fee_paid = true;
                     }
                     $user->save();
 

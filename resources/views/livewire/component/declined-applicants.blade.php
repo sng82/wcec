@@ -7,7 +7,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 mr-2 text-slate-400">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>
-            <input wire:model.live.debounce.300ms="search" type="text" placeholder='search...'
+            <input wire:model="search" wire:keydown.debounce.300ms="searchFilter" type="text" placeholder='search...'
                    class="rounded-lg border border-slate-200 py-1
                    placeholder:font-normal placeholder:italic placeholder:text-slate-300
                    focus:border-sky-200 focus:ring-sky-100 focus:ring-4 ">
@@ -69,20 +69,20 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-sky-100">
-                    @foreach($blocked_applicants as $member)
-                        <tr wire:key="{{ $member->id }}"
+                    @foreach($blocked_applicants as $registrant)
+                        <tr wire:key="{{ $registrant->id }}"
                             class="text-slate-500 odd:bg-white even:bg-slate-50 hover:text-sky-600 hover:bg-slate-100">
                             <td class="px-4 py-2">
-                                {{ $member->first_name . ' ' . $member->last_name }}
+                                {{ $registrant->first_name . ' ' . $registrant->last_name }}
                             </td>
                             <td class="px-4 py-2">
-                                {{ $member->email }}
+                                {{ $registrant->email }}
                             </td>
                             <td class="px-4 py-2">
-                                {{ \Carbon\Carbon::parse($member->declined_at)->toDayDateTimeString() }} by {{ $member->declinedBy->first_name . ' ' . $member->declinedBy->last_name }}
+                                {{ \Carbon\Carbon::parse($registrant->declined_at)->toDayDateTimeString() }} by {{ $registrant->declinedBy->first_name . ' ' . $registrant->declinedBy->last_name }}
                             </td>
                             <td class="px-4 py-1">
-                                <x-edit-button :href="route('member-edit', $member->id)" class="">
+                                <x-edit-button :href="route('member-edit', $registrant->id)" class="">
                                     {{ __('View/Edit') }}
                                 </x-edit-button>
                             </td>

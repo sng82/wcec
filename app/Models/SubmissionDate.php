@@ -23,7 +23,8 @@ class SubmissionDate extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'submission_date',
+        'admission_date',
+        'submission_deadline',
         'updated_by',
         'deleted_by',
         'deleted_at',
@@ -42,7 +43,8 @@ class SubmissionDate extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'submission_date' => 'date',
+        'admission_date' => 'date',
+        'submission_deadline' => 'date',
         'deleted_at' => 'datetime',
     ];
 

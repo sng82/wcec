@@ -41,9 +41,9 @@ class Membership extends Component
 
         session()->flash('status', 'sent');
 
-//        $this->redirect('/membership#enquiry', navigate: true);
+//        $this->redirect('/registration#enquiry', navigate: true);
 
-//        return redirect('/membership#enquiry')
+//        return redirect('/registration#enquiry')
 //            ->with('status', 'sent')
 //            ;
     }

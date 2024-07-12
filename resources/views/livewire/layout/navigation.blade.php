@@ -20,7 +20,7 @@ new class extends Component
 ?>
 
 
-<div class="sticky top-0">
+<div class="sticky top-0 z-50">
 
     <nav class="flex bg-sky-900 text-white main-nav lg-text-sky-900 shadow-md">
         <div class="container mx-auto px-5 mb-3 flex justify-between font-semibold uppercase">

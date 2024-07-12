@@ -17,7 +17,7 @@
                             x-text="tab"></li>
                     </template>
                     <li>
-                        <button wire:click="addMember" title="Add new member/applicant" class="rounded-full bg-sky-700 text-white px-5 py-1 hover:bg-sky-600">
+                        <button wire:click="addMember" title="Add new registrant/applicant" class="rounded-full bg-sky-700 text-white px-5 py-1 hover:bg-sky-600">
                             Add&nbsp;New
                         </button>
                     </li>
@@ -56,11 +56,11 @@
         return {
             activeTab: 0,
             tabs: [
-                "Active Members [{{ $active_member_count }}]",
+                "Active Registrants [{{ $active_registrant_count }}]",
                 "Accepted Applicants [{{ $accepted_applicant_count }}]",
                 "Pending Applicants [{{ $pending_applicant_count . '/' . $pending_eoi_submitted_count . '/' . $pending_waiting_approval_count }}]",
                 "Declined Applicants [{{ $blocked_applicant_count }}]",
-                "Lapsed Members [{{ $lapsed_member_count }}]",
+                "Lapsed Registrants [{{ $lapsed_registrant_count }}]",
             ]
         };
     }

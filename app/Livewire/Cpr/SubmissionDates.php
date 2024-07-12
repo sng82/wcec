@@ -17,25 +17,36 @@ class SubmissionDates extends Component
 
 //    #[Validate('required')]
 //    #[Validate('date', message:'Invalid date format')]
-//    #[Validate('unique:submission_dates,submission_date', message:'This date already exists.')]
-    public $date = '';
+//    #[Validate('unique:admission_dates,admission_date', message:'This date already exists.')]
+    public $admission_date;
+    public $submission_deadline;
 
     public function rules() {
         return [
-            'date' => [
+            'admission_date' => [
                 'required',
                 'date',
-                Rule::unique('submission_dates', 'submission_date')
+                'after:submission_deadline',
+                Rule::unique('submission_dates', 'admission_date')
                     ->withoutTrashed(),
+            ],
+            'submission_deadline' => [
+                'required',
+                'date',
+                'after:today',
             ]
         ];
     }
 
     public function messages() {
         return [
-            'date.required' => 'A date is required',
-            'date.date' => 'Invalid date',
-            'date.unique' => 'This date is already set',
+            'admission_date.required' => 'An Admission Date is required',
+            'admission_date.date' => 'Invalid Admission Date',
+            'admission_date.unique' => 'This Admission Date is already set',
+            'admission_date.after' => 'Submission Deadline must be BEFORE Admission Date',
+            'submission_deadline.required' => 'A Submission Deadline is required',
+            'submission_deadline.date' => 'Invalid Submission Deadline',
+            'submission_deadline.after' => 'Submission Deadline cannot be a date in the past',
         ];
     }
 
@@ -45,30 +56,31 @@ class SubmissionDates extends Component
         $this->validate();
 
         SubmissionDate::create([
-            'submission_date' => $this->date,
-            'updated_by' => Auth::user()->id,
+            'admission_date'        => $this->admission_date,
+            'submission_deadline'   => $this->submission_deadline,
+            'updated_by'            => Auth::user()->id,
         ]);
 
-        $this->reset('date');
+        $this->reset('admission_date');
 
-        $this->alert('success', 'Submission Date Added.', [
+        $this->alert('success', 'Admission Date Added.', [
             'position' => 'top-end',
             'timer' => 2000,
             'showConfirmButton' => false,
             'confirmButtonColor' => '#10b981',
         ]);
 
-//        session()->flash('success', 'Submission Date Created Successfully.');
+//        session()->flash('success', 'Admission Date Created Successfully.');
     }
 
     public function delete($dateId)
     {
         try{
-            SubmissionDate::findOrFail($dateId)->update([
+            SubmissionDate::findOrFail($dateId)?->update([
                 'deleted_by' => Auth::user()->id,
                 'deleted_at' => now(),
             ]);
-            $this->alert('info', 'Submission Date Deleted.', [
+            $this->alert('info', 'Admission Date Deleted.', [
                 'position' => 'top-end',
                 'timer' => 2000,
                 'showConfirmButton' => false,
@@ -89,8 +101,8 @@ class SubmissionDates extends Component
     {
         return view('livewire.cpr.submission-dates', [
             'upcoming_dates' => SubmissionDate::with('updatedBy')
-                                              ->where('submission_date', '>', now())
-                                              ->orderBy('submission_date')
+                                              ->where('admission_date', '>', now())
+                                              ->orderBy('admission_date')
                                               ->get(),
         ]);
     }

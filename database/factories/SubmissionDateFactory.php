@@ -12,7 +12,7 @@ class SubmissionDateFactory extends Factory
     public function definition(): array
     {
         return [
-            'submission_date' => $this->faker->dateTimeBetween('+4 weeks', '+52 weeks'),
+            'admission_date' => $this->faker->dateTimeBetween('+4 weeks', '+52 weeks'),
             'updated_by' => 1,
         ];
     }

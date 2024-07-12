@@ -118,7 +118,7 @@
                                         required>
                                     <option value="">Please select...</option>
                                     <option value="registration">Registration</option>
-                                    <option value="application">Application</option>
+                                    <option value="submission">Submission</option>
                                     <option value="renewal">Renewal</option>
                                 </select>
                             </div>

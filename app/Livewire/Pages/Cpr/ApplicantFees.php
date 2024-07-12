@@ -8,7 +8,7 @@ use App\Models\Prices;
 class ApplicantFees extends Component
 {
     public $registration_fee;
-    public $application_fee;
+    public $submission_fee;
     public $renewal_fee;
 
     public function render()
@@ -22,7 +22,7 @@ class ApplicantFees extends Component
                                ->orderBy('start_date')
                                ->first();
 
-        $this->application_fee = Prices::where('price_type', 'application')
+        $this->submission_fee = Prices::where('price_type', 'submission')
                                       ->where('start_date', '<=', now())
                                       ->where(function($query) {
                                                $query->where('end_date', '>', now())

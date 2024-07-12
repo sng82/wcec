@@ -23,20 +23,20 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'view roles']);
         Permission::create(['name' => 'view permissions']);
         Permission::create(['name' => 'view prices']);
-        Permission::create(['name' => 'view submission dates']);
+        Permission::create(['name' => 'view admission dates']);
         Permission::create(['name' => 'view admin dashboard']);
 
         Permission::create(['name' => 'edit users']);
         Permission::create(['name' => 'edit roles']);
         Permission::create(['name' => 'edit permissions']);
         Permission::create(['name' => 'edit prices']);
-        Permission::create(['name' => 'edit submission dates']);
+        Permission::create(['name' => 'edit admission dates']);
 
         Permission::create(['name' => 'delete users']);
         Permission::create(['name' => 'delete roles']);
         Permission::create(['name' => 'delete permissions']);
         Permission::create(['name' => 'delete prices']);
-        Permission::create(['name' => 'delete submission dates']);
+        Permission::create(['name' => 'delete admission dates']);
 
 
         // create roles and assign created permissions
@@ -48,26 +48,26 @@ class RolesAndPermissionsSeeder extends Seeder
                 'view roles',
                 'view permissions',
                 'view prices',
-                'view submission dates',
+                'view admission dates',
                 'view admin dashboard',
                 'edit users',
                 'edit roles',
                 'edit permissions',
                 'edit prices',
-                'edit submission dates',
+                'edit admission dates',
                 'delete users',
                 'delete roles',
                 'delete permissions',
                 'delete prices',
-                'delete submission dates',
+                'delete admission dates',
             ]);
 
 //        Role::create(['name' => 'new applicant']);
         Role::create(['name' => 'applicant']);
         Role::create(['name' => 'accepted applicant']);
         Role::create(['name' => 'blocked applicant']);
-        Role::create(['name' => 'member']);
-        Role::create(['name' => 'lapsed member']);
+        Role::create(['name' => 'registrant']);
+        Role::create(['name' => 'lapsed registrant']);
 
     }
 }

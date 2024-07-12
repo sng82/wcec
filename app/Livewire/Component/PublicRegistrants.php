@@ -6,14 +6,14 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class AcceptedApplicants extends Component
+class PublicRegistrants extends Component
 {
-    use WithPagination;
+    use withPagination;
 
-    public $sort_column_name = 'submission_accepted_at';
+    public $sort_column_name = 'became_registrant_at';
     public $sort_column_direction = 'asc';
     public $search = '';
-    public $per_page = 10;
+    public $per_page = 12;
 
     public function sortBy($column_name)
     {
@@ -32,11 +32,13 @@ class AcceptedApplicants extends Component
 
     public function render()
     {
-        return view('livewire.component.accepted-applicants', [
-            'accepted_applicants' => User::role('accepted applicant')
-                                         ->search($this->search)
-                                         ->orderBy($this->sort_column_name, $this->sort_column_direction)
-                                         ->paginate($this->per_page),
+        return view('livewire.component.public-registrants', [
+
+            'registrants' => User::select(['id', 'first_name', 'last_name', 'submission_accepted_at'])
+                                ->role('registrant')
+                                ->publicSearch($this->search)
+                                ->orderBy($this->sort_column_name, $this->sort_column_direction)
+                                ->paginate($this->per_page),
         ]);
     }
 }

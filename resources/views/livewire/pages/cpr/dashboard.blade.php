@@ -19,20 +19,20 @@
 
             @if ($logged_in_user->hasRole('admin'))
                 <x-admin-dashboard :$logged_in_user
-                                   :$next_submission_date
-                                   :$next_submission_date_difference
+                                   :$next_admission_date
+                                   :$next_admission_date_difference
                                    :$submitted_eois
-                                   :$submitted_applications
-                                   :$expiring_memberships
+                                   :$submitted_submissions
+                                   :$expiring_registrations
                 />
             @endif
 
             @if (Auth::user()->hasRole('applicant'))
                 <x-applicant-dashboard :$logged_in_user
-                                       :$next_submission_date_difference
-                                       :$next_submission_date
+                                       :$next_admission_date_difference
+                                       :$next_admission_date
                                        :$registration_fee
-                                       :$application_fee
+                                       :$submission_fee
                 />
             @endif
 

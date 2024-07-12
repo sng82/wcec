@@ -29,6 +29,11 @@ class PendingApplicants extends Component
         $this->sort_column_name = $column_name;
     }
 
+    public function searchFilter()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         return view('livewire.component.pending-applicants', [

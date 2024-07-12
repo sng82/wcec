@@ -28,12 +28,12 @@
                 </div>
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
 
-                @if($role === 'member' || $role === 'lapsed member')
+                @if($role === 'registrant' || $role === 'lapsed registrant')
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
-                        <x-admin-input-label for="membership_expires_at" :value="__('Membership Expiry')" class="w-48" />
-                        <x-text-input wire:model="membership_expires_at" id="membership_expires_at" class="block" type="date" name="membership_expires_at" required autofocus autocomplete="membership_expires_at" />
+                        <x-admin-input-label for="registration_expires_at" :value="__('Registration Expiry')" class="w-48" />
+                        <x-text-input wire:model="registration_expires_at" id="registration_expires_at" class="block" type="date" name="registration_expires_at" required autofocus autocomplete="registration_expires_at" />
                     </div>
-                    <x-input-error :messages="$errors->get('membership_expires_at')" class="mt-2" />
+                    <x-input-error :messages="$errors->get('registration_expires_at')" class="mt-2" />
                 @endif
 
                 <div class="flex flex-col lg:flex-row lg:items-center mt-6 gap-1">
@@ -49,38 +49,38 @@
 
                 <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                     <span class="w-52">
-                        Membership Level:
+                        Account Type:
                     </span>
                     <span>
-                        {{ Str::of($member->roles->pluck('name')[0] ?? '')->title() }}
+                        {{ Str::of($registrant->roles->pluck('name')[0] ?? '')->title() }}
                     </span>
                 </div>
 
                 {{-- Member or Lapsed member --}}
-                @if($role === 'member' || $role === 'lapsed member')
+                @if($role === 'registrant' || $role === 'lapsed registrant')
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
                             Became Member:
                         </span>
                         <span>
-                            {{ \Carbon\Carbon::parse($became_member_at)->toFormattedDayDateString() }}
-                            {{--                            {{ \Carbon\Carbon::parse($became_member_at)->format('d/m/Y') }}--}}
-                            {{--                            ({{ \Carbon\Carbon::parse($became_member_at)->diffForHumans() }})--}}
+                            {{ \Carbon\Carbon::parse($became_registrant_at)->toFormattedDayDateString() }}
+                            {{--                            {{ \Carbon\Carbon::parse($became_registrant_at)->format('d/m/Y') }}--}}
+                            {{--                            ({{ \Carbon\Carbon::parse($became_registrant_at)->diffForHumans() }})--}}
                         </span>
                     </div>
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
-                            Membership {{ $role === 'member' ? 'Expires' : 'Expired' }}:
+                            Registration {{ $role === 'registrant' ? 'Expires' : 'Expired' }}:
                         </span>
                         <span>
-                            {{ \Carbon\Carbon::parse($membership_expires_at)->toFormattedDayDateString() }}
+                            {{ \Carbon\Carbon::parse($registration_expires_at)->toFormattedDayDateString() }}
                         </span>
                     </div>
                 @endif
 
                 {{-- Lapsed Member --}}
-                @if($role === 'lapsed member')
+                @if($role === 'lapsed registrant')
                 @endif
 
                 {{-- Pending Applicant --}}
@@ -90,7 +90,7 @@
                             Created:
                         </span>
                         <span>
-                            {{ \Carbon\Carbon::parse($member->created_at)->toFormattedDayDateString() }}
+                            {{ \Carbon\Carbon::parse($registrant->created_at)->toFormattedDayDateString() }}
                         </span>
                     </div>
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
@@ -107,19 +107,19 @@
                 @if($role === 'accepted applicant')
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
-                            Application Accepted:
+                            Submission Accepted:
                         </span>
                         <span>
-                            {{ \Carbon\Carbon::parse($accepted_at)->toFormattedDayDateString() }}
+                            {{ \Carbon\Carbon::parse($submission_accepted_at)->toFormattedDayDateString() }}
                         </span>
                     </div>
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
-                            Application Accepted By:
+                            Submission Accepted By:
                         </span>
                         <span>
-                            {{ $member->acceptedBy->first_name . ' ' . $member->acceptedBy->last_name }}
+                            {{ $registrant->acceptedBy->first_name . ' ' . $registrant->acceptedBy->last_name }}
                         </span>
                     </div>
                 @endif
@@ -131,7 +131,7 @@
                             Application Declined:
                         </span>
                         <span>
-                            {{ \Carbon\Carbon::parse($member->declined_at)->toFormattedDayDateString() }}
+                            {{ \Carbon\Carbon::parse($registrant->declined_at)->toFormattedDayDateString() }}
                         </span>
                     </div>
 
@@ -140,7 +140,7 @@
                             Application Declined By:
                         </span>
                         <span>
-                            {{ $member->declinedBy->first_name . ' ' . $member->declinedBy->last_name }}
+                            {{ $registrant->declinedBy->first_name . ' ' . $registrant->declinedBy->last_name }}
                         </span>
                     </div>
                 @endif

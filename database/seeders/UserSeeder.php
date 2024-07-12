@@ -33,6 +33,16 @@ class UserSeeder extends Seeder
         ]);
         $testAdmin->assignRole('admin');
 
+        // Random admins
+//        User::factory()->count(3)->create()->each(function ($user) {
+//            $user->assignRole('admin');
+//            $user->eoi_status = 'n/a';
+//            $user->submission_status = 'n/a';
+//            $user->save();
+//        });
+
+
+        // Pending applicant
         $test_applicant = User::factory()->create([
            'first_name'   => 'Test',
            'last_name'    => 'Applicant',
@@ -49,39 +59,30 @@ class UserSeeder extends Seeder
         ]);
         $test_applicant2->assignRole('applicant');
 
-        // Random admins
-//        User::factory()->count(3)->create()->each(function ($user) {
-//            $user->assignRole('admin');
-//            $user->eoi_status = 'n/a';
-//            $user->application_status = 'n/a';
-//            $user->save();
-//        });
-
-        // Pending applicant
-        User::factory()->count(4)->create()->each(function ($user) {
-            $user->assignRole('applicant');
-            $user->registration_fee_paid = true;
-            $user->application_fee_paid = true;
-            $user->save();
-        });
         User::factory()->count(3)->create()->each(function ($user) {
             $user->assignRole('applicant');
             $user->registration_fee_paid = true;
             $user->save();
         });
-        User::factory()->count(2)->create()->each(function ($user) {
+//        User::factory()->count(3)->create()->each(function ($user) {
+//            $user->assignRole('applicant');
+//            $user->registration_fee_paid = true;
+//            $user->save();
+//        });
+        User::factory()->count(7)->create()->each(function ($user) {
             $user->assignRole('applicant');
         });
+
 
         // Accepted applicant
         User::factory()->count(4)->create()->each(function ($user) {
             $user->assignRole('accepted applicant');
-            $user->accepted_at = fake()->dateTimeBetween('-20 days', '-1 days')->format('Y-m-d H:i:s');
-            $user->accepted_by = 1;
+            $user->submission_accepted_at = fake()->dateTimeBetween('-20 days', '-1 days')->format('Y-m-d H:i:s');
+            $user->submission_accepted_by = 1;
             $user->eoi_status = 'accepted';
             $user->registration_fee_paid = true;
-            $user->application_status = 'accepted';
-            $user->application_fee_paid = true;
+            $user->submission_status = 'accepted';
+            $user->submission_fee_paid = true;
             $user->save();
         });
 
@@ -93,54 +94,55 @@ class UserSeeder extends Seeder
             $user->save();
         });
 
-        // Active member, not expiring anytime soon
-        User::factory()->count(95)->create()->each(function ($user) {
-            $became_member_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d H:i:s');
-            $accepted_at = Carbon::parse($became_member_at)->subDays(fake()->numberBetween(1,30))->format('Y-m-d H:i:s');
+        // Active registrant, not expiring anytime soon
+        User::factory()->count(116)->create()->each(function ($user) {
+            $became_registrant_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d H:i:s');
 
-            $user->assignRole('member');
-            $user->accepted_at = $accepted_at;
-            $user->accepted_by = 1;
+            $submission_accepted_at = Carbon::parse($became_registrant_at)->subDays(fake()->numberBetween(1,30))->format('Y-m-d H:i:s');
+
+            $user->assignRole('registrant');
+            $user->submission_accepted_at = $submission_accepted_at;
+            $user->submission_accepted_by = 1;
             $user->eoi_status = 'accepted';
-            $user->membership_expires_at = fake()->dateTimeBetween('+60 days', '+364 days')->format('Y-m-d');
-            $user->became_member_at = Carbon::parse($became_member_at)->format('Y-m-d');
+            $user->registration_expires_at = fake()->dateTimeBetween('+60 days', '+364 days')->format('Y-m-d');
+            $user->became_registrant_at = Carbon::parse($became_registrant_at)->format('Y-m-d');
             $user->registration_fee_paid = true;
-            $user->application_status = 'accepted';
-            $user->application_fee_paid = true;
+            $user->submission_status = 'accepted';
+            $user->submission_fee_paid = true;
             $user->save();
         });
 
-        // Active member, expiring soon
+        // Active registrant, expiring soon
         User::factory()->count(5)->create()->each(function ($user) {
-            $became_member_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d H:i:s');
-            $accepted_at = Carbon::parse($became_member_at)->subDays(fake()->numberBetween(1,30))->format('Y-m-d H:i:s');
+            $became_registrant_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d H:i:s');
+            $submission_accepted_at = Carbon::parse($became_registrant_at)->subDays(fake()->numberBetween(1,30))->format('Y-m-d H:i:s');
 
-            $user->assignRole('member');
-            $user->accepted_at = $accepted_at;
-            $user->accepted_by = 1;
+            $user->assignRole('registrant');
+            $user->submission_accepted_at = $submission_accepted_at;
+            $user->submission_accepted_by = 1;
             $user->eoi_status = 'accepted';
-            $user->membership_expires_at = fake()->dateTimeBetween('+1 days', '+30 days')->format('Y-m-d');
-            $user->became_member_at = Carbon::parse($became_member_at)->format('Y-m-d');
+            $user->registration_expires_at = fake()->dateTimeBetween('+1 days', '+30 days')->format('Y-m-d');
+            $user->became_registrant_at = Carbon::parse($became_registrant_at)->format('Y-m-d');
             $user->registration_fee_paid = true;
-            $user->application_status = 'accepted';
-            $user->application_fee_paid = true;
+            $user->submission_status = 'accepted';
+            $user->submission_fee_paid = true;
             $user->save();
         });
 
-        // Lapsed member
+        // Lapsed registrant
         User::factory()->count(45)->create()->each(function ($user) {
-            $became_member_at = fake()->dateTimeBetween('-18 years', '-11 years')->format('Y-m-d H:i:s');
-            $accepted_at = Carbon::parse($became_member_at)->subDays(fake()->numberBetween(1,30))->format('Y-m-d H:i:s');
+            $became_registrant_at = fake()->dateTimeBetween('-18 years', '-11 years')->format('Y-m-d H:i:s');
+            $submission_accepted_at = Carbon::parse($became_registrant_at)->subDays(fake()->numberBetween(1,30))->format('Y-m-d H:i:s');
 
-            $user->assignRole('lapsed member');
-            $user->accepted_at = $accepted_at;
-            $user->accepted_by = 1;
+            $user->assignRole('lapsed registrant');
+            $user->submission_accepted_at = $submission_accepted_at;
+            $user->submission_accepted_by = 1;
             $user->eoi_status = 'accepted';
-            $user->membership_expires_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d');
-            $user->became_member_at = Carbon::parse($became_member_at)->format('Y-m-d');
+            $user->registration_expires_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d');
+            $user->became_registrant_at = Carbon::parse($became_registrant_at)->format('Y-m-d');
             $user->registration_fee_paid = true;
-            $user->application_status = 'accepted';
-            $user->application_fee_paid = true;
+            $user->submission_status = 'accepted';
+            $user->submission_fee_paid = true;
             $user->save();
         });
     }

@@ -18,27 +18,27 @@ class Dashboard extends Component
     use LivewireAlert;
 
     public $title = "CPR Dashboard";
-    public $next_submission_date = '';
-    public $next_submission_date_difference = '';
+    public $next_admission_date = '';
+    public $next_admission_date_difference = '';
 
     public $submitted_eois = '';
 
-    public $submitted_applications = '';
+    public $submitted_submissions = '';
 
-    public $expiring_memberships = '';
+    public $expiring_registrations = '';
 
     public $logged_in_user;
 
-    public $application_fee;
+    public $submission_fee;
     public $registration_fee;
 
     public function mount()
     {
         $this->getSubmissionDate();
         $this->getEOIs();
-        $this->getApplications();
-        $this->getExpiringMemberships();
-        $this->getApplicationFee();
+        $this->getSubmissions();
+        $this->getExpiringRegistrations();
+        $this->getSubmissionFee();
         $this->getRegistrationFee();
     }
 
@@ -53,41 +53,29 @@ class Dashboard extends Component
                                     ->where('registration_fee_paid', true)
                                     ->where('eoi_status', 'submitted')
                                     ->where(function($query) {
-                                        $query->where('application_status', null)
-                                              ->orWhere('application_status', '');
+                                        $query->where('submission_status', null)
+                                              ->orWhere('submission_status', '');
                                     })
                                     ->get();
     }
 
-    public function getApplications()
+    public function getSubmissions()
     {
-        $this->submitted_applications = User::role('applicant')
+        $this->submitted_submissions = User::role('applicant')
                                             ->where('registration_fee_paid', true)
                                             ->where('eoi_status', 'accepted')
-                                            ->where('application_fee_paid', true)
-                                            ->where('application_status', 'submitted')
+                                            ->where('submission_fee_paid', true)
+                                            ->where('submission_status', 'submitted')
                                             ->get();
     }
 
-    public function getExpiringMemberships()
+    public function getExpiringRegistrations()
     {
-        $this->expiring_memberships = User::role('member')
-                                          ->where('membership_expires_at', '>', now())
-                                          ->where('membership_expires_at', '<', now()->addDays(30))
-                                          ->orderBy('membership_expires_at', 'ASC')
+        $this->expiring_registrations = User::role('registrant')
+                                          ->where('registration_expires_at', '>', now())
+                                          ->where('registration_expires_at', '<', now()->addDays(30))
+                                          ->orderBy('registration_expires_at', 'ASC')
                                           ->get();
-    }
-
-    public function getApplicationFee()
-    {
-        $this->application_fee = Prices::where('price_type', 'application')
-                                       ->where('start_date', '<=', now())
-                                       ->where(function($query) {
-                                           $query->where('end_date', '>', now())
-                                                 ->orWhere('end_date', null);
-                                       })
-                                       ->orderBy('start_date')
-                                       ->first();
     }
 
     public function getRegistrationFee()
@@ -102,15 +90,27 @@ class Dashboard extends Component
                                         ->first();
     }
 
+    public function getSubmissionFee()
+    {
+        $this->submission_fee = Prices::where('price_type', 'submission')
+                                       ->where('start_date', '<=', now())
+                                       ->where(function($query) {
+                                           $query->where('end_date', '>', now())
+                                                 ->orWhere('end_date', null);
+                                       })
+                                       ->orderBy('start_date')
+                                       ->first();
+    }
+
     public function getSubmissionDate()
     {
-        $nextSubmissionDate = SubmissionDate::where('submission_date', '>', now()->subDay())
-                                            ->orderBy('submission_date', 'ASC')
-                                            ->first()->submission_date;
+        $nextSubmissionDate = SubmissionDate::where('admission_date', '>', now()->subDay())
+                                            ->orderBy('admission_date', 'ASC')
+                                            ->first()->admission_date;
 
-        $this->next_submission_date = Carbon::parse($nextSubmissionDate)->toFormattedDayDateString();
+        $this->next_admission_date = Carbon::parse($nextSubmissionDate)->toFormattedDayDateString();
 
-        $this->next_submission_date_difference = Carbon::parse($nextSubmissionDate)->diffForHumans();
+        $this->next_admission_date_difference = Carbon::parse($nextSubmissionDate)->diffForHumans();
     }
 
     public function payFee($price_type)
@@ -125,7 +125,7 @@ class Dashboard extends Component
                            ->orderBy('start_date')
                            ->firstOrFail();
 
-            $stripe = new StripeClient(Config('cashier.secret'));
+            $stripe = new StripeClient(Config('stripe.secret'));
 
             $amount = $price->amount * 100;
             $email  = Auth::user()->email;
@@ -134,8 +134,8 @@ class Dashboard extends Component
             if ($price->price_type === 'registration') {
                 $description = 'Registration fee for the Chartered Practitioners Register.';
             }
-            if ($price->price_type === 'application') {
-                $description = 'Application fee for the Chartered Practitioners Register.';
+            if ($price->price_type === 'submission') {
+                $description = 'Submission fee for the Chartered Practitioners Register.';
             }
 
             $checkout_session = $stripe->checkout->sessions->create([

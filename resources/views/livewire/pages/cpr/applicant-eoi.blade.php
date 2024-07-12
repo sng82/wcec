@@ -95,27 +95,19 @@
                 <x-cpr-input-error :messages="$errors->get('email')" class="mt-2 lg:pl-1 lg:ml-48"/>
 
                 <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
-                    <x-admin-input-label for="phone_1" :value="__('Business Phone')" class="w-48"/>
-                    <x-text-input wire:model="phone_1" id="phone_1" class="block w-full lg:w-60" type="text"
-                                  name="phone_1" required autocomplete="phone_1"/>
+                    <x-admin-input-label for="phone_main" :value="__('Phone (Main)')" class="w-48"/>
+                    <x-text-input wire:model="phone_main" id="phone_main" class="block w-full lg:w-60" type="text"
+                                  name="phone_main" required autocomplete="phone_main"/>
                 </div>
-                <x-cpr-input-error :messages="$errors->get('phone_1')" class="mt-2 lg:pl-1 lg:ml-48"/>
+                <x-cpr-input-error :messages="$errors->get('phone_main')" class="mt-2 lg:pl-1 lg:ml-48"/>
 
                 <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
-                    <x-admin-input-label for="phone_2" :value="__('Business Phone 2')" class="w-48"/>
-                    <x-text-input wire:model="phone_2" id="phone_2" class="block w-full lg:w-60" type="text"
-                                  name="phone_2" autocomplete="phone_2"/>
+                    <x-admin-input-label for="phone_mobile" :value="__('Phone (Mobile)')" class="w-48"/>
+                    <x-text-input wire:model="phone_mobile" id="phone_mobile" class="block w-full lg:w-60" type="text"
+                                  name="phone_mobile" autocomplete="phone_mobile"/>
                     <span class="text-sm text-gray-700 italic"> - optional</span>
                 </div>
-                <x-cpr-input-error :messages="$errors->get('phone_2')" class="mt-2 lg:pl-1 lg:ml-48"/>
-
-                <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
-                    <x-admin-input-label for="phone_3" :value="__('Business Phone 3')" class="w-48"/>
-                    <x-text-input wire:model="phone_3" id="phone_3" class="block w-full lg:w-60" type="text"
-                                  name="phone_3" autocomplete="phone_3"/>
-                    <span class="text-sm text-gray-700 italic"> - optional</span>
-                </div>
-                <x-cpr-input-error :messages="$errors->get('phone_3')" class="mt-2 lg:pl-1 lg:ml-48"/>
+                <x-cpr-input-error :messages="$errors->get('phone_mobile')" class="mt-2 lg:pl-1 lg:ml-48"/>
             </div>
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
@@ -251,7 +243,7 @@
 {{--                @endif--}}
 
                 <label for="current_role" class="block mt-6">
-                    If you do not have a formal document, please provide a description of your current role instead:
+                    If you do not have a formal document, please provide a summary of your current role instead. Max 200 words.:
                 </label>
 
                 <div wire:ignore class="mt-4">

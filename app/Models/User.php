@@ -10,7 +10,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\Permission\Traits\HasRoles;
-use Laravel\Cashier\Billable;
 
 /**
  * @mixin Builder
@@ -18,13 +17,13 @@ use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasRoles, Notifiable, Billable;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
 
 //    public mixed $first_name;
 //    public mixed $last_name;
 //    public mixed $email;
-//    public mixed $phone_1;
-//    public mixed $phone_2;
+//    public mixed $phone_main;
+//    public mixed $phone_main;
 //    public mixed $phone_3;
 //    public mixed $eoi_status;
 
@@ -47,21 +46,20 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email',
-        'phone_1',
-        'phone_2',
-        'phone_3',
-        'submitted_at',
+        'phone_main',
+        'phone_mobile',
+//        'submission_submitted_at',
         'submission_count',
-        'accepted_at',
-        'accepted_by',
-        'became_member_at',
-        'membership_expires_at',
+        'submission_accepted_at',
+        'submission_accepted_by',
+        'became_registrant_at',
+        'registration_expires_at',
         'declined_at',
         'declined_by',
         'eoi_status',
         'registration_fee_paid',
-        'application_status',
-        'application_fee_paid',
+        'submission_status',
+        'submission_fee_paid',
         'password',
     ];
 
@@ -71,11 +69,11 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'submitted_at' => 'datetime',
+//        'submission_submitted_at' => 'datetime',
         'submission_count' => 'integer',
-        'accepted_at' => 'datetime',
-        'became_member_at' => 'datetime',
-        'membership_expires_at' => 'datetime',
+        'submission_accepted_at' => 'datetime',
+        'became_registrant_at' => 'datetime',
+        'registration_expires_at' => 'datetime',
         'declined_at' => 'datetime',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
@@ -88,9 +86,15 @@ class User extends Authenticatable
               ->orWhere('email', 'like', "%{$value}%");
     }
 
+    public function scopePublicSearch($query, $value)
+    {
+        $query->where('first_name', 'like', "%{$value}%")
+              ->orWhere('last_name', 'like', "%{$value}%");
+    }
+
     public function acceptedBy(): BelongsTo
     {
-        return $this->belongsTo(__CLASS__, 'accepted_by');
+        return $this->belongsTo(__CLASS__, 'submission_accepted_by');
     }
 
     public function declinedBy(): BelongsTo

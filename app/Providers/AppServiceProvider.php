@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
-use Laravel\Cashier\Cashier;
+//use Laravel\Cashier\Cashier;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,6 +31,6 @@ class AppServiceProvider extends ServiceProvider
         });
 
         // https://laravel.com/docs/11.x/billing#tax-configuration
-        Cashier::calculateTaxes();
+//        Cashier::calculateTaxes();
     }
 }

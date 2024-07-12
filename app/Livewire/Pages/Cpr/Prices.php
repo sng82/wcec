@@ -28,7 +28,7 @@ class Prices extends Component
         return [
             'price_type' => [
                 'required',
-                Rule::in(['registration', 'application', 'renewal'])
+                Rule::in(['registration', 'submission', 'renewal'])
             ],
             'amount' => 'required|numeric',
             'start_date' => 'required|date',

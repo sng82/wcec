@@ -15,19 +15,19 @@ class MemberEdit extends Component
     use LivewireAlert;
 
     public int $id = 0;
-    public $member;
+    public $registrant;
     public $first_name;
     public $last_name;
     public $email;
     public $role;
-    public $membership_type;
+    public $registration_type;
 //    public $roles;
-    public $submitted_at;
+//    public $submitted_at;
     public $submission_count;
-    public $accepted_at;
-    public $accepted_by;
-    public $became_member_at;
-    public $membership_expires_at;
+    public $submission_accepted_at;
+    public $submission_accepted_by;
+    public $became_registrant_at;
+    public $registration_expires_at;
     public $declined_at;
     public $declined_by;
     public $created_at;
@@ -35,9 +35,9 @@ class MemberEdit extends Component
     public function mount()
     {
         $id = Route::current()->parameter('id');
-        $this->member = User::find($id);
+        $this->registrant = User::find($id);
 
-        if (! $this->member) {
+        if (! $this->registrant) {
             return $this->flash(
                 'error',
                 'Member not found',
@@ -60,7 +60,7 @@ class MemberEdit extends Component
         ]);
 
         try {
-            $this->member->update([
+            $this->registrant->update([
                 'first_name'   => trim($this->first_name),
                 'last_name'    => trim($this->last_name),
                 'email'        => trim(Str::of($this->email)->lower()),
@@ -87,22 +87,12 @@ class MemberEdit extends Component
 
     public function render()
     {
-        $this->first_name = $this->member->first_name;
-        $this->last_name = $this->member->last_name;
-        $this->email = $this->member->email;
-        $this->role = $this->member->roles->pluck('name')[0] ?? '';
-//        $this->membership_type = $this->member->roles->pluck('name')[0] ?? '';
-//        $this->roles = Role::get();
-
-//        $this->submitted_at = $this->member->submitted_at?->format('Y-m-d H:i:s');
-        $this->submission_count = $this->member->submission_count;
-//        $this->accepted_at = $this->member->accepted_at?->format('Y-m-d H:i:s');
-//        $this->accepted_by = $this->member->accepted_by;
-//        $this->became_member_at = $this->member->became_member_at?->format('Y-m-d');
-        $this->membership_expires_at = $this->member->membership_expires_at?->format('Y-m-d');
-//        $this->declined_at = $this->member->declined_at?->format('Y-m-d H:i:s');
-//        $this->declined_by = $this->member->declined_by;
-//        $this->created_at = $this->member->created_at?->format('Y-m-d H:i:s');
+        $this->first_name = $this->registrant->first_name;
+        $this->last_name = $this->registrant->last_name;
+        $this->email = $this->registrant->email;
+        $this->role = $this->registrant->roles->pluck('name')[0] ?? '';
+        $this->submission_count = $this->registrant->submission_count;
+        $this->registration_expires_at = $this->registrant->registration_expires_at?->format('Y-m-d');
 
         return view('livewire.pages.cpr.member-edit')
             ->layout('layouts.app');

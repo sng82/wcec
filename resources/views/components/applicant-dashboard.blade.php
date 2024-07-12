@@ -1,15 +1,14 @@
 @props([
     'logged_in_user',
-    'next_submission_date',
-    'next_submission_date_difference',
+    'next_admission_date',
+    'next_admission_date_difference',
     'registration_fee',
-    'application_fee',
+    'submission_fee',
 ])
 
 <div {{ $attributes->class(['bg-slate-100 rounded-lg p-3 xl:p-4 shadow']) }}>
     <p class="my-2">
         Hi, {{ $logged_in_user->first_name }},
-    </p>
     <p class="mb-2">
         Welcome to the Chartered Practitioners Portal...
     </p>
@@ -20,28 +19,22 @@
     <ul class="my-2 ml-12 list-square marker:text-sky-400 space-y-1 max-w-2xl xl:max-w-fit">
         <li>Step 1: Pay your registration fee.</li>
         <li>Step 2: Submit your Expression of Interest.</li>
-        <li>Step 3: Pay your application fee.</li>
-        <li>Step 4: Submit your application.</li>
+        <li>Step 3: Pay your submission fee.</li>
+        <li>Step 4: Submit your submission.</li>
     </ul>
-    <p class="mb-2">
-        Steps 1-3 can be completed in any order, although no submitted Expression of Interest will be assessed unless the registration fee has been paid.
-    </p>
-    <p class="mb-2">
-        Step 4 cannot commence until steps 1 to 3 have been completed and an Expression of Interest has been accepted.
-    </p>
     <p class="mb-2">
         Track your progression in the table below.
     </p>
     <hr class="my-4">
     <p class="mb-2">
-        This page and the options available to you within the left-hand menu will update as your application progresses. You'll recieve emails informing you of important milestones, but it's advised to log in to the Chartered Practitioners Portal and check progress on occasion.
+        This page and the options available to you within the left-hand menu will update as your application progresses. You'll receive emails informing you of important milestones, but it's advised to log in to the Chartered Practitioners Portal and check progress on occasion.
     </p>
     <hr class="my-4">
     <p class="mb-2">
         Accepted applicants will be added to the Chartered Practitioners Register on the next admission date.
     </p>
     <p class="mb-2">
-        the next admission date is <span class="font-bold">{{ $next_submission_date ?? '' }}</span>.
+        the next admission date is <span class="font-bold">{{ $next_admission_date ?? '' }}</span>.
     </p>
 </div>
 
@@ -102,7 +95,11 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                         @endif
                     </td>
                     <td class="px-4 py-2 italic text-sm">
-                        {{ $logged_in_user->registration_fee_paid ? 'This fee has been paid.' : ' This £' . $registration_fee->amount . ' fee has not yet been paid. Your Expression of Interest will not be assessed before this payment is made.' }}
+                        @if($logged_in_user->registration_fee_paid)
+                            This fee has been paid.
+                        @else
+                            The £{{ $registration_fee->amount }} +VAT registration fee has not yet been paid. This is required before you can progress.
+                        @endif
                     </td>
                     <td class="px-4 py-2">
                         @if(! $logged_in_user->registration_fee_paid)
@@ -119,7 +116,8 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                         @endif
                     </td>
                 </tr>
-                <tr>
+
+                <tr  class="{{ ! $logged_in_user->registration_fee_paid ? 'bg-slate-100' : '' }}">
                     <th class="px-4 py-2">2</th>
                     <td class="px-4 py-2">
                         Submit Expression of Interest
@@ -132,37 +130,50 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                                 </svg>
                             </div>
-                        @elseif($logged_in_user->eoi_status === 'unaccepted')
+                        @elseif ($logged_in_user->eoi_status === 'unaccepted' )
                             <div class="flex items-center text-red-600">
                                 <span class="text-lg font-semibold me-3 border-2 border-red-600 rounded-full px-4">
                                     Not&nbsp;Accepted
                                 </span>
                             </div>
                         @else
-                            <div class="flex items-center text-amber-500">
-                                <span class="text-lg font-semibold me-3 border-2 border-amber-500 rounded-full px-4">
+                            <div class="flex items-center">
+                                <span class="text-lg font-semibold me-3 border-2  rounded-full px-4
+                                    {{ $logged_in_user->registration_fee_paid ? 'border-amber-500  text-amber-500' : 'border-slate-300  text-slate-300' }}
+                                ">
                                    Incomplete
                                 </span>
                             </div>
+{{--                            <div class="flex items-center text-amber-500">--}}
+{{--                                <span class="text-lg font-semibold me-3 border-2 border-amber-500 rounded-full px-4">--}}
+{{--                                   Incomplete--}}
+{{--                                </span>--}}
+{{--                            </div>--}}
                         @endif
                     </td>
                     <td class="px-4 py-2 italic text-sm">
-                        @if($logged_in_user->eoi_status === 'unaccepted')
-                            Your Expression of Interest was NOT accepted. Please click View/Edit for further details.
+                        @if(!$logged_in_user->registration_fee_paid)
+                            <span class="text-slate-500">
+                                Your Registration Fee must be paid before you can submit
+                                your Expression of Interest.
+                            </span>
                         @elseif($logged_in_user->eoi_status === 'accepted')
                             Your Expression of Interest has been accepted.
-                        @elseif (empty($logged_in_user->eoi_status ?? ''))
-                            You can edit and save progress as often as you like before submitting
-                        @elseif(!$logged_in_user->registration_fee_paid && $logged_in_user->eoi_status === 'submitted')
-                            Your Expression of Interest has been submitted but you need to pay your registration fee before it will be assessed.
-                        @elseif($logged_in_user->registration_fee_paid && $logged_in_user->eoi_status === 'submitted')
-                            Your Expression of Interest has been submitted. We'll be in touch once as soon as it has been assessed.
+                        @elseif($logged_in_user->eoi_status === 'unaccepted')
+                            Your Expression of Interest was NOT accepted.
+                            Please click View/Edit for further details.
                         @elseif($logged_in_user->eoi_status === 'submitted')
-                            We'll be in touch ASAP...
+                            Your Expression of Interest has been submitted.
+                            We'll be in touch as soon as it has been assessed.
+                        @elseif($logged_in_user->eoi_status === 'rejected')
+                            Your Expression of Interest has been rejected.
+                        @else
+                            Your Expression of Interest can be submitted.
+                            You can edit and save progress as often as you like before submitting.
                         @endif
                     </td>
                     <td class="px-4 py-2">
-                        @if( !in_array($logged_in_user->eoi_status, ['accepted', 'submitted', 'rejected']))
+                        @if( $logged_in_user->registration_fee_paid && !in_array($logged_in_user->eoi_status, ['accepted', 'submitted', 'rejected']))
                             <a href="{{ route('applicant-eoi') }}"
                                class="bg-sky-600 w-fit pl-4 pr-1 gap-2 py-1 text-white rounded-full flex flex-row hover:bg-sky-700">
                                 View/Edit
@@ -176,13 +187,13 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                     </td>
                 </tr>
 
-                <tr>
+                <tr class="{{ $logged_in_user->eoi_status !== 'accepted' || ! $logged_in_user->registration_fee_paid ? 'bg-slate-100' : '' }}">
                     <th class="px-4 py-2">3</th>
                     <td class="px-4 py-2">
-                        Pay Application Fee
+                        Pay Submission Fee
                     </td>
                     <td class="px-4 py-2">
-                        @if($logged_in_user->application_fee_paid)
+                        @if($logged_in_user->submission_fee_paid)
                             <div class="flex flex-row w-fit gap-2 items-center text-green-500 text-lg font-semibold italic me-3 border-2 border-green-500 rounded-full px-4">
                                 <span>Complete</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="size-5">
@@ -190,23 +201,30 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                                 </svg>
                             </div>
                         @else
-                            <div class="flex items-center text-amber-500">
-                                <span class="text-lg font-semibold me-3 border-2 border-amber-500 rounded-full px-4">
+
+                            <div class="flex items-center">
+                                <span class="text-lg font-semibold me-3 border-2  rounded-full px-4
+                                    {{ $logged_in_user->eoi_status === 'accepted' && $logged_in_user->registration_fee_paid ? 'border-amber-500  text-amber-500' : 'border-slate-300  text-slate-300' }}
+                                ">
                                    Incomplete
                                 </span>
                             </div>
                         @endif
                     </td>
                     <td class="px-4 py-2 italic text-sm">
-                        {{
-                            $logged_in_user->application_fee_paid
-                            ? 'This fee has been paid'
-                            : 'This £' . $application_fee->amount . ' fee can be paid at any time. Your application will not be assessed before this payment is made.'
-                        }}
+                        @if ( $logged_in_user->submission_fee_paid)
+                            The submission fee has been paid.
+                        @elseif ( $logged_in_user->eoi_status === 'accepted' && $logged_in_user->registration_fee_paid )
+                            The Submission Fee of £{{ $submission_fee->amount }} + VAT is ready to be paid.
+                        @else
+                            <span class="text-slate-500">
+                                Your Expression of Interest must have been accepted before this payment can be made.
+                            </span>
+                        @endif
                     </td>
                     <td class="px-4 py-2">
-                        @if(! $logged_in_user->application_fee_paid)
-                            <button wire:click="payFee('application')"
+                        @if(! $logged_in_user->submission_fee_paid && $logged_in_user->eoi_status === 'accepted' && $logged_in_user->registration_fee_paid)
+                            <button wire:click="payFee('submission')"
                                     class="bg-fuchsia-600 hover:bg-fuchsia-700 focus:cursor-wait w-fit pl-4 pr-1 gap-2 py-1 text-white rounded-full flex flex-row"
                             >
                                 Pay Now
@@ -220,22 +238,22 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                     </td>
                 </tr>
 
-                <tr class="{{ $logged_in_user->eoi_status !== 'accepted' || ! $logged_in_user->registration_fee_paid || ! $logged_in_user->application_fee_paid ? 'bg-slate-100' : '' }}">
+                <tr class="{{ $logged_in_user->eoi_status !== 'accepted' || ! $logged_in_user->registration_fee_paid || ! $logged_in_user->submission_fee_paid ? 'bg-slate-100' : '' }}">
                     <th class="px-4 py-2">4</th>
                     <td class="px-4 py-2">
-                        Submit Application
+                        Submit Submission
                     </td>
                     <td class="px-4 py-2">
-                        @if(!empty($logged_in_user->application_status ?? ''))
+                        @if(!empty($logged_in_user->submission_status ?? ''))
                             <div class="flex items-center text-sky-500">
                                 <span class="text-lg font-semibold me-3 border-2 border-sky-500 bg-white rounded-full px-4">
-                                   {{ Str::of($logged_in_user->application_status)->title() }}
+                                   {{ Str::of($logged_in_user->submission_status)->title() }}
                                 </span>
                             </div>
                         @else
                             <div class="flex items-center">
                                 <span class="text-lg font-semibold me-3 border-2  rounded-full px-4
-                                    {{ $logged_in_user->eoi_status === 'accepted' && $logged_in_user->registration_fee_paid && $logged_in_user->application_fee_paid ? 'border-amber-500  text-amber-500' : 'border-slate-300  text-slate-300' }}
+                                    {{ $logged_in_user->eoi_status === 'accepted' && $logged_in_user->registration_fee_paid && $logged_in_user->submission_fee_paid ? 'border-amber-500  text-amber-500' : 'border-slate-300  text-slate-300' }}
                                 ">
                                    Incomplete
                                 </span>
@@ -243,19 +261,16 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                         @endif
                     </td>
                     <td class="px-4 py-2 italic text-sm">
-                        {{
-                            $logged_in_user->eoi_status !== 'accepted' || ! $logged_in_user->registration_fee_paid || ! $logged_in_user->application_fee_paid
-                            ? 'Your Expression of Interest must have been submitted and accepted, and both fees paid before you can submit an application.'
-                            : ''
-                        }}
-                        {{
-                            $logged_in_user->application_status === 'submitted'
-                            ? 'Your application has been submitted. We\'ll be in touch ASAP...'
-                            : ''
-                        }}
+                        @if ($logged_in_user->submission_fee_paid)
+                            Your Submission can be submitted.
+                        @else
+                            <span class="text-slate-500">
+                                Your Submission Fee must be paid before you can submit your submission.
+                            </span>
+                        @endif
                     </td>
                     <td class="px-4 py-2">
-                        @if($logged_in_user->eoi_status === 'accepted' && $logged_in_user->registration_fee_paid && $logged_in_user->application_fee_paid)
+                        @if($logged_in_user->submission_fee_paid)
                             <a href="#"
                                class="bg-sky-600 w-fit pl-4 pr-1 gap-2 py-1 text-white rounded-full flex flex-row hover:bg-sky-700">
                                 View/Edit
