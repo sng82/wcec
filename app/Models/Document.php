@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @mixin Builder
+ * @mixin IdeHelperDocument
  */
 
 class Document extends Model

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @mixin Builder
+ * @mixin IdeHelperEOI
  */
 
 class EOI extends Model

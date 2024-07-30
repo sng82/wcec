@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @mixin Builder
+ * @mixin IdeHelperPrices
  */
 
 class Prices extends Model

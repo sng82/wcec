@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @mixin Builder
+ * @mixin IdeHelperSubmissionDate
  */
 
 class SubmissionDate extends Model

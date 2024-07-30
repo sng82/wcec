@@ -3,6 +3,9 @@
 namespace App\Livewire\Component;
 
 use App\Models\User;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -15,7 +18,7 @@ class PublicRegistrants extends Component
     public $search = '';
     public $per_page = 12;
 
-    public function sortBy($column_name)
+    public function sortBy($column_name): void
     {
         if ($this->sort_column_name === $column_name) {
             $this->sort_column_direction = $this->sort_column_direction === 'asc' ? 'desc' : 'asc';
@@ -25,12 +28,12 @@ class PublicRegistrants extends Component
         $this->sort_column_name = $column_name;
     }
 
-    public function searchFilter()
+    public function searchFilter(): void
     {
         $this->resetPage();
     }
 
-    public function render()
+    public function render(): Application|Factory|View
     {
         return view('livewire.component.public-registrants', [
 

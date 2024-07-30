@@ -1,14 +1,13 @@
-<div class="bg-slate-100 rounded-xl px-5 py-6">
+<div class="bg-slate-50 rounded-xl px-5 py-6">
     <h2 class="text-2xl lg:text-3xl text-slate-800 border-b border-slate-300 pb-2 mb-4">
         The Chartered Practitioners Register
     </h2>
     <p class="mb-2">
-        Individuals in the register have proven, and continue to prove that they deserve their positions within the upper echelons of the industry.
+        Individuals in the register have proven their positions within the upper echelons of the industry.
     </p>
     <p class="mb-6 text-sm text-slate-500">
         Dates shown indicate when the individual was initially submitted to the register.
     </p>
-
 
     <div class="mb-4 flex flex-col lg:flex-row gap-4 items-center">
         <div class="flex flex-col lg:flex-row items-center justify-between w-full gap-4">
@@ -34,33 +33,27 @@
                                       placeholder:font-normal placeholder:italic placeholder:text-slate-300
                                       focus:border-sky-200 focus:ring-sky-100 focus:ring-4"
                         >
-
-
-{{--                            <input wire:model.live.debounce.300ms="search" wire:submit="filter" type="text" placeholder='search...'--}}
-{{--                                   class="rounded-lg border border-slate-200 py-1--}}
-{{--                                      placeholder:font-normal placeholder:italic placeholder:text-slate-300--}}
-{{--                                      focus:border-sky-200 focus:ring-sky-100 focus:ring-4"--}}
-{{--                            >--}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="bg-white rounded-lg border border-slate-200 p-4 pt-6 mb-4 columns-1 md:columns-2 xl:columns-3 2xl:columns-4 gap-6">
+    <div class="bg-white rounded-lg border border-slate-200 p-4 pt-6 mb-4 gap-6">
         @forelse($registrants as $registrant)
-            <p class="pb-1 mb-3 border-b border-slate-100" wire:key="{{ $registrant->id }}">
-                {{ $registrant->first_name . ' ' . $registrant->last_name }}
-                <span class="text-slate-400">
-                    {{ ' - ' . \Carbon\Carbon::parse($registrant->submission_accepted_at)->toFormattedDayDateString() }}
-                </span>
-            </p>
+            <div class="block float-left w-full md:w-1/2 xl:w-1/3 2xl:w-1/4">
+                <p class="pb-1 mb-3 border-b border-slate-100" wire:key="{{ $registrant->id }}">
+                    {{ $registrant->first_name . ' ' . $registrant->last_name }}
+                    <span class="text-slate-400">
+                        {{ ' - ' . \Carbon\Carbon::parse($registrant->submission_accepted_at)->toFormattedDayDateString() }}
+                    </span>
+                </p>
+            </div>
+
         @empty
             <p>No results found.</p>
         @endforelse
+        <div class="clear-both"></div>
     </div>
-{{--    <div>--}}
-{{--        <hr class="my-4">--}}
-{{--    </div>--}}
     <div>
         {{ $registrants->onEachSide(1)->links() }}
     </div>

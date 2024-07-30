@@ -97,7 +97,6 @@ class UserSeeder extends Seeder
         // Active registrant, not expiring anytime soon
         User::factory()->count(116)->create()->each(function ($user) {
             $became_registrant_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d H:i:s');
-
             $submission_accepted_at = Carbon::parse($became_registrant_at)->subDays(fake()->numberBetween(1,30))->format('Y-m-d H:i:s');
 
             $user->assignRole('registrant');

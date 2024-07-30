@@ -13,6 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 /**
  * @mixin Builder
+ * @mixin IdeHelperUser
  */
 
 class User extends Authenticatable
@@ -48,18 +49,17 @@ class User extends Authenticatable
         'email',
         'phone_main',
         'phone_mobile',
-//        'submission_submitted_at',
+        'registration_fee_paid',
+        'eoi_status',
         'submission_count',
+        'submission_fee_paid',
+        'submission_status',
         'submission_accepted_at',
         'submission_accepted_by',
         'became_registrant_at',
         'registration_expires_at',
         'declined_at',
         'declined_by',
-        'eoi_status',
-        'registration_fee_paid',
-        'submission_status',
-        'submission_fee_paid',
         'password',
     ];
 

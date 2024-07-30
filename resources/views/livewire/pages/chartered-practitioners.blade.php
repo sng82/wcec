@@ -9,7 +9,9 @@
                 <p class="mb-12">
                     The Worshipful Company of Environmental Cleaners (WCEC) have developed a register for Environmental Cleaning Professionals as a means of recognising and maintaining high standards and ongoing proficiency for individuals.
                 </p>
-                <livewire:component.public-registrants></livewire:component.public-registrants>
+                @if(config('cpp.active'))
+                    <livewire:component.public-registrants></livewire:component.public-registrants>
+                @endif
             </div>
 
         </div>

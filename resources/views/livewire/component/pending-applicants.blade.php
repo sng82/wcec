@@ -189,9 +189,9 @@
                                         {{ __('View/Edit') }}
                                     </x-edit-button>
                                     @if ($registrant->submission_status === 'submitted' && $registrant->submission_fee_paid)
-                                        <x-edit-button-fuchsia :href="www.google.com" class="">
-                                            Assess&nbsp;Submission
-                                        </x-edit-button-fuchsia>
+{{--                                        <x-edit-button-fuchsia :href="" class="">--}}
+{{--                                            Assess&nbsp;Submission--}}
+{{--                                        </x-edit-button-fuchsia>--}}
                                     @elseif ($registrant->eoi_status === 'submitted' && $registrant->registration_fee_paid)
                                         <x-edit-button-fuchsia :href="route('assess-eoi',[$registrant->eoi->id])" class="">
                                             Assess&nbsp;EoI
