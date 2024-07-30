@@ -147,6 +147,10 @@
     "file": "assets/wcec-crest-alt-BJZHKteh.png",
     "src": "resources/img/wcec-crest-alt.png"
   },
+  "resources/img/wcec-crest-blue-2.webp": {
+    "file": "assets/wcec-crest-blue-2-DaFv_oKA.webp",
+    "src": "resources/img/wcec-crest-blue-2.webp"
+  },
   "resources/img/wcec-crest-blue.webp": {
     "file": "assets/wcec-crest-blue-CjFXaWRh.webp",
     "src": "resources/img/wcec-crest-blue.webp"
@@ -182,7 +186,7 @@
     "isEntry": true
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-BprgVCRT.css",
+    "file": "assets/app-CHXEwjV3.css",
     "src": "resources/scss/app.scss",
     "isEntry": true
   },
