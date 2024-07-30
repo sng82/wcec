@@ -168,7 +168,7 @@ new class extends Component
                  x-data="{ mob_open: false }">
                 <div class="mt-3 flex w-full justify-between lg:hidden">
                     <a href="/" class="flex flex-row items-center">
-                        <img src="{{ Vite::asset('resources/img/wcec-crest-small.png') }}" class="inline-block object-contain h-10" alt="WCEC Logo">
+                        <img src="{{ Vite::asset('resources/img/wcec-crest-updated.png') }}" class="inline-block object-contain h-10" alt="WCEC Logo">
                     </a>
                     <button @click="mob_open = !mob_open" type="button"
                             class="outline-none"
@@ -206,7 +206,7 @@ new class extends Component
                             <div class="border border-b-slate-200 bg-white">
                                 <div class="flex flex-row justify-between p-5 px-4 content-center w-full">
                                     <a href="/" wire:navigate class="flex flex-row items-center">
-                                        <img src="{{ Vite::asset('resources/img/wcec-crest-small.png') }}" class="inline-block object-contain h-10" alt="WCEC Logo">
+                                        <img src="{{ Vite::asset('resources/img/wcec-crest-updated.webp') }}" class="inline-block object-contain h-10" alt="WCEC Logo">
                                         <span class="font-brand ml-2 text-2xl text-sky-900">WC-EC</span>
                                     </a>
                                     <button @click="mob_open = false"

@@ -5,7 +5,7 @@
     <div class="flex flex-col grow p-6 gap-5">
 
         <div class="flex flex-col content-center mt-8 mb-6">
-            <img src="{{ Vite::asset('resources/img/wcec-crest-small.webp') }}" class="inline-block object-contain h-30 lg:h-[200px]" alt="WCEC Logo">
+            <img src="{{ Vite::asset('resources/img/wcec-crest-updated.webp') }}" class="inline-block object-contain h-30 lg:h-[200px]" alt="WCEC Logo">
             <h2 class="text-center mx-auto mt-6 text-sky-900 text-2xl border-b-4 border-red-700 pb-2">Chartered Practitioners Portal</h2>
         </div>
 

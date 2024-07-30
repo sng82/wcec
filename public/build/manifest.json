@@ -159,6 +159,14 @@
     "file": "assets/wcec-crest-small-Bg14XZwC.webp",
     "src": "resources/img/wcec-crest-small.webp"
   },
+  "resources/img/wcec-crest-updated.png": {
+    "file": "assets/wcec-crest-updated-DRPwX-Yh.png",
+    "src": "resources/img/wcec-crest-updated.png"
+  },
+  "resources/img/wcec-crest-updated.webp": {
+    "file": "assets/wcec-crest-updated-DZ8mjnpA.webp",
+    "src": "resources/img/wcec-crest-updated.webp"
+  },
   "resources/img/wcec-crest.png": {
     "file": "assets/wcec-crest-Xa1c5Y9J.png",
     "src": "resources/img/wcec-crest.png"
@@ -168,18 +176,19 @@
     "src": "resources/img/wcec-crest.webp"
   },
   "resources/js/app.js": {
-    "file": "assets/app-D2jpX1vH.js",
+    "file": "assets/app-C1-XIpUa.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-BsV6wX9m.css",
+    "file": "assets/app-BprgVCRT.css",
     "src": "resources/scss/app.scss",
     "isEntry": true
   },
   "resources/scss/cpr.scss": {
-    "file": "assets/cpr-BiwSURvc.css",
+    "file": "assets/cpr-l0sNRNKZ.js",
+    "name": "cpr",
     "src": "resources/scss/cpr.scss",
     "isEntry": true
   }

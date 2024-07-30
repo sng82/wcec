@@ -1,4 +1,4 @@
-<img src="{{ Vite::asset('resources/img/wcec-crest-small.png') }}"
+<img src="{{ Vite::asset('resources/img/wcec-crest-updated.png') }}"
      class="inline-block object-contain h-20 lg:h-32"
      alt="WCEC Logo"
 >
