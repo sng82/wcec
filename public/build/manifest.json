@@ -19,6 +19,10 @@
     "file": "assets/armourers-B3kAQ0cJ.jpg",
     "src": "resources/img/armourers.jpg"
   },
+  "resources/img/banners/WCEC_Installation_19-04-24.webp": {
+    "file": "assets/WCEC_Installation_19-04-24-CDjiB68C.webp",
+    "src": "resources/img/banners/WCEC_Installation_19-04-24.webp"
+  },
   "resources/img/banners/armourers-hall-2.webp": {
     "file": "assets/armourers-hall-2-DzXUCBej.webp",
     "src": "resources/img/banners/armourers-hall-2.webp"
@@ -186,7 +190,7 @@
     "isEntry": true
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-CHXEwjV3.css",
+    "file": "assets/app-CV84ZjqQ.css",
     "src": "resources/scss/app.scss",
     "isEntry": true
   },
