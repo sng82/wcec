@@ -202,10 +202,6 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $stripe_id
- * @property string|null $pm_type
- * @property string|null $pm_last_four
- * @property string|null $trial_ends_at
  * @property-read User|null $acceptedBy
  * @property-read User|null $declinedBy
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Document> $documents
@@ -240,19 +236,15 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePhoneMain($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePhoneMobile($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePmLastFour($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePmType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRegistrationExpiresAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRegistrationFeePaid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRegistrationPathway($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereStripeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSubmissionAcceptedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSubmissionAcceptedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSubmissionCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSubmissionFeePaid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSubmissionStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereTrialEndsAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutRole($roles, $guard = null)
