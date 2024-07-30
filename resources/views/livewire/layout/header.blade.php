@@ -5,7 +5,7 @@
             <a href="/" wire:navigate class="flex content-center items-center">
                 <div class="lg:pr-3 hidden lg:inline-block">
                     @persist('header-crest')
-                        <img src="{{ Vite::asset('resources/img/wcec-crest-small.webp') }}" class="inline-block object-contain h-20 lg:h-32" alt="WCEC Logo">
+                        <img src="{{ Vite::asset('resources/img/wcec-crest-updated.webp') }}" class="inline-block object-contain h-20 lg:h-28" alt="WCEC Logo">
                     @endpersist
                 </div>
                 <div class="lg:px-3 lg:inline-block max-w-lg">

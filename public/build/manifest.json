@@ -19,6 +19,10 @@
     "file": "assets/armourers-B3kAQ0cJ.jpg",
     "src": "resources/img/armourers.jpg"
   },
+  "resources/img/banners/WCEC_Installation_19-04-24.webp": {
+    "file": "assets/WCEC_Installation_19-04-24-CDjiB68C.webp",
+    "src": "resources/img/banners/WCEC_Installation_19-04-24.webp"
+  },
   "resources/img/banners/armourers-hall-2.webp": {
     "file": "assets/armourers-hall-2-DzXUCBej.webp",
     "src": "resources/img/banners/armourers-hall-2.webp"
@@ -168,19 +172,18 @@
     "src": "resources/img/wcec-crest.webp"
   },
   "resources/js/app.js": {
-    "file": "assets/app-C1-XIpUa.js",
+    "file": "assets/app-D2jpX1vH.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-BEaJiTym.css",
+    "file": "assets/app-BsV6wX9m.css",
     "src": "resources/scss/app.scss",
     "isEntry": true
   },
   "resources/scss/cpr.scss": {
-    "file": "assets/cpr-l0sNRNKZ.js",
-    "name": "cpr",
+    "file": "assets/cpr-BiwSURvc.css",
     "src": "resources/scss/cpr.scss",
     "isEntry": true
   }

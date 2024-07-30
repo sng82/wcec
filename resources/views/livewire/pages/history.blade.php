@@ -46,7 +46,7 @@
                             <div class="rounded-xl border border-sky-100 bg-sky-50 text-sky-800 mt-0 py-8 px-4 xl:px-8">
                                 <h2 class="mb-2 text-2xl xl:text-3xl ">The Armorial Bearings</h2>
                                 <hr class="mb-4 border-sky-100">
-                                <img src="{{ Vite::asset('resources/img/wcec-crest-alt.png') }}" class="float-left p-6 rounded-lg bg-white border border-sky-100 mr-6 mb-6" alt="random pic">
+                                <img src="{{ Vite::asset('resources/img/wcec-crest-updated.webp') }}" class="float-left p-6 rounded-lg bg-white border border-sky-100 mr-6 mb-6 w-64" alt="The WCEC Crest">
                                 <p>
                                     The armorial bearings of the Company comprise a shield, helmet and crest, blazoned with the motto ‘Tergere est Servare’ (To clean is to preserve).
                                 </p>
