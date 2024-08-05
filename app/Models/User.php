@@ -111,7 +111,7 @@ class User extends Authenticatable
 
     public function eoi()
     {
-        return $this->hasOne(Eoi::class);
+        return $this->hasOne(EOI::class);
     }
 
     public function submission()
