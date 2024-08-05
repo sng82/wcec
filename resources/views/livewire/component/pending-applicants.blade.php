@@ -188,13 +188,13 @@
                                     <x-edit-button :href="route('member-edit', $registrant->id)" class="">
                                         {{ __('View/Edit') }}
                                     </x-edit-button>
-                                    @if ($registrant->submission_status === 'submitted' && $registrant->submission_fee_paid)
-{{--                                        <x-edit-button-fuchsia :href="" class="">--}}
-{{--                                            Assess&nbsp;Submission--}}
-{{--                                        </x-edit-button-fuchsia>--}}
+                                    @if ($registrant->submission_fee_paid && ($registrant->submission_status === 'submitted' || $registrant->submission_status === 'awaiting_interview'))
+                                        <x-edit-button-fuchsia :href="route('assess-submission', [$registrant->id])" class="">
+                                            Submission
+                                        </x-edit-button-fuchsia>
                                     @elseif ($registrant->eoi_status === 'submitted' && $registrant->registration_fee_paid)
                                         <x-edit-button-fuchsia :href="route('assess-eoi',[$registrant->eoi->id])" class="">
-                                            Assess&nbsp;EoI
+                                            EoI
                                         </x-edit-button-fuchsia>
                                     @endif
                                 </div>

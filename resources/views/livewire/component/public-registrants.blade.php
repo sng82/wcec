@@ -1,24 +1,24 @@
-<div class="bg-slate-50 rounded-xl px-5 py-6">
-    <h2 class="text-2xl lg:text-3xl text-slate-800 border-b border-slate-300 pb-2 mb-4">
+<div class="bg-slate-200 border shadow-xl shadow-slate-400 rounded-xl px-5 py-6">
+    <h2 class="text-2xl lg:text-3xl text-slate-700 border-b-2 border-red-700 pb-2 mb-4">
         The Chartered Practitioners Register
     </h2>
-    <p class="mb-2">
-        Individuals in the register have proven their positions within the upper echelons of the industry.
-    </p>
-    <p class="mb-6 text-sm text-slate-500">
-        Dates shown indicate when the individual was initially submitted to the register.
-    </p>
+{{--    <p class="mb-2">--}}
+{{--        All registrants can be found here.--}}
+{{--    </p>--}}
+{{--    <p class="mb-6 text-sm text-slate-500">--}}
+{{--        Dates shown indicate when the individual was initially submitted to the register.--}}
+{{--    </p>--}}
 
     <div class="mb-4 flex flex-col lg:flex-row gap-4 items-center">
         <div class="flex flex-col lg:flex-row items-center justify-between w-full gap-4">
             <div class="flex flex-row gap-2 items-center">
                 <div>
-                    <span>Order Registrants By:</span>
+                    <span>Order by:</span>
                 </div>
-                <button type="button" wire:click="sortBy('became_registrant_at')" class="rounded-full text-white px-6 py-1 {{ $sort_column_name === 'became_registrant_at' ? ' bg-sky-700 hover:bg-sky-600 ' : ' bg-slate-300 hover:bg-sky-600 ' }}">
+                <button type="button" wire:click="sortBy('became_registrant_at')" class="rounded-full text-white px-6 py-1 {{ $sort_column_name === 'became_registrant_at' ? ' bg-red-800 hover:bg-red-700 ' : ' bg-slate-500 hover:bg-red-700 ' }}">
                     Submission Date
                 </button>
-                <button type="button" wire:click="sortBy('last_name')" class="rounded-full text-white px-6 py-1 {{ $sort_column_name === 'last_name' ? ' bg-sky-700 hover:bg-sky-600 ' : ' bg-slate-300 hover:bg-sky-600 ' }}">
+                <button type="button" wire:click="sortBy('last_name')" class="rounded-full text-white px-6 py-1 {{ $sort_column_name === 'last_name' ? ' bg-red-800 hover:bg-red-700 ' : ' bg-slate-500 hover:bg-red-700 ' }}">
                     Last Name
                 </button>
             </div>
@@ -29,7 +29,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                         </svg>
                         <input wire:model="search" wire:keydown.debounce.300ms="searchFilter" type="text" placeholder='search...'
-                               class="rounded-lg border border-slate-200 py-1
+                               class="rounded-lg border border-slate-300 py-1
                                       placeholder:font-normal placeholder:italic placeholder:text-slate-300
                                       focus:border-sky-200 focus:ring-sky-100 focus:ring-4"
                         >
@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <div class="bg-white rounded-lg border border-slate-200 p-4 pt-6 mb-4 gap-6">
+    <div class="bg-white rounded-lg border border-slate-300 p-4 pt-6 mb-4 gap-6">
         @forelse($registrants as $registrant)
             <div class="block float-left w-full md:w-1/2 xl:w-1/3 2xl:w-1/4">
                 <p class="pb-1 mb-3 border-b border-slate-100" wire:key="{{ $registrant->id }}">
@@ -48,11 +48,13 @@
                     </span>
                 </p>
             </div>
-
         @empty
             <p>No results found.</p>
         @endforelse
         <div class="clear-both"></div>
+            <p class="my-4 text-sm text-slate-500">
+                Dates shown indicate when the individual was initially submitted to the register.
+            </p>
     </div>
     <div>
         {{ $registrants->onEachSide(1)->links() }}

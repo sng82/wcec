@@ -40,6 +40,8 @@ class AssessEoi extends Component
             $this->eoi_status   = $this->applicant->eoi_status;
 
         } catch (\Exception $e) {
+            Log::error('Error loading EOI | ' . $e->getMessage());
+
             return $this->flash(
                 'error',
                 'Applicant not found',
@@ -49,7 +51,7 @@ class AssessEoi extends Component
                     'showConfirmButton' => true,
                     'confirmButtonColor' => '#dc2626',
                 ],
-                'cpr/members');
+                'cpr/dashboard');
         }
     }
 

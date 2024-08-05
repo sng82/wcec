@@ -65,7 +65,11 @@ class Dashboard extends Component
                                             ->where('registration_fee_paid', true)
                                             ->where('eoi_status', 'accepted')
                                             ->where('submission_fee_paid', true)
-                                            ->where('submission_status', 'submitted')
+                                            ->where(function($query) {
+                                                $query->where('submission_status', 'submitted')
+                                                      ->orWhere('submission_status', 'awaiting_interview');
+                                            })
+
                                             ->get();
     }
 

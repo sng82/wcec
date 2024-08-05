@@ -10,7 +10,9 @@ use App\Livewire\Pages\Cpr\ApplicantDocuments;
 use App\Livewire\Pages\Cpr\ApplicantEoi;
 use App\Livewire\Pages\Cpr\ApplicantFees;
 use App\Livewire\Pages\Cpr\ApplicantHelp;
+use App\Livewire\Pages\Cpr\ApplicantSubmission;
 use App\Livewire\Pages\Cpr\AssessEoi;
+use App\Livewire\Pages\Cpr\AssessSubmission;
 use App\Livewire\Pages\Cpr\MemberAdd;
 use App\Livewire\Pages\Cpr\MemberEdit;
 //use App\Livewire\Pages\Cpr\Payment;
@@ -81,6 +83,7 @@ Route::group(['middleware' => ['role:admin', 'auth']], function () {
     Route::get('/cpr/member-edit/{id}', MemberEdit::class)->name('member-edit');
     Route::get('/cpr/member-add', MemberAdd::class)->name('member-add');
     Route::get('/cpr/assess-eoi/{id}', AssessEoi::class)->name('assess-eoi');
+    Route::get('/cpr/assess-submission/{id}', AssessSubmission::class)->name('assess-submission');
 });
 
 Route::group(['middleware' => ['role:applicant', 'auth']], function () {
@@ -88,6 +91,7 @@ Route::group(['middleware' => ['role:applicant', 'auth']], function () {
     Route::get('/cpr/applicant-help', ApplicantHelp::class)->name('applicant-help');
     Route::get('/cpr/applicant-eoi', ApplicantEoi::class)->name('applicant-eoi');
     Route::get('/cpr/applicant-fees', ApplicantFees::class)->name('applicant-fees');
+    Route::get('/cpr/applicant-submission', ApplicantSubmission::class)->name('applicant-submission');
 });
 
 Route::get('/cpr/print-eoi/{id}/{obfuscation_key}', PrintEoi::class)->name('print-eoi');

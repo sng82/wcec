@@ -77,17 +77,19 @@ class UserSeeder extends Seeder
         // Accepted applicant
         User::factory()->count(4)->create()->each(function ($user) {
             $user->assignRole('accepted applicant');
+            $user->submission_interview_at = fake()->dateTimeBetween('-40 days', '-21 days')->format('Y-m-d H:i:s');
             $user->submission_accepted_at = fake()->dateTimeBetween('-20 days', '-1 days')->format('Y-m-d H:i:s');
             $user->submission_accepted_by = 1;
             $user->eoi_status = 'accepted';
             $user->registration_fee_paid = true;
             $user->submission_status = 'accepted';
             $user->submission_fee_paid = true;
+            $user->registration_pathway = fake()->randomElement(['personal','standard']);
             $user->save();
         });
 
         // Blocked applicant
-        User::factory()->count(25)->create()->each(function ($user) {
+        User::factory()->count(12)->create()->each(function ($user) {
             $user->assignRole('blocked applicant');
             $user->declined_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d H:i:s');
             $user->declined_by = 1;
@@ -95,7 +97,7 @@ class UserSeeder extends Seeder
         });
 
         // Active registrant, not expiring anytime soon
-        User::factory()->count(116)->create()->each(function ($user) {
+        User::factory()->count(47)->create()->each(function ($user) {
             $became_registrant_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d H:i:s');
             $submission_accepted_at = Carbon::parse($became_registrant_at)->subDays(fake()->numberBetween(1,30))->format('Y-m-d H:i:s');
 
@@ -106,6 +108,7 @@ class UserSeeder extends Seeder
             $user->registration_expires_at = fake()->dateTimeBetween('+60 days', '+364 days')->format('Y-m-d');
             $user->became_registrant_at = Carbon::parse($became_registrant_at)->format('Y-m-d');
             $user->registration_fee_paid = true;
+            $user->registration_pathway = fake()->randomElement(['personal','standard']);
             $user->submission_status = 'accepted';
             $user->submission_fee_paid = true;
             $user->save();
@@ -120,6 +123,7 @@ class UserSeeder extends Seeder
             $user->submission_accepted_at = $submission_accepted_at;
             $user->submission_accepted_by = 1;
             $user->eoi_status = 'accepted';
+            $user->registration_pathway = fake()->randomElement(['personal','standard']);
             $user->registration_expires_at = fake()->dateTimeBetween('+1 days', '+30 days')->format('Y-m-d');
             $user->became_registrant_at = Carbon::parse($became_registrant_at)->format('Y-m-d');
             $user->registration_fee_paid = true;
@@ -129,7 +133,7 @@ class UserSeeder extends Seeder
         });
 
         // Lapsed registrant
-        User::factory()->count(45)->create()->each(function ($user) {
+        User::factory()->count(5)->create()->each(function ($user) {
             $became_registrant_at = fake()->dateTimeBetween('-18 years', '-11 years')->format('Y-m-d H:i:s');
             $submission_accepted_at = Carbon::parse($became_registrant_at)->subDays(fake()->numberBetween(1,30))->format('Y-m-d H:i:s');
 
@@ -137,6 +141,7 @@ class UserSeeder extends Seeder
             $user->submission_accepted_at = $submission_accepted_at;
             $user->submission_accepted_by = 1;
             $user->eoi_status = 'accepted';
+            $user->registration_pathway = fake()->randomElement(['personal','standard']);
             $user->registration_expires_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d');
             $user->became_registrant_at = Carbon::parse($became_registrant_at)->format('Y-m-d');
             $user->registration_fee_paid = true;

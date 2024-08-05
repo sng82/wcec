@@ -2,7 +2,7 @@
 
     <livewire:cpr.sidebar/>
 
-    <div class="right w-full flex flex-col grow min-w-80 overflow-y-auto">
+    <div class="right w-full flex flex-col grow min-w-80 overflow-y-auto" style="scroll-behavior: smooth;">
 
         <livewire:layout.cpr-navigation/>
 

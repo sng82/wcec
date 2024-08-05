@@ -209,7 +209,7 @@
 
                     <hr class="my-4">
                     <h3 class="text-lg font-bold text-sky-200">Assessor Notes</h3>
-                    <p class="mt-0 text-sm">Optional. Only visible to CPP admins so can include private observations, such as why an EoI was unacceptable. Assessor Notes will remain visible if/when an EoI is resubmitted</p>
+                    <p class="mt-0 text-sm">Optional. Only visible to CPR admins so can include private observations, such as why an EoI was unacceptable. Assessor Notes will remain visible if/when an EoI is resubmitted</p>
                 </div>
 
             </div>

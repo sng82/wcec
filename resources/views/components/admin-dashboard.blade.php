@@ -19,7 +19,7 @@
     </p>
 
     <p class="mb-4">
-        The next Admission Date (when accepted applicants will appear on the register) is
+        The next Admission Date (when accepted applicants will be admitted to the register) is
 {{--        around {{ $next_admission_date_difference }}:--}}
         <span class="font-bold">{{ $next_admission_date }}</span>.
     </p>
@@ -68,7 +68,7 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-sky-100">
                     @foreach($submitted_eois as $registrant)
-                        <tr wire:key="{{ $registrant->id }}" class="hover:bg-slate-100 hover:text-sky-600">
+                        <tr wire:key="{{ $registrant->id }}" class="">
                             <td class="px-4 py-2 " >
                                 <span class="cursor-pointer" wire:click="openMember({{ $registrant->id }})">
                                     {{ $registrant->first_name . ' ' . $registrant->last_name }}
@@ -96,9 +96,11 @@
                                 @endif
                             </td>
                             <td class="px-4 py-1">
-                                <a href="{{ route('assess-eoi',[$registrant->eoi->id]) }}" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess&nbsp;EoI</a>
+                                <x-edit-button-fuchsia :href="route('assess-eoi',[$registrant->eoi->id])" class="">
+                                    EoI
+                                </x-edit-button-fuchsia>
+{{--                                <a href="{{ route('assess-eoi',[$registrant->eoi->id]) }}" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess&nbsp;EoI</a>--}}
 
-{{--                                <a href="#" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess</a>--}}
                             </td>
                         </tr>
                     @endforeach
@@ -112,39 +114,42 @@
 
 <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow" wire:poll.15s="getSubmissions">
     <h2 class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2 mb-2">
-        Submissions
+        Registration Submissions
     </h2>
     @if($submitted_submissions->count() > 0)
         <p class="mb-4">
-            Applicants who are waiting for their Expression of Interest to be assessed:
+            Applicants who have submitted submissions but not yet been accepted:
         </p>
         <div class="mt-3 mb-2 overflow-hidden border border-sky-100 rounded-lg shadow-sm overflow-x-auto">
             <table class="table-auto w-full divide-y divide-sky-100 text-sm">
                 <thead class="bg-sky-100">
                     <tr class="text-sky-700 divide-x divide-sky-200">
-                        <th scope="col" class="px-4 py-2 text-left cursor-pointer ">
+                        <th scope="col" class="px-4 py-2 text-left ">
                             <div class="flex flex-row justify-between gap-1 content-center">
                                 <span class="text-slate-500">
                                     Name
                                 </span>
                             </div>
                         </th>
-                        <th scope="col" class="px-4 py-2 text-left cursor-pointer">
+                        <th scope="col" class="px-4 py-2 text-left">
                             <div class="flex flex-row justify-between gap-1 content-center">
                                 <span class="text-slate-500">
                                     Email
                                 </span>
                             </div>
                         </th>
-                        <th scope="col" class="px-4 py-2 text-left cursor-pointer min-w-32">
-                            <div class="flex flex-row justify-between gap-1 content-center">
-                                <span class="text-slate-500">
-                                    Registration Fee
-                                </span>
-                            </div>
+{{--                        <th scope="col" class="px-4 py-2 text-left min-w-32">--}}
+{{--                            <div class="flex flex-row justify-between gap-1 content-center">--}}
+{{--                                <span class="text-slate-500">--}}
+{{--                                    Submission Fee--}}
+{{--                                </span>--}}
+{{--                            </div>--}}
+{{--                        </th>--}}
+                        <th scope="col" class="px-4 py-2 text-left">
+                            Submission Status
                         </th>
                         <th scope="col" class="px-4 py-2 text-left">
-                            EoI Status
+                            Interview Date &amp; Time
                         </th>
                         <th scope="col" class="px-4 py-2 text-left">
                             Actions
@@ -153,31 +158,36 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-sky-100">
                     @foreach($submitted_submissions as $registrant)
-                        <tr wire:key="{{ $registrant->id }}" wire:click="openMember({{ $registrant->id }})" class="cursor-pointer hover:bg-slate-100 hover:text-sky-600">
+                        <tr wire:key="{{ $registrant->id }}" class="">
                             <td class="px-4 py-2">
                                 {{ $registrant->first_name . ' ' . $registrant->last_name }}
                             </td>
                             <td class="px-4 py-2">
                                 {{ $registrant->email }}
                             </td>
-                            <td class="px-4 py-1">
-                                <span class="py-1 px-3 inline rounded-full w-96 {{ $registrant->registration_fee_paid ? 'text-emerald-500 bg-emerald-100' : 'text-slate-500 bg-slate-200' }}">
-                                    {{ $registrant->registration_fee_paid ? 'Paid' : 'Not Paid' }}
-                                </span>
-                            </td>
+{{--                            <td class="px-4 py-1">--}}
+{{--                                <span class="py-1 px-3 inline rounded-full w-96 {{ $registrant->registration_fee_paid ? 'text-emerald-500 bg-emerald-100' : 'text-slate-500 bg-slate-200' }}">--}}
+{{--                                    {{ $registrant->submission_fee_paid ? 'Paid' : 'Not Paid' }}--}}
+{{--                                </span>--}}
+{{--                            </td>--}}
                             <td class="px-4 py-2">
-                                @if ($registrant->submission_status === 'submitted' && $registrant->submission_fee_paid)
-                                    Ready for assessment.
-                                @elseif($registrant->submission_status === 'submitted' && !$registrant->submission_fee_paid)
-                                    Submitted. Awaiting payment.
-                                @elseif($registrant->submission_status !== 'submitted' && $registrant->submission_fee_paid)
-                                    Paid. Awaiting submission.
-                                @else
-                                    Unpaid. Awaiting submission.
-                                @endif
+                                {{ str(str_replace('_', ' ', $registrant->submission_status))->title() }}
+                            </td>
+                            <td class="px-4 py-2 {{ empty($registrant->submission_interview_at) || $registrant->submission_interview_at > now()
+                                        ? ''
+                                        : ' text-red-700 '
+                            }} ">
+                                {{
+                                    empty($registrant->submission_interview_at)
+                                        ? '-'
+                                        : \Carbon\Carbon::parse($registrant->submission_interview_at)->toDayDateTimeString()
+                                }}
                             </td>
                             <td class="px-4 py-1">
-                                <a href="#" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess</a>
+                                <x-edit-button-fuchsia :href="route('assess-submission', [$registrant->id])" class="">
+                                    Submission
+                                </x-edit-button-fuchsia>
+{{--                                <a href="{{ route('assess-submission',[$registrant->id]) }}" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess&nbsp;Submission</a>--}}
                             </td>
                         </tr>
                     @endforeach

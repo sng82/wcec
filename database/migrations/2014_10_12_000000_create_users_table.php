@@ -26,11 +26,12 @@ return new class extends Migration
             $table->integer('submission_count')->default(0);
             $table->boolean('submission_fee_paid')->default(false);
             $table->string('submission_status')->nullable()->default(null);
+            $table->timestamp('submission_interview_at')->nullable()->default(null);
             $table->timestamp('submission_accepted_at')->nullable()->default(null);
             $table->unsignedBigInteger('submission_accepted_by')->nullable()->default(null);
             $table->timestamp('became_registrant_at')->nullable()->default(null);
             $table->timestamp('registration_expires_at')->nullable()->default(null);
-            $table->string('registration_pathway')->default('standard');
+            $table->string('registration_pathway')->nullable()->default(null);
             $table->timestamp('declined_at')->nullable()->default(null);
             $table->unsignedBigInteger('declined_by')->nullable()->default(null);
             $table->timestamp('email_verified_at')->nullable();

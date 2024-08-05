@@ -23,7 +23,7 @@
         <li>Step 4: Submit your submission.</li>
     </ul>
     <p class="mb-2">
-        Track your progression in the table below.
+        Track your progression in the <a href="#progression">table below</a>.
     </p>
     <hr class="my-4">
     <p class="mb-2">
@@ -49,16 +49,16 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
 {{--    </svg>--}}
     <div>
         <p class="text-lg mb-1">
-            Payments and subscriptions are processed by our secure payment processor, <a href="https://stripe.com/gb" class="underline hover:text-sky-100" target="_blank">Stripe</a>.
+            Payments and subscriptions are processed by <a href="https://stripe.com/gb" class="underline hover:text-sky-100" target="_blank">Stripe</a>, our secure payment processor.
         </p>
         <p class="text-lg">
-            No bank or card details are stored within the Chartered Practitioners Portal.
+            No bank or card details are stored within this website.
         </p>
     </div>
 </div>
 
 <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
-    <h2 class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2 mb-2">
+    <h2 id="progression" class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2 mb-2">
         Application Progression
     </h2>
     <div class="mt-4 mb-4 overflow-hidden border border-slate-200 rounded-lg shadow-sm overflow-x-auto">
@@ -74,7 +74,9 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
             </thead>
             <tbody class="bg-white divide-y divide-sky-100 text-slate-600">
                 <tr>
-                    <th class="px-4 py-2">1</th>
+                    <th class="px-4 py-2">
+                        1
+                    </th>
                     <td class="px-4 py-2">
                         Pay Registration Fee
                     </td>
@@ -118,7 +120,9 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                 </tr>
 
                 <tr  class="{{ ! $logged_in_user->registration_fee_paid ? 'bg-slate-100' : '' }}">
-                    <th class="px-4 py-2">2</th>
+                    <th class="px-4 py-2">
+                        2
+                    </th>
                     <td class="px-4 py-2">
                         Submit Expression of Interest
                     </td>
@@ -188,7 +192,9 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                 </tr>
 
                 <tr class="{{ $logged_in_user->eoi_status !== 'accepted' || ! $logged_in_user->registration_fee_paid ? 'bg-slate-100' : '' }}">
-                    <th class="px-4 py-2">3</th>
+                    <th class="px-4 py-2">
+                        3
+                    </th>
                     <td class="px-4 py-2">
                         Pay Submission Fee
                     </td>
@@ -239,15 +245,17 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                 </tr>
 
                 <tr class="{{ $logged_in_user->eoi_status !== 'accepted' || ! $logged_in_user->registration_fee_paid || ! $logged_in_user->submission_fee_paid ? 'bg-slate-100' : '' }}">
-                    <th class="px-4 py-2">4</th>
+                    <th class="px-4 py-2">
+                        4
+                    </th>
                     <td class="px-4 py-2">
-                        Submit Submission
+                        Register
                     </td>
                     <td class="px-4 py-2">
                         @if(!empty($logged_in_user->submission_status ?? ''))
                             <div class="flex items-center text-sky-500">
                                 <span class="text-lg font-semibold me-3 border-2 border-sky-500 bg-white rounded-full px-4">
-                                   {{ Str::of($logged_in_user->submission_status)->title() }}
+                                   {{ str(str_replace('_', ' ', $logged_in_user->submission_status))->title() }}
                                 </span>
                             </div>
                         @else
@@ -261,8 +269,17 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                         @endif
                     </td>
                     <td class="px-4 py-2 italic text-sm">
-                        @if ($logged_in_user->submission_fee_paid)
-                            Your Submission can be submitted.
+                        @if($logged_in_user->submission_status === 'awaiting_interview')
+                            @if(null !== $logged_in_user->submission_interview_at)
+                                Scheduled for {{ \Carbon\Carbon::parse($logged_in_user->submission_interview_at)->toDayDateTimeString() }}.
+                            @else
+                                Date and time to be confirmed. We'll be in touch.
+                            @endif
+                        @elseif($logged_in_user->submission_status === 'submitted')
+                            Your registration has been submitted.
+                            We'll be in touch as soon as it has been assessed.
+                        @elseif ($logged_in_user->submission_fee_paid)
+                            Choose your pathway to registration.
                         @else
                             <span class="text-slate-500">
                                 Your Submission Fee must be paid before you can submit your submission.
@@ -270,10 +287,11 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
                         @endif
                     </td>
                     <td class="px-4 py-2">
-                        @if($logged_in_user->submission_fee_paid)
-                            <a href="#"
-                               class="bg-sky-600 w-fit pl-4 pr-1 gap-2 py-1 text-white rounded-full flex flex-row hover:bg-sky-700">
-                                View/Edit
+                        @if ($logged_in_user->submission_status !== 'awaiting_interview' && $logged_in_user->submission_status !== 'submitted' && $logged_in_user->submission_fee_paid)
+                            <a href="{{ route('applicant-submission') }}"
+                               class="bg-sky-600 w-fit pl-4 pr-1 gap-2 py-1 text-white rounded-full flex flex-row hover:bg-sky-700"
+                            >
+                                Go
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -287,19 +305,5 @@ px-6 py-4 lg:mx-6 rounded-lg flex flex-row items-center justify-center text-whit
             </tbody>
         </table>
     </div>
-
-{{--    <div class="px-6 py-4 mt-4 bg-sky-200 rounded-lg flex flex-row items-center text-sky-700 gap-6">--}}
-{{--        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-16 text-sky-500">--}}
-{{--            <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />--}}
-{{--        </svg>--}}
-{{--        <div>--}}
-{{--            <p class="mb-1">--}}
-{{--                Payments and subscriptions are processed and managed by our secure payment processor, <a href="https://stripe.com/gb" class="text-sky-500 hover:underline hover:text-sky-600" target="_blank">StripeController</a>.--}}
-{{--            </p>--}}
-{{--            <p>--}}
-{{--                No bank or card details are stored within the Chartered Practitioners Portal.--}}
-{{--            </p>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
 </div>
+

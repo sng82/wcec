@@ -54,10 +54,12 @@ class User extends Authenticatable
         'submission_count',
         'submission_fee_paid',
         'submission_status',
+        'submission_interview_at',
         'submission_accepted_at',
         'submission_accepted_by',
         'became_registrant_at',
         'registration_expires_at',
+        'registration_pathway',
         'declined_at',
         'declined_by',
         'password',
@@ -110,5 +112,10 @@ class User extends Authenticatable
     public function eoi()
     {
         return $this->hasOne(Eoi::class);
+    }
+
+    public function submission()
+    {
+        return $this->hasOne(Submission::class);
     }
 }
