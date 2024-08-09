@@ -9,7 +9,7 @@
 
 <div {{ $attributes->class(['bg-slate-50 rounded-lg p-3 xl:p-4 shadow']) }}>
     <p class="mb-4">
-        Hi, {{ $logged_in_user->first_name }},
+        Hi, {{ explode(" ", $logged_in_user->first_name)[0] }},
     </p>
     <p class="mb-4">
         Welcome to the Admin dashboard!
@@ -138,13 +138,6 @@
                                 </span>
                             </div>
                         </th>
-{{--                        <th scope="col" class="px-4 py-2 text-left min-w-32">--}}
-{{--                            <div class="flex flex-row justify-between gap-1 content-center">--}}
-{{--                                <span class="text-slate-500">--}}
-{{--                                    Submission Fee--}}
-{{--                                </span>--}}
-{{--                            </div>--}}
-{{--                        </th>--}}
                         <th scope="col" class="px-4 py-2 text-left">
                             Submission Status
                         </th>
@@ -165,11 +158,6 @@
                             <td class="px-4 py-2">
                                 {{ $registrant->email }}
                             </td>
-{{--                            <td class="px-4 py-1">--}}
-{{--                                <span class="py-1 px-3 inline rounded-full w-96 {{ $registrant->registration_fee_paid ? 'text-emerald-500 bg-emerald-100' : 'text-slate-500 bg-slate-200' }}">--}}
-{{--                                    {{ $registrant->submission_fee_paid ? 'Paid' : 'Not Paid' }}--}}
-{{--                                </span>--}}
-{{--                            </td>--}}
                             <td class="px-4 py-2">
                                 {{ str(str_replace('_', ' ', $registrant->submission_status))->title() }}
                             </td>

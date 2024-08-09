@@ -51,6 +51,16 @@ class UserSeeder extends Seeder
         ]);
         $test_applicant->assignRole('applicant');
 
+        $became_registrant_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d H:i:s');
+        $submission_accepted_at = Carbon::parse($became_registrant_at)->subDays(fake()->numberBetween(1,30))->format('Y-m-d H:i:s');
+
+        $test_registrant = User::factory()->create([
+            'first_name'   => 'Ted',
+            'last_name'    => 'Hunter',
+            'email'        => 'ted@asapcomputers.co.uk',
+            'password'     => Hash::make('asap3434'),
+        ]);
+
         $test_applicant2 = User::factory()->create([
             'first_name'   => 'James',
             'last_name'    => 'Smith',

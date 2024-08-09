@@ -1,9 +1,13 @@
 <?php
 
+use App\Mail\RegistrationExpiringNotification;
 use App\Models\SubmissionDate;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,24 +24,54 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
+
+// Promote Applicants to Registrants
 Schedule::call(function () {
     $next_admission_date = SubmissionDate::where('admission_date', '>=', date('Y-m-d'))
-                                          ->orderBy('admission_date', 'desc')
+                                          ->orderBy('admission_date', 'asc')
                                           ->first()->admission_date;
 
     if ($next_admission_date === date('Y-m-d')) {
-        $users_to_update = User::where('application_status', 'accepted')
-                               ->where('registration_fee_paid', 1)
-                               ->where('application_fee_paid', 1)
-                               ->whereNull('became_registrant_at')
-                               ->whereNull('registration_expires_at')
-                               ->get();
-        foreach ($users_to_update as $user) {
-            $user->removeRole('accepted_applicant');
+        $accepted_applicants = User::role('accepted applicant')
+                                   ->where('application_status', 'accepted')
+                                   ->where('registration_fee_paid', 1)
+                                   ->where('application_fee_paid', 1)
+                                   ->whereNull('became_registrant_at')
+                                   ->whereNull('registration_expires_at')
+                                   ->get();
+
+        foreach ($accepted_applicants as $user) {
+            $user->removeRole('accepted applicant');
             $user->assignRole('registrant');
             $user->became_registrant_at = date('Y-m-d');
             $user->registration_expires_at = date('Y-m-d', strtotime('+1 year'));
             $user->save();
         }
     }
-})->daily();
+})->dailyAt('00:10'); // run just after midnight to allow for any discrepancy between server and database clocks.
+
+// Demote Registrants who have not completed their CPD (Continuous Professional Development) / Paid their renewal fee.
+Schedule::call(function () {
+   $expired_users = User::role('registrant')
+                        ->where('registration_expires_at', '<', date('Y-m-d'))
+                        ->get();
+
+   foreach ($expired_users as $user) {
+       $user->removeRole('registrant');
+       $user->assignRole('lapsed registrant');
+   }
+})->dailyAt('00:20'); // run a little later than the last call, just to minimise load on server.
+
+// Send reminder emails to users whose registrations are close to expiring
+Schedule::call(function () {
+    $four_weeks_from_now = Carbon::now()->addDays(28)->format('Y-m-d');
+    $expiring_users = User::role('registrant')
+                          ->where('registration_expires_at', $four_weeks_from_now)
+                          ->get();
+
+    foreach ($expiring_users as $user) {
+        Mail::to($user->email)
+            ->send(new RegistrationExpiringNotification($user));
+    }
+
+})->dailyAt('00:30'); // run a little later than the last call, just to minimise load on server.

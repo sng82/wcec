@@ -38,7 +38,7 @@ class Contact extends Component
             'message'   => 'required|min:10',
         ]);
 
-        Mail::to(Config('mail.contact_mail_recipient'))
+        Mail::to(config('mail.contact_mail_recipient'))
             ->send(new ContactMail($validated));
 
         session()->flash('status', 'sent');

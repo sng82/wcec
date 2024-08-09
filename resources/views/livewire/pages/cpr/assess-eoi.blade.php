@@ -153,7 +153,7 @@
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3">
                         <x-admin-input-label for="feedback" :value="__('Feedback')" class="lg:w-48 shrink-0"/>
-                        <textarea wire:model="feedback" name="current_role" rows="3" id="current_role"
+                        <textarea wire:model="feedback" name="feedback" rows="3" id="feedback"
                                   class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full"></textarea>
                     </div>
 

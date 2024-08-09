@@ -74,6 +74,7 @@ class User extends Authenticatable
 //        'submission_submitted_at' => 'datetime',
         'submission_count' => 'integer',
         'submission_accepted_at' => 'datetime',
+        'submission_interview_at' => 'datetime',
         'became_registrant_at' => 'datetime',
         'registration_expires_at' => 'datetime',
         'declined_at' => 'datetime',

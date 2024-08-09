@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -19,8 +20,9 @@ class ApplicantSubmission extends Component
     use LivewireAlert;
     use WithFileUploads;
 
-    public $path;
+    public $registration_path;
     public $submission_paper;
+    public $proof_of_qualifications;
     public $user;
 
     public function mount()
@@ -38,42 +40,77 @@ class ApplicantSubmission extends Component
     public function submit()
     {
         $this->validate([
-            'path'              => 'required',
-            'submission_paper'  => 'required_if:path,individual'
+            'registration_path'         => ['required'],
+            'submission_paper'          => ['required_if:registration_path,individual'],
+            'proof_of_qualifications'   => ['required_if:registration_path,standard'],
+            'proof_of_qualifications.*' => [
+                'file',
+                'mimes:pdf,doc,docx,jpg,jpeg,png',
+                'max:5120'
+            ],
         ]);
+
+//        dd('validation passed');
 
         try {
             if (null !== $this->submission_paper) {
-                $filename = 'Submission_' . $this->user->first_name . '_' . $this->user->last_name . '_' . Carbon::parse(now())->format('YmdHisu');
-                $filename .= '.' . $this->submission_paper->getClientOriginalExtension();
+                $filename = 'Submission_'
+                            . str_replace(' ', '_', $this->user->first_name) . '_'
+                            . str_replace(' ', '_', $this->user->last_name) . '_'
+                            . Carbon::parse(now())->format('YmdHisu')
+                            . '.' . $this->submission_paper->getClientOriginalExtension();
 
-                $this->submission_paper->storeAs(path: 'public/submitted_documents/' . $this->user->id, name: $filename);
+                $this->submission_paper->storeAs(
+                    path: 'public/submitted_documents/' . $this->user->id,
+                    name: $filename
+                );
 
                 Document::create([
                     'file_name' => $filename,
                     'doc_type'  => 'submission',
                     'user_id'   => $this->user->id,
                 ]);
-
-                User::find($this->user->id)?->update([
-                    'submission_status'    => 'submitted',
-                    'registration_pathway' => $this->path,
-                ]);
-
-                return $this->flash(
-                    'success',
-                    'Registration Submitted.',
-                    [
-                        'text'               => 'We\'ll be in touch soon.',
-                        'position'           => 'center',
-                        'timer'              => null,
-                        'showConfirmButton'  => true,
-                        'confirmButtonColor' => '#10b981',
-                        'width'              => '500'
-                    ],
-                    route('dashboard')
-                );
             }
+
+            if (null !== $this->proof_of_qualifications) {
+                foreach ($this->proof_of_qualifications as $proof) {
+                    $filename = 'Qualification_Proof_'
+                                . str_replace(' ', '_', $this->user->first_name) . '_'
+                                . str_replace(' ', '_', $this->user->last_name) . '_'
+                                . Carbon::parse(now())->format('YmdHisu')
+                                . '.' . $proof->getClientOriginalExtension();
+
+                    $proof->storeAs(
+                        path: 'public/submitted_documents/' . $this->user->id,
+                        name: $filename
+                    );
+
+                    Document::create([
+                        'user_id'   => $this->user->id,
+                        'doc_type'  => 'qualification_proof',
+                        'file_name' => $filename,
+                    ]);
+                }
+            }
+
+            User::find($this->user->id)?->update([
+                'submission_status'    => 'submitted',
+                'registration_pathway' => $this->registration_path,
+            ]);
+
+            return $this->flash(
+                'success',
+                'Registration Submitted.',
+                [
+                    'text'               => 'We\'ll be in touch soon.',
+                    'position'           => 'center',
+                    'timer'              => null,
+                    'showConfirmButton'  => true,
+                    'confirmButtonColor' => '#10b981',
+                    'width'              => '500'
+                ],
+                route('dashboard')
+            );
         } catch (Exception $e) {
             Log::error('Unable to submit submission | ' . $e->getMessage());
 

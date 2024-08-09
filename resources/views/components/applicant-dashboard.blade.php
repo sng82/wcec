@@ -8,7 +8,8 @@
 
 <div {{ $attributes->class(['bg-slate-100 rounded-lg p-3 xl:p-4 shadow']) }}>
     <p class="my-2">
-        Hi, {{ $logged_in_user->first_name }},
+        Hi, {{ explode(" ", $logged_in_user->first_name)[0] }},
+    </p>
     <p class="mb-2">
         Welcome to the Chartered Practitioners Portal...
     </p>
@@ -18,12 +19,12 @@
     </p>
     <ul class="my-2 ml-12 list-square marker:text-sky-400 space-y-1 max-w-2xl xl:max-w-fit">
         <li>Step 1: Pay your registration fee.</li>
-        <li>Step 2: Submit your Expression of Interest.</li>
+        <li>Step 2: Complete &amp; submit your Expression of Interest.</li>
         <li>Step 3: Pay your submission fee.</li>
-        <li>Step 4: Submit your submission.</li>
+        <li>Step 4: Provide your submission.</li>
     </ul>
     <p class="mb-2">
-        Track your progression in the <a href="#progression">table below</a>.
+        Track your progression in the <a href="#progression" class="text-sky-600 border-transparent border-b hover:text-sky-500 hover:border-b-sky-500">table below</a>.
     </p>
     <hr class="my-4">
     <p class="mb-2">

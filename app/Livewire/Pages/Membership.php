@@ -36,7 +36,7 @@ class Membership extends Component
             'detail'    => 'required|min:10',
         ]);
 
-        Mail::to(Config('mail.membership_enquiry_mail_recipient'))
+        Mail::to(config('mail.membership_enquiry_mail_recipient'))
             ->send(new MembershipEnquiryMail($validated));
 
         session()->flash('status', 'sent');

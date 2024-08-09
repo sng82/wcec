@@ -6,7 +6,7 @@
 
         <livewire:layout.cpr-navigation/>
 
-        <form wire:submit="submit" class="py-4 p-3 xl:p-6">
+        <form wire:submit="submit" enctype="multipart/form-data" class="py-4 p-3 xl:p-6">
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mt-6 mb-6 border border-slate-300 shadow shadow-slate-400">
                 <h1 class="text-3xl text-sky-800 border-b-4 border-red-600 pb-2 mb-6">
@@ -19,7 +19,7 @@
                     <div class="flex w-full xl:w-1/2">
                         <div class="rounded-3xl bg-slate-600 text-white p-6 w-full">
                             <h2 class="text-2xl border-b-2 border-slate-400 pb-1 text-slate-100 mb-4">
-                                Standard Path
+                                Standard Pathway
                             </h2>
                             <p class="font-bold">
                                 Standard Path requirements:
@@ -50,14 +50,14 @@
                     <div class="flex w-full xl:w-1/2">
                         <div class="rounded-3xl bg-slate-400 text-white p-6 w-full">
                             <h2 class="text-2xl border-b-2 border-slate-500 pb-1 text-slate-100 mb-4">
-                                Individual Path
+                                Individual Pathway
                             </h2>
                             <p class="font-bold">
                                 Individual Path requirements:
                             </p>
                             <ul class="my-2 ml-6 list-square marker:text-slate-700 space-y-4">
                                 <li>
-                                    Submission of a paper (approximately 10,000 words in length) demonstrating
+                                    Submission of a paper (no more than 10,000 words in length) demonstrating
                                     that you meet the defined competence requirements of all the
                                     five key elements.
                                 </li>
@@ -92,20 +92,34 @@
 
                 <hr class="mt-12 mb-8 border-b-4">
 
-                <div x-data="{ path: '' }">
+                <div x-data="{ registration_path: '' }">
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
-                        <x-admin-input-label for="path" :value="__('Registration Path')" class="w-48" />
-                        <select wire:model="path" x-model="path" id="path" name="path"
+                        <x-admin-input-label for="registration_path" :value="__('Registration Path')" class="w-48" />
+                        <select wire:model="registration_path" x-model="registration_path" id="registration_path" name="registration_path"
                                 class="border-gray-300 focus:border-indigo-500 focus:ring-sky-500 rounded-md shadow-sm lg:w-52"
-                                required>
+{{--                                required--}}
+                        >
                             <option value="" selected>- Please Select -</option>
                             <option value="standard">Standard</option>
                             <option value="individual">Individual</option>
                         </select>
                     </div>
-                    <x-input-error :messages="$errors->get('path')" class="mt-2" />
+                    <x-cpr-input-error :messages="$errors->get('registration_path')" class="mt-2" class="mt-2 lg:pl-1 lg:ml-48" />
 
-                    <div x-show="path == 'individual'" x-cloak>
+                    <div x-show="registration_path == 'standard'" x-cloak>
+                        <p class="mt-4">Please provide copies of your Bachelor’s or Master’s degree or Diploma in any subject plus a cleaning related qualification.</p>
+                        <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
+                            <x-admin-input-label for="proof_of_qualifications" :value="__('Proof of Qualifications')" class="w-48"/>
+                            <input type="file" wire:model="proof_of_qualifications" id="proof_of_qualifications"
+                                   class="block w-full lg:w-96 cursor-pointer rounded-lg border border-solid border-secondary-500 bg-white bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-sky-600 hover:file:bg-sky-700 file:px-3  file:py-[0.32rem] file:text-surface file:text-white focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none"
+                                   name="proof_of_qualifications" multiple/>
+                        </div>
+                        <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .pdf, .doc, .docx, .jpg, .jpeg, .png | Max file size (each): 5MB</p>
+                        <x-cpr-input-error :messages="$errors->get('proof_of_qualifications')" class="mt-2 lg:pl-1 lg:ml-48"/>
+                        <x-cpr-input-error :messages="$errors->get('proof_of_qualifications.*')" class="mt-2 lg:pl-1 lg:ml-48"/>
+                    </div>
+
+                    <div x-show="registration_path == 'individual'" x-cloak>
                         <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                             <x-admin-input-label for="submission_paper" :value="__('Submission Paper')" class="w-48"/>
                             <input type="file" wire:model="submission_paper" id="submission_paper"
@@ -113,7 +127,7 @@
                                    name="submission_paper"/>
                         </div>
                         <x-cpr-input-error :messages="$errors->get('submission_paper')" class="mt-2 lg:pl-1 lg:ml-48"/>
-                        <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .doc, .docx, .pdf</p>
+                        <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .pdf, .doc, .docx, .jpg, .jpeg, .png | Max file size: 5MB</p>
                     </div>
 
                     <button class="bg-sky-600 hover:bg-sky-700 text-white rounded-full px-6 py-2 my-4 flex flex-row items-center justify-center gap-2"

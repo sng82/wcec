@@ -132,7 +132,11 @@ class ApplicantEoi extends Component
     public function downloadFiles($doc_type)
     {
         $zip         = new ZipArchive;
-        $zipFileName = $this->user->first_name . '_' . $this->user->last_name . '_' . str($doc_type)->title() . 's_' . Carbon::parse(now())->format('YmdHisu') . '.zip';
+        $zipFileName = str_replace(' ', '_', $this->user->first_name) . '_'
+                       . str_replace(' ', '_', $this->user->last_name) . '_'
+                       . str($doc_type)->title() . 's_'
+                       . Carbon::parse(now())->format('YmdHisu')
+                       . '.zip';
 
         if ($zip->open(public_path($zipFileName), ZipArchive::CREATE) === true) {
             $documents = Document::where('user_id', Auth::user()->id)
@@ -209,10 +213,10 @@ class ApplicantEoi extends Component
             'first_name'                   => 'required|min:2',
             'last_name'                    => 'required|min:2',
             'email'                        => 'required|email',
-            'cv'                           => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'job_description'              => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'qualification_certificates.*' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-            'training_certificates.*'      => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'cv'                           => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
+            'job_description'              => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
+            'qualification_certificates.*' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
+            'training_certificates.*'      => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
         ]);
 
         try {
@@ -235,10 +239,16 @@ class ApplicantEoi extends Component
             ]);
 
             if (null !== $this->cv) {
-                $filename = 'CV_' . $this->user->first_name . '_' . $this->user->last_name . '_' . Carbon::parse(now())->format('YmdHisu');
-                $filename .= '.' . $this->cv->getClientOriginalExtension();
+                $filename = 'CV_'
+                            . str_replace(' ', '_', $this->user->first_name) . '_'
+                            . str_replace(' ', '_', $this->user->last_name) . '_'
+                            . Carbon::parse(now())->format('YmdHisu')
+                            . '.' . $this->cv->getClientOriginalExtension();
 
-                $this->cv->storeAs(path: 'public/submitted_documents/' . $this->user->id, name: $filename);
+                $this->cv->storeAs(
+                    path: 'public/submitted_documents/' . $this->user->id,
+                    name: $filename
+                );
 
                 Document::updateOrCreate([
                     'user_id'  => $this->user->id,
@@ -253,10 +263,16 @@ class ApplicantEoi extends Component
             }
 
             if (null !== $this->job_description) {
-                $filename = 'Job_Description_' . $this->user->first_name . '_' . $this->user->last_name . '_' . Carbon::parse(now())->format('YmdHisu');
-                $filename .= '.' . $this->job_description->getClientOriginalExtension();
+                $filename = 'Job_Description_'
+                            . str_replace(' ', '_', $this->user->first_name) . '_'
+                            . str_replace(' ', '_', $this->user->last_name) . '_'
+                            . Carbon::parse(now())->format('YmdHisu')
+                            . '.' . $this->job_description->getClientOriginalExtension();
 
-                $this->job_description->storeAs(path: 'public/submitted_documents/' . $this->user->id, name: $filename);
+                $this->job_description->storeAs(
+                    path: 'public/submitted_documents/' . $this->user->id,
+                    name: $filename
+                );
 
                 Document::updateOrCreate([
                     'user_id'  => $this->user->id,
@@ -272,11 +288,16 @@ class ApplicantEoi extends Component
 
             if (null !== $this->qualification_certificates) {
                 foreach ($this->qualification_certificates as $qualification_certificate) {
-                    $filename = 'Qualification_Certificate_' . $this->user->first_name . '_' . $this->user->last_name . '_' . Carbon::parse(now())->format('YmdHisu');
-                    $filename .= '.' . $qualification_certificate->getClientOriginalExtension();
+                    $filename = 'Qualification_Certificate_'
+                                . str_replace(' ', '_', $this->user->first_name) . '_'
+                                . str_replace(' ', '_', $this->user->last_name) . '_'
+                                . Carbon::parse(now())->format('YmdHisu')
+                                . '.' . $qualification_certificate->getClientOriginalExtension();
 
-                    $qualification_certificate->storeAs(path: 'public/submitted_documents/' . $this->user->id,
-                        name: $filename);
+                    $qualification_certificate->storeAs(
+                        path: 'public/submitted_documents/' . $this->user->id,
+                        name: $filename
+                    );
 
                     Document::create([
                         'user_id'   => $this->user->id,
@@ -289,11 +310,16 @@ class ApplicantEoi extends Component
 
             if (null !== $this->training_certificates) {
                 foreach ($this->training_certificates as $training_certificate) {
-                    $filename = 'Training_Certificate_' . $this->user->first_name . '_' . $this->user->last_name . '_' . Carbon::parse(now())->format('YmdHisu');
-                    $filename .= '.' . $training_certificate->getClientOriginalExtension();
+                    $filename = 'Training_Certificate_'
+                                . str_replace(' ', '_', $this->user->first_name) . '_'
+                                . str_replace(' ', '_', $this->user->last_name) . '_'
+                                . Carbon::parse(now())->format('YmdHisu')
+                                .'.' . $training_certificate->getClientOriginalExtension();
 
-                    $training_certificate->storeAs(path: 'public/submitted_documents/' . $this->user->id,
-                        name: $filename);
+                    $training_certificate->storeAs(
+                        path: 'public/submitted_documents/' . $this->user->id,
+                        name: $filename
+                    );
 
                     Document::create([
                         'user_id'   => $this->user->id,
@@ -345,7 +371,7 @@ class ApplicantEoi extends Component
         }
 
         if (!$cv_doc) {
-            $to_be_validated['cv'] = 'required|file|mimes:pdf,doc,docx|max:2048';
+            $to_be_validated['cv'] = 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120';
         }
 
         if (!$job_desc_doc) {
@@ -353,8 +379,8 @@ class ApplicantEoi extends Component
             $validation_messages['current_role.required_without'] = 'Either a Job Description document OR a description of your current role is required.';
         }
 
-        $to_be_validated['qualification_certificates.*']    = 'nullable|file|mimes:pdf,doc,docx|max:2048';
-        $to_be_validated['training_certificates.*']         = 'nullable|file|mimes:pdf,doc,docx|max:2048';
+        $to_be_validated['qualification_certificates.*']    = 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120';
+        $to_be_validated['training_certificates.*']         = 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120';
         $to_be_validated['employment_history']              = 'required|min:3';
         $to_be_validated['qualifications']                  = 'required|min:3';
         $to_be_validated['training']                        = 'required|min:3';

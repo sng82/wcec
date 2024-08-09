@@ -2,10 +2,13 @@
 
 namespace App\Livewire\Pages\Cpr;
 
+use App\Mail\ApplicantInterviewNotification;
 use App\Models\Document;
 use App\Models\Submission;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -23,6 +26,7 @@ class AssessSubmission extends Component
     public $feedback;
     public $notes;
     public $submission;
+    public $send_interview_email = false;
 
     public function mount()
     {
@@ -35,7 +39,9 @@ class AssessSubmission extends Component
                                                       ->first();
             $this->path                     = $this->applicant->registration_pathway;
             $this->submission_status        = $this->applicant->submission_status;
-            $this->submission_interview_at  = $this->applicant->submission_interview_at;
+            $this->submission_interview_at  = !empty($this->applicant->submission_interview_at ?: '')
+                                                ? Carbon::parse($this->applicant->submission_interview_at)->format('Y-m-d\TH:i:s')
+                                                : null;
             $this->submission               = $this->applicant->submission;
 
             if ($this->submission){
@@ -91,14 +97,58 @@ class AssessSubmission extends Component
                 'notes'     => $this->notes,
             ]);
 
-            $this->applicant->update([
-                'submission_status'         => $this->submission_status,
-                'submission_interview_at'   => $this->submission_interview_at,
-            ]);
+            $applicant_data = [];
+            $applicant_data['submission_status']        = $this->submission_status;
+            $applicant_data['submission_interview_at']  = $this->submission_interview_at !== ''
+                                                                ? $this->submission_interview_at
+                                                                : null;
+
+            if (
+                $this->submission_status === 'accepted' && (
+                    empty($this->applicant->submission_accepted_at) ||
+                    empty($this->applicant->submission_accepted_by)
+                )
+            ) {
+                $applicant_data['submission_accepted_at'] = now();
+                $applicant_data['submission_accepted_by'] = \Auth::id();
+            }
+
+            if ($this->submission_status === 'rejected') {
+                $applicant_data['declined_at'] = now();
+                $applicant_data['declined_by'] = \Auth::id();
+            }
+
+            $this->applicant->update($applicant_data);
+
+            if ($this->submission_status === 'accepted'){
+                $this->applicant->removeRole('applicant');
+                $this->applicant->assignRole('accepted applicant');
+            }
+
+            if ($this->submission_status === 'rejected'){
+                $this->applicant->removeRole('applicant');
+                $this->applicant->assignRole('blocked applicant');
+            }
+
+            if ($this->send_interview_email && !empty($this->submission_interview_at)) {
+                Mail::to($this->applicant->email)
+                    ->send(new ApplicantInterviewNotification($this->applicant));
+                return $this->flash(
+                    'success',
+                    'Submission saved and email sent.',
+                    [
+                        'position' => 'top-end',
+                        'timer' => 2000,
+                        'showConfirmButton' => false,
+                        'confirmButtonColor' => '#10b981',
+                    ],
+                    route('dashboard')
+                );
+            }
 
             return $this->flash(
                 'success',
-                'Submission Saved.',
+                'Submission saved.',
                 [
                     'position' => 'top-end',
                     'timer' => 2000,

@@ -36,7 +36,7 @@ class AssessEoi extends Component
 
             $this->feedback     = $this->eoi->feedback;
             $this->notes        = $this->eoi->notes;
-            $this->documents    = $this->applicant->documents->sortBy('doc_type');
+            $this->documents    = $this->applicant->documents->where('eoi_id', $id)->sortBy('doc_type');
             $this->eoi_status   = $this->applicant->eoi_status;
 
         } catch (\Exception $e) {
@@ -65,9 +65,10 @@ class AssessEoi extends Component
         $html = file_get_contents($file_loc);
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadHTML($html);
-        $filename = 'EoI_' . $this->applicant->first_name
-                    . '_' . $this->applicant->last_name
-                    . '_' . Carbon::parse(now())->format('YmdHisu')
+        $filename = 'EoI_'
+                    . str_replace(' ', '_', $this->applicant->first_name) . '_'
+                    . str_replace(' ', '_', $this->applicant->last_name) . '_'
+                    . Carbon::parse(now())->format('YmdHisu')
                     . '.pdf';
 
         return response()->streamDownload(function () use ($pdf) {
@@ -116,8 +117,8 @@ class AssessEoi extends Component
             }
 
             $zipFileName = 'EoI_Documents_'
-                           . $this->eoi->user->first_name . '_'
-                           . $this->eoi->user->last_name . '_'
+                           . str_replace(' ', '_', $this->eoi->user->first_name) . '_'
+                           . str_replace(' ', '_', $this->eoi->user->last_name) . '_'
                            . Carbon::parse(now())->format('YmdHisu')
                            . '.zip';
 
@@ -144,7 +145,7 @@ class AssessEoi extends Component
             Log::error('Admin EoI Files download failed | ' . $e->getMessage());
 
             $err_message = 'Unable to download files';
-            if (Config('app.env') !== 'Production') {
+            if (config('app.env') !== 'Production') {
                 $err_message = $e->getMessage();
             } else {
                 Log::error($e->getMessage());
@@ -192,6 +193,8 @@ class AssessEoi extends Component
                 case 'rejected':
                     Mail::to($user->email)->send(new App\Mail\ExpressionRejected($user, $this->eoi));
                     $mail_sent = true;
+                    $user->removeRole('applicant');
+                    $user->assignRole('blocked applicant');
                     break;
             }
 

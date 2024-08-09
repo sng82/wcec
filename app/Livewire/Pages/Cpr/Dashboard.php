@@ -129,7 +129,7 @@ class Dashboard extends Component
                            ->orderBy('start_date')
                            ->firstOrFail();
 
-            $stripe = new StripeClient(Config('stripe.secret'));
+            $stripe = new StripeClient(config('stripe.secret'));
 
             $amount = $price->amount * 100;
             $email  = Auth::user()->email;
@@ -154,8 +154,17 @@ class Dashboard extends Component
                     ],
                     'quantity' => 1,
                 ]],
+                'automatic_tax' => ['enabled' => true],
                 'mode' => 'payment',
                 'customer_email' => $email,
+                'invoice_creation' => [
+                    'enabled' => true,
+                ],
+//                'custom_text' => [
+//                    'after_submit' => [
+//                        'message' => ''
+//                    ]
+//                ],
                 'success_url' => route('payment-success', [], true) . "?session_id={CHECKOUT_SESSION_ID}",
                 'cancel_url' => route('payment-cancel', [], true),
             ]);
@@ -173,7 +182,7 @@ class Dashboard extends Component
         } catch (\Exception $e) {
             $err_message = 'Unable to make payment. ';
 
-            if (Config('app.env') !== 'Production') {
+            if (config('app.env') !== 'Production') {
                 $err_message = $e->getMessage();
             } else {
                 Log::error($e->getMessage());

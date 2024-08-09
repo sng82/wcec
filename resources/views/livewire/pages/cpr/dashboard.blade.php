@@ -27,7 +27,7 @@
                 />
             @endif
 
-            @if (Auth::user()->hasRole('applicant'))
+            @if ($logged_in_user->hasRole('applicant'))
                 <x-applicant-dashboard :$logged_in_user
                                        :$next_admission_date_difference
                                        :$next_admission_date
@@ -35,6 +35,15 @@
                                        :$submission_fee
                 />
             @endif
+
+{{--            <div>--}}
+{{--                {{ $logged_in_user->hasRole('admin') ? 'Admin ' : '' }}--}}
+{{--                {{ $logged_in_user->hasRole('applicant') ? 'applicant ' : '' }}--}}
+{{--                {{ $logged_in_user->hasRole('accepted applicant') ? 'accepted applicant ' : '' }}--}}
+{{--                {{ $logged_in_user->hasRole('blocked applicant') ? 'blocked applicant ' : '' }}--}}
+{{--                {{ $logged_in_user->hasRole('registrant') ? 'registrant ' : '' }}--}}
+{{--                {{ $logged_in_user->hasRole('lapsed registrant') ? 'lapsed registrant ' : '' }}--}}
+{{--            </div>--}}
 
         </div>
 

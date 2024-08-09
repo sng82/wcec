@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
+use URL;
+
 //use Laravel\Cashier\Cashier;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+//        if (config('app.url') === 'https://wcec.sys') {
+//            URL::forceScheme('https');
+//        }
     }
 
     /**

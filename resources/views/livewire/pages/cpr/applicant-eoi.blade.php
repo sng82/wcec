@@ -8,7 +8,7 @@
 
         <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 
-        <form wire:submit="saveProgress" class="py-4 p-3 xl:p-6" x-data="{
+        <form wire:submit="saveProgress" enctype="multipart/form-data" class="py-4 p-3 xl:p-6" x-data="{
             init() {
                 Livewire.hook('commit', ({ succeed }) => {
                     succeed(() => {
@@ -74,7 +74,7 @@
                     Your admittance certificate will show your name as printed here.
                 </p>
                 <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
-                    <x-admin-input-label for="first_name" :value="__('First Name')" class="lg:w-48"/>
+                    <x-admin-input-label for="first_name" :value="__('First Name(s)')" class="lg:w-48"/>
                     <x-text-input wire:model="first_name" id="first_name" class="block w-full lg:w-96" type="text"
                                   name="first_name" required autofocus autocomplete="first_name"/>
                 </div>
@@ -171,7 +171,7 @@
                     <x-cpr-input-error :messages="$errors->get('cv')" class="mt-2 lg:pl-1 lg:ml-48"/>
 {{--                    <x-files-renamed-notice/>--}}
                 @endif
-                <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .doc, .docx, .pdf</p>
+                <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .pdf, .doc, .docx, .jpg, .jpeg, .png | Max file size: 5MB</p>
             </div>
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-8 xl:pb-8 mt-6 border border-slate-300 shadow shadow-slate-400">
@@ -238,7 +238,7 @@
                            name="job_description"/>
                 </div>
                 <x-cpr-input-error :messages="$errors->get('job_description')" class="mt-2 lg:pl-1 lg:ml-48"/>
-                <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .doc, .docx, .pdf</p>
+                <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .pdf, .doc, .docx, .jpg, .jpeg, .png | Max file size: 5MB</p>
 
 {{--                @endif--}}
 
@@ -261,6 +261,9 @@
                     @endscript
                 </div>
 
+                {{-- @todo:counter                --}}
+                <span class="text-orange-500 block font-bold text-lg mt-6">!Todo! : Add live word counter, possibly restricting input to 200 words.</span>
+
                 <x-cpr-input-error :messages="$errors->get('current_role')" class="mt-2"/>
             </div>
 
@@ -269,11 +272,10 @@
                     Employment History
                 </h2>
                 <label for="employment_history" class="my-4">
-                    An appraisal of your employment history, particularly with regard to knowledge,
+                    An appraisal of your employment history covering the last 10 years or 5 positions held,
+                    whichever is longer.
+                    <br>Be specific about the roles you have undertaken, particularly with regard to knowledge,
                     practical skills, leadership, communication and professional commitment.
-                    Be specific about the roles you have undertaken during your employment history,
-                    particularly with regard to knowledge, practical skills, leadership, communication
-                    and professional commitment.
                 </label>
 
                 <div wire:ignore class="mt-4">
@@ -299,7 +301,7 @@
                     Education
                 </h2>
                 <label for="qualifications" class="mt-4">
-                    Provide details of all higher education qualifications, including non-cleaning subjects:
+                    Provide details of higher education qualifications, including non-cleaning subjects:
                 </label>
 
                 <div wire:ignore class="mt-4">
@@ -423,7 +425,7 @@
                            name="qualification_certificates" multiple/>
                     <span class="text-sm text-gray-700 italic"> - You can add multiple files at once, or add them one at a time.</span>
                 </div>
-                <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .doc, .docx, .pdf</p>
+                <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .pdf, .doc, .docx, .jpg, .jpeg, .png | Max file size (each): 5MB</p>
 
                 <x-cpr-input-error :messages="$errors->get('qualification_certificates')" class="mt-2 mt-2 lg:pl-1 lg:ml-48"/>
 
@@ -559,7 +561,7 @@
 
                     <span class="text-sm text-gray-700 italic"> - You can add multiple files at once, or add them one at a time.</span>
                 </div>
-                <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .doc, .docx, .pdf</p>
+                <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .pdf, .doc, .docx, .jpg, .jpeg, .png | Max file size (each): 5MB</p>
 
                 <x-cpr-input-error :messages="$errors->get('training_certificates')" class="mt-2 lg:pl-1 lg:ml-48"/>
 
