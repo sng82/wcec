@@ -17,6 +17,6 @@ The assessor provided the following feedback:
 Chartered Practitioners Portal
 </x-mail::button>
 
-<br><br>Thanks,<br>
+<br><br>Regards,<br>
 {{ config('app.name') }}
 </x-mail::message>

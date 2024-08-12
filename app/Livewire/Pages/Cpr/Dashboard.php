@@ -20,17 +20,13 @@ class Dashboard extends Component
     public $title = "CPR Dashboard";
     public $next_admission_date = '';
     public $next_admission_date_difference = '';
-
     public $submitted_eois = '';
-
     public $submitted_submissions = '';
-
     public $expiring_registrations = '';
-
     public $logged_in_user;
-
     public $submission_fee;
     public $registration_fee;
+    public $renewal_fee;
 
     public function mount()
     {
@@ -40,6 +36,7 @@ class Dashboard extends Component
         $this->getExpiringRegistrations();
         $this->getSubmissionFee();
         $this->getRegistrationFee();
+        $this->getRenewalFee();
     }
 
     public function openMember($id)
@@ -106,6 +103,18 @@ class Dashboard extends Component
                                        ->first();
     }
 
+    public function getRenewalFee()
+    {
+        $this->renewal_fee = Prices::where('price_type', 'renewal')
+                                   ->where('start_date', '<=', now())
+                                   ->where(function($query) {
+                                       $query->where('end_date', '>', now())
+                                             ->orWhere('end_date', null);
+                                   })
+                                   ->orderBy('start_date')
+                                   ->first();
+    }
+
     public function getSubmissionDate()
     {
         $nextSubmissionDate = SubmissionDate::where('admission_date', '>', now()->subDay())
@@ -157,14 +166,16 @@ class Dashboard extends Component
                 'automatic_tax' => ['enabled' => true],
                 'mode' => 'payment',
                 'customer_email' => $email,
-                'invoice_creation' => [
-                    'enabled' => true,
-                ],
-//                'custom_text' => [
-//                    'after_submit' => [
-//                        'message' => ''
-//                    ]
+                // @NOTE: Stripe acct can be configured to automatically send receipts from dashboard.
+                // Not sure if Invoices can or should be created/sent as it looks like it might be a premium feature.
+                // more here: https://docs.stripe.com/receipts?payment-ui=checkout&locale=en-GB#paid-invoices
+                // Invoice pricing here: https://support.stripe.com/questions/pricing-for-post-payment-invoices-for-one-time-purchases-via-checkout-and-payment-links
+
+                // Uncomment the following line to enable invoices.
+//                'invoice_creation' => [
+//                    'enabled' => true,
 //                ],
+
                 'success_url' => route('payment-success', [], true) . "?session_id={CHECKOUT_SESSION_ID}",
                 'cancel_url' => route('payment-cancel', [], true),
             ]);
@@ -172,7 +183,7 @@ class Dashboard extends Component
             $order = new Order();
             $order->order_status = 'unpaid';
             $order->product_name = $price->price_type;
-            $order->total_price = $price->amount;
+            $order->price_ex_vat = $price->amount;
             $order->stripe_session_id = $checkout_session->id;
             $order->user_id = Auth::user()->id;
             $order->save();

@@ -23,7 +23,7 @@ class StripeController extends Controller
         $sig_header         = $_SERVER['HTTP_STRIPE_SIGNATURE'];
         $event              = null;
 
-        Log::error('Testing 12345');
+//        Log::error('Testing 12345');
 
         try {
             $event = Webhook::constructEvent(
@@ -43,7 +43,8 @@ class StripeController extends Controller
             // return response('', 400);
         }
 
-        Log::error($event->type ?: 'No Event Type');
+        // Useful for debugging:
+//        Log::info($event->type ?: 'No Event Type');
 
         // Handle the event
         switch ($event->type) {
@@ -56,6 +57,7 @@ class StripeController extends Controller
 
                 if ($order && $order->order_status === 'unpaid') {
                     $order->order_status = 'paid';
+                    $order->payment_intent = $paymentIntent->payment_intent;
                     $order->save();
 
                     $user = User::findorFail($order->user_id);
@@ -67,27 +69,34 @@ class StripeController extends Controller
                     }
                     $user->save();
 
-                    // @todo: Send email to user & admins confirming purchase
+                    Mail::to(config('mail.membership_enquiry_mail_recipient'))
+                        ->send(new CPRFeePaidAdminNotification($order));
 
-                    $admins = User::role('admin')->get();
-                    foreach ($admins as $admin) {
-                        Mail::to($admin->email)
-                            ->send(new CPRFeePaidAdminNotification($order));
-                    }
+                    // @todo: Send email to user confirming purchase
+                    // @todo: Investigate fetching receipt pdf (if one exists?) using the API, and storing it locally.
                 }
+                break;
 
-//            case 'payment_intent.succeeded':
-//                $paymentIntent = $event->data->object;
-            // ... handle other event types
-
-//            case 'invoice.payment_succeeded':
+            // @NOTE: This case won't be reached unless invoice creation is
+            // enabled in PayFee() method @ app\Livewire\Pages\Cpr\Dashboard.php
+            // See the comment(s) there.
+            // If enabled, Stripe *SHOULD* automatically send an invoice to the user when system is live,
+            // if that doesn't happen, manual sending can be triggered from here.
+            case 'invoice.payment_succeeded':
+                $stripeData = $event->data->object;
+                $order = Order::where('payment_intent', $stripeData->payment_intent)
+                              ->first();
+                if ($order) {
+                    $order->stripe_hosted_invoice_url = $stripeData->hosted_invoice_url;
+                    $order->save();
+                }
+                // @todo: Investigate fetching invoice pdf using the API, and storing it locally.
+                break;
 
             default:
-                Log::error('Stripe webhook unknown event: ' . $event->type);
-                echo 'Received unknown event type ' . $event->type;
+                // Useful for debugging:
+//                Log::info('Stripe webhook unknown event: ' . $event->type);
         }
-
-//        Log::error('Testing 123');
 
         http_response_code(200);
 //        return response('', 200);

@@ -9,6 +9,6 @@ You may now continue with your application.
 Chartered Practitioners Portal
 </x-mail::button>
 
-Thanks,<br>
+Regards,<br>
 {{ config('app.name') }}
 </x-mail::message>

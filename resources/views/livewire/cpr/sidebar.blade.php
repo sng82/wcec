@@ -71,14 +71,6 @@
                         {{ __('Submit CPD') }}
                     </x-sidebar-link>
 
-                    <x-sidebar-link href="#">
-                        {{ __('Create Recurring Payment') }}
-                    </x-sidebar-link>
-
-                    <x-sidebar-link href="#">
-                        {{ __('Manage My Payments') }}
-                    </x-sidebar-link>
-
                 @endif
 
                 @if(Auth::user()->hasRole('applicant'))

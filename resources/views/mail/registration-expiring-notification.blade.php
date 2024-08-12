@@ -1,17 +1,16 @@
 <x-mail::message>
-# CPR - Continuous Professional Development Required
+# Chartered Practitioners Register - Renewal
 
 Dear {{ explode(" ", $user->first_name)[0] }},<br><br>
-Please log in to the Chartered Practitioners Portal on the Worshipful Company of
-Environmental Cleaners website to upload your CPD
-(Continuous Professional Development) and pay your renewal fee.<br><br>
-Failure to do so before {{ \Carbon\Carbon::parse($registrant->registration_expires_at)->toFormattedDayDateString() }}
-will result in being removed from the register.
+Your CPD (Continuous Professional Development) and renewal fee are due before
+<strong>{{ \Carbon\Carbon::parse($user->registration_expires_at)->toFormattedDayDateString() }}</strong>.
+Both requirements can be actioned from the Chartered Practitioners Portal.<br>
+Failure to renew will result in removal from the Chartered Practitioners Register.<br><br><br>
 
 <x-mail::button :url="config('app.url') . '/login'">
-Chartered Practitioners Portal Login
+Chartered Practitioners Portal
 </x-mail::button>
 
-Thanks,<br>
+<br><br>Regards,<br>
 {{ config('app.name') }}
 </x-mail::message>

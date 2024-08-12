@@ -36,6 +36,12 @@
                 />
             @endif
 
+            @if ($logged_in_user->hasRole('registrant'))
+                <x-registrant-dashboard :$logged_in_user
+                                        :$renewal_fee
+                />
+            @endif
+
 {{--            <div>--}}
 {{--                {{ $logged_in_user->hasRole('admin') ? 'Admin ' : '' }}--}}
 {{--                {{ $logged_in_user->hasRole('applicant') ? 'applicant ' : '' }}--}}

@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('order_status');
-            $table->string('product_name');
-            $table->decimal('total_price', 6, 2);
-            $table->string('stripe_session_id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->string('product_name');
+            $table->decimal('price_ex_vat', 6, 2);
+            $table->string('order_status');
+            $table->string('payment_intent')->nullable()->default(null);
+            $table->string('stripe_session_id');
+            $table->string('stripe_hosted_invoice_url')->nullable()->default(null);
             $table->timestamps();
         });
     }

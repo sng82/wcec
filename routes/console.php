@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\RegistrationExpiredNotification;
 use App\Mail\RegistrationExpiringNotification;
 use App\Models\SubmissionDate;
 use App\Models\User;
@@ -24,7 +25,6 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-
 // Promote Applicants to Registrants
 Schedule::call(function () {
     $next_admission_date = SubmissionDate::where('admission_date', '>=', date('Y-m-d'))
@@ -36,6 +36,7 @@ Schedule::call(function () {
                                    ->where('application_status', 'accepted')
                                    ->where('registration_fee_paid', 1)
                                    ->where('application_fee_paid', 1)
+                                   ->where('submission_accepted_at', '<=', $next_admission_date->submission_deadline)
                                    ->whereNull('became_registrant_at')
                                    ->whereNull('registration_expires_at')
                                    ->get();
@@ -50,7 +51,7 @@ Schedule::call(function () {
     }
 })->dailyAt('00:10'); // run just after midnight to allow for any discrepancy between server and database clocks.
 
-// Demote Registrants who have not completed their CPD (Continuous Professional Development) / Paid their renewal fee.
+// Demote Registrants who have not completed their CPD (Continuous Professional Development) and/or paid their renewal fee.
 Schedule::call(function () {
    $expired_users = User::role('registrant')
                         ->where('registration_expires_at', '<', date('Y-m-d'))
@@ -59,6 +60,8 @@ Schedule::call(function () {
    foreach ($expired_users as $user) {
        $user->removeRole('registrant');
        $user->assignRole('lapsed registrant');
+       Mail::to($user->email)
+           ->send(new RegistrationExpiredNotification($user));
    }
 })->dailyAt('00:20'); // run a little later than the last call, just to minimise load on server.
 
@@ -75,3 +78,27 @@ Schedule::call(function () {
     }
 
 })->dailyAt('00:30'); // run a little later than the last call, just to minimise load on server.
+
+
+// Tests
+Artisan::command('send_test_expiring_email', function () {
+    try {
+        $user = User::find(1);
+        Mail::to($user->email)
+            ->send(new RegistrationExpiringNotification($user));
+        print 'sent';
+    } catch (Exception $e) {
+        print 'not sent | ' . $e->getMessage();
+    }
+});
+
+Artisan::command('send_test_expired_email', function () {
+    try {
+        $user = User::find(1);
+        Mail::to($user->email)
+            ->send(new RegistrationExpiredNotification($user));
+        print 'sent';
+    } catch (Exception $e) {
+        print 'not sent | ' . $e->getMessage();
+    }
+});

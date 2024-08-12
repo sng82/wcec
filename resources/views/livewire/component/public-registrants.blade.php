@@ -53,7 +53,7 @@
         @endforelse
         <div class="clear-both"></div>
             <p class="my-4 text-sm text-slate-500">
-                Dates shown indicate when the individual was initially submitted to the register.
+                Dates shown indicate when the individual was initially admitted to the register.
             </p>
     </div>
     <div>

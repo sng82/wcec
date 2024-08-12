@@ -51,15 +51,25 @@ class UserSeeder extends Seeder
         ]);
         $test_applicant->assignRole('applicant');
 
-        $became_registrant_at = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d H:i:s');
+        $became_registrant_at = Carbon::parse(now())->subYears(7)->addDays(27)->format('Y-m-d H:i:s');
         $submission_accepted_at = Carbon::parse($became_registrant_at)->subDays(fake()->numberBetween(1,30))->format('Y-m-d H:i:s');
 
         $test_registrant = User::factory()->create([
-            'first_name'   => 'Ted',
-            'last_name'    => 'Hunter',
-            'email'        => 'ted@asapcomputers.co.uk',
-            'password'     => Hash::make('asap3434'),
+            'first_name'                => 'Ted',
+            'last_name'                 => 'Hunter',
+            'email'                     => 'ted@asapcomputers.co.uk',
+            'password'                  => Hash::make('asap3434'),
+            'submission_accepted_at'    => $submission_accepted_at,
+            'submission_accepted_by'    => 1,
+            'eoi_status'                => 'accepted',
+            'registration_expires_at'   => Carbon::parse($became_registrant_at)->addYears(7)->format('Y-m-d'),
+            'became_registrant_at'      => Carbon::parse($became_registrant_at)->format('Y-m-d'),
+            'registration_fee_paid'     => true,
+            'registration_pathway'      => fake()->randomElement(['personal','standard']),
+            'submission_status'         => 'accepted',
+            'submission_fee_paid'       => true,
         ]);
+        $test_registrant->assignRole('registrant');
 
         $test_applicant2 = User::factory()->create([
             'first_name'   => 'James',

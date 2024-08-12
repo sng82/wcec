@@ -9,7 +9,7 @@ Your account must be secured with a password before you can login. Please set on
 Request Password Reset
 </x-mail::button>
 
-Thanks,<br>
+Regards,<br>
 {{ config('app.name') }}
 
 <x-slot:subcopy>

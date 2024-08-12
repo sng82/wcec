@@ -13,7 +13,7 @@
 
 namespace App\Models{
 /**
- * 
+ *
  *
  * @mixin Builder
  * @property int $id
@@ -42,7 +42,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
+ *
  *
  * @mixin Builder
  * @property int $id
@@ -79,12 +79,12 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $order_status
  * @property string $product_name
- * @property string $total_price
+ * @property string $price_ex_vat
  * @property string $stripe_session_id
  * @property int $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -109,7 +109,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
+ *
  *
  * @mixin Builder
  * @property int $id
@@ -141,7 +141,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
+ *
  *
  * @mixin Builder
  * @property int $id
@@ -176,7 +176,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * 
+ *
  *
  * @mixin Builder
  * @property int $id
