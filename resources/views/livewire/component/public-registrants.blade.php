@@ -57,6 +57,6 @@
             </p>
     </div>
     <div>
-        {{ $registrants->onEachSide(1)->links() }}
+        {{ $registrants->onEachSide(1)->links(data: ['scrollTo' => false]) }}
     </div>
 </div>
