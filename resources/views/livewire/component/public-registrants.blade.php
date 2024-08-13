@@ -16,7 +16,7 @@
                     <span>Order by:</span>
                 </div>
                 <button type="button" wire:click="sortBy('became_registrant_at')" class="rounded-full text-white px-6 py-1 {{ $sort_column_name === 'became_registrant_at' ? ' bg-red-800 hover:bg-red-700 ' : ' bg-slate-500 hover:bg-red-700 ' }}">
-                    Submission Date
+                    Admission Date
                 </button>
                 <button type="button" wire:click="sortBy('last_name')" class="rounded-full text-white px-6 py-1 {{ $sort_column_name === 'last_name' ? ' bg-red-800 hover:bg-red-700 ' : ' bg-slate-500 hover:bg-red-700 ' }}">
                     Last Name
@@ -53,7 +53,7 @@
         @endforelse
         <div class="clear-both"></div>
             <p class="my-4 text-sm text-slate-500">
-                Dates shown indicate when the individual was initially admitted to the register.
+                The date next to each name indicates when the individual was admitted to the register.
             </p>
     </div>
     <div>
