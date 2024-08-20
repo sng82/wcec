@@ -13,7 +13,7 @@
 
 namespace App\Models{
 /**
- *
+ * 
  *
  * @mixin Builder
  * @property int $id
@@ -27,6 +27,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Document newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Document newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Document query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Document search($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereDocType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Document whereEoiId($value)
@@ -42,7 +43,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- *
+ * 
  *
  * @mixin Builder
  * @property int $id
@@ -79,7 +80,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- *
+ * 
  *
  * @property int $id
  * @property int $user_id
@@ -113,7 +114,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- *
+ * 
  *
  * @mixin Builder
  * @property int $id
@@ -145,7 +146,39 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * 
  *
+ * @mixin Builder
+ * @property int $id
+ * @property int $order
+ * @property string $file_name
+ * @property string|null $doc_type
+ * @property int $version
+ * @property string $release_month
+ * @property string $release_year
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|PublicDocument newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PublicDocument newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PublicDocument query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PublicDocument whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PublicDocument whereDocType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PublicDocument whereFileName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PublicDocument whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PublicDocument whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PublicDocument whereReleaseMonth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PublicDocument whereReleaseYear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PublicDocument whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PublicDocument whereVersion($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperPublicDocument {}
+}
+
+namespace App\Models{
+/**
+ * 
  *
  * @mixin Builder
  * @property int $id
@@ -172,7 +205,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- *
+ * 
  *
  * @mixin Builder
  * @property int $id
@@ -207,7 +240,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- *
+ * 
  *
  * @mixin Builder
  * @property int $id
@@ -226,7 +259,7 @@ namespace App\Models{
  * @property int|null $submission_accepted_by
  * @property string|null $registration_pathway
  * @property \Illuminate\Support\Carbon|null $became_registrant_at
- * @property string|null $last_cpr_submitted_at
+ * @property string|null $cpd_last_submitted_at
  * @property string|null $renewal_fee_last_paid_at
  * @property \Illuminate\Support\Carbon|null $registration_expires_at
  * @property \Illuminate\Support\Carbon|null $declined_at
@@ -259,6 +292,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null, $without = false)
  * @method static \Illuminate\Database\Eloquent\Builder|User search($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereBecameRegistrantAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCpdLastSubmittedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereDeclinedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereDeclinedBy($value)
@@ -267,7 +301,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEoiStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereFirstName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereLastCprSubmittedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLastName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePhoneMain($value)
