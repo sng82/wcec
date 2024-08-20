@@ -36,8 +36,8 @@
 
         {{--            <h2 class="text-cyan-200 ml-3 text-md">ADMIN</h2>--}}
 
-                    <x-sidebar-link :href="route('members')"
-                                    :active="request()->routeIs(['members', 'member-edit', 'member-add'])"
+                    <x-sidebar-link :href="route('registrants')"
+                                    :active="request()->routeIs(['registrants', 'user-edit', 'user-add'])"
                                     x-bind:title="sidebar_open ? null : 'Registrants & Applicants'"
                                     icon="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
                                     wire:navigate >
@@ -52,23 +52,52 @@
                         {{ __('Prices') }}
                     </x-sidebar-link>
 
-                    <x-sidebar-link :href="route('submission-dates')"
-                                    :active="request()->routeIs('submission-dates')"
+                    <x-sidebar-link :href="route('admission-dates')"
+                                    :active="request()->routeIs('admission-dates')"
                                     x-bind:title="sidebar_open ? null : 'Admission Dates'"
                                     icon="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"
                                     wire:navigate>
                         {{ __('Admission Dates') }}
                     </x-sidebar-link>
 
+                    <x-sidebar-link :href="route('public-documents')"
+                                    :active="request()->routeIs('public-documents')"
+                                    x-bind:title="sidebar_open ? null : 'Public Documents'"
+                                    icon="{{
+                                        request()->routeIs('public-documents')
+                                            ? 'M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776'
+                                            : 'M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z'
+                                    }}"
+                                    wire:navigate>
+                        {{ __('Public Documents') }}
+                    </x-sidebar-link>
+
+                    <x-sidebar-link :href="route('private-documents')"
+                                    :active="request()->routeIs('private-documents')"
+                                    x-bind:title="sidebar_open ? null : 'Private Documents'"
+                                    icon="{{
+                                        request()->routeIs('private-documents')
+                                            ? 'M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776'
+                                            : 'M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z'
+                                    }}"
+                                    wire:navigate>
+                        {{ __('Private Documents') }}
+                    </x-sidebar-link>
+
                 @endif
 
                 @if(Auth::user()->hasRole('registrant') || Auth::user()->hasRole('lapsed registrant'))
-                    <x-sidebar-link href="#">
-                        {{ __('My Details') }}
+
+                    <x-sidebar-link :href="route('registrant-cpd')"
+                                    :active="request()->routeIs('registrant-cpd')"
+                                    x-bind:title="sidebar_open ? null : 'Submit CPD'"
+                                    icon="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+                                    wire:navigate>
+                        {{ __('Submit CPD') }}
                     </x-sidebar-link>
 
                     <x-sidebar-link href="#">
-                        {{ __('Submit CPD') }}
+                        {{ __('My Details') }}
                     </x-sidebar-link>
 
                 @endif

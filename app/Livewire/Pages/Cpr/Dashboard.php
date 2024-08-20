@@ -27,21 +27,32 @@ class Dashboard extends Component
     public $submission_fee;
     public $registration_fee;
     public $renewal_fee;
+    public $renewal_due;
+    public $renewal_fee_due;
+    public $cpd_due;
+    public $renewal_window = 3; //how long, in months, before their registration expires that a user can renew.
 
     public function mount()
     {
-        $this->getSubmissionDate();
+        $this->updateRegistrationExpiryDate();
+
+        $this->getAdmissionDate();
         $this->getEOIs();
         $this->getSubmissions();
         $this->getExpiringRegistrations();
         $this->getSubmissionFee();
         $this->getRegistrationFee();
         $this->getRenewalFee();
+        $this->getRenewalDue();
+        $this->getRenewalFeeDue(); // must come after getRenewalDue!
+        $this->getCpdDue(); // must come after getRenewalDue!
+
+
     }
 
     public function openMember($id)
     {
-        $this->redirect('member-edit/' . $id);
+        $this->redirect('user-edit/' . $id);
     }
 
     public function getEOIs()
@@ -115,7 +126,7 @@ class Dashboard extends Component
                                    ->first();
     }
 
-    public function getSubmissionDate()
+    public function getAdmissionDate()
     {
         $nextSubmissionDate = SubmissionDate::where('admission_date', '>', now()->subDay())
                                             ->orderBy('admission_date', 'ASC')
@@ -124,6 +135,59 @@ class Dashboard extends Component
         $this->next_admission_date = Carbon::parse($nextSubmissionDate)->toFormattedDayDateString();
 
         $this->next_admission_date_difference = Carbon::parse($nextSubmissionDate)->diffForHumans();
+    }
+
+    public function getRenewalDue()
+    {
+        $user = Auth::user();
+        $this->renewal_due = $user?->registrationCanBeRenewed() ?: false;
+
+//        $is_registrant = $user?->hasRole('registrant');
+//
+//        if (
+//            ($is_registrant) &&
+//            (Carbon::parse($user?->registration_expires_at) > Carbon::now()) &&
+//            (Carbon::parse($user?->registration_expires_at) < Carbon::now()->addMonths($this->renewal_window))
+//        ) {
+//            $this->renewal_due = true;
+//        } else {
+//            $this->renewal_due = false;
+//        }
+    }
+
+    public function getRenewalFeeDue()
+    {
+        $user = Auth::user();
+        $this->renewal_fee_due = $user?->registrationRenewalCanBePaid() ?: false;
+//        $is_registrant = $user?->hasRole('registrant');
+//
+//        if (
+//            ($is_registrant) &&
+//            ($this->renewal_due) &&
+//            (Carbon::parse($user?->renewal_fee_last_paid_at) < Carbon::now()->subMonths($this->renewal_window))
+//        ) {
+//            $this->renewal_fee_due = true;
+//        } else {
+//            $this->renewal_fee_due = false;
+//        }
+    }
+
+    public function getCpdDue()
+    {
+        $user = Auth::user();
+        $this->cpd_due = $user?->cpdCanBeSubmitted() ?: false;
+
+//        $is_registrant = $user?->hasRole('registrant');
+//
+//        if (
+//            ($is_registrant) &&
+//            ($this->renewal_due) &&
+//            (Carbon::parse($user?->cpd_last_submitted_at) < Carbon::now()->subMonths($this->renewal_window))
+//        ) {
+//            $this->cpd_due = true;
+//        } else {
+//            $this->cpd_due = false;
+//        }
     }
 
     public function payFee($price_type)
@@ -149,6 +213,9 @@ class Dashboard extends Component
             }
             if ($price->price_type === 'submission') {
                 $description = 'Submission fee for the Chartered Practitioners Register.';
+            }
+            if ($price->price_type === 'renewal') {
+                $description = 'Renewal fee for the Chartered Practitioners Register.';
             }
 
             $checkout_session = $stripe->checkout->sessions->create([
@@ -205,6 +272,36 @@ class Dashboard extends Component
                 'showConfirmButton' => true,
                 'confirmButtonColor' => '#dc2626',
             ]);
+        }
+    }
+
+    private function updateRegistrationExpiryDate(): void
+    {
+        $user = Auth::user();
+        $is_registrant = $user?->hasRole('registrant');
+
+        if ($user && $is_registrant) {
+
+            if(Carbon::parse($user->registration_expires_at) < Carbon::parse(now())->addYear()) {
+                $new_expires_at = Carbon::parse($user->registration_expires_at)->addYear();
+                $user->update([
+                    'registration_expires_at' => $new_expires_at
+                ]);
+            }
+
+//            $oldest_valid_date = Carbon::now()->subMonths($this->renewal_window);
+//            if (
+//                Carbon::parse($user->renewal_fee_last_paid_at) >= Carbon::parse($oldest_valid_date)
+//                &&
+//                Carbon::parse($user->cpd_last_submitted_at) >= Carbon::parse($oldest_valid_date)
+//                &&
+//                Carbon::parse($user->registration_expires_at) < Carbon::parse(now())->addYear()
+//            ) {
+//                $new_expires_at = Carbon::parse($this->user->registration_expires_at)->addYear();
+//                $user->update([
+//                    'registration_expires_at' => $new_expires_at
+//                ]);
+//            }
         }
     }
 

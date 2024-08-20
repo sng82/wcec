@@ -10,7 +10,7 @@ use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Route;
 use Spatie\Permission\Models\Role;
 
-class MemberEdit extends Component
+class UserEdit extends Component
 {
     use LivewireAlert;
 
@@ -47,7 +47,9 @@ class MemberEdit extends Component
                     'showConfirmButton' => true,
                     'confirmButtonColor' => '#dc2626',
                 ],
-                'cpr/members');
+                route('registrants')
+//                'cpr/members'
+            );
         }
     }
 
@@ -94,7 +96,7 @@ class MemberEdit extends Component
         $this->submission_count = $this->registrant->submission_count;
         $this->registration_expires_at = $this->registrant->registration_expires_at?->format('Y-m-d');
 
-        return view('livewire.pages.cpr.member-edit')
+        return view('livewire.pages.cpr.user-edit')
             ->layout('layouts.app');
     }
 }

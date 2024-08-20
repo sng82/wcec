@@ -61,7 +61,7 @@ class ApplicantSubmission extends Component
                             . '.' . $this->submission_paper->getClientOriginalExtension();
 
                 $this->submission_paper->storeAs(
-                    path: 'public/submitted_documents/' . $this->user->id,
+                    path: 'private/submitted_documents/' . $this->user->id,
                     name: $filename
                 );
 
@@ -81,7 +81,7 @@ class ApplicantSubmission extends Component
                                 . '.' . $proof->getClientOriginalExtension();
 
                     $proof->storeAs(
-                        path: 'public/submitted_documents/' . $this->user->id,
+                        path: 'private/submitted_documents/' . $this->user->id,
                         name: $filename
                     );
 

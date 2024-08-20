@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\CPRFeePaidAdminNotification;
 use App\Models\Order;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -66,6 +67,9 @@ class StripeController extends Controller
                     }
                     if ($order->product_name === 'submission') {
                         $user->submission_fee_paid = true;
+                    }
+                    if ($order->product_name === 'renewal') {
+                        $user->renewal_fee_last_paid_at = Carbon::now();
                     }
                     $user->save();
 

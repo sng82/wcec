@@ -62,6 +62,8 @@ class UserSeeder extends Seeder
             'submission_accepted_at'    => $submission_accepted_at,
             'submission_accepted_by'    => 1,
             'eoi_status'                => 'accepted',
+            'cpd_last_submitted_at'     => Carbon::parse($became_registrant_at)->addYears(6)->subDays(8)->format('Y-m-d') . ' 13:45:27',
+            'renewal_fee_last_paid_at'  => Carbon::parse($became_registrant_at)->addYears(6)->subDays(8)->format('Y-m-d') . ' 13:42:18',
             'registration_expires_at'   => Carbon::parse($became_registrant_at)->addYears(7)->format('Y-m-d'),
             'became_registrant_at'      => Carbon::parse($became_registrant_at)->format('Y-m-d'),
             'registration_fee_paid'     => true,

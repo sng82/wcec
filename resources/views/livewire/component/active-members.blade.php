@@ -84,7 +84,7 @@
                                     {{ \Carbon\Carbon::parse($registrant->registration_expires_at)->toFormattedDayDateString() }}
                                 </td>
                                 <td class="px-4 py-1">
-                                    <x-edit-button :href="route('member-edit', $registrant->id)" class="">
+                                    <x-edit-button :href="route('user-edit', $registrant->id)" class="">
                                         {{ __('View/Edit') }}
                                     </x-edit-button>
                                 </td>

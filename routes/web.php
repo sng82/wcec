@@ -6,6 +6,9 @@ use App\Livewire\Pages\CharitableTrust;
 use App\Livewire\Pages\CharteredPractitioners;
 use App\Livewire\Pages\Contact;
 use App\Livewire\Pages\Cpr\AdminMembers;
+use App\Livewire\Pages\Cpr\AdminPrivateDocuments;
+use App\Livewire\Pages\Cpr\AdminPublicDocuments;
+use App\Livewire\Pages\Cpr\AdmissionDates;
 use App\Livewire\Pages\Cpr\ApplicantDocuments;
 use App\Livewire\Pages\Cpr\ApplicantEoi;
 use App\Livewire\Pages\Cpr\ApplicantFees;
@@ -13,15 +16,16 @@ use App\Livewire\Pages\Cpr\ApplicantHelp;
 use App\Livewire\Pages\Cpr\ApplicantSubmission;
 use App\Livewire\Pages\Cpr\AssessEoi;
 use App\Livewire\Pages\Cpr\AssessSubmission;
-use App\Livewire\Pages\Cpr\MemberAdd;
-use App\Livewire\Pages\Cpr\MemberEdit;
 //use App\Livewire\Pages\Cpr\Payment;
 use App\Livewire\Pages\Cpr\PaymentCancel;
 use App\Livewire\Pages\Cpr\PaymentSuccess;
 use App\Livewire\Pages\Cpr\Prices;
 use App\Livewire\Pages\Cpr\PrintEoi;
 //use App\Livewire\Pages\Cpr\StripePayment;
+use App\Livewire\Pages\Cpr\RegistrantCpd;
 use App\Livewire\Pages\Cpr\SubmissionDates;
+use App\Livewire\Pages\Cpr\UserAdd;
+use App\Livewire\Pages\Cpr\UserEdit;
 use App\Livewire\Pages\CprComingSoon;
 //use App\Livewire\Pages\CprEoi;
 use App\Livewire\Pages\Officers;
@@ -78,10 +82,12 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::group(['middleware' => ['role:admin', 'auth']], function () {
     Route::get('/cpr/prices', Prices::class)->name('prices');
-    Route::get('/cpr/members', AdminMembers::class)->name('members');
-    Route::get('/cpr/submission-dates', SubmissionDates::class)->name('submission-dates');
-    Route::get('/cpr/member-edit/{id}', MemberEdit::class)->name('member-edit');
-    Route::get('/cpr/member-add', MemberAdd::class)->name('member-add');
+    Route::get('/cpr/registrants', AdminMembers::class)->name('registrants');
+    Route::get('/cpr/admission-dates', AdmissionDates::class)->name('admission-dates');
+    Route::get('/cpr/public-documents', AdminPublicDocuments::class)->name('public-documents');
+    Route::get('/cpr/private-documents', AdminPrivateDocuments::class)->name('private-documents');
+    Route::get('/cpr/user-edit/{id}', UserEdit::class)->name('user-edit');
+    Route::get('/cpr/user-add', UserAdd::class)->name('user-add');
     Route::get('/cpr/assess-eoi/{id}', AssessEoi::class)->name('assess-eoi');
     Route::get('/cpr/assess-submission/{id}', AssessSubmission::class)->name('assess-submission');
 });
@@ -92,6 +98,10 @@ Route::group(['middleware' => ['role:applicant', 'auth']], function () {
     Route::get('/cpr/applicant-eoi', ApplicantEoi::class)->name('applicant-eoi');
     Route::get('/cpr/applicant-fees', ApplicantFees::class)->name('applicant-fees');
     Route::get('/cpr/applicant-submission', ApplicantSubmission::class)->name('applicant-submission');
+});
+
+Route::group(['middleware' => ['role:registrant', 'auth']], function () {
+    Route::get('/cpr/registrant-cpd', RegistrantCpd::class)->name('registrant-cpd');
 });
 
 Route::get('/cpr/print-eoi/{id}/{obfuscation_key}', PrintEoi::class)->name('print-eoi');

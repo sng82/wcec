@@ -43,13 +43,35 @@ class Prices extends Component
         ];
     }
 
-//    protected function getPrecedingPrice()
-//    {
-//        return ModelsPrices::where('price_type', $this->price_type)
-//                           ->where('start_date', '<=', Carbon::parse($this->start_date))
-//                           ->orderBy('start_date', 'desc')
-//                           ->first();
-//    }
+    public function mount(): void
+    {
+        $this->current_prices = ModelsPrices::with('updatedBy')
+                                            ->where('start_date', '<=', now())
+                                            ->where(function($query) {
+                                                $query->where('end_date', '>', now())
+                                                      ->orWhere('end_date', null);
+                                            })
+                                            ->orderBy('price_type')
+                                            ->orderBy('start_date')
+                                            ->get();
+
+        $this->upcoming_prices = ModelsPrices::with('updatedBy')
+                                             ->where('start_date', '>', now())
+                                             ->where(function($query) {
+                                                 $query->where('end_date', '>', now())
+                                                       ->orWhere('end_date', null);
+                                             })
+                                             ->orderBy('start_date')
+                                             ->orderBy('price_type')
+                                             ->get();
+
+        $this->archived_prices = ModelsPrices::with('updatedBy')
+                                             ->where('end_date', '<', now())
+                                             ->orderBy('price_type')
+                                             ->orderByDesc('end_date')
+                                             ->orderByDesc('start_date')
+                                             ->get();
+    }
 
     public function create(): void
     {
@@ -133,36 +155,6 @@ class Prices extends Component
                 'confirmButtonColor' => '#dc2626',
             ]);
         }
-    }
-
-    public function mount(): void
-    {
-        $this->current_prices = ModelsPrices::with('updatedBy')
-                                            ->where('start_date', '<=', now())
-                                            ->where(function($query) {
-                                                 $query->where('end_date', '>', now())
-                                                       ->orWhere('end_date', null);
-                                             })
-                                            ->orderBy('price_type')
-                                            ->orderBy('start_date')
-                                            ->get();
-
-        $this->upcoming_prices = ModelsPrices::with('updatedBy')
-                                             ->where('start_date', '>', now())
-                                             ->where(function($query) {
-                                                 $query->where('end_date', '>', now())
-                                                       ->orWhere('end_date', null);
-                                             })
-                                             ->orderBy('start_date')
-                                             ->orderBy('price_type')
-                                             ->get();
-
-        $this->archived_prices = ModelsPrices::with('updatedBy')
-                                             ->where('end_date', '<', now())
-                                             ->orderBy('price_type')
-                                             ->orderByDesc('end_date')
-                                             ->orderByDesc('start_date')
-                                             ->get();
     }
 
     public function render()

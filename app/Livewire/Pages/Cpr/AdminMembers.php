@@ -23,12 +23,12 @@ class AdminMembers extends Component
 
 //    public function openMember($id)
 //    {
-//        $this->redirect('member-add');
+//        $this->redirect('user-add');
 //    }
 
     public function addMember()
     {
-        $this->redirect('member-add');
+        $this->redirect('user-add');
     }
 
     public function mount()

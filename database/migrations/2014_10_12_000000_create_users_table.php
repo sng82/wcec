@@ -31,7 +31,7 @@ return new class extends Migration
             $table->unsignedBigInteger('submission_accepted_by')->nullable()->default(null);
             $table->string('registration_pathway')->nullable()->default(null);
             $table->timestamp('became_registrant_at')->nullable()->default(null);
-            $table->dateTime('last_cpr_submitted_at')->nullable()->default(null);
+            $table->dateTime('cpd_last_submitted_at')->nullable()->default(null);
             $table->dateTime('renewal_fee_last_paid_at')->nullable()->default(null);
             $table->timestamp('registration_expires_at')->nullable()->default(null);
             $table->timestamp('declined_at')->nullable()->default(null);

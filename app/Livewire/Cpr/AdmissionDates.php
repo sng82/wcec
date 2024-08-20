@@ -11,7 +11,7 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
-class SubmissionDates extends Component
+class AdmissionDates extends Component
 {
     use LivewireAlert;
 
@@ -99,7 +99,7 @@ class SubmissionDates extends Component
 
     public function render()
     {
-        return view('livewire.cpr.submission-dates', [
+        return view('livewire.cpr.admission-dates', [
             'upcoming_dates' => SubmissionDate::with('updatedBy')
                                               ->where('admission_date', '>', now())
                                               ->orderBy('admission_date')

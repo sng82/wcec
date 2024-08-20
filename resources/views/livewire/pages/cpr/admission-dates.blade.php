@@ -6,7 +6,7 @@
 
         <livewire:layout.cpr-navigation />
 
-        <livewire:cpr.submission-dates />
+        <livewire:cpr.admission-dates />
 
 
     </div>

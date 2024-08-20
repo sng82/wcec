@@ -112,7 +112,8 @@ class ApplicantEoi extends Component
 
     public function downloadFile(Document $document)
     {
-        $file_loc = 'public/submitted_documents/' . Auth::id() . '/' . $document->file_name;
+        $file_loc = 'private/submitted_documents/' . Auth::id() . '/' . $document->file_name;
+//        $file_loc = 'public/submitted_documents/' . Auth::id() . '/' . $document->file_name;
         if (Storage::disk('local')->exists($file_loc)) {
             return Storage::download($file_loc);
         }
@@ -146,7 +147,8 @@ class ApplicantEoi extends Component
 
             foreach ($documents as $document) {
                 $zip->addFile(
-                    storage_path('app/public/submitted_documents/' . Auth::id() . '/' . $document->file_name),
+//                    storage_path('app/public/submitted_documents/' . Auth::id() . '/' . $document->file_name),
+                    storage_path('app/private/submitted_documents/' . Auth::id() . '/' . $document->file_name),
                     $document->file_name
                 );
             }
@@ -177,7 +179,9 @@ class ApplicantEoi extends Component
             return null;
         }
 
-        $file_loc = 'public/submitted_documents/' . Auth::id() . '/' . $document->file_name;
+//        $file_loc = 'public/submitted_documents/' . Auth::id() . '/' . $document->file_name;
+        $file_loc = 'private/submitted_documents/' . Auth::id() . '/' . $document->file_name;
+
 
         if (storage::disk('local')->exists($file_loc)) {
             Storage::delete($file_loc);
@@ -195,7 +199,8 @@ class ApplicantEoi extends Component
                              ->get();
 
         foreach ($documents as $document) {
-            $file_loc = 'public/submitted_documents/' . Auth::id() . '/' . $document->file_name;
+            $file_loc = 'private/submitted_documents/' . Auth::id() . '/' . $document->file_name;
+//            $file_loc = 'public/submitted_documents/' . Auth::id() . '/' . $document->file_name;
 
             if (storage::disk('local')->exists($file_loc)) {
                 Storage::delete($file_loc);
@@ -245,8 +250,13 @@ class ApplicantEoi extends Component
                             . Carbon::parse(now())->format('YmdHisu')
                             . '.' . $this->cv->getClientOriginalExtension();
 
+//                $this->cv->storeAs(
+//                    path: 'public/submitted_documents/' . $this->user->id,
+//                    name: $filename
+//                );
+
                 $this->cv->storeAs(
-                    path: 'public/submitted_documents/' . $this->user->id,
+                    path: 'private/submitted_documents/' . $this->user->id,
                     name: $filename
                 );
 
@@ -270,7 +280,8 @@ class ApplicantEoi extends Component
                             . '.' . $this->job_description->getClientOriginalExtension();
 
                 $this->job_description->storeAs(
-                    path: 'public/submitted_documents/' . $this->user->id,
+//                    path: 'public/submitted_documents/' . $this->user->id,
+                    path: 'private/submitted_documents/' . $this->user->id,
                     name: $filename
                 );
 
@@ -295,7 +306,8 @@ class ApplicantEoi extends Component
                                 . '.' . $qualification_certificate->getClientOriginalExtension();
 
                     $qualification_certificate->storeAs(
-                        path: 'public/submitted_documents/' . $this->user->id,
+                        path: 'private/submitted_documents/' . $this->user->id,
+//                        path: 'public/submitted_documents/' . $this->user->id,
                         name: $filename
                     );
 
@@ -317,7 +329,8 @@ class ApplicantEoi extends Component
                                 .'.' . $training_certificate->getClientOriginalExtension();
 
                     $training_certificate->storeAs(
-                        path: 'public/submitted_documents/' . $this->user->id,
+//                        path: 'public/submitted_documents/' . $this->user->id,
+                        path: 'private/submitted_documents/' . $this->user->id,
                         name: $filename
                     );
 

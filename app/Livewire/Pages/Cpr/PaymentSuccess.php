@@ -5,6 +5,7 @@ namespace App\Livewire\Pages\Cpr;
 use App\Mail\CPRFeePaidAdminNotification;
 use App\Models\Order;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -42,16 +43,15 @@ class PaymentSuccess extends Component
                 if ($order->product_name === 'submission') {
                     $user->submission_fee_paid = true;
                 }
+                if ($order->product_name === 'renewal') {
+                    $user->renewal_fee_last_paid_at = Carbon::now();
+                }
                 $user->save();
 
-//                 @todo: Send email to user & admins confirming purchase
-//                $admins = User::role('admin')->get();
-//                foreach ($admins as $admin) {
-//                    Mail::to($admin->email)
-//                        ->send(new CPRFeePaidAdminNotification($order));
-//                }
-                Mail::to('sam@asapcomputers.co.uk')
-                        ->send(new CPRFeePaidAdminNotification($order));
+                Mail::to(config('mail.membership_enquiry_mail_recipient'))
+                    ->send(new CPRFeePaidAdminNotification($order));
+
+//                 @todo: Send email to user confirming purchase
             }
 
             return $this->flash(

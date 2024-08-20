@@ -3,12 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Builder;
+use phpDocumentor\Reflection\Types\Void_;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -58,6 +60,8 @@ class User extends Authenticatable
         'submission_accepted_at',
         'submission_accepted_by',
         'became_registrant_at',
+        'cpd_last_submitted_at',
+        'renewal_fee_last_paid_at',
         'registration_expires_at',
         'registration_pathway',
         'declined_at',
@@ -118,5 +122,68 @@ class User extends Authenticatable
     public function submission()
     {
         return $this->hasOne(Submission::class);
+    }
+
+    public function registrationCanBeRenewed()
+    {
+        if (! $this->hasRole('registrant')) {
+            return false;
+        }
+
+        if (Carbon::parse($this->registration_expires_at)->isPast()) {
+            return false;
+        }
+
+        if (Carbon::parse($this->registration_expires_at)->subMonths(3)->isFuture()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function registrationRenewalCanBePaid()
+    {
+        if (! $this->hasRole('registrant')) {
+            return false;
+        }
+
+        if (Carbon::parse($this->registration_expires_at)->isPast()) {
+            return false;
+        }
+
+        if (Carbon::parse($this->registration_expires_at)->subMonths(3)->isFuture()) {
+            return false;
+        }
+
+        if (Carbon::parse($this->renewal_fee_last_paid_at) > Carbon::now()->subMonths(3)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function cpdCanBeSubmitted()
+    {
+        // CPD can't be submitted if user isn't a registrant
+        if (! $this->hasRole('registrant')) {
+            return false;
+        }
+
+        // CPD can't be submitted if users registration has lapsed.
+        if (Carbon::parse($this->registration_expires_at)->isPast()) {
+            return false;
+        }
+
+        // CPD can't be submitted unless registration renewal is within next 3 months,
+        if (Carbon::parse($this->registration_expires_at)->subMonths(3)->isFuture()) {
+            return false;
+        }
+
+        // CPD can't be submitted if the user has submitted one within the last 3 months.
+        if (Carbon::parse($this->cpd_last_submitted_at) > Carbon::now()->subMonths(3)) {
+            return false;
+        }
+
+        return true;
     }
 }

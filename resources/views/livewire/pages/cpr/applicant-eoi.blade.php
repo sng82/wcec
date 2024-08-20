@@ -261,8 +261,7 @@
                     @endscript
                 </div>
 
-                {{-- @todo:counter                --}}
-                <span class="text-orange-500 block font-bold text-lg mt-6">!Todo! : Add live word counter, possibly restricting input to 200 words.</span>
+                {{-- @todo: Add live word counter, possibly restricting input to 200 words. --}}
 
                 <x-cpr-input-error :messages="$errors->get('current_role')" class="mt-2"/>
             </div>

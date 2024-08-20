@@ -23,7 +23,7 @@ namespace App\Models{
  * @property int|null $eoi_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\User $ownedBy
+ * @property-read \App\Models\User $owner
  * @method static \Illuminate\Database\Eloquent\Builder|Document newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Document newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Document query()
@@ -82,11 +82,13 @@ namespace App\Models{
  *
  *
  * @property int $id
- * @property string $order_status
+ * @property int $user_id
  * @property string $product_name
  * @property string $price_ex_vat
+ * @property string $order_status
+ * @property string|null $payment_intent
  * @property string $stripe_session_id
- * @property int $user_id
+ * @property string|null $stripe_hosted_invoice_url
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
@@ -96,9 +98,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereOrderStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePaymentIntent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePriceExVat($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereProductName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereStripeHostedInvoiceUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereStripeSessionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Order whereTotalPrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereUserId($value)
  * @mixin \Eloquent
@@ -137,6 +141,33 @@ namespace App\Models{
  */
 	#[\AllowDynamicProperties]
 	class IdeHelperPrices {}
+}
+
+namespace App\Models{
+/**
+ *
+ *
+ * @mixin Builder
+ * @property int $id
+ * @property string|null $feedback
+ * @property string|null $notes
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Submission newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Submission newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Submission query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Submission whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Submission whereFeedback($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Submission whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Submission whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Submission whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Submission whereUserId($value)
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperSubmission {}
 }
 
 namespace App\Models{
@@ -190,11 +221,14 @@ namespace App\Models{
  * @property int $submission_count
  * @property int $submission_fee_paid
  * @property string|null $submission_status
+ * @property \Illuminate\Support\Carbon|null $submission_interview_at
  * @property \Illuminate\Support\Carbon|null $submission_accepted_at
  * @property int|null $submission_accepted_by
+ * @property string|null $registration_pathway
  * @property \Illuminate\Support\Carbon|null $became_registrant_at
+ * @property string|null $last_cpr_submitted_at
+ * @property string|null $renewal_fee_last_paid_at
  * @property \Illuminate\Support\Carbon|null $registration_expires_at
- * @property string $registration_pathway
  * @property \Illuminate\Support\Carbon|null $declined_at
  * @property int|null $declined_by
  * @property \Illuminate\Support\Carbon|null $email_verified_at
@@ -213,6 +247,7 @@ namespace App\Models{
  * @property-read int|null $permissions_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
  * @property-read int|null $roles_count
+ * @property-read \App\Models\Submission|null $submission
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
@@ -232,6 +267,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEoiStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereFirstName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastCprSubmittedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereLastName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePhoneMain($value)
@@ -240,10 +276,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRegistrationFeePaid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRegistrationPathway($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRenewalFeeLastPaidAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSubmissionAcceptedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSubmissionAcceptedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSubmissionCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSubmissionFeePaid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereSubmissionInterviewAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSubmissionStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutPermission($permissions)

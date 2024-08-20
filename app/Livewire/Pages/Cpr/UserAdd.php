@@ -12,7 +12,7 @@ use Livewire\Component;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
 
-class MemberAdd extends Component
+class UserAdd extends Component
 {
     use LivewireAlert;
 
@@ -79,7 +79,8 @@ class MemberAdd extends Component
                     'timer' => 2000,
                     'showConfirmButton' => false,
                 ],
-                'cpr/members'
+//                'cpr/members'
+                route('registrants')
             );
 
 //            $this->alert('info', 'User added successfully', [
@@ -105,6 +106,6 @@ class MemberAdd extends Component
     {
         $this->send_email = true;
 //        $this->roles = Role::get()->pluck('name', 'name')->toArray();
-        return view('livewire.pages.cpr.member-add')->layout('layouts.app');
+        return view('livewire.pages.cpr.user-add')->layout('layouts.app');
     }
 }

@@ -14,7 +14,6 @@
                     <tr class="text-slate-700">
                         <th scope="col" class="px-4 py-2 text-left min-w-44">Admission Date</th>
                         <th scope="col" class="px-4 py-2 text-left min-w-44">Submission Deadline</th>
-{{--                        <th scope="col" class="px-4 py-2 text-left min-w-44">Added By</th>--}}
                         <th scope="col" class="min-w-28"></th>
                     </tr>
                 </thead>
@@ -35,9 +34,6 @@
                             <td class="px-4 py-2">
                                 {{ \Carbon\Carbon::parse($date->submission_deadline)->toFormattedDayDateString() }}
                             </td>
-{{--                            <td class="px-4 py-2">--}}
-{{--                                {{ $date->updatedBy->first_name . ' ' . $date->updatedBy->last_name }}--}}
-{{--                            </td>--}}
                             <td>
                                 <x-danger-button wire:click="delete({{ $date->id }})"
                                                  wire:confirm="Are you sure you want to delete this date?"

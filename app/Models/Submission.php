@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @mixin Builder
+ * @mixin IdeHelperSubmission
  */
 
 class Submission extends Model

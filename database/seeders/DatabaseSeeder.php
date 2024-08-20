@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Prices;
+use App\Models\PublicDocument;
 use App\Models\SubmissionDate;
 //use App\Models\User;
 use Carbon\Carbon;
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
 
         // Delete old files
         Storage::deleteDirectory('/public/submitted_documents');
+        Storage::deleteDirectory('/private/submitted_documents');
 
 
         $this->call([
@@ -126,5 +128,71 @@ class DatabaseSeeder extends Seeder
             'start_date' => '2024-03-02',
             'updated_by' => 1
         ]);
+
+        PublicDocument::create([
+            'order'         => 1,
+            'file_name'     => 'WCEC-CP-03-05-EXPRESSION-OF-INTEREST-FORM_v5_FEB-2021.docx',
+            'doc_type'      => 'Expression of Interest form',
+            'version'       => '5',
+            'release_month' => 'FEB',
+            'release_year'  => '2021',
+        ]);
+
+        PublicDocument::create([
+            'order'         => 2,
+            'file_name'     => 'WCEC-CP-02-04-GUIDE-FOR-EXPRESSION-OF-INTEREST_v4_FEB-2021.docx',
+            'doc_type'      => 'Guide for Expression of Interest',
+            'version'       => '4',
+            'release_month' => 'FEB',
+            'release_year'  => '2021',
+        ]);
+
+        PublicDocument::create([
+            'order'         => 3,
+            'file_name'     => 'WCEC-CP-05-04-ASSESSMENT-CRITERIA_v4_MAR-2021.pdf',
+            'doc_type'      => 'Assessment Criteria',
+            'version'       => '4',
+            'release_month' => 'MAR',
+            'release_year'  => '2021',
+        ]);
+
+        PublicDocument::create([
+            'order'         => 4,
+            'file_name'     => 'APPENDIX-1-to-WCEC-CP-05-04_v2_MAR-2021.pdf',
+            'doc_type'      => 'Appendix to Assessment Criteria',
+            'version'       => '2',
+            'release_month' => 'MAR',
+            'release_year'  => '2021',
+        ]);
+
+        PublicDocument::create([
+            'order'         => 5,
+            'file_name'     => 'WCEC.CP-10-03-DEFINITIONS-_v3_MAR-2021.pdf',
+            'doc_type'      => 'Definitions',
+            'version'       => '3',
+            'release_month' => 'MAR',
+            'release_year'  => '2021',
+        ]);
+
+        PublicDocument::create([
+            'order'         => 6,
+            'file_name'     => 'WCEC-CP-08-04-APPEALS-PROCEDURES_v4_MAR-2021.pdf',
+            'doc_type'      => 'Appeals Procedure',
+            'version'       => '4',
+            'release_month' => 'MAR',
+            'release_year'  => '2021',
+        ]);
+
+        PublicDocument::create([
+            'order'         => 7,
+            'file_name'     => 'TEMPLATE_FOR_CPD_RECORD_2022.xlsx',
+            'doc_type'      => 'CPD Form',
+            'version'       => '1',
+            'release_month' => 'JAN',
+            'release_year'  => '2022',
+        ]);
+
+
+        print 'Migration and seeding completed at ' . Carbon::now()->toTimeString();
     }
 }

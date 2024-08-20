@@ -29,8 +29,20 @@ class Document extends Model
         'eoi_id'
     ];
 
-    public function ownedBy()
+    public function scopeSearch($query, $value)
+    {
+        $query->where('file_name', 'like', "%{$value}%")
+              ->orWhere('doc_type', 'like', "%{$value}%")
+              ->orWhereHas('owner', function (Builder $query) use ($value) {
+                  $query->where('first_name', 'like', "%{$value}%")
+                        ->orWhere('last_name', 'like', "%{$value}%")
+                        ->orWhere('email', 'like', "%{$value}%");
+              });
+    }
+
+    public function owner()
     {
         return $this->belongsTo(User::class, 'user_id');
+//        return $this->belongsTo(User::class);
     }
 }

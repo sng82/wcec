@@ -18,7 +18,7 @@
             </div>
 
             @if ($logged_in_user->hasRole('admin'))
-                <x-admin-dashboard :$logged_in_user
+                <x-dashboard-admin :$logged_in_user
                                    :$next_admission_date
                                    :$next_admission_date_difference
                                    :$submitted_eois
@@ -28,7 +28,7 @@
             @endif
 
             @if ($logged_in_user->hasRole('applicant'))
-                <x-applicant-dashboard :$logged_in_user
+                <x-dashboard-applicant :$logged_in_user
                                        :$next_admission_date_difference
                                        :$next_admission_date
                                        :$registration_fee
@@ -37,8 +37,12 @@
             @endif
 
             @if ($logged_in_user->hasRole('registrant'))
-                <x-registrant-dashboard :$logged_in_user
+                <x-dashboard-registrant :$logged_in_user
                                         :$renewal_fee
+                                        :$renewal_due
+                                        :$renewal_fee_due
+                                        :$cpd_due
+                                        :$renewal_window
                 />
             @endif
 

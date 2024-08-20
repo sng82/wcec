@@ -67,7 +67,7 @@ class AssessSubmission extends Component
 
     public function downloadFile()
     {
-        $file_loc = 'public/submitted_documents/'
+        $file_loc = 'private/submitted_documents/'
                     . $this->submission_document->user_id . '/'
                     . $this->submission_document->file_name;
         if (Storage::disk('local')->exists($file_loc)) {

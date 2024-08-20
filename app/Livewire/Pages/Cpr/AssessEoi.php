@@ -78,7 +78,8 @@ class AssessEoi extends Component
 
     public function downloadFile(Document $document)
     {
-        $file_loc = 'public/submitted_documents/'
+//        $file_loc = 'public/submitted_documents/'
+        $file_loc = 'private/submitted_documents/'
                     . $document->user_id . '/'
                     . $document->file_name;
         if (Storage::disk('local')->exists($file_loc)) {
@@ -127,7 +128,8 @@ class AssessEoi extends Component
             foreach ($documents as $document) {
                 $zip->addFile(
                     storage_path(
-                        'app/public/submitted_documents/'
+//                        'app/public/submitted_documents/'
+                        'app/private/submitted_documents/'
                         . $this->eoi->user->id . '/'
                         . $document->file_name
                     ),
