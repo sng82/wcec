@@ -1,5 +1,5 @@
 <div class="rounded-lg p-3 xl:p-4 shadow bg-slate-50">
-    <h2 class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2">
+    <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2">
         Active Registrants
 {{--        <span class="text-base">[{{ $active_members->count() }}]</span>--}}
     </h2>

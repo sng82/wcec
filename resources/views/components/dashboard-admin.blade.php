@@ -26,7 +26,7 @@
 </div>
 
 <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow" wire:poll.15s="getEOIs">
-    <h2 class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2 mb-2">
+    <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2 mb-2">
         Expressions of Interest
     </h2>
     @if($submitted_eois->count() > 0)
@@ -113,7 +113,7 @@
 </div>
 
 <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow" wire:poll.15s="getSubmissions">
-    <h2 class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2 mb-2">
+    <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2 mb-2">
         Registration Submissions
     </h2>
     @if($submitted_submissions->count() > 0)
@@ -188,7 +188,7 @@
 </div>
 
 <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
-    <h2 class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2 mb-2">
+    <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2 mb-2">
         Expiring Registrations
     </h2>
     @if($expiring_registrations->count() > 0)

@@ -139,6 +139,7 @@ class ApplicantEoi extends Component
                        . Carbon::parse(now())->format('YmdHisu')
                        . '.zip';
 
+        // @todo: it gets deleted immediately, but this probably shouldn't be in the public path!
         if ($zip->open(public_path($zipFileName), ZipArchive::CREATE) === true) {
             $documents = Document::where('user_id', Auth::user()->id)
                                  ->where('eoi_id', $this->eoi_id)

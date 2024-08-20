@@ -39,7 +39,7 @@
     <x-stripe-banner />
 
     <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
-        <h2 id="progression" class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2 mb-2">
+        <h2 id="progression" class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2 mb-2">
             Renewal Progression
         </h2>
         <div class="mt-4 mb-4 overflow-hidden border border-slate-200 rounded-lg shadow-sm overflow-x-auto">

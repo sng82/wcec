@@ -5,7 +5,7 @@
     <div class="right w-full flex grow flex-col p-6 gap-8 overflow-y-auto">
 
         <div class="rounded-lg bg-slate-50 border border-slate-50 p-4">
-            <h2 class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2">
+            <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2">
                 {{ $first_name . ' ' . $last_name }}
             </h2>
 

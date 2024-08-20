@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Log;
+use ZipArchive;
 
 class AssessSubmission extends Component
 {
@@ -20,6 +21,7 @@ class AssessSubmission extends Component
 
     public $applicant;
     public $submission_document;
+    public $qualification_proof;
     public $submission_status;
     public $submission_interview_at;
     public $path;
@@ -33,11 +35,19 @@ class AssessSubmission extends Component
         try {
             $id = \Route::current()->parameter('id');
             $this->applicant                = User::find($id);
-            $this->submission_document      = Document::where('user_id', $id)
-                                                      ->where('doc_type', 'submission')
-                                                      ->orderBy('id', 'DESC')
-                                                      ->first();
             $this->path                     = $this->applicant->registration_pathway;
+
+            if ($this->path === 'individual') {
+                $this->submission_document = Document::where('user_id', $id)
+                                                     ->where('doc_type', 'submission')
+                                                     ->orderBy('id', 'DESC')
+                                                     ->first();
+            } else {
+                $this->qualification_proof = Document::where('user_id', $id)
+                                                     ->where('doc_type', 'qualification_proof')
+                                                     ->get();
+            }
+
             $this->submission_status        = $this->applicant->submission_status;
             $this->submission_interview_at  = !empty($this->applicant->submission_interview_at ?: '')
                                                 ? Carbon::parse($this->applicant->submission_interview_at)->format('Y-m-d\TH:i:s')
@@ -67,23 +77,61 @@ class AssessSubmission extends Component
 
     public function downloadFile()
     {
-        $file_loc = 'private/submitted_documents/'
-                    . $this->submission_document->user_id . '/'
-                    . $this->submission_document->file_name;
-        if (Storage::disk('local')->exists($file_loc)) {
-            return Storage::download($file_loc);
+        try {
+            if ($this->path === 'individual') {
+                $file_loc = 'private/submitted_documents/'
+                            . $this->submission_document->user_id . '/'
+                            . $this->submission_document->file_name;
+                if (Storage::disk('local')->exists($file_loc)) {
+                    return Storage::download($file_loc);
+                }
+            } elseif ($this->path === 'standard') {
+                $zip         = new ZipArchive;
+                $zip_file_name = str_replace(' ', '_', $this->applicant->first_name) . '_'
+                                 . str_replace(' ', '_', $this->applicant->last_name) . '_'
+                                 . 'Qualification_Proof_'
+                                 . Carbon::parse(now())->format('YmdHisu')
+                                 . '.zip';
+
+                $zip_loc = 'app/private/submitted_documents/'
+                           . $this->applicant->id . '/'
+                           . $zip_file_name;
+
+                if ($zip->open(storage_path($zip_loc), ZipArchive::CREATE) === TRUE) {
+                    $documents = Document::where('user_id', $this->applicant->id)
+                                         ->where('doc_type', 'qualification_proof')
+                                         ->get();
+
+                    foreach ($documents as $document) {
+                        $zip->addFile(
+                            storage_path(
+                                'app/private/submitted_documents/'
+                                . $this->applicant->id . '/'
+                                . $document->file_name
+                            ),
+                            $document->file_name
+                        );
+                    }
+                    $zip->close();
+                    return response()->download(storage_path($zip_loc))->deleteFileAfterSend();
+                }
+                Log::error('Error creating/opening ZIP file');
+            }
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+
+            $this->alert(
+                'error',
+                'Error',
+                [
+                    'position'           => 'center',
+                    'timer'              => null,
+                    'text'               => 'Unable to download file. It has probably been deleted.',
+                    'showConfirmButton'  => true,
+                    'confirmButtonColor' => '#dc2626',
+                ]
+            );
         }
-        $this->alert(
-            'error',
-            'Error',
-            [
-                'position'           => 'center',
-                'timer'              => null,
-                'text'               => 'Unable to download file. It has probably been deleted.',
-                'showConfirmButton'  => true,
-                'confirmButtonColor' => '#dc2626',
-            ]
-        );
     }
 
     public function save()

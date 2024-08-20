@@ -29,27 +29,26 @@
         <div class="flex flex-col p-3 xl:p-6 gap-5">
 
             <div class="rounded-lg bg-slate-100 border border-slate-200 p-4 shadow-md shadow-slate-400">
-                <h1 class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2 mb-6">
+                <h1 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2 mb-6">
                     Registration Submission: <span class="text-fuchsia-500">{{ $applicant->first_name . ' ' . $applicant->last_name }}</span>
                 </h1>
 
                 <p class="mb-4">Registration Pathway: <span class="font-bold">{{ str($path)->title() }}</span>.</p>
 
-                @if($path === 'standard')
-                    <button wire:click.prevent="downloadFile"
-                            class="text-white rounded-full bg-sky-700 px-4 py-1 hover:bg-sky-800 flex flex-row gap-2 items-center"
-                    >
-                        <span>
-                            Download Submission Paper
-                        </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                             class="size-4">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                  d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/>
-                        </svg>
-                    </button>
-                @endif
+                <button wire:click.prevent="downloadFile"
+                        class="text-white rounded-full bg-sky-700 px-4 py-1 hover:bg-sky-800 flex flex-row gap-2 items-center"
+                >
+                    <span>
+                        {{ $path === 'individual' ? 'Download Submission Paper' : 'Download Qualification Proof' }}
+                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                         class="size-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/>
+                    </svg>
+                </button>
+
             </div>
 
             <div class="rounded-lg bg-slate-100 border border-slate-200 p-4 shadow-md shadow-slate-400"
@@ -62,10 +61,7 @@
                     Assessment
                 </h2>
 
-{{--                @dump($this)--}}
-
                 <form wire:submit="save">
-
                     <div class="flex flex-col lg:flex-row lg:items-center py-2">
                         <x-admin-input-label for="submission_status" :value="__('Submission Status')" class="lg:w-60 shrink-0"/>
                         <select wire:model="submission_status" x-model="submission_status" name="submission_status" id="submission_status"
@@ -83,7 +79,7 @@
                          x-cloak
 {{--                         x-transition:enter.duration.1500ms--}}
                          x-transition:enter="transition ease-out duration-500"
-                         x-transition:enter-start="bg-cyan-300"
+                         x-transition:enter-start="bg-slate-300"
                     >
                         <div class="flex flex-col lg:flex-row lg:items-center py-2">
                             <x-admin-input-label for="submission_interview_at" :value="__('Interview Date & Time')" class="lg:w-60 shrink-0"/>
@@ -102,7 +98,7 @@
                     <div x-show="submission_interview_at != '' && submission_interview_at != null && submission_status == 'awaiting_interview'"
                          x-cloak
                          x-transition:enter="transition ease-out duration-500"
-                         x-transition:enter-start="bg-cyan-300"
+                         x-transition:enter-start="bg-slate-300"
 {{--                         x-transition:enter.duration.500ms--}}
                     >
                         <div class="flex flex-col lg:flex-row lg:items-center py-2 gap-1">
@@ -159,7 +155,7 @@
                                     interview.
                                 </li>
                                 <li>
-                                    If the 'Interview Date &amp; Time' files is completed, and the 'Send Email' switch is turned
+                                    If the 'Interview Date &amp; Time' input is completed, and the 'Send Email' switch is turned
                                     on, an email will be sent to the applicant advising them of the interview that has
                                     been scheduled.<br>
                                     The applicant is asked to reply<span class="text-slate-500">*</span> to the email

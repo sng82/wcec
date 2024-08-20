@@ -29,7 +29,7 @@
         <div class="flex flex-col p-3 xl:p-6 gap-5">
 
             <div class="rounded-lg bg-slate-50 border border-slate-50 p-4 shadow">
-                <h2 class="text-2xl text-sky-800 border-b-4 border-red-600 pb-2">
+                <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2">
                     New Applicant/Registrant
                 </h2>
                 <form wire:submit="saveUser">

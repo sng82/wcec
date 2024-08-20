@@ -8,7 +8,7 @@
 
         <div class="py-4 p-3 xl:p-6">
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-6 border border-slate-300 shadow shadow-slate-400">
-                <h1 class="text-3xl text-sky-800 border-b-4 border-red-600 pb-2 mb-6">
+                <h1 class="text-3xl text-sky-800 border-b-4 border-red-700 pb-2 mb-6">
                     Continual Professional Development {{ $cpd_year_due }}
                 </h1>
 

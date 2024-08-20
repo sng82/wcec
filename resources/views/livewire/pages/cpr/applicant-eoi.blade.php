@@ -25,7 +25,7 @@
         }">
 
             <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mt-6 mb-6 border border-slate-300 shadow shadow-slate-400">
-                <h1 class="text-3xl text-sky-800 border-b-4 border-red-600 pb-2 mb-4">
+                <h1 class="text-3xl text-sky-800 border-b-4 border-red-700 pb-2 mb-4">
                     Expression of Interest
                 </h1>
                 <p class="mb-2">
@@ -569,7 +569,7 @@
 
             <div class="bg-slate-800 text-white rounded-3xl xl:rounded-[50px] p-3 xl:py-4 px-4 lg:px-6 xl:px-12 mt-6 border border-slate-200 shadow">
                 @if($errors->any())
-                    <div class="rounded-lg bg-red-500 px-4 py-2 border border-red-600 mt-3 flex flex-row items-center gap-4 text-white text-lg">
+                    <div class="rounded-lg bg-red-500 px-4 py-2 border border-red-700 mt-3 flex flex-row items-center gap-4 text-white text-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                              stroke="currentColor" class="size-8 min-w-8">
                             <path stroke-linecap="round" stroke-linejoin="round"
