@@ -65,7 +65,8 @@ class AdminPrivateDocuments extends Component
 //                   ->orderBy($this->sort_column_name, $this->sort_column_direction));
 
         return view('livewire.pages.cpr.admin-private-documents', [
-            'documents' => Document::search($this->search)
+            'documents' => Document::with('owner')
+                                   ->search($this->search)
                                    ->where('doc_type', 'like', "%{$this->filter}%")
                                    ->orderBy($this->sort_column_name, $this->sort_column_direction)
                                    ->paginate($this->per_page),

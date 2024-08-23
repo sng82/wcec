@@ -9,7 +9,7 @@
         </p>
 
         <div class="overflow-hidden border border-slate-100 rounded-lg shadow-sm overflow-x-auto">
-            <table class="table-auto w-full divide-y divide-slate-100">
+            <table class="table-auto w-full divide-y divide-slate-100 text-sm">
                 <thead class="bg-slate-200">
                     <tr class="text-slate-700">
                         <th scope="col" class="px-4 py-2 text-left min-w-44">Admission Date</th>

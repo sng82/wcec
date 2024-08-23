@@ -62,7 +62,7 @@
                 </h2>
                 @if($current_prices->count() > 0)
                     <div class="overflow-hidden border border-teal-100 rounded-lg shadow-sm overflow-x-auto">
-                        <table class="table-auto w-full divide-y divide-teal-100">
+                        <table class="table-auto w-full divide-y divide-teal-100 text-sm">
                             <thead class="bg-teal-100">
                                 <tr class="text-teal-700 divide-x divide-teal-200">
                                     <th scope="col" class="px-4 py-2 text-left min-w-56">Type</th>
@@ -178,7 +178,7 @@
 
                 @if($archived_prices->count() > 0)
                     <div class="overflow-hidden border border-amber-100 rounded-lg shadow-sm overflow-x-auto">
-                        <table class="table-auto w-full divide-y divide-amber-100">
+                        <table class="table-auto w-full divide-y divide-amber-100 text-sm">
                             <thead class="bg-amber-100">
                                 <tr class="text-amber-700">
                                     <th scope="col" class="px-4 py-2 text-left min-w-56">Type</th>
