@@ -19,6 +19,8 @@ class UserEdit extends Component
     public $first_name;
     public $last_name;
     public $email;
+    public $phone_main;
+    public $phone_mobile;
     public $role;
     public $registration_type;
 //    public $roles;
@@ -31,6 +33,14 @@ class UserEdit extends Component
     public $declined_at;
     public $declined_by;
     public $created_at;
+
+    public function messages()
+    {
+        return [
+            'phone_main.phone' => 'The Phone (Main) field contains an invalid number',
+            'phone_mobile.phone' => 'The Phone (Mobile) field contains an invalid number',
+        ];
+    }
 
     public function mount()
     {
@@ -51,6 +61,15 @@ class UserEdit extends Component
 //                'cpr/members'
             );
         }
+
+        $this->first_name = $this->registrant->first_name;
+        $this->last_name = $this->registrant->last_name;
+        $this->email = $this->registrant->email;
+        $this->phone_main = $this->registrant->phone_main;
+        $this->phone_mobile = $this->registrant->phone_mobile;
+        $this->role = $this->registrant->roles->pluck('name')[0] ?? '';
+        $this->submission_count = $this->registrant->submission_count;
+        $this->registration_expires_at = $this->registrant->registration_expires_at?->format('Y-m-d');
     }
 
     public function update()
@@ -59,6 +78,8 @@ class UserEdit extends Component
             'first_name'    => 'required|min:2',
             'last_name'     => 'required|min:2',
             'email'         => 'required|email',
+            'phone_main'    => 'required|phone:GB',
+            'phone_mobile'  => 'nullable|phone:GB,mobile',
         ]);
 
         try {
@@ -66,6 +87,8 @@ class UserEdit extends Component
                 'first_name'   => trim($this->first_name),
                 'last_name'    => trim($this->last_name),
                 'email'        => trim(Str::of($this->email)->lower()),
+                'phone_main'   => trim($this->phone_main),
+                'phone_mobile' => trim($this->phone_mobile),
             ]);
 
             $this->alert('info', 'Member updated successfully', [
@@ -86,16 +109,8 @@ class UserEdit extends Component
         }
     }
 
-
     public function render()
     {
-        $this->first_name = $this->registrant->first_name;
-        $this->last_name = $this->registrant->last_name;
-        $this->email = $this->registrant->email;
-        $this->role = $this->registrant->roles->pluck('name')[0] ?? '';
-        $this->submission_count = $this->registrant->submission_count;
-        $this->registration_expires_at = $this->registrant->registration_expires_at?->format('Y-m-d');
-
         return view('livewire.pages.cpr.user-edit')
             ->layout('layouts.app');
     }

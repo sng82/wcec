@@ -44,10 +44,15 @@ class ApplicantEoi extends Component
     public $existing_qualification_certificates;
     public $training_certificates;
     public $existing_training_certificates;
-//    public $file_name;
-//    public $file_location;
-//    public $file_path;
-//    public $doc_type;
+
+
+    public function messages()
+    {
+        return [
+            'phone_main.phone' => 'The Phone (Main) field contains an invalid number',
+            'phone_mobile.phone' => 'The Phone (Mobile) field contains an invalid number',
+        ];
+    }
 
     public function mount()
     {
@@ -216,13 +221,15 @@ class ApplicantEoi extends Component
     public function saveProgress($skip_feedback = false)
     {
         $this->validate([
-            'first_name'                   => 'required|min:2',
-            'last_name'                    => 'required|min:2',
-            'email'                        => 'required|email',
-            'cv'                           => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
-            'job_description'              => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
-            'qualification_certificates.*' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
-            'training_certificates.*'      => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
+            'first_name'                    => 'required|min:2',
+            'last_name'                     => 'required|min:2',
+            'email'                         => 'required|email',
+            'phone_main'                    => 'required|phone:GB',
+            'phone_mobile'                  => 'nullable|phone:GB,mobile',
+            'cv'                            => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
+            'job_description'               => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
+            'qualification_certificates.*'  => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
+            'training_certificates.*'       => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
         ]);
 
         try {

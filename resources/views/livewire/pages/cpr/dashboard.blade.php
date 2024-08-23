@@ -4,11 +4,11 @@
 
     <div class="right w-full flex flex-col grow min-w-80 overflow-y-auto" style="scroll-behavior: smooth;">
 
-        <livewire:layout.cpr-navigation/>
+{{--        <livewire:layout.cpr-navigation/>--}}
 
-        <div class="flex flex-col p-3 xl:p-6 gap-5">
+        <div class="flex flex-col p-3 xl:p-6">
 
-            <div class="flex flex-col content-center mt-8 mb-2">
+            <div class="flex flex-col content-center mt-8 mb-4">
                 <img src="{{ Vite::asset('resources/img/wcec-crest-small.webp') }}"
                      class="inline-block object-contain h-16 lg:h-28" alt="WCEC Logo">
 

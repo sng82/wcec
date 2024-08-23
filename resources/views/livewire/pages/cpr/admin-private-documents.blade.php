@@ -4,11 +4,11 @@
 
     <div class="right w-full min-w-80 flex grow flex-col overflow-y-auto">
 
-        <livewire:layout.cpr-navigation/>
+{{--        <livewire:layout.cpr-navigation/>--}}
 
         <div class="py-4 p-3 xl:p-6">
 
-            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-6 border border-slate-300 shadow shadow-slate-400">
+            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300">
                 <h1 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2 mb-4">
                     Private Documents
                 </h1>
@@ -86,29 +86,10 @@
                                         </div>
                                     </th>
 
-                                    {{-- @todo: make dynamic --}}
-                                    <th scope="col" class="px-4 py-2 text-left">Submitted By</th>
-{{--                                    <th wire:click="sortBy('users.last_name')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'users.last_name' ? 'bg-slate-400' : 'hover:bg-slate-300' }}">--}}
-{{--                                        <div class="flex flex-row justify-between gap-1 content-center {{ $sort_column_name === 'users.last_name' ? 'text-white' : 'text-slate-500'  }}">--}}
-{{--                                            <span class="">--}}
-{{--                                                Submitted By--}}
-{{--                                            </span>--}}
-{{--                                            <span class="float-right flex flex-col font-normal">--}}
-{{--                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'users.last_name' && $sort_column_direction === 'asc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'users.last_name' && $sort_column_direction === 'asc' ? '' : 'text-slate-800' }}">--}}
-{{--                                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />--}}
-{{--                                            </svg>--}}
-{{--                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'users.last_name' && $sort_column_direction === 'desc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'users.last_name' && $sort_column_direction === 'desc' ? '' : 'text-slate-800' }}">--}}
-{{--                                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />--}}
-{{--                                            </svg>--}}
-{{--                                        </span>--}}
-{{--                                        </div>--}}
-{{--                                    </th>--}}
-
-
                                     <th wire:click="sortBy('created_at')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'created_at' ? 'bg-slate-400' : 'hover:bg-slate-300' }}">
                                         <div class="flex flex-row justify-between gap-1 content-center {{ $sort_column_name === 'created_at' ? 'text-white' : 'text-slate-500'  }}">
                                             <span class="">
-                                                Submitted At
+                                                Submitted
                                             </span>
                                             <span class="float-right flex flex-col font-normal">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="{{ $sort_column_name === 'created_at' && $sort_column_direction === 'asc' ? '2' : '1.5'  }}" stroke="currentColor" class="w-3 h-3 {{ $sort_column_name === 'created_at' && $sort_column_direction === 'asc' ? '' : 'text-slate-800' }}">
@@ -120,7 +101,7 @@
                                         </span>
                                         </div>
                                     </th>
-{{--                                    <th scope="col" class="px-4 py-2 text-left"></th>--}}
+
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-slate-100 text-slate-500">
@@ -132,30 +113,24 @@
                                             @else
                                                 {{ str(str_replace('_', ' ', $document->doc_type))->title() }}
                                             @endif
-
                                         </td>
                                         <td class="px-4 py-2">
                                         {{-- @todo: make downloadable --}}
                                             {{ $document->file_name }}
                                         </td>
                                         <td class="px-4 py-2">
+                                            {{ \Carbon\Carbon::parse($document->created_at)->toDayDateTimeString() }} by
                                             <a class="text-sky-600 hover:text-sky-700" href="/cpr/user-edit/{{ $document->owner->id }}">
                                                 {{ $document->owner->first_name . ' ' . $document->owner->last_name }}
                                             </a>
-
                                         </td>
-                                        <td class="px-4 py-2">
-                                            {{ \Carbon\Carbon::parse($document->created_at)->toFormattedDateString() }}
-                                        </td>
-{{--                                        <td class="px-4 py-2">--}}
 
-{{--                                        </td>--}}
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     @else
-                        <p>No documents found.</p>
+                        <p class="bg-white p-4">No documents found. Try a different search and/or filter.</p>
                     @endif
                 </div>
 

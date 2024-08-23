@@ -17,13 +17,13 @@ use App\Livewire\Pages\Cpr\ApplicantSubmission;
 use App\Livewire\Pages\Cpr\AssessEoi;
 use App\Livewire\Pages\Cpr\AssessSubmission;
 //use App\Livewire\Pages\Cpr\Payment;
+use App\Livewire\Pages\Cpr\MyDetails;
 use App\Livewire\Pages\Cpr\PaymentCancel;
 use App\Livewire\Pages\Cpr\PaymentSuccess;
 use App\Livewire\Pages\Cpr\Prices;
 use App\Livewire\Pages\Cpr\PrintEoi;
 //use App\Livewire\Pages\Cpr\StripePayment;
 use App\Livewire\Pages\Cpr\RegistrantCpd;
-use App\Livewire\Pages\Cpr\SubmissionDates;
 use App\Livewire\Pages\Cpr\UserAdd;
 use App\Livewire\Pages\Cpr\UserEdit;
 use App\Livewire\Pages\CprComingSoon;
@@ -50,27 +50,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//---------------------------------------------//
+//---------------------------------------------//
+// Public Pages
+//---------------------------------------------//
+//---------------------------------------------//
+
+
+Route::get('/', Home::class)->name('home');
 
 // The Company Pages
-Route::get('/', Home::class)->name('home');
 Route::get('/membership', Membership::class)->name('membership');
 Route::get('/officers', Officers::class)->name('officers');
-Route::get('/where-we-meet', WhereWeMeet::class)->name('where-we-meet');
 Route::get('/history', History::class)->name('history');
-Route::get('/supporters', Supporters::class)->name('supporters');
 Route::get('/supporting', Supporting::class)->name('supporting');
-Route::get('/our-church', OurChurch::class)->name('our-church');
+
 
 // Other Pages
+Route::get('/about', About::class)->name('about');
 Route::get('/charitable-trust', CharitableTrust::class)->name('charitable-trust');
 Route::get('/chartered-practitioners', CharteredPractitioners::class)->name('chartered-practitioners');
-Route::get('/about', About::class)->name('about');
 Route::get('/contact', Contact::class)->name('contact');
 
+//Route::get('/supporters', Supporters::class)->name('supporters');
+//Route::get('/our-church', OurChurch::class)->name('our-church');
+//Route::get('/where-we-meet', WhereWeMeet::class)->name('where-we-meet');
 
-//temp
+// CPR Offline pages
 Route::get('/cpr-coming-soon', CprComingSoon::class)->name('cpr-coming-soon');
 Route::get('/register', CprComingSoon::class)->name('cpr-coming-soon');
+
+
+//---------------------------------------------//
+//---------------------------------------------//
+// Chartered Practitioners Portal
+//---------------------------------------------//
+//---------------------------------------------//
 
 Route::get('/cpr/payment-success', PaymentSuccess::class)->name('payment-success');
 Route::get('/cpr/payment-cancel', PaymentCancel::class)->name('payment-cancel');
@@ -78,8 +93,10 @@ Route::get('/cpr/payment-cancel', PaymentCancel::class)->name('payment-cancel');
 // Routes accessible to all logged-in users.
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/cpr/dashboard', Dashboard::class)->name('dashboard');
+    Route::get('/cpr/my-details', MyDetails::class)->name('my-details');
 });
 
+// Admin routes
 Route::group(['middleware' => ['role:admin', 'auth']], function () {
     Route::get('/cpr/prices', Prices::class)->name('prices');
     Route::get('/cpr/registrants', AdminMembers::class)->name('registrants');
@@ -92,6 +109,10 @@ Route::group(['middleware' => ['role:admin', 'auth']], function () {
     Route::get('/cpr/assess-submission/{id}', AssessSubmission::class)->name('assess-submission');
 });
 
+// Used to build printable PDF of data submitted for an EOI.
+Route::get('/cpr/print-eoi/{id}/{obfuscation_key}', PrintEoi::class)->name('print-eoi');
+
+// Applicant Routes
 Route::group(['middleware' => ['role:applicant', 'auth']], function () {
     Route::get('/cpr/applicant-documents', ApplicantDocuments::class)->name('applicant-documents');
     Route::get('/cpr/applicant-help', ApplicantHelp::class)->name('applicant-help');
@@ -100,17 +121,22 @@ Route::group(['middleware' => ['role:applicant', 'auth']], function () {
     Route::get('/cpr/applicant-submission', ApplicantSubmission::class)->name('applicant-submission');
 });
 
+// Registrant Routes
 Route::group(['middleware' => ['role:registrant', 'auth']], function () {
     Route::get('/cpr/registrant-cpd', RegistrantCpd::class)->name('registrant-cpd');
 });
 
-Route::get('/cpr/print-eoi/{id}/{obfuscation_key}', PrintEoi::class)->name('print-eoi');
+//---------------------------------------------//
+//---------------------------------------------//
+// Miscellaneous
+//---------------------------------------------//
+//---------------------------------------------//
 
+// Stripe webhook access point
 Route::post('/stripe/webhook', [StripeController::class, 'webhook'])->name('stripe.webhook');
 
-
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
+//Route::view('profile', 'profile')
+//    ->middleware(['auth'])
+//    ->name('profile');
 
 require __DIR__.'/auth.php';

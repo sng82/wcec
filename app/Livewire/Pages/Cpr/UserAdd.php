@@ -30,6 +30,13 @@ class UserAdd extends Component
 //    public $registration_type;
     public $roles;
 
+    public function messages()
+    {
+        return [
+            'phone_main.phone' => 'The Phone (Main) field contains an invalid number',
+            'phone_mobile.phone' => 'The Phone (Mobile) field contains an invalid number',
+        ];
+    }
     public function saveUser()
     {
 //        dump($this->first_name);
@@ -39,8 +46,8 @@ class UserAdd extends Component
             'first_name'    => 'required|min:2',
             'last_name'     => 'required|min:2',
             'email'         => 'required|email',
-            'phone_main'    => 'nullable|numeric',
-            'phone_mobile'  => 'nullable|numeric',
+            'phone_main'    => 'required|phone:GB',
+            'phone_mobile'  => 'nullable|phone:GB,mobile',
             'role'          => ['required', Rule::in(Role::get()->pluck('name'))],
         ]);
 

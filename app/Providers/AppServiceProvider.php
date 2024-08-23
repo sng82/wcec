@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use URL;
@@ -25,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Model::shouldBeStrict(); // Explanation: https://laravel-news.com/laravel-model-tips#content-enable-strict-mode-for-models.
+
         // Set default password requirements for users
         Password::defaults(function () {
             $rule = Password::min(8);

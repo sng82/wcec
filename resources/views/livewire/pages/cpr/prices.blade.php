@@ -4,15 +4,15 @@
 
     <div class="right w-full flex flex-col grow min-w-80 overflow-y-auto">
 
-        <livewire:layout.cpr-navigation />
+{{--        <livewire:layout.cpr-navigation />--}}
 
-        <div class="flex flex-col p-3 xl:p-6 gap-5">
+        <div class="flex flex-col p-3 xl:p-6">
 
             {{--        @dump($upcoming_prices)--}}
             {{--        @dump($upcoming_prices->count())--}}
 
             @if($upcoming_prices->first())
-                <div class="bg-sky-50 rounded-lg p-3 xl:p-4 shadow">
+                <div class="bg-sky-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md">
                     <h2 class="text-2xl text-sky-800 border-b-4 border-sky-600 mb-3 pb-2">
                         Scheduled Price Changes
                     </h2>
@@ -56,7 +56,7 @@
                 </div>
             @endif
 
-            <div class="bg-teal-50 rounded-lg p-3 xl:p-4 shadow">
+            <div class="bg-teal-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md">
                 <h2 class="text-2xl text-sky-800 border-b-4 border-teal-600 mb-3 pb-2">
                     Current Prices
                 </h2>
@@ -100,7 +100,7 @@
                 @endif
             </div>
 
-            <div class="bg-white rounded-lg p-3 xl:p-4 shadow">
+            <div class="bg-white rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md">
                 <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 mb-3 pb-2">
                     New Price
                 </h2>
@@ -170,7 +170,7 @@
                 </ul>
             </div>
 
-            <div class="bg-amber-50 block rounded-lg p-3 xl:p-4 shadow">
+            <div class="bg-amber-50 block rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md">
                 <h2 class="text-2xl text-sky-800 border-b-4 border-amber-600 mb-3 pb-2">
                     Historic Prices
                 </h2>

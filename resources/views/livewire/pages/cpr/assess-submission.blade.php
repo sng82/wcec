@@ -24,9 +24,9 @@
 
     <div class="right w-full flex flex-col grow min-w-80 overflow-y-auto">
 
-        <livewire:layout.cpr-navigation />
+{{--        <livewire:layout.cpr-navigation />--}}
 
-        <div class="flex flex-col p-3 xl:p-6 gap-5">
+        <div class="flex flex-col p-3 xl:p-6 gap-3 xl:gap-5">
 
             <div class="rounded-lg bg-slate-100 border border-slate-200 p-4 shadow-md shadow-slate-400">
                 <h1 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2 mb-6">
@@ -57,7 +57,7 @@
                     submission_status: $wire.submission_status
                 }"
             >
-                <h2 class="text-2xl pb-2 mt-2 border-b-2 border-slate-400">
+                <h2 class="text-xl text-sky-800 border-b-4 border-red-700 pb-1 mb-2">
                     Assessment
                 </h2>
 

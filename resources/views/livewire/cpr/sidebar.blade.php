@@ -1,11 +1,9 @@
-<nav
-    x-data="{ sidebar_open: $persist(true) }"
-    aria-label="Sidebar"
-    class="h-full flex flex-shrink-0 bg-slate-600 overflow-y-auto transition duration-500 w-fit"
-{{--    :class="{ 'w-60' : sidebar_open , 'w-fit' : !sidebar_open }"--}}
+<nav x-data="{ sidebar_open: $persist(true) }"
+     aria-label="Sidebar"
+     class="h-full flex flex-shrink-0 bg-slate-700 overflow-y-auto transition duration-500 w-fit"
+        {{--    :class="{ 'w-60' : sidebar_open , 'w-fit' : !sidebar_open }"--}}
 >
     <div class=" w-full flex sticky-top space-y-2 flex-col">
-
         <div class="flex flex-col h-full justify-between">
             <div class="flex flex-col ">
 
@@ -24,18 +22,17 @@
                     </button>
                 </div>
 
-                <x-sidebar-link :href="route('dashboard')"
-                                :active="request()->routeIs('dashboard')"
-                                x-bind:title="sidebar_open ? null : 'Dashboard (Home)'"
-                                icon="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-                                wire:navigate>
-                    {{ __('Dashboard') }}
-                </x-sidebar-link>
+                @can('view dashboard')
+                    <x-sidebar-link :href="route('dashboard')"
+                                    :active="request()->routeIs('dashboard')"
+                                    x-bind:title="sidebar_open ? null : 'Dashboard (Home)'"
+                                    icon="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                                    wire:navigate>
+                        {{ __('Dashboard') }}
+                    </x-sidebar-link>
+                @endcan
 
-                @if(Auth::user()->hasRole('admin'))
-
-        {{--            <h2 class="text-cyan-200 ml-3 text-md">ADMIN</h2>--}}
-
+                @can('manage users')
                     <x-sidebar-link :href="route('registrants')"
                                     :active="request()->routeIs(['registrants', 'user-edit', 'user-add'])"
                                     x-bind:title="sidebar_open ? null : 'Registrants & Applicants'"
@@ -43,7 +40,9 @@
                                     wire:navigate >
                         {{ __('Registrants') }}
                     </x-sidebar-link>
+                @endcan
 
+                @can('manage prices')
                     <x-sidebar-link :href="route('prices')"
                                     :active="request()->routeIs('prices')"
                                     x-bind:title="sidebar_open ? null : 'Prices'"
@@ -51,7 +50,9 @@
                                     wire:navigate >
                         {{ __('Prices') }}
                     </x-sidebar-link>
+                @endcan
 
+                @can('manage admission dates')
                     <x-sidebar-link :href="route('admission-dates')"
                                     :active="request()->routeIs('admission-dates')"
                                     x-bind:title="sidebar_open ? null : 'Admission Dates'"
@@ -59,7 +60,9 @@
                                     wire:navigate>
                         {{ __('Admission Dates') }}
                     </x-sidebar-link>
+                @endcan
 
+                @can('manage public documents')
                     <x-sidebar-link :href="route('public-documents')"
                                     :active="request()->routeIs('public-documents')"
                                     x-bind:title="sidebar_open ? null : 'Public Documents'"
@@ -71,7 +74,9 @@
                                     wire:navigate>
                         {{ __('Public Documents') }}
                     </x-sidebar-link>
+                @endcan
 
+                @can('manage private documents')
                     <x-sidebar-link :href="route('private-documents')"
                                     :active="request()->routeIs('private-documents')"
                                     x-bind:title="sidebar_open ? null : 'Private Documents'"
@@ -83,11 +88,9 @@
                                     wire:navigate>
                         {{ __('Private Documents') }}
                     </x-sidebar-link>
+                @endcan
 
-                @endif
-
-                @if(Auth::user()->hasRole('registrant') || Auth::user()->hasRole('lapsed registrant'))
-
+                @can('submit cpd')
                     <x-sidebar-link :href="route('registrant-cpd')"
                                     :active="request()->routeIs('registrant-cpd')"
                                     x-bind:title="sidebar_open ? null : 'Submit CPD'"
@@ -95,16 +98,10 @@
                                     wire:navigate>
                         {{ __('Submit CPD') }}
                     </x-sidebar-link>
+                @endcan
 
-                    <x-sidebar-link href="#">
-                        {{ __('My Details') }}
-                    </x-sidebar-link>
-
-                @endif
-
-                @if(Auth::user()->hasRole('applicant'))
+                @can('submit eoi')
                     @if(Auth::user()->registration_fee_paid && !in_array(Auth::user()->eoi_status, ['accepted', 'submitted', 'rejected']))
-{{--                    @if(Auth::user()->eoi_status !== 'submitted')--}}
                         <x-sidebar-link :href="route('applicant-eoi')"
                                         :active="request()->routeIs('applicant-eoi')"
                                         x-bind:title="sidebar_open ? null : 'Expression of Interest'"
@@ -113,7 +110,9 @@
                             {{ __('Expression of Interest') }}
                         </x-sidebar-link>
                     @endif
+                @endcan
 
+                @can('view applicant help')
                     <x-sidebar-link :href="route('applicant-help')"
                                     :active="request()->routeIs('applicant-help')"
                                     x-bind:title="sidebar_open ? null : 'Help'"
@@ -121,28 +120,41 @@
                                     wire:navigate>
                         {{ __('Help') }}
                     </x-sidebar-link>
+                @endcan
 
-                @endif
-
-                @if(Auth::user()->hasRole('accepted applicant'))
-
-                @endif
+                @can('edit own details')
+                    <x-sidebar-link :href="route('my-details')"
+                                    :active="request()->routeIs('my-details')"
+                                    x-bind:title="sidebar_open ? null : 'My Details'"
+                                    icon="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                                    wire:navigate>
+                        {{ __('My Details') }}
+                    </x-sidebar-link>
+                @endcan
             </div>
 
             <div class="flex flex-col pb-2">
                 <x-sidebar-link href="/" icon="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3">
-                    Return to site
+                    Back to website
                 </x-sidebar-link>
+
+                <button wire:click="logout"
+                        class="inline-flex items-center py-3 lg:py-2 my-1 lg:my-0
+                        font-medium border-l-2 border-transparent focus:outline-none text-slate-200
+                        hover:text-white hover:border-b-cyan-400 hover:bg-red-500
+                        focus:text-gray-700 focus:border-gray-300 active:cursor-wait transition duration-150 ease-in-out"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                         class="w-6 h-6 mx-3 text-red-300">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+                    </svg>
+                    <span class="transition ease-in delay-1000" :class="{'hidden pr-0' : !sidebar_open, 'block pr-4' : sidebar_open }">
+                        Logout
+                    </span>
+                </button>
+
             </div>
         </div>
     </div>
 
-{{--    <div class="position-absolute top-1 left-2">--}}
-{{--        <a href="/" class="flex content-center bg-transparent px-2 py-2 font-semibold transition-all ease-in-out duration-500 text-white hover:text-cyan-400">--}}
-{{--            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">--}}
-{{--                <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />--}}
-{{--            </svg>--}}
-
-{{--        </a>--}}
-{{--    </div>--}}
 </nav>

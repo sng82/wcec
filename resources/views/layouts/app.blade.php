@@ -27,7 +27,7 @@
         <meta name="msapplication-config" content="/icons/browserconfig.xml">
         <meta name="theme-color" content="#ffffff">
     </head>
-    <body class="cpp flex flex-col h-screen bg-slate-300 overflow-hidden">
+    <body class="cpp flex flex-col h-screen bg-slate-200 overflow-hidden">
         {{ $slot }}
 
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

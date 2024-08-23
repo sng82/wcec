@@ -19,55 +19,61 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // create permissions
-        Permission::create(['name' => 'view users']);
-        Permission::create(['name' => 'view roles']);
-        Permission::create(['name' => 'view permissions']);
-        Permission::create(['name' => 'view prices']);
-        Permission::create(['name' => 'view admission dates']);
-        Permission::create(['name' => 'view admin dashboard']);
-
-        Permission::create(['name' => 'edit users']);
-        Permission::create(['name' => 'edit roles']);
-        Permission::create(['name' => 'edit permissions']);
-        Permission::create(['name' => 'edit prices']);
-        Permission::create(['name' => 'edit admission dates']);
-
-        Permission::create(['name' => 'delete users']);
-        Permission::create(['name' => 'delete roles']);
-        Permission::create(['name' => 'delete permissions']);
-        Permission::create(['name' => 'delete prices']);
-        Permission::create(['name' => 'delete admission dates']);
+        Permission::create(['name' => 'view dashboard']);
+        Permission::create(['name' => 'edit own details']);
+        Permission::create(['name' => 'manage users']);
+        Permission::create(['name' => 'manage prices']);
+        Permission::create(['name' => 'manage admission dates']);
+        Permission::create(['name' => 'manage public documents']);
+        Permission::create(['name' => 'manage private documents']);
+        Permission::create(['name' => 'submit eoi']);
+        Permission::create(['name' => 'submit cpd']);
+        Permission::create(['name' => 'view applicant help']);
 
 
         // create roles and assign created permissions
-
-        // this can be done as separate statements
         Role::create(['name' => 'admin'])
             ->givePermissionTo([
-                'view users',
-                'view roles',
-                'view permissions',
-                'view prices',
-                'view admission dates',
-                'view admin dashboard',
-                'edit users',
-                'edit roles',
-                'edit permissions',
-                'edit prices',
-                'edit admission dates',
-                'delete users',
-                'delete roles',
-                'delete permissions',
-                'delete prices',
-                'delete admission dates',
+                'view dashboard',
+                'edit own details',
+                'manage users',
+                'manage prices',
+                'manage admission dates',
+                'manage public documents',
+                'manage private documents',
             ]);
 
-//        Role::create(['name' => 'new applicant']);
-        Role::create(['name' => 'applicant']);
-        Role::create(['name' => 'accepted applicant']);
-        Role::create(['name' => 'blocked applicant']);
-        Role::create(['name' => 'registrant']);
-        Role::create(['name' => 'lapsed registrant']);
+        Role::create(['name' => 'applicant'])
+            ->givePermissionTo([
+                'view dashboard',
+                'edit own details',
+                'submit eoi',
+                'view applicant help',
+            ]);
+
+        Role::create(['name' => 'accepted applicant'])
+            ->givePermissionTo([
+                'view dashboard',
+                'edit own details',
+            ]);
+
+        Role::create(['name' => 'blocked applicant'])
+            ->givePermissionTo([
+                'view dashboard',
+            ]);
+
+        Role::create(['name' => 'registrant'])
+            ->givePermissionTo([
+                'view dashboard',
+                'edit own details',
+                'submit cpd',
+            ]);
+
+        Role::create(['name' => 'lapsed registrant'])
+            ->givePermissionTo([
+                'view dashboard',
+                'submit cpd',
+            ]);
 
     }
 }

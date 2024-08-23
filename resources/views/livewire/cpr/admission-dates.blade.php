@@ -1,6 +1,6 @@
-<div class="flex flex-col flex-grow p-3 xl:p-6 gap-5 overflow-y-auto">
+<div class="flex flex-col flex-grow p-3 xl:p-6 overflow-y-auto">
 
-    <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
+    <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300">
         <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 mb-3 pb-2">
             Upcoming Admission Dates
         </h2>
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
+    <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300">
         <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 mb-3 pb-2">
             New Admission Date
         </h2>

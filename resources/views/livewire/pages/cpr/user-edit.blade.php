@@ -4,34 +4,48 @@
 
     <div class="right w-full flex grow flex-col p-6 gap-8 overflow-y-auto">
 
-        <div class="rounded-lg bg-slate-50 border border-slate-50 p-4">
+        <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300">
             <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2">
                 {{ $first_name . ' ' . $last_name }}
+                <span class="text-lg uppercase font-bold text-sky-500">[{{ \Illuminate\Support\Str::of($registrant->roles->pluck('name')[0] ?? '')->title() }}]</span>
             </h2>
 
             <form wire:submit="update">
                 <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                     <x-admin-input-label for="first_name" :value="__('First Name')" class="lg:w-48" />
                     <x-text-input wire:model="first_name" id="first_name" class="block w-full lg:w-96" type="text" name="first_name" required autofocus autocomplete="first_name" />
+                    <x-input-error :messages="$errors->get('first_name')" class="ml-2 mt-2" />
                 </div>
-                <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
 
                 <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                     <x-admin-input-label for="last_name" :value="__('Last Name')" class="w-48" />
-                    <x-text-input wire:model="last_name" id="last_name" class="block w-full lg:w-96" type="text" name="last_name" required autofocus autocomplete="last_name" />
+                    <x-text-input wire:model="last_name" id="last_name" class="block w-full lg:w-96" type="text" name="last_name" required autocomplete="last_name" />
+                    <x-input-error :messages="$errors->get('last_name')" class="ml-2 mt-2" />
                 </div>
-                <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
 
                 <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                     <x-admin-input-label for="email" :value="__('Email')" class="w-48" />
-                    <x-text-input wire:model="email" id="email" class="block w-full lg:w-[500px]" type="email" name="email" required autofocus autocomplete="email" />
+                    <x-text-input wire:model="email" id="email" class="block w-full lg:w-[500px]" type="email" name="email" required autocomplete="email" />
+                    <x-input-error :messages="$errors->get('email')" class="ml-2 mt-2" />
                 </div>
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+
+
+                <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
+                    <x-admin-input-label for="phone_main" :value="__('Phone (Main)')" class="w-48" />
+                    <x-text-input wire:model="phone_main" id="phone_main" class="block w-full lg:w-60" type="text" name="phone_main" autocomplete="off" />
+                    <x-input-error :messages="$errors->get('phone_main')" class="ml-2 mt-2" />
+                </div>
+
+                <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
+                    <x-admin-input-label for="phone_mobile" :value="__('Phone (Mobile)')" class="w-48" />
+                    <x-text-input wire:model="phone_mobile" id="phone_mobile" class="block w-full lg:w-60" type="text" name="phone_mobile" autocomplete="off"  />
+                    <x-input-error :messages="$errors->get('phone_mobile')" class="ml-2 mt-2" />
+                </div>
 
                 @if($role === 'registrant' || $role === 'lapsed registrant')
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                         <x-admin-input-label for="registration_expires_at" :value="__('Registration Expiry')" class="w-48" />
-                        <x-text-input wire:model="registration_expires_at" id="registration_expires_at" class="block" type="date" name="registration_expires_at" required autofocus autocomplete="registration_expires_at" />
+                        <x-text-input wire:model="registration_expires_at" id="registration_expires_at" class="block" type="date" name="registration_expires_at" required autocomplete="registration_expires_at" />
                     </div>
                     <x-input-error :messages="$errors->get('registration_expires_at')" class="mt-2" />
                 @endif
@@ -52,7 +66,7 @@
                         Account Type:
                     </span>
                     <span>
-                        {{ Str::of($registrant->roles->pluck('name')[0] ?? '')->title() }}
+                        {{ \Illuminate\Support\Str::of($registrant->roles->pluck('name')[0] ?? '')->title() }}
                     </span>
                 </div>
 
@@ -60,12 +74,10 @@
                 @if($role === 'registrant' || $role === 'lapsed registrant')
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
-                            Became Member:
+                            Date Awarded:
                         </span>
                         <span>
                             {{ \Carbon\Carbon::parse($became_registrant_at)->toFormattedDayDateString() }}
-                            {{--                            {{ \Carbon\Carbon::parse($became_registrant_at)->format('d/m/Y') }}--}}
-                            {{--                            ({{ \Carbon\Carbon::parse($became_registrant_at)->diffForHumans() }})--}}
                         </span>
                     </div>
 

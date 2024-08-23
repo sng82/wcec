@@ -20,9 +20,9 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $gender = $this->faker->randomElement(['male', 'female']);
-        $first_name = $this->faker->firstName($gender);
-        $last_name = $this->faker->lastName($gender);
+        $gender = fake()->randomElement(['male', 'female']);
+        $first_name = fake('en_GB')->firstName($gender);
+        $last_name = fake('en_GB')->lastName();
         $email = (fake()->numberBetween(1,2) > 1 ? $first_name : $first_name[0])
                  . (fake()->numberBetween(1,3) > 1
                         ? fake()->randomElement(['','','','','-','_','.'])
@@ -34,7 +34,14 @@ class UserFactory extends Factory
                         : fake()->numberBetween(1970,2006)
                  )
                  . '@example'
-                 . fake()->randomElement(['.co.uk','.co.uk','.co.uk','.co.uk','.com','.com','.org','.org.uk']);
+                 . fake()->randomElement([
+                     '.co.uk','.co.uk','.co.uk','.co.uk',
+                     '.com','.com','.com',
+                     '.org',
+                     '.org.uk'
+                 ]);
+
+        $mobile_phone_no = '07' . fake()->numberBetween(100000000,999999999);
 
         return [
 //            'title' => fake()->title($gender),
@@ -43,8 +50,8 @@ class UserFactory extends Factory
             'email' => strtolower($email),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'phone_main' => fake()->phoneNumber(),
-            'phone_mobile' => fake()->numberBetween(1,2) > 1 ? fake()->phoneNumber() : null,
+            'phone_main' => fake('en_GB')->phoneNumber(),
+            'phone_mobile' => fake()->numberBetween(1,2) > 1 ? $mobile_phone_no : null,
             'remember_token' => Str::random(10),
         ];
     }

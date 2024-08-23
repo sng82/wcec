@@ -33,7 +33,8 @@ class DeclinedApplicants extends Component
     public function render()
     {
         return view('livewire.component.declined-applicants', [
-            'blocked_applicants' => User::role('blocked applicant')
+            'blocked_applicants' => User::with('declinedBy')
+                                        ->role('blocked applicant')
                                         ->search($this->search)
                                         ->orderBy($this->sort_column_name, $this->sort_column_direction)
                                         ->paginate($this->per_page),

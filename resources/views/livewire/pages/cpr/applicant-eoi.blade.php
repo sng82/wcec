@@ -4,7 +4,7 @@
 
     <div class="right w-full min-w-80 flex grow flex-col overflow-y-auto">
 
-        <livewire:layout.cpr-navigation/>
+{{--        <livewire:layout.cpr-navigation/>--}}
 
         <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 

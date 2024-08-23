@@ -33,7 +33,8 @@ class AcceptedApplicants extends Component
     public function render()
     {
         return view('livewire.component.accepted-applicants', [
-            'accepted_applicants' => User::role('accepted applicant')
+            'accepted_applicants' => User::with('acceptedBy')
+                                         ->role('accepted applicant')
                                          ->search($this->search)
                                          ->orderBy($this->sort_column_name, $this->sort_column_direction)
                                          ->paginate($this->per_page),

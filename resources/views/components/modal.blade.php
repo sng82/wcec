@@ -13,11 +13,11 @@
     </div>
     <div class="bg-white p-4 sm:px-6 ">
         <div class="">
-            {{ $content }}
+            {{ $content ?? '' }}
         </div>
     </div>
 
-    @if($buttons)
+    @if(isset($buttons) && $buttons)
         <div class="bg-white p-4 sm:px-6 sm:flex border-t border-slate-150">
             {{ $buttons }}
         </div>

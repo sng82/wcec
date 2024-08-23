@@ -126,14 +126,17 @@ class User extends Authenticatable
 
     public function registrationCanBeRenewed()
     {
+        // Fail if user isn't a registrant.
         if (! $this->hasRole('registrant')) {
             return false;
         }
 
+        // Fail if users registration has lapsed.
         if (Carbon::parse($this->registration_expires_at)->isPast()) {
             return false;
         }
 
+        // Fail if registration renewal is not due within next 3 months
         if (Carbon::parse($this->registration_expires_at)->subMonths(3)->isFuture()) {
             return false;
         }
@@ -143,15 +146,7 @@ class User extends Authenticatable
 
     public function registrationRenewalCanBePaid()
     {
-        if (! $this->hasRole('registrant')) {
-            return false;
-        }
-
-        if (Carbon::parse($this->registration_expires_at)->isPast()) {
-            return false;
-        }
-
-        if (Carbon::parse($this->registration_expires_at)->subMonths(3)->isFuture()) {
+        if (!$this->registrationCanBeRenewed()) {
             return false;
         }
 
@@ -164,18 +159,7 @@ class User extends Authenticatable
 
     public function cpdCanBeSubmitted()
     {
-        // CPD can't be submitted if user isn't a registrant
-        if (! $this->hasRole('registrant')) {
-            return false;
-        }
-
-        // CPD can't be submitted if users registration has lapsed.
-        if (Carbon::parse($this->registration_expires_at)->isPast()) {
-            return false;
-        }
-
-        // CPD can't be submitted unless registration renewal is within next 3 months,
-        if (Carbon::parse($this->registration_expires_at)->subMonths(3)->isFuture()) {
+        if (!$this->registrationCanBeRenewed()) {
             return false;
         }
 

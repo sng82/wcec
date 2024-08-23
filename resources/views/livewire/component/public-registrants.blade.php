@@ -1,4 +1,4 @@
-<div class="bg-slate-200 border shadow-xl shadow-slate-400 rounded-xl px-5 py-6">
+<div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300">
     <h2 class="text-2xl lg:text-3xl text-slate-700 border-b-2 border-red-700 pb-2 mb-4">
         The Chartered Practitioners Register
     </h2>

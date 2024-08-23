@@ -4,7 +4,7 @@
 
     <div class="right w-full flex flex-col grow min-w-80 overflow-y-scroll">
 
-        <livewire:layout.cpr-navigation />
+{{--        <livewire:layout.cpr-navigation />--}}
 
         <div class="flex flex-col px-3 xl:px-6">
 
@@ -23,7 +23,7 @@
                     </li>
                 </ul>
 
-                <div class="w-full bg-white mx-auto border rounded-lg mb-6">
+                <div class="">
                     <div x-show="activeTab===0">
                         <livewire:component.active-members />
                     </div>

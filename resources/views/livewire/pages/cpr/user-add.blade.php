@@ -24,11 +24,11 @@
 
     <div class="right w-full flex flex-col grow min-w-80 overflow-y-auto">
 
-        <livewire:layout.cpr-navigation />
+{{--        <livewire:layout.cpr-navigation />--}}
 
         <div class="flex flex-col p-3 xl:p-6 gap-5">
 
-            <div class="rounded-lg bg-slate-50 border border-slate-50 p-4 shadow">
+            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300">
                 <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2">
                     New Applicant/Registrant
                 </h2>

@@ -4,10 +4,10 @@
 
     <div class="right w-full min-w-80 flex grow flex-col overflow-y-auto">
 
-        <livewire:layout.cpr-navigation/>
+{{--        <livewire:layout.cpr-navigation/>--}}
 
         <div class="py-4 p-3 xl:p-6">
-            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-6 border border-slate-300 shadow shadow-slate-400">
+            <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300">
                 <h1 class="text-3xl text-sky-800 border-b-4 border-red-700 pb-2 mb-6">
                     Continual Professional Development {{ $cpd_year_due }}
                 </h1>
@@ -53,11 +53,7 @@
                         </svg>
                     </button>
                 </form>
-        </div>
-
-
-
-
+            </div>
         </div>
     </div>
 </div>

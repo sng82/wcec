@@ -4,7 +4,7 @@
 
     <div class="right w-full min-w-80 flex grow flex-col overflow-y-auto">
 
-        <livewire:layout.cpr-navigation/>
+{{--        <livewire:layout.cpr-navigation/>--}}
 
         <div class="bg-slate-50 rounded-lg p-3 xl:p-4 mt-6 mx-6 border border-slate-200 shadow">
             <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2 mb-8">

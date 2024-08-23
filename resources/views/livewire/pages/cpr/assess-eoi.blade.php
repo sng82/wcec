@@ -3,7 +3,7 @@
 
     <div class="right w-full flex flex-col grow min-w-80 overflow-y-auto">
 
-        <livewire:layout.cpr-navigation />
+{{--        <livewire:layout.cpr-navigation />--}}
 
         <div class="flex flex-col p-3 xl:p-6 gap-5">
 

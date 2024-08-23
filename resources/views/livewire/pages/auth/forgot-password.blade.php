@@ -7,6 +7,7 @@ use Livewire\Volt\Component;
 new #[Layout('layouts.guest')] class extends Component
 {
     public string $email = '';
+    public string $feedback_message = '';
 
 
     public function mount()
@@ -33,15 +34,16 @@ new #[Layout('layouts.guest')] class extends Component
             $this->only('email')
         );
 
-        if ($status != Password::RESET_LINK_SENT) {
-            $this->addError('email', __($status));
-
-            return;
-        }
+//        if ($status != Password::RESET_LINK_SENT) {
+//            $this->addError('email', __($status));
+//
+//            return;
+//        }
 
         $this->reset('email');
 
-        session()->flash('status', __($status));
+//        session()->flash('status', __($status));
+        $this->feedback_message = "We've checked for an account using this email address. If one was found, an email containing further instructions has been sent to it.";
     }
 }; ?>
 
@@ -74,6 +76,8 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+
+            {!! $this->feedback_message !== '' ? "<p class='mt-3 text-sky-600 text-sm'>" . $this->feedback_message . '</p>' : '' !!}
         </div>
 
         <div class="flex items-center justify-end mt-4">

@@ -4,7 +4,7 @@
 
     <div class="right w-full flex flex-col grow overflow-y-auto">
 
-        <livewire:layout.cpr-navigation />
+{{--        <livewire:layout.cpr-navigation />--}}
 
         <livewire:cpr.admission-dates />
 

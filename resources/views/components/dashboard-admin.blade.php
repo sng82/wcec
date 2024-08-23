@@ -7,7 +7,7 @@
     'expiring_registrations',
 ])
 
-<div {{ $attributes->class(['bg-slate-50 rounded-lg p-3 xl:p-4 shadow']) }}>
+<div {{ $attributes->class(['bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300']) }}>
     <p class="mb-4">
         Hi, {{ explode(" ", $logged_in_user->first_name)[0] }},
     </p>
@@ -25,7 +25,7 @@
     </p>
 </div>
 
-<div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow" wire:poll.15s="getEOIs">
+<div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300" wire:poll.15s="getEOIs">
     <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2 mb-2">
         Expressions of Interest
     </h2>
@@ -112,7 +112,7 @@
     @endif
 </div>
 
-<div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow" wire:poll.15s="getSubmissions">
+<div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300" wire:poll.15s="getSubmissions">
     <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2 mb-2">
         Registration Submissions
     </h2>
@@ -187,7 +187,7 @@
     @endif
 </div>
 
-<div class="bg-slate-50 rounded-lg p-3 xl:p-4 shadow">
+<div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300">
     <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2 mb-2">
         Expiring Registrations
     </h2>

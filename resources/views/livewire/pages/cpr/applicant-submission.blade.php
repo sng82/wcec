@@ -4,7 +4,7 @@
 
     <div class="right w-full min-w-80 flex grow flex-col overflow-y-auto">
 
-        <livewire:layout.cpr-navigation/>
+{{--        <livewire:layout.cpr-navigation/>--}}
 
         <form wire:submit="submit" enctype="multipart/form-data" class="py-4 p-3 xl:p-6">
 
