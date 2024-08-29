@@ -3,7 +3,7 @@
             x-cloak
             {{ $attributes->merge([
                 'class' => 'flex flex-row justify-center items-center
-                mt-4 text-lg h-9 w-40 bg-fuchsia-500 hover:bg-fuchsia-600
+                text-lg h-9 w-40 bg-fuchsia-500 hover:bg-fuchsia-600
                 focus:cursor-wait text-white rounded-full '
             ])}}
 

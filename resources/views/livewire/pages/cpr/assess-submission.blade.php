@@ -140,7 +140,7 @@
                                   class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full"></textarea>
                     </div>
 
-                    <x-fuchsia-button class="lg:ml-60">
+                    <x-fuchsia-button class="lg:ml-60 mt-4">
                         {{ __('Save') }}
                     </x-fuchsia-button>
 

@@ -193,6 +193,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        print 'Migration and seeding completed at ' . Carbon::now()->toTimeString();
+        print '  Migration and seeding completed: ' . Carbon::now()->toDateTimeString();
     }
 }
