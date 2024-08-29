@@ -51,7 +51,6 @@
                 <div class="overflow-hidden border border-slate-100 rounded-lg shadow-sm overflow-x-auto">
                     @if($documents->count() > 0)
                         <table class="table-auto w-full divide-y divide-slate-200 text-sm">
-    {{--                        @todo: make headings interactive for sorting--}}
                             <thead class="bg-slate-200">
                                 <tr class="text-slate-700">
                                     <th wire:click="sortBy('doc_type')" scope="col" class="px-4 py-2 text-left cursor-pointer {{ $sort_column_name === 'doc_type' ? 'bg-slate-400' : 'hover:bg-slate-300' }}">
@@ -101,6 +100,7 @@
                                         </span>
                                         </div>
                                     </th>
+                                    <th scope="col" class="px-4 py-2"></th>
 
                                 </tr>
                             </thead>
@@ -115,8 +115,10 @@
                                             @endif
                                         </td>
                                         <td class="px-4 py-2">
-                                        {{-- @todo: make downloadable --}}
+
                                             {{ $document->file_name }}
+
+
                                         </td>
                                         <td class="px-4 py-2">
                                             {{ \Carbon\Carbon::parse($document->created_at)->toDayDateTimeString() }} by
@@ -124,28 +126,47 @@
                                                 {{ $document->owner->first_name . ' ' . $document->owner->last_name }}
                                             </a>
                                         </td>
+                                        <td class="px-4 py-2">
+                                            <button wire:click.prevent="downloadFile({{$document->id}})"
+                                                    class="text-white rounded-full bg-sky-700 px-4 py-1 hover:bg-sky-800 flex flex-row gap-2 items-center">
+                                                <span>
+                                                    Download
+                                                </span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                     class="size-4">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                          d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/>
+                                                </svg>
+                                            </button>
+                                        </td>
 
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     @else
-                        <p class="bg-white p-4">No documents found. Try a different search and/or filter.</p>
+                        <p class="bg-white p-4">
+                            No documents found.
+                            Either no documents have been submitted yet, or your search criteria produces no matches.
+                        </p>
                     @endif
                 </div>
 
-                <div class="flex flex-row justify-end items-center gap-4 my-3 text-base">
-                    <label class="text-sm" for="per_page">Per Page</label>
-                    <select wire:model.live="per_page" name="per_page" id="per_page" class="rounded-lg border border-slate-300 focus:border-sky-200 focus:ring-sky-100 focus:ring-4">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                </div>
-                <div class="overflow-x-auto">
-                    {{ $documents->onEachSide(1)->links() }}
-                </div>
+                @if($documents->count() > 0)
+                    <div class="flex flex-row justify-end items-center gap-4 my-3 text-base">
+                        <label class="text-sm" for="per_page">Per Page</label>
+                        <select wire:model.live="per_page" name="per_page" id="per_page" class="rounded-lg border border-slate-300 focus:border-sky-200 focus:ring-sky-100 focus:ring-4">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <div class="overflow-x-auto">
+                        {{ $documents->onEachSide(1)->links() }}
+                    </div>
+                @endif
 
             </div>
         </div>

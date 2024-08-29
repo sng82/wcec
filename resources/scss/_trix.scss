@@ -1,3 +1,5 @@
+$standard_border_radius: 6px;
+
 .trix-block {
 
     h1 {
@@ -11,7 +13,8 @@
         font-weight: 500;
     }
 
-    ul,ol {
+    ul,
+    ol {
         li {
             margin-left: 20px;
         }
@@ -62,16 +65,21 @@
 }
 
 trix-toolbar {
-    //hide file upload button
-    .trix-button--icon-attach {
+    // hide buttons
+    .trix-button--icon-link,
+    .trix-button--icon-attach,
+    .trix-button--icon-quote,
+    .trix-button--icon-code,
+    .trix-button--icon-increase-nesting-level {
         display: none;
     }
+
     .trix-button-group.trix-button-group--file-tools {
         border: none !important;
     }
 
     .trix-button-group {
-        border-radius: 5px;
+        border-radius: $standard_border_radius;
         box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
     }
 
@@ -85,11 +93,17 @@ trix-toolbar {
         }
 
         &:first-of-type {
-            border-radius: 4px 0 0 4px;
+            border-radius: $standard_border_radius 0 0 $standard_border_radius;
         }
         &:last-of-type {
-            border-radius: 0 4px 4px 0;
+            border-radius: 0 $standard_border_radius $standard_border_radius 0;
         }
+    }
+
+    // manually round corners where buttons have been hidden
+    .trix-button--icon-strike,
+    .trix-button--icon-decrease-nesting-level {
+        border-radius: 0 $standard_border_radius $standard_border_radius 0;
     }
 
 }

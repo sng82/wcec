@@ -50,7 +50,7 @@
                 <!-- Sidebar -->
                 <div class="flex flex-col gap-y-8 xl:max-w-md xl:min-w-96 ">
 
-                    <div class="rounded-2xl bg-sky-800 px-9 py-8 text-white">
+                    <div class="rounded-2xl bg-sky-800 px-9 py-8 text-white shadow-md shadow-slate-300">
                         <h2 class="mb-3 text-2xl">Expression of Interest</h2>
                         <hr class="mb-3">
                         <p class="text-sky-100">
@@ -62,7 +62,7 @@
                         </a>
                     </div>
 
-                    <div class="rounded-2xl bg-red-700 px-9 py-8 text-white">
+                    <div class="rounded-2xl bg-red-700 px-9 py-8 text-white shadow-md shadow-slate-300">
                         <h2 class="mb-3 text-2xl">Chartered Practitioner Login</h2>
                         <hr class="mb-3">
                         <p class="text-red-100">
@@ -91,7 +91,7 @@
                             </template>
                         </ul>
 
-                        <div class="w-full bg-white  mx-auto border rounded-lg">
+                        <div class="w-full bg-white mx-auto rounded-lg shadow-md shadow-slate-400">
                             <div x-show="activeTab===0">
                                 <div class="px-16 py-8">
                                     <h2 class="mt-8 mb-2 text-2xl xl:text-3xl ">Guide for Expression of Interest</h2>
@@ -361,6 +361,6 @@
                     "Award",
                 ]
             };
-        };
+        }
     </script>
 </main>

@@ -136,7 +136,7 @@ class User extends Authenticatable
             return false;
         }
 
-        // Fail if registration renewal is not due within next 3 months
+        // Fail if registration renewal is not due within next 3 months.
         if (Carbon::parse($this->registration_expires_at)->subMonths(3)->isFuture()) {
             return false;
         }
@@ -150,7 +150,11 @@ class User extends Authenticatable
             return false;
         }
 
-        if (Carbon::parse($this->renewal_fee_last_paid_at) > Carbon::now()->subMonths(3)) {
+        // Renewal fee can't be paid if it has previously been paid within the last 3 months.
+        if (
+            !empty($this->renewal_fee_last_paid_at) &&
+            Carbon::parse($this->renewal_fee_last_paid_at) > Carbon::now()->subMonths(3)
+        ) {
             return false;
         }
 
@@ -164,7 +168,10 @@ class User extends Authenticatable
         }
 
         // CPD can't be submitted if the user has submitted one within the last 3 months.
-        if (Carbon::parse($this->cpd_last_submitted_at) > Carbon::now()->subMonths(3)) {
+        if (
+            !empty($this->cpd_last_submitted_at) &&
+            Carbon::parse($this->cpd_last_submitted_at) > Carbon::now()->subMonths(3)
+        ) {
             return false;
         }
 

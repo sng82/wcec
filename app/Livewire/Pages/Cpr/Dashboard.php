@@ -202,7 +202,7 @@ class Dashboard extends Component
 
                 // Uncomment the following line to enable invoices.
 //                'invoice_creation' => [
-//                    'enabled' => true,
+//                    'enabled' => true
 //                ],
 
                 'success_url' => route('payment-success', [], true) . "?session_id={CHECKOUT_SESSION_ID}",

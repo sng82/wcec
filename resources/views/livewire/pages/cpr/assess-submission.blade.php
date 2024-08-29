@@ -33,7 +33,9 @@
                     Registration Submission: <span class="text-fuchsia-500">{{ $applicant->first_name . ' ' . $applicant->last_name }}</span>
                 </h1>
 
-                <p class="mb-4">Registration Pathway: <span class="font-bold">{{ str($path)->title() }}</span>.</p>
+                <p class="mb-4">
+                    Registration Pathway: <span class="font-bold">{{ str($path)->title() }}</span>.
+                </p>
 
                 <button wire:click.prevent="downloadFile"
                         class="text-white rounded-full bg-sky-700 px-4 py-1 hover:bg-sky-800 flex flex-row gap-2 items-center"
@@ -67,11 +69,21 @@
                         <select wire:model="submission_status" x-model="submission_status" name="submission_status" id="submission_status"
                                 class="block w-52 border-gray-300 focus:border-indigo-500 focus:ring-sky-500 rounded-md shadow-sm"
                                 required>
-                            <option value="submitted" {{ $submission_status === 'submitted' ? 'selected' : '' }}>Submitted</option>
-                            <option value="awaiting_interview" {{ $submission_status === 'awaiting_interview' ? 'selected' : '' }}>Awaiting Interview</option>
-                            <option value="accepted" {{ $submission_status === 'accepted' ? 'selected' : '' }}>Accepted</option>
-                            <option value="unaccepted" {{ $submission_status === 'unaccepted' ? 'selected' : '' }}>Unaccepted</option>
-                            <option value="rejected" {{ $submission_status === 'rejected' ? 'selected' : '' }}>Rejected</option>
+                            <option value="submitted" {{ $submission_status === 'submitted' ? 'selected' : '' }}>
+                                Submitted
+                            </option>
+                            <option value="awaiting_interview" {{ $submission_status === 'awaiting_interview' ? 'selected' : '' }}>
+                                Awaiting Interview
+                            </option>
+                            <option value="accepted" {{ $submission_status === 'accepted' ? 'selected' : '' }}>
+                                Accepted
+                            </option>
+                            <option value="unaccepted" {{ $submission_status === 'unaccepted' ? 'selected' : '' }}>
+                                Unaccepted
+                            </option>
+                            <option value="rejected" {{ $submission_status === 'rejected' ? 'selected' : '' }}>
+                                Rejected
+                            </option>
                         </select>
                     </div>
 
@@ -91,7 +103,9 @@
                             <div class="hidden lg:inline-block lg:relative  w-2 mr-2 align-middle">
                                 -
                             </div>
-                            <span class="text-sm text-gray-700 italic">Can be set any time after Submission Status is set to 'Awaiting Interview'.</span>
+                            <span class="text-sm text-gray-700 italic">
+                                Can be set any time after Submission Status is set to 'Awaiting Interview'.
+                            </span>
                         </div>
                     </div>
 
@@ -108,10 +122,11 @@
                                        class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none focus:ring focus:ring-indigo-200 focus:ring-opacity-50 cursor-pointer"/>
                                 <label for="send_interview_email" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-200 border border-gray-300 cursor-pointer"></label>
                             </div>
-                            <span class="text-sm text-gray-700 italic">Send an email to the applicant advising date and time of interview.</span>
+                            <span class="text-sm text-gray-700 italic">
+                                Send an email to the applicant advising date and time of interview.
+                            </span>
                         </div>
                     </div>
-
 
                     <div class="flex flex-col lg:flex-row lg:items-center py-2">
                         <x-admin-input-label for="feedback" :value="__('Feedback')" class="lg:w-60 shrink-0"/>
@@ -125,14 +140,33 @@
                                   class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full"></textarea>
                     </div>
 
-                    <button class="mt-4 text-lg py-2 px-12 bg-fuchsia-500 hover:bg-fuchsia-600 focus:cursor-wait text-white rounded-full lg:ml-60">
-                        Save
-                    </button>
+                    <x-fuchsia-button class="lg:ml-60">
+                        {{ __('Save') }}
+                    </x-fuchsia-button>
+
+{{--                    <div x-data="{ submitted: false }">--}}
+{{--                        <button x-on:click="submitted = !submitted"--}}
+{{--                                x-cloak--}}
+{{--                                class="flex justify-center items-center mt-4 text-lg h-10 w-36 bg-fuchsia-500 hover:bg-fuchsia-600 focus:cursor-wait text-white rounded-full lg:ml-60"--}}
+{{--                        >--}}
+{{--                            <span x-show="!submitted">--}}
+{{--                                Save--}}
+{{--                            </span>--}}
+{{--                            <span x-show="submitted">--}}
+{{--                                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">--}}
+{{--                                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>--}}
+{{--                                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>--}}
+{{--                                </svg>--}}
+{{--                            </span>--}}
+{{--                        </button>--}}
+{{--                    </div>--}}
 
                 </form>
 
                 <div class="rounded-lg bg-gradient-to-r from-sky-500 to-teal-500 text-white p-4 mt-6 mb-2">
-                    <h3 class="text-lg font-bold text-sky-200">Submission Statuses</h3>
+                    <h3 class="text-lg font-bold text-sky-200">
+                        Submission Statuses
+                    </h3>
                     <ul class="mt-0 ml-5 list-disc marker:text-white space-y-2 text-sm">
                         <li>
                             <span class="font-bold text-slate-600">
@@ -151,13 +185,13 @@
                             </span>
                             <ul class="ml-8 list-square marker:text-slate-200">
                                 <li>
-                                    Select this status when you are happy with the submission and want to arrange an
-                                    interview.
+                                    Select this status when you are happy with the submission and want to
+                                    arrange an interview.
                                 </li>
                                 <li>
-                                    If the 'Interview Date &amp; Time' input is completed, and the 'Send Email' switch is turned
-                                    on, an email will be sent to the applicant advising them of the interview that has
-                                    been scheduled.<br>
+                                    If the 'Interview Date &amp; Time' input is completed, and the 'Send Email' switch
+                                    is turned on, an email will be sent to the applicant advising them of the
+                                    interview that has been scheduled.<br>
                                     The applicant is asked to reply<span class="text-slate-500">*</span> to the email
                                     either confirming or requesting a different time/date.<br>
                                     <span class="text-slate-500">*</span> Replies are sent to
@@ -217,12 +251,23 @@
                     </ul>
 
                     <hr class="my-4">
-                    <h3 class="text-lg font-bold text-sky-200">Feedback</h3>
-                    <p class="mt-0 text-sm">Depending upon the submission status, the feedback you provide here may be made available to the applicant.</p>
+                    <h3 class="text-lg font-bold text-sky-200">
+                        Feedback
+                    </h3>
+                    <p class="mt-0 text-sm">
+                        Depending upon the submission status, the feedback you provide here may be made
+                        available to the applicant.
+                    </p>
 
                     <hr class="my-4">
-                    <h3 class="text-lg font-bold text-sky-200">Assessor Notes</h3>
-                    <p class="mt-0 text-sm">Optional. Only visible to CPR admins so can include private observations, such as why a submission was unacceptable. Assessor Notes will remain visible if/when a submission is resubmitted</p>
+                    <h3 class="text-lg font-bold text-sky-200">
+                        Assessor Notes
+                    </h3>
+                    <p class="mt-0 text-sm">
+                        Optional. Only visible to CPR admins so can include private observations, such as
+                        why a submission was unacceptable. Assessor Notes will remain visible on this page
+                        if/when a submission is resubmitted
+                    </p>
                 </div>
 
             </div>

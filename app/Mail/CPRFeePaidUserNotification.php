@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -9,20 +10,20 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ApplicantInterviewNotification extends Mailable
+class CPRFeePaidUserNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $order;
     public $user;
-    public $feedback;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($user, $feedback)
+    public function __construct($order)
     {
-        $this->user = $user;
-        $this->feedback = $feedback;
+        $this->order = $order;
+        $this->user = User::find($order->user_id);
     }
 
     /**
@@ -31,8 +32,7 @@ class ApplicantInterviewNotification extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            replyTo: config('mail.membership_enquiry_mail_recipient'),
-            subject: 'Chartered Practitioners Register: Interview Notification',
+            subject: 'CPR Payment Made',
         );
     }
 
@@ -42,10 +42,10 @@ class ApplicantInterviewNotification extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.applicant-interview-notification',
+            markdown: 'mail.cpr-fee-paid-user-notification',
             with: [
+                'order' => $this->order,
                 'user' => $this->user,
-                'feedback' => $this->feedback,
             ]
         );
     }

@@ -130,7 +130,7 @@
                         <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .pdf, .doc, .docx, .jpg, .jpeg, .png | Max file size: 5MB</p>
                     </div>
 
-                    <button class="bg-sky-600 hover:bg-sky-700 text-white rounded-full px-6 py-2 my-4 flex flex-row items-center justify-center gap-2"
+                    <button class="bg-sky-600 hover:bg-sky-700 focus:cursor-wait text-white rounded-full px-6 py-2 my-4 flex flex-row items-center justify-center gap-2"
                     >
                         Submit
                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"

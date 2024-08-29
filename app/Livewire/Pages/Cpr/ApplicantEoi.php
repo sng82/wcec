@@ -144,8 +144,7 @@ class ApplicantEoi extends Component
                        . Carbon::parse(now())->format('YmdHisu')
                        . '.zip';
 
-        // @todo: it gets deleted immediately, but this probably shouldn't be in the public path!
-        if ($zip->open(public_path($zipFileName), ZipArchive::CREATE) === true) {
+        if ($zip->open(storage_path($zipFileName), ZipArchive::CREATE) === true) {
             $documents = Document::where('user_id', Auth::user()->id)
                                  ->where('eoi_id', $this->eoi_id)
                                  ->where('doc_type', $doc_type)
@@ -154,14 +153,18 @@ class ApplicantEoi extends Component
             foreach ($documents as $document) {
                 $zip->addFile(
 //                    storage_path('app/public/submitted_documents/' . Auth::id() . '/' . $document->file_name),
-                    storage_path('app/private/submitted_documents/' . Auth::id() . '/' . $document->file_name),
+                    storage_path(
+                        'app/private/submitted_documents/'
+                        . Auth::id() . '/'
+                        . $document->file_name
+                    ),
                     $document->file_name
                 );
             }
 
             $zip->close();
 
-            return response()->download(public_path($zipFileName))->deleteFileAfterSend();
+            return response()->download(storage_path($zipFileName))->deleteFileAfterSend();
         }
 
         $this->alert('error', 'Unable to download files', [

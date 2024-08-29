@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\CPRFeePaidAdminNotification;
+use App\Mail\CPRFeePaidUserNotification;
 use App\Models\Order;
 use App\Models\User;
 use Carbon\Carbon;
@@ -76,8 +77,10 @@ class StripeController extends Controller
                     Mail::to(config('mail.membership_enquiry_mail_recipient'))
                         ->send(new CPRFeePaidAdminNotification($order));
 
-                    // @todo: Send email to user confirming purchase
-                    // @todo: Investigate fetching receipt pdf (if one exists?) using the API, and storing it locally.
+                    Mail::to($user->email)
+                        ->send(new CPRFeePaidUserNotification($order));
+
+                    // TODO: Investigate fetching receipt pdf (if one exists?) using the API, and storing it locally.
                 }
                 break;
 
@@ -94,7 +97,7 @@ class StripeController extends Controller
                     $order->stripe_hosted_invoice_url = $stripeData->hosted_invoice_url;
                     $order->save();
                 }
-                // @todo: Investigate fetching invoice pdf using the API, and storing it locally.
+                // TODO: Investigate fetching invoice pdf using the API, and storing it locally.
                 break;
 
             default:

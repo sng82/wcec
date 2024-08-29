@@ -136,7 +136,7 @@ class AssessSubmission extends Component
 
     public function save()
     {
-        try{
+        try {
             $this->submission = Submission::updateOrCreate([
                 'user_id' => $this->applicant->id,
             ], [
@@ -145,42 +145,61 @@ class AssessSubmission extends Component
                 'notes'     => $this->notes,
             ]);
 
-            $applicant_data = [];
-            $applicant_data['submission_status']        = $this->submission_status;
-            $applicant_data['submission_interview_at']  = $this->submission_interview_at !== ''
-                                                                ? $this->submission_interview_at
-                                                                : null;
+            $applicant = $this->applicant;
+            $applicant->submission_status = $this->submission_status;
+            $applicant->submission_interview_at = $this->submission_interview_at !== ''
+                                                    ? $this->submission_interview_at
+                                                    : null;
 
-            if (
-                $this->submission_status === 'accepted' && (
+//            $applicant_data = [];
+//            $applicant_data['submission_status']        = $this->submission_status;
+//            $applicant_data['submission_interview_at']  = $this->submission_interview_at !== ''
+//                                                                ? $this->submission_interview_at
+//                                                                : null;
+
+            if ($this->submission_status === 'accepted') {
+
+                $applicant->removeRole('applicant');
+                $applicant->assignRole('accepted applicant');
+
+                if (
                     empty($this->applicant->submission_accepted_at) ||
                     empty($this->applicant->submission_accepted_by)
-                )
-            ) {
-                $applicant_data['submission_accepted_at'] = now();
-                $applicant_data['submission_accepted_by'] = \Auth::id();
+                ) {
+                    $applicant->submission_accepted_at = Carbon::now();
+                    $applicant->submission_accepted_by = \Auth::user()->id;
+                    //                $applicant_data['submission_accepted_at'] = now();
+                    //                $applicant_data['submission_accepted_by'] = \Auth::id();
+                }
             }
+
 
             if ($this->submission_status === 'rejected') {
-                $applicant_data['declined_at'] = now();
-                $applicant_data['declined_by'] = \Auth::id();
+                $applicant->removeRole('applicant');
+                $applicant->assignRole('blocked applicant');
+
+                $applicant->declined_at = Carbon::now();
+                $applicant->declined_by = \Auth::user()->id;
+//                $applicant_data['declined_at'] = now();
+//                $applicant_data['declined_by'] = \Auth::id();
             }
 
-            $this->applicant->update($applicant_data);
+            $applicant->save();
+//            $this->applicant->update($applicant_data);
 
-            if ($this->submission_status === 'accepted'){
-                $this->applicant->removeRole('applicant');
-                $this->applicant->assignRole('accepted applicant');
-            }
+//            if ($this->submission_status === 'accepted'){
+//                $applicant->removeRole('applicant');
+//                $applicant->assignRole('accepted applicant');
+//            }
 
-            if ($this->submission_status === 'rejected'){
-                $this->applicant->removeRole('applicant');
-                $this->applicant->assignRole('blocked applicant');
-            }
+//            if ($this->submission_status === 'rejected'){
+//                $applicant->removeRole('applicant');
+//                $applicant->assignRole('blocked applicant');
+//            }
 
             if ($this->send_interview_email && !empty($this->submission_interview_at)) {
                 Mail::to($this->applicant->email)
-                    ->send(new ApplicantInterviewNotification($this->applicant));
+                    ->send(new ApplicantInterviewNotification($this->applicant, $this->feedback));
                 return $this->flash(
                     'success',
                     'Submission saved and email sent.',
@@ -215,8 +234,6 @@ class AssessSubmission extends Component
                 'confirmButtonColor' => '#dc2626',
             ]);
         }
-
-
     }
 
     public function render()

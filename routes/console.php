@@ -33,9 +33,9 @@ Schedule::call(function () {
 
     if ($next_admission_date === date('Y-m-d')) {
         $accepted_applicants = User::role('accepted applicant')
-                                   ->where('application_status', 'accepted')
+                                   ->where('submission_status', 'accepted')
                                    ->where('registration_fee_paid', 1)
-                                   ->where('application_fee_paid', 1)
+                                   ->where('submission_fee_paid', 1)
                                    ->where('submission_accepted_at', '<=', $next_admission_date->submission_deadline)
                                    ->whereNull('became_registrant_at')
                                    ->whereNull('registration_expires_at')

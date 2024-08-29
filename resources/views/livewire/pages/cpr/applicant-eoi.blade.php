@@ -248,20 +248,69 @@
 
                 <div wire:ignore class="mt-4">
                     <input id="current_role" type="hidden" value="{{ $this->current_role }}" wire:model="current_role">
-                    <trix-editor input="current_role" class="trix-block" style="min-height: 200px;" ></trix-editor>
+                    <trix-editor input="current_role"
+                                 class="trix-block bg-white border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                                 style="min-height: 200px;" ></trix-editor>
+                    <small>
+                        Word Count: <span id="word_count_display"></span>
+                    </small>
 
                     @script
                     <script>
-                        let trixEditor = document.getElementById("current_role")
+                        let trixEditor = document.getElementById("current_role");
+                        let wordCountDisplay = document.getElementById('word_count_display');
 
-                        addEventListener("trix-blur", function (event) {
+                        showCount();
+
+                        document.addEventListener("trix-blur", function () {
                             @this.set('current_role', trixEditor.getAttribute('value'))
-                        })
+                        });
+
+                        document.addEventListener("trix-change", function () {
+                            showCount();
+                        });
+
+                        function showCount() {
+                            let string = trixEditor.getAttribute('value');
+                            wordCountDisplay.innerHTML = wordCount(string);
+                        }
+
+                        function wordCount(s) {
+                            // console.log('pre: ' + s); // debug
+                            s = s.replace(/(^\s*)|(\s*$)/gi,""); // Exclude start and end white-space
+                            s = s.replace(/[ ]{2,}/gi," "); // Trim 2 or more space to 1
+
+                            let treatAsSpace = [
+                                "<div>", "</div>",
+                                "<strong>", "</strong>",
+                                "<em>", "</em>",
+                                "<del>", "</del>",
+                                "<h1>", "</h1>",
+                                "<ul><li>",
+                                "<ol><li>",
+                                "<ul>", "</ul>",
+                                "<ol>", "</ol>",
+                                "<li>", "</li>",
+                                "&nbsp;",
+                                "<br>",
+                            ]
+
+                            for (let i = 0; i < treatAsSpace.length; i++) {
+                                s = s.replaceAll(treatAsSpace[i], ' ')
+                            }
+
+                            s = s.replaceAll(/[ ]{2,}/gi, " "); // Trim 2 or more space to 1
+
+                            console.log('post: ' + s); // debug
+                            return s.split(' ').filter(
+                                function(str){
+                                    return str != "";
+                                }
+                            ).length;
+                        }
                     </script>
                     @endscript
                 </div>
-
-                {{-- @todo: Add live word counter, possibly restricting input to 200 words. --}}
 
                 <x-cpr-input-error :messages="$errors->get('current_role')" class="mt-2"/>
             </div>
@@ -279,13 +328,15 @@
 
                 <div wire:ignore class="mt-4">
                     <input id="employment_history" type="hidden" value="{{ $this->employment_history }}" wire:model="employment_history">
-                    <trix-editor input="employment_history" class="trix-block" style="min-height: 200px;" ></trix-editor>
+                    <trix-editor input="employment_history"
+                                 class="trix-block bg-white border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                                 style="min-height: 200px;" ></trix-editor>
 
                     @script
                     <script>
                         let trixEditor = document.getElementById("employment_history")
 
-                        addEventListener("trix-blur", function (event) {
+                        addEventListener("trix-blur", function () {
                             @this.set('employment_history', trixEditor.getAttribute('value'))
                         })
                     </script>
@@ -305,13 +356,15 @@
 
                 <div wire:ignore class="mt-4">
                     <input id="qualifications" type="hidden" value="{{ $this->qualifications }}" wire:model="qualifications">
-                    <trix-editor input="qualifications" class="trix-block" style="min-height: 200px;" ></trix-editor>
+                    <trix-editor input="qualifications"
+                                 class="trix-block bg-white border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                                 style="min-height: 200px;" ></trix-editor>
 
                     @script
                     <script>
                         let trixEditor = document.getElementById("qualifications")
 
-                        addEventListener("trix-blur", function (event) {
+                        addEventListener("trix-blur", function () {
                             @this.set('qualifications', trixEditor.getAttribute('value'))
                         })
                     </script>
@@ -426,7 +479,7 @@
                 </div>
                 <p class="text-sm mt-2 pl-1 lg:ml-48 text-slate-400">Permitted file types: .pdf, .doc, .docx, .jpg, .jpeg, .png | Max file size (each): 5MB</p>
 
-                <x-cpr-input-error :messages="$errors->get('qualification_certificates')" class="mt-2 mt-2 lg:pl-1 lg:ml-48"/>
+                <x-cpr-input-error :messages="$errors->get('qualification_certificates')" class="mt-2 lg:pl-1 lg:ml-48"/>
 
 {{--                <x-files-renamed-notice/>--}}
             </div>
@@ -441,13 +494,15 @@
 
                 <div wire:ignore class="mt-4">
                     <input id="training" type="hidden" value="{{ $this->training }}" wire:model="training">
-                    <trix-editor input="training" class="trix-block" style="min-height: 200px;" ></trix-editor>
+                    <trix-editor input="training"
+                                 class="trix-block bg-white border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                                 style="min-height: 200px;" ></trix-editor>
 
                     @script
                     <script>
                         let trixEditor = document.getElementById("training")
 
-                        addEventListener("trix-blur", function (event) {
+                        addEventListener("trix-blur", function () {
                             @this.set('training', trixEditor.getAttribute('value'))
                         })
                     </script>

@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Cpr;
 
 use App\Mail\CPRFeePaidAdminNotification;
+use App\Mail\CPRFeePaidUserNotification;
 use App\Models\Order;
 use App\Models\User;
 use Carbon\Carbon;
@@ -51,7 +52,8 @@ class PaymentSuccess extends Component
                 Mail::to(config('mail.membership_enquiry_mail_recipient'))
                     ->send(new CPRFeePaidAdminNotification($order));
 
-//                 @todo: Send email to user confirming purchase
+                Mail::to($user->email)
+                    ->send(new CPRFeePaidUserNotification($order));
             }
 
             return $this->flash(

@@ -36,6 +36,11 @@
                 />
             @endif
 
+            @if($logged_in_user->hasRole('accepted applicant'))
+                <x-dashboard-accepted-applicant :$logged_in_user
+                                                :$next_admission_date />
+            @endif
+
             @if ($logged_in_user->hasRole('registrant'))
                 <x-dashboard-registrant :$logged_in_user
                                         :$renewal_fee

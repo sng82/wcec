@@ -89,16 +89,25 @@
                     </td>
                     <td class="px-4 py-2">
                         @if(! $logged_in_user->registration_fee_paid)
-                            <button wire:click="payFee('registration')"
-                                    class="bg-fuchsia-600 hover:bg-fuchsia-700 focus:cursor-wait w-fit pl-4 pr-1 gap-2 py-1 text-white rounded-full flex flex-row"
-                            >
-                                Pay Now
+                            <x-fuchsia-button wire:click="payFee('registration')" class="">
+                                <span>Pay Now</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                           d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                 </svg>
-                            </button>
+                            </x-fuchsia-button>
+
+{{--                            <button wire:click="payFee('registration')"--}}
+{{--                                    class="bg-fuchsia-600 hover:bg-fuchsia-700 focus:cursor-wait w-fit pl-4 pr-1 gap-2 py-1 text-white rounded-full flex flex-row"--}}
+{{--                            >--}}
+{{--                                Pay Now--}}
+{{--                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"--}}
+{{--                                     stroke-width="1.5" stroke="currentColor" class="size-6">--}}
+{{--                                    <path stroke-linecap="round" stroke-linejoin="round"--}}
+{{--                                          d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>--}}
+{{--                                </svg>--}}
+{{--                            </button>--}}
                         @endif
                     </td>
                 </tr>
@@ -132,11 +141,6 @@
                                    Incomplete
                                 </span>
                             </div>
-{{--                            <div class="flex items-center text-amber-500">--}}
-{{--                                <span class="text-lg font-semibold me-3 border-2 border-amber-500 rounded-full px-4">--}}
-{{--                                   Incomplete--}}
-{{--                                </span>--}}
-{{--                            </div>--}}
                         @endif
                     </td>
                     <td class="px-4 py-2 italic text-sm">
@@ -214,16 +218,25 @@
                     </td>
                     <td class="px-4 py-2">
                         @if(! $logged_in_user->submission_fee_paid && $logged_in_user->eoi_status === 'accepted' && $logged_in_user->registration_fee_paid)
-                            <button wire:click="payFee('submission')"
-                                    class="bg-fuchsia-600 hover:bg-fuchsia-700 focus:cursor-wait w-fit pl-4 pr-1 gap-2 py-1 text-white rounded-full flex flex-row"
-                            >
-                                Pay Now
+                            <x-fuchsia-button wire:click="payFee('submission')" class="">
+                                <span>Pay Now</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                           d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                                 </svg>
-                            </button>
+                            </x-fuchsia-button>
+
+{{--                            <button wire:click="payFee('submission')"--}}
+{{--                                    class="bg-fuchsia-600 hover:bg-fuchsia-700 focus:cursor-wait w-fit pl-4 pr-1 gap-2 py-1 text-white rounded-full flex flex-row"--}}
+{{--                            >--}}
+{{--                                Pay Now--}}
+{{--                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"--}}
+{{--                                     stroke-width="1.5" stroke="currentColor" class="size-6">--}}
+{{--                                    <path stroke-linecap="round" stroke-linejoin="round"--}}
+{{--                                          d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>--}}
+{{--                                </svg>--}}
+{{--                            </button>--}}
                         @endif
                     </td>
                 </tr>
