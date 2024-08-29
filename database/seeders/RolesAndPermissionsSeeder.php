@@ -29,6 +29,13 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'submit eoi']);
         Permission::create(['name' => 'submit cpd']);
         Permission::create(['name' => 'view applicant help']);
+        Permission::create(['name' => 'view logs']);
+
+        Role::create(['name' => 'super admin'])
+            ->givePermissionTo(
+//                Permission::all()
+                'view logs'
+            );
 
 
         // create roles and assign created permissions

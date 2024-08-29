@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
             'password'     => Hash::make('asap3434'),
         ]);
         $me->assignRole('admin');
+        $me->assignRole('super admin');
 
         $testAdmin = User::factory()->create([
             'first_name'   => 'Dan',
