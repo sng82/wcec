@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Pages\Cpr;
 
+use App\Mail\SubmissionSubmittedNotification;
 use App\Models\Document;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -97,6 +99,9 @@ class ApplicantSubmission extends Component
                 'submission_status'    => 'submitted',
                 'registration_pathway' => $this->registration_path,
             ]);
+
+            Mail::to(config('mail.membership_enquiry_mail_recipient'))
+                ->send(new SubmissionSubmittedNotification($this->user));
 
             return $this->flash(
                 'success',

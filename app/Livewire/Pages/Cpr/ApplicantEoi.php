@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages\Cpr;
 
+use App\Mail\ExpressionSubmittedNotification;
 use App\Models\EOI;
 use App\Models\User;
 use App\Models\Document;
@@ -9,6 +10,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -419,6 +421,9 @@ class ApplicantEoi extends Component
 
         $this->eoi->update(['submitted_at' => now()]);
         $this->user->update(['eoi_status' => 'submitted']);
+
+        Mail::to(config('mail.membership_enquiry_mail_recipient'))
+            ->send(new ExpressionSubmittedNotification($this->user));
 
         $extended_message = $this->user->registration_fee_paid
             ? 'We\'ll be in touch soon.'

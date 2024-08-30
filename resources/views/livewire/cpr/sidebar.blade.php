@@ -90,6 +90,9 @@
                     </x-sidebar-link>
                 @endcan
 
+                {{-- TODO: Add page to view historic EoIs --}}
+                {{-- TODO: Add page to view historic Submissions --}}
+
                 @can('submit cpd')
                     <x-sidebar-link :href="route('registrant-cpd')"
                                     :active="request()->routeIs('registrant-cpd')"
