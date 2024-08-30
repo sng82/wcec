@@ -37,7 +37,8 @@ class PendingApplicants extends Component
     public function render()
     {
         return view('livewire.component.pending-applicants', [
-            'applicants' => User::role('applicant')
+            'applicants' => User::with(['eoi', 'submission'])
+                                ->role('applicant')
                                 ->search($this->search)
                                 ->orderBy($this->sort_column_name, $this->sort_column_direction)
                                 ->paginate($this->per_page),

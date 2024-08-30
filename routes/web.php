@@ -5,9 +5,11 @@ use App\Livewire\Pages\About;
 use App\Livewire\Pages\CharitableTrust;
 use App\Livewire\Pages\CharteredPractitioners;
 use App\Livewire\Pages\Contact;
+use App\Livewire\Pages\Cpr\AdminEoi;
 use App\Livewire\Pages\Cpr\AdminMembers;
 use App\Livewire\Pages\Cpr\AdminPrivateDocuments;
 use App\Livewire\Pages\Cpr\AdminPublicDocuments;
+use App\Livewire\Pages\Cpr\AdminSubmission;
 use App\Livewire\Pages\Cpr\AdmissionDates;
 use App\Livewire\Pages\Cpr\ApplicantDocuments;
 use App\Livewire\Pages\Cpr\ApplicantEoi;
@@ -107,6 +109,8 @@ Route::group(['middleware' => ['role:admin', 'auth']], function () {
     Route::get('/cpr/user-add', UserAdd::class)->name('user-add');
     Route::get('/cpr/assess-eoi/{id}', AssessEoi::class)->name('assess-eoi');
     Route::get('/cpr/assess-submission/{id}', AssessSubmission::class)->name('assess-submission');
+//    Route::get('/cpr/eois', AdminEoi::class)->name('eois');
+//    Route::get('/cpr/submissions', AdminSubmission::class)->name('submissions');
 });
 
 // Used to build printable PDF of data submitted for an EOI.

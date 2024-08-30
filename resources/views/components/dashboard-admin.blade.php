@@ -15,7 +15,7 @@
         Welcome to the Admin dashboard!
     </p>
     <p class="mb-4">
-        You can get a quick overview of Expressions of Interest and CPR Submissions below. Use the menu on the left to delve deeper into the Chartered Practitioners Portal.
+        Everything currently requiring your attention is listed below. Use the menu on the left to delve deeper into the Chartered Practitioners Portal.
     </p>
 
     <p class="mb-4">
@@ -83,17 +83,7 @@
                                 </span>
                             </td>
                             <td class="px-4 py-2">
-                                @if ($registrant->eoi_status === 'accepted')
-                                    Complete.
-                                @elseif ($registrant->eoi_status === 'submitted' && $registrant->registration_fee_paid)
-                                    Ready for assessment.
-                                @elseif($registrant->eoi_status === 'submitted' && !$registrant->registration_fee_paid)
-                                    Submitted. Awaiting payment.
-                                @elseif($registrant->eoi_status !== 'submitted' && $registrant->registration_fee_paid)
-                                    Paid. Awaiting submission.
-                                @else
-                                    Unpaid. Awaiting submission.
-                                @endif
+                                {{ str($registrant->eoi_status)->title() }}
                             </td>
                             <td class="px-4 py-1">
                                 <x-edit-button-fuchsia :href="route('assess-eoi',[$registrant->eoi->id])" class="">

@@ -188,15 +188,27 @@
                                     <x-edit-button :href="route('user-edit', $registrant->id)" class="">
                                         {{ __('View/Edit') }}
                                     </x-edit-button>
-                                    @if ($registrant->submission_fee_paid && ($registrant->submission_status === 'submitted' || $registrant->submission_status === 'awaiting_interview'))
+{{--                                    @if ($registrant->submission_fee_paid && ($registrant->submission_status === 'submitted' || $registrant->submission_status === 'awaiting_interview'))--}}
+{{--                                        <x-edit-button-fuchsia :href="route('assess-submission', [$registrant->id])" class="">--}}
+{{--                                            Submission--}}
+{{--                                        </x-edit-button-fuchsia>--}}
+{{--                                    @elseif ($registrant->eoi_status === 'submitted' && $registrant->registration_fee_paid)--}}
+{{--                                        <x-edit-button-fuchsia :href="route('assess-eoi',[$registrant->eoi->id])" class="">--}}
+{{--                                            EoI--}}
+{{--                                        </x-edit-button-fuchsia>--}}
+{{--                                    @endif--}}
+
+                                    @if ($registrant?->submission?->id)
                                         <x-edit-button-fuchsia :href="route('assess-submission', [$registrant->id])" class="">
                                             Submission
                                         </x-edit-button-fuchsia>
-                                    @elseif ($registrant->eoi_status === 'submitted' && $registrant->registration_fee_paid)
+                                    @endif
+                                    @if ($registrant?->eoi?->id)
                                         <x-edit-button-fuchsia :href="route('assess-eoi',[$registrant->eoi->id])" class="">
                                             EoI
                                         </x-edit-button-fuchsia>
                                     @endif
+
                                 </div>
                             </td>
                         </tr>

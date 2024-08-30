@@ -26,6 +26,7 @@ class AssessEoi extends Component
     public $eoi_status;
     public $feedback;
     public $notes;
+    public $can_save;
 
     public function mount()
     {
@@ -33,6 +34,14 @@ class AssessEoi extends Component
             $id = Route::current()->parameter('id');
             $this->eoi = Eoi::find($id);
             $this->applicant = User::find($this->eoi->user_id);
+
+            $this->can_save = true;
+            if (!$this->applicant->hasRole('applicant')) {
+                $this->can_save = false;
+            }
+            if ($this->applicant->eoi_status === 'accepted') {
+                $this->can_save = false;
+            }
 
             $this->feedback     = $this->eoi->feedback;
             $this->notes        = $this->eoi->notes;

@@ -28,6 +28,7 @@ class AssessSubmission extends Component
     public $feedback;
     public $notes;
     public $submission;
+    public $can_save;
     public $send_interview_email = false;
 
     public function mount()
@@ -57,6 +58,14 @@ class AssessSubmission extends Component
             if ($this->submission){
                 $this->feedback = $this->submission->feedback;
                 $this->notes    = $this->submission->notes;
+            }
+
+            $this->can_save = true;
+            if (!$this->applicant->hasRole('applicant')) {
+                $this->can_save = false;
+            }
+            if ($this->applicant->submission_status === 'accepted') {
+                $this->can_save = false;
             }
 
         } catch (Exception $e) {

@@ -66,28 +66,34 @@
                 <form wire:submit="save">
                     <div class="flex flex-col lg:flex-row lg:items-center py-2">
                         <x-admin-input-label for="submission_status" :value="__('Submission Status')" class="lg:w-60 shrink-0"/>
-                        <select wire:model="submission_status" x-model="submission_status" name="submission_status" id="submission_status"
-                                class="block w-52 border-gray-300 focus:border-indigo-500 focus:ring-sky-500 rounded-md shadow-sm"
-                                required>
-                            <option value="submitted" {{ $submission_status === 'submitted' ? 'selected' : '' }}>
-                                Submitted
-                            </option>
-                            <option value="awaiting_interview" {{ $submission_status === 'awaiting_interview' ? 'selected' : '' }}>
-                                Awaiting Interview
-                            </option>
-                            <option value="accepted" {{ $submission_status === 'accepted' ? 'selected' : '' }}>
-                                Accepted
-                            </option>
-                            <option value="unaccepted" {{ $submission_status === 'unaccepted' ? 'selected' : '' }}>
-                                Unaccepted
-                            </option>
-                            <option value="rejected" {{ $submission_status === 'rejected' ? 'selected' : '' }}>
-                                Rejected
-                            </option>
-                        </select>
+                        @if($can_save)
+                            <select wire:model="submission_status" x-model="submission_status" name="submission_status" id="submission_status"
+                                    class="block w-52 border-gray-300 focus:border-indigo-500 focus:ring-sky-500 rounded-md shadow-sm"
+                                    required>
+                                <option value="submitted" {{ $submission_status === 'submitted' ? 'selected' : '' }}>
+                                    Submitted
+                                </option>
+                                <option value="awaiting_interview" {{ $submission_status === 'awaiting_interview' ? 'selected' : '' }}>
+                                    Awaiting Interview
+                                </option>
+                                <option value="accepted" {{ $submission_status === 'accepted' ? 'selected' : '' }}>
+                                    Accepted
+                                </option>
+                                <option value="unaccepted" {{ $submission_status === 'unaccepted' ? 'selected' : '' }}>
+                                    Unaccepted
+                                </option>
+                                <option value="rejected" {{ $submission_status === 'rejected' ? 'selected' : '' }}>
+                                    Rejected
+                                </option>
+                            </select>
+                        @else
+                            <span class="p-2 rounded-md border border-slate-200">
+                                {{ str($submission_status)->title() }}
+                            </span>
+                        @endif
                     </div>
 
-                    <div x-show="submission_status == 'awaiting_interview'"
+                    <div x-show="submission_status == 'awaiting_interview' || submission_status == 'accepted'"
                          x-cloak
 {{--                         x-transition:enter.duration.1500ms--}}
                          x-transition:enter="transition ease-out duration-500"
@@ -95,17 +101,22 @@
                     >
                         <div class="flex flex-col lg:flex-row lg:items-center py-2">
                             <x-admin-input-label for="submission_interview_at" :value="__('Interview Date & Time')" class="lg:w-60 shrink-0"/>
-                            <div class="relative inline-block w-60 mr-2 align-middle">
-                                <x-text-input wire:model="submission_interview_at" x-model="submission_interview_at" id="submission_interview_at"
-                                              class="block w-full" type="datetime-local"
-                                              name="submission_interview_at" autocomplete="off" />
-                            </div>
-                            <div class="hidden lg:inline-block lg:relative  w-2 mr-2 align-middle">
-                                -
-                            </div>
-                            <span class="text-sm text-gray-700 italic">
-                                Can be set any time after Submission Status is set to 'Awaiting Interview'.
-                            </span>
+                            @if($can_save)
+                                <div class="relative inline-block w-60 mr-2 align-middle">
+                                    <x-text-input wire:model="submission_interview_at" x-model="submission_interview_at" id="submission_interview_at"
+                                                  class="block w-full" type="datetime-local"
+                                                  name="submission_interview_at" autocomplete="off" />
+                                </div>
+                                <div class="hidden lg:inline-block lg:relative  w-2 mr-2 align-middle">
+                                    -
+                                </div>
+                                <span class="text-sm text-gray-700 italic">
+                                    Can be set any time after Submission Status is set to 'Awaiting Interview'.
+                                </span>
+                            @else
+                                {{ \Carbon\Carbon::parse($submission_interview_at)->toDayDateTimeString() }}
+                            @endif
+
                         </div>
                     </div>
 
@@ -130,36 +141,46 @@
 
                     <div class="flex flex-col lg:flex-row lg:items-center py-2">
                         <x-admin-input-label for="feedback" :value="__('Feedback')" class="lg:w-60 shrink-0"/>
-                        <textarea wire:model="feedback" name="feedback" rows="3" id="feedback"
-                                  class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full"></textarea>
+                        @if($can_save)
+                            <textarea wire:model="feedback"
+                                      name="feedback"
+                                      rows="3"
+                                      id="feedback"
+                                      class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full"
+                            ></textarea>
+                        @else
+                            <span class="p-2 rounded-md border border-slate-200">
+                                {{ $feedback }}
+                            </span>
+                        @endif
                     </div>
 
                     <div class="flex flex-col lg:flex-row lg:items-center py-2">
                         <x-admin-input-label for="notes" :value="__('Assessor Notes')" class="lg:w-60 shrink-0"/>
-                        <textarea wire:model="notes" name="notes" rows="3" id="notes"
-                                  class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full"></textarea>
+                        @if($can_save)
+                            <textarea wire:model="notes"
+                                      name="notes"
+                                      rows="3"
+                                      id="notes"
+                                      class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full"
+                            ></textarea>
+                        @else
+                            <span class="p-2 rounded-md border border-slate-200">
+                                {{ $notes }}
+                            </span>
+                        @endif
                     </div>
 
-                    <x-fuchsia-button class="lg:ml-60 mt-4">
-                        {{ __('Save') }}
-                    </x-fuchsia-button>
-
-{{--                    <div x-data="{ submitted: false }">--}}
-{{--                        <button x-on:click="submitted = !submitted"--}}
-{{--                                x-cloak--}}
-{{--                                class="flex justify-center items-center mt-4 text-lg h-10 w-36 bg-fuchsia-500 hover:bg-fuchsia-600 focus:cursor-wait text-white rounded-full lg:ml-60"--}}
-{{--                        >--}}
-{{--                            <span x-show="!submitted">--}}
-{{--                                Save--}}
-{{--                            </span>--}}
-{{--                            <span x-show="submitted">--}}
-{{--                                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">--}}
-{{--                                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>--}}
-{{--                                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>--}}
-{{--                                </svg>--}}
-{{--                            </span>--}}
-{{--                        </button>--}}
-{{--                    </div>--}}
+                    @if ($can_save)
+                        <x-fuchsia-button class="lg:ml-60 mt-3">
+                            <span>Save</span>
+                            <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                 height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5"
+                                      d="M11 16h2m6.707-9.293-2.414-2.414A1 1 0 0 0 16.586 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7.414a1 1 0 0 0-.293-.707ZM16 20v-6a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v6h8ZM9 4h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V4Z"/>
+                            </svg>
+                        </x-fuchsia-button>
+                    @endif
 
                 </form>
 

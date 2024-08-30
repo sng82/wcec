@@ -147,39 +147,76 @@
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3">
                         <x-admin-input-label for="eoi_status" :value="__('EoI Status')" class="lg:w-48 shrink-0"/>
-                        <select wire:model="eoi_status" name="eoi_status" id="eoi_status"
-                                class="block w-48 border-gray-300 focus:border-indigo-500 focus:ring-sky-500 rounded-md shadow-sm"
-                                required>
-                            <option value="submitted" {{ $eoi_status === 'submitted' ? 'selected' : '' }}>
-                                Submitted
-                            </option>
-                            <option value="accepted" {{ $eoi_status === 'accepted' ? 'selected' : '' }}>
-                                Accepted
-                            </option>
-                            <option value="unaccepted" {{ $eoi_status === 'unaccepted' ? 'selected' : '' }}>
-                                Unaccepted
-                            </option>
-                            <option value="rejected" {{ $eoi_status === 'rejected' ? 'selected' : '' }}>
-                                Rejected
-                            </option>
-                        </select>
+                        @if($can_save)
+                            <select wire:model="eoi_status" name="eoi_status" id="eoi_status"
+                                    class="block w-48 border-gray-300 focus:border-indigo-500 focus:ring-sky-500 rounded-md shadow-sm"
+                                    required
+                            >
+                                <option value="submitted" {{ $eoi_status === 'submitted' ? 'selected' : '' }}>
+                                    Submitted
+                                </option>
+                                <option value="accepted" {{ $eoi_status === 'accepted' ? 'selected' : '' }}>
+                                    Accepted
+                                </option>
+                                <option value="unaccepted" {{ $eoi_status === 'unaccepted' ? 'selected' : '' }}>
+                                    Unaccepted
+                                </option>
+                                <option value="rejected" {{ $eoi_status === 'rejected' ? 'selected' : '' }}>
+                                    Rejected
+                                </option>
+                            </select>
+                            <span class="text-sm text-gray-700 italic lg:ml-2 mt-1 lg:mt-0">
+                                - Saving any status other than 'Submitted' will result in an email being sent to the applicant
+                            </span>
+                        @else
+                            <span class="p-2 rounded-md border border-slate-200">
+                                {{ str($eoi_status)->title() }}
+                            </span>
+                        @endif
                     </div>
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3">
                         <x-admin-input-label for="feedback" :value="__('Feedback')" class="lg:w-48 shrink-0"/>
-                        <textarea wire:model="feedback" name="feedback" rows="3" id="feedback"
-                                  class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full"></textarea>
+                        @if($can_save)
+                            <textarea wire:model="feedback"
+                                      name="feedback"
+                                      rows="3"
+                                      id="feedback"
+                                      class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full"
+                            ></textarea>
+                        @else
+                            <span class="p-2 rounded-md border border-slate-200">
+                                {{ $feedback }}
+                            </span>
+                        @endif
                     </div>
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3">
                         <x-admin-input-label for="notes" :value="__('Assessor Notes')" class="lg:w-48 shrink-0"/>
-                        <textarea wire:model="notes" name="notes" rows="3" id="notes"
-                                  class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full"></textarea>
+                        @if($can_save)
+                            <textarea wire:model="notes"
+                                      name="notes"
+                                      rows="3"
+                                      id="notes"
+                                      class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 resize rounded-md block w-full"
+                            ></textarea>
+                        @else
+                            <span class="p-2 rounded-md border border-slate-200">
+                                {{ $notes }}
+                            </span>
+                        @endif
                     </div>
 
-                    <button class="mt-4 text-lg py-2 px-12 bg-fuchsia-500 hover:bg-fuchsia-600 focus:cursor-wait text-white rounded-full lg:ml-48">
-                        Save
-                    </button>
+                    @if ($can_save)
+                        <x-fuchsia-button class="lg:ml-48 mt-3">
+                            <span>Save</span>
+                            <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                                 height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5"
+                                      d="M11 16h2m6.707-9.293-2.414-2.414A1 1 0 0 0 16.586 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7.414a1 1 0 0 0-.293-.707ZM16 20v-6a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v6h8ZM9 4h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V4Z"/>
+                            </svg>
+                        </x-fuchsia-button>
+                    @endif
 
                 </form>
 

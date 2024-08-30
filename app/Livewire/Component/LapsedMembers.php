@@ -33,10 +33,11 @@ class LapsedMembers extends Component
     public function render()
     {
         return view('livewire.component.lapsed-members', [
-            'lapsed_registrants' => User::role('lapsed registrant')
-                                    ->search($this->search)
-                                    ->orderBy($this->sort_column_name, $this->sort_column_direction)
-                                    ->paginate($this->per_page),
+            'lapsed_registrants' => User::with(['eoi', 'submission'])
+                                        ->role('lapsed registrant')
+                                        ->search($this->search)
+                                        ->orderBy($this->sort_column_name, $this->sort_column_direction)
+                                        ->paginate($this->per_page),
         ]);
     }
 }
