@@ -7,7 +7,9 @@
         <div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300">
             <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2">
                 {{ $first_name . ' ' . $last_name }}
-                <span class="text-lg uppercase font-bold text-sky-500">[{{ \Illuminate\Support\Str::of($registrant->roles->pluck('name')[0] ?? '')->title() }}]</span>
+                @foreach($roles as $role)
+                    <span class="text-lg uppercase font-bold text-sky-500">[{{ str($role)->title() }}] </span>
+                @endforeach
             </h2>
 
             <form wire:submit="update">
@@ -42,7 +44,7 @@
                     <x-input-error :messages="$errors->get('phone_mobile')" class="ml-2 mt-2" />
                 </div>
 
-                @if($role === 'registrant' || $role === 'lapsed registrant')
+                @if($roles[0] === 'registrant' || $roles[0] === 'lapsed registrant')
                     <div class="flex flex-col lg:flex-row lg:items-center mt-3 gap-1">
                         <x-admin-input-label for="registration_expires_at" :value="__('Registration Expiry')" class="w-48" />
                         <x-text-input wire:model="registration_expires_at" id="registration_expires_at" class="block" type="date" name="registration_expires_at" required autocomplete="registration_expires_at" />
@@ -66,12 +68,16 @@
                         Account Type:
                     </span>
                     <span>
-                        {{ \Illuminate\Support\Str::of($registrant->roles->pluck('name')[0] ?? '')->title() }}
+                        @foreach($roles as $role)
+                            {{ str($role)->title() }}
+                            {{ $loop->last ? '' : '|' }}
+                        @endforeach
+{{--                        {{ \Illuminate\Support\Str::of($registrant->roles->pluck('name')[0] ?? '')->title() }}--}}
                     </span>
                 </div>
 
                 {{-- Member or Lapsed member --}}
-                @if($role === 'registrant' || $role === 'lapsed registrant')
+                @if($roles->contains('registrant') || $roles->contains('lapsed registrant'))
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
                             Date Awarded:
@@ -83,7 +89,7 @@
 
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
-                            Registration {{ $role === 'registrant' ? 'Expires' : 'Expired' }}:
+                            Registration {{ $roles->contains('lapsed registrant') ? 'Expired' : 'Expires' }}:
                         </span>
                         <span>
                             {{ \Carbon\Carbon::parse($registration_expires_at)->toFormattedDayDateString() }}
@@ -92,11 +98,11 @@
                 @endif
 
                 {{-- Lapsed Member --}}
-                @if($role === 'lapsed registrant')
+                @if($roles->contains('lapsed registrant'))
                 @endif
 
                 {{-- Pending Applicant --}}
-                @if($role === 'applicant')
+                @if($roles->contains('applicant'))
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
                             Created:
@@ -115,8 +121,13 @@
                     </div>
                 @endif
 
-                {{-- Accepted Applicant --}}
-                @if($role === 'accepted applicant')
+
+                {{-- Accepted Applicant or Registrant--}}
+                @if(
+                    $roles->contains('accepted applicant') ||
+                    $roles->contains('registrant') ||
+                    $roles->contains('lapsed registrant')
+                )
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
                             Submission Accepted:
@@ -134,10 +145,11 @@
                             {{ $registrant->acceptedBy->first_name . ' ' . $registrant->acceptedBy->last_name }}
                         </span>
                     </div>
+
                 @endif
 
                 {{-- Blocked Applicant --}}
-                @if($role === 'blocked applicant')
+                @if($roles->contains('blocked applicant'))
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
                             Application Declined:

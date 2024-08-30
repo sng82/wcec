@@ -21,10 +21,8 @@ class UserEdit extends Component
     public $email;
     public $phone_main;
     public $phone_mobile;
-    public $role;
+    public $roles;
     public $registration_type;
-//    public $roles;
-//    public $submitted_at;
     public $submission_count;
     public $submission_accepted_at;
     public $submission_accepted_by;
@@ -67,7 +65,7 @@ class UserEdit extends Component
         $this->email = $this->registrant->email;
         $this->phone_main = $this->registrant->phone_main;
         $this->phone_mobile = $this->registrant->phone_mobile;
-        $this->role = $this->registrant->roles->pluck('name')[0] ?? '';
+        $this->roles = $this->registrant->getRoleNames();
         $this->submission_count = $this->registrant->submission_count;
         $this->registration_expires_at = $this->registrant->registration_expires_at?->format('Y-m-d');
     }

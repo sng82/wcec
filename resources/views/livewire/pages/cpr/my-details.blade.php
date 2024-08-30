@@ -63,7 +63,12 @@
                 </h3>
                 <div class="mt-3">
                     <span class="inline-block font-bold w-48">Account Type:</span>
-                    <span class="inline-block lg:pl-1">{{ str($role)->title() }}</span>
+                    <span class="inline-block lg:pl-1">
+                        @foreach($roles as $role)
+                            {{ str($role)->title() }}
+                            {{ $loop->last ? '' : '|' }}
+                        @endforeach
+                    </span>
                 </div>
                 @if($role === 'registrant')
                     <div class="mt-2">

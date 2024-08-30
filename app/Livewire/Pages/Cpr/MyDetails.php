@@ -16,7 +16,7 @@ class MyDetails extends Component
     public $email;
     public $phone_main;
     public $phone_mobile;
-    public $role;
+    public $roles;
 
     public function messages()
     {
@@ -34,7 +34,7 @@ class MyDetails extends Component
         $this->email        = $this->user->email;
         $this->phone_main   = $this->user->phone_main;
         $this->phone_mobile = $this->user->phone_mobile;
-        $this->role         = $this->user->roles->pluck('name')[0] ?? '';
+        $this->roles        = $this->user->getRoleNames();
     }
 
     public function update()
