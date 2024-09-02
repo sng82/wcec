@@ -160,12 +160,6 @@ class AssessSubmission extends Component
                                                     ? $this->submission_interview_at
                                                     : null;
 
-//            $applicant_data = [];
-//            $applicant_data['submission_status']        = $this->submission_status;
-//            $applicant_data['submission_interview_at']  = $this->submission_interview_at !== ''
-//                                                                ? $this->submission_interview_at
-//                                                                : null;
-
             if ($this->submission_status === 'accepted') {
 
                 $applicant->removeRole('applicant');
@@ -177,8 +171,6 @@ class AssessSubmission extends Component
                 ) {
                     $applicant->submission_accepted_at = Carbon::now();
                     $applicant->submission_accepted_by = \Auth::user()->id;
-                    //                $applicant_data['submission_accepted_at'] = now();
-                    //                $applicant_data['submission_accepted_by'] = \Auth::id();
                 }
             }
 
@@ -189,42 +181,22 @@ class AssessSubmission extends Component
 
                 $applicant->declined_at = Carbon::now();
                 $applicant->declined_by = \Auth::user()->id;
-//                $applicant_data['declined_at'] = now();
-//                $applicant_data['declined_by'] = \Auth::id();
             }
 
             $applicant->save();
-//            $this->applicant->update($applicant_data);
 
-//            if ($this->submission_status === 'accepted'){
-//                $applicant->removeRole('applicant');
-//                $applicant->assignRole('accepted applicant');
-//            }
-
-//            if ($this->submission_status === 'rejected'){
-//                $applicant->removeRole('applicant');
-//                $applicant->assignRole('blocked applicant');
-//            }
+            $extended_message = '';
 
             if ($this->send_interview_email && !empty($this->submission_interview_at)) {
                 Mail::to($this->applicant->email)
                     ->send(new ApplicantInterviewNotification($this->applicant, $this->feedback));
-                return $this->flash(
-                    'success',
-                    'Submission saved and email sent.',
-                    [
-                        'position' => 'top-end',
-                        'timer' => 2000,
-                        'showConfirmButton' => false,
-                        'confirmButtonColor' => '#10b981',
-                    ],
-                    route('dashboard')
-                );
+
+                $extended_message = ' and email sent';
             }
 
             return $this->flash(
                 'success',
-                'Submission saved.',
+                'Submission saved' . $extended_message . '.',
                 [
                     'position' => 'top-end',
                     'timer' => 2000,
@@ -233,6 +205,7 @@ class AssessSubmission extends Component
                 ],
                 route('dashboard')
             );
+            
         } catch (Exception $e) {
             Log::error('Error saving submission | ' . $e->getMessage());
 

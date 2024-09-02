@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Cpr;
 
 use App\Mail\SubmissionSubmittedNotification;
 use App\Models\Document;
+use App\Models\Submission;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
@@ -94,6 +95,13 @@ class ApplicantSubmission extends Component
                     ]);
                 }
             }
+
+            // Create a Submission record.
+            // Nothing is stored in it at this stage, but its existence is
+            // required for admins to see that the submission has been submitted.
+            Submission::firstOrCreate([
+                'user_id'   => $this->user->id,
+            ]);
 
             User::find($this->user->id)?->update([
                 'submission_status'    => 'submitted',
