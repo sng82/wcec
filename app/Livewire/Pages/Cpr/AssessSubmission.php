@@ -205,7 +205,7 @@ class AssessSubmission extends Component
                 ],
                 route('dashboard')
             );
-            
+
         } catch (Exception $e) {
             Log::error('Error saving submission | ' . $e->getMessage());
 

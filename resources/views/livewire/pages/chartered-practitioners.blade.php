@@ -66,7 +66,7 @@
                         <h2 class="mb-3 text-2xl">Chartered Practitioner Login</h2>
                         <hr class="mb-3">
                         <p class="text-red-100">
-                            Existing registrants of the Chartered Practitioners Register, and those who have already submitted an Expression of Interest can log in here.
+                            Existing registrants of the Chartered Practitioners Register, and those who have already started the application process can log in here.
                         </p>
                         <a href="/login" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-red-700">
                             Login

@@ -150,7 +150,7 @@
                             ></textarea>
                         @else
                             <span class="p-2 rounded-md border border-slate-200">
-                                {{ $feedback }}
+                                {{ !empty($feedback) ? $feedback : 'N/A' }}
                             </span>
                         @endif
                     </div>
@@ -166,7 +166,7 @@
                             ></textarea>
                         @else
                             <span class="p-2 rounded-md border border-slate-200">
-                                {{ $notes }}
+                                {{ !empty($notes) ? $notes : 'N/A' }}
                             </span>
                         @endif
                     </div>
