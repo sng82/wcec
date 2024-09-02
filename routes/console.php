@@ -51,7 +51,8 @@ Schedule::call(function () {
     }
 })->dailyAt('00:10'); // run just after midnight to allow for any discrepancy between server and database clocks.
 
-// Demote Registrants who have not completed their CPD (Continuous Professional Development) and/or paid their renewal fee.
+// Demote Registrants who have not completed their CPD (Continuous Professional Development)
+// and/or paid their renewal fee.
 Schedule::call(function () {
    $expired_users = User::role('registrant')
                         ->where('registration_expires_at', '<', date('Y-m-d'))

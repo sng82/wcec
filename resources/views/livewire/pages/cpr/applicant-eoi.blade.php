@@ -332,7 +332,7 @@
 
                                 s = s.replaceAll(/[ ]{2,}/gi, " "); // Trim 2 or more space to 1
 
-                                console.log('post: ' + s); // debug
+                                // console.log('post: ' + s); // debug
                                 return s.split(' ').filter(
                                     function(str){
                                         return str != "";
