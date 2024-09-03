@@ -68,6 +68,7 @@ class UserEdit extends Component
         $this->roles = $this->registrant->getRoleNames();
         $this->submission_count = $this->registrant->submission_count;
         $this->registration_expires_at = $this->registrant->registration_expires_at?->format('Y-m-d');
+        $this->became_registrant_at = $this->registrant->became_registrant_at?->format('Y-m-d');
     }
 
     public function update()

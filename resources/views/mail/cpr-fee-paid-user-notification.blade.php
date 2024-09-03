@@ -13,6 +13,6 @@ Date: {{ now()->format('jS F Y') }}
 
 <br>You will receive another email including a payment receipt from our payment processor, Stripe.<br><br>
 
-Thanks,<br>
+Regards,<br>
 {{ config('app.name') }}
 </x-mail::message>

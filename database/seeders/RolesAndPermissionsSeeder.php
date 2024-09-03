@@ -31,6 +31,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'submit cpd']);
         Permission::create(['name' => 'view applicant help']);
         Permission::create(['name' => 'view logs']);
+        Permission::create(['name' => 'view emails']);
 
         Role::create(['name' => 'super admin'])
             ->givePermissionTo(
@@ -49,6 +50,7 @@ class RolesAndPermissionsSeeder extends Seeder
                 'manage admission dates',
                 'manage public documents',
                 'manage private documents',
+                'view emails'
             ]);
 
         Role::create(['name' => 'applicant'])

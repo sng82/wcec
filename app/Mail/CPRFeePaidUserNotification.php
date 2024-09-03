@@ -20,10 +20,10 @@ class CPRFeePaidUserNotification extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($order)
+    public function __construct($order, $user)
     {
         $this->order = $order;
-        $this->user = User::find($order->user_id);
+        $this->user = $user;
     }
 
     /**

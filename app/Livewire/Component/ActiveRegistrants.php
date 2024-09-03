@@ -6,7 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ActiveMembers extends Component
+class ActiveRegistrants extends Component
 {
     use WithPagination;
 
@@ -32,7 +32,7 @@ class ActiveMembers extends Component
 
     public function render()
     {
-        return view('livewire.component.active-members', [
+        return view('livewire.component.active-registrants', [
             'active_registrants' => User::with(['eoi', 'submission'])
                                         ->role('registrant')
                                         ->search($this->search)

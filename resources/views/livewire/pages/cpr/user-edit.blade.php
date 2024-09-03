@@ -76,7 +76,7 @@
                     </span>
                 </div>
 
-                {{-- Member or Lapsed member --}}
+                {{-- Registrant or Lapsed Registrant --}}
                 @if($roles->contains('registrant') || $roles->contains('lapsed registrant'))
                     <div class="flex flex-col lg:flex-row lg:items-center mt-4 gap-1">
                         <span class="w-52">
@@ -133,7 +133,10 @@
                             Submission Accepted:
                         </span>
                         <span>
-                            {{ \Carbon\Carbon::parse($submission_accepted_at)->toFormattedDayDateString() }}
+                            {{ !empty($submission_accepted_at)
+                                ? \Carbon\Carbon::parse($submission_accepted_at)->toFormattedDayDateString()
+                                : 'Unknown'
+                            }}
                         </span>
                     </div>
 
@@ -142,7 +145,10 @@
                             Submission Accepted By:
                         </span>
                         <span>
-                            {{ $registrant->acceptedBy->first_name . ' ' . $registrant->acceptedBy->last_name }}
+                            {{ !empty ($registrant->acceptedBy)
+                                ? $registrant->acceptedBy->first_name . ' ' . $registrant->acceptedBy->last_name
+                                : 'Unknown'
+                            }}
                         </span>
                     </div>
 

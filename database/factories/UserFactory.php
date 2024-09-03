@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -12,6 +13,7 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     protected static ?string $password;
+    private static int $reg_no = 1;
 
     /**
      * Define the model's default state.
@@ -20,6 +22,12 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+//        $last_reg_no = 0;
+//        $highest_existing_reg_no = User::orderBy('reg_no', 'desc')->first()?->reg_no;
+//        if ($highest_existing_reg_no){
+//            $last_reg_no = (int)$highest_existing_reg_no;
+//        }
+
         $gender = fake()->randomElement(['male', 'female']);
         $first_name = fake('en_GB')->firstName($gender);
         $last_name = fake('en_GB')->lastName();
@@ -45,6 +53,7 @@ class UserFactory extends Factory
 
         return [
 //            'title' => fake()->title($gender),
+            'reg_no' => self::$reg_no++,
             'first_name' => $first_name,
             'last_name' => $last_name,
             'email' => strtolower($email),

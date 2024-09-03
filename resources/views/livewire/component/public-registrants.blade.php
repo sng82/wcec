@@ -44,7 +44,7 @@
                 <p class="pb-1 mb-3 border-b border-slate-100" wire:key="{{ $registrant->id }}">
                     {{ $registrant->first_name . ' ' . $registrant->last_name }}
                     <span class="text-slate-400">
-                        {{ ' - ' . \Carbon\Carbon::parse($registrant->submission_accepted_at)->toFormattedDayDateString() }}
+                        {{ ' - ' . \Carbon\Carbon::parse($registrant->became_registrant_at)->toFormattedDayDateString() }}
                     </span>
                 </p>
             </div>

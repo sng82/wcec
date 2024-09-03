@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-//            $table->string('title');
+            $table->integer('reg_no')->unique()->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('phone_mobile')->nullable()->default(null);
             $table->boolean('registration_fee_paid')->default(false);
             $table->string('eoi_status')->nullable()->default(null);
-//            $table->timestamp('eoi_submitted_at')->nullable()->default(null);
-//            $table->timestamp('submission_submitted_at')->nullable()->default(null);
             $table->integer('submission_count')->default(0);
             $table->boolean('submission_fee_paid')->default(false);
             $table->string('submission_status')->nullable()->default(null);

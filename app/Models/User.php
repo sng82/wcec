@@ -46,6 +46,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'reg_no',
         'first_name',
         'last_name',
         'email',
@@ -75,7 +76,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-//        'submission_submitted_at' => 'datetime',
+        'reg_no'=> 'integer',
         'submission_count' => 'integer',
         'submission_accepted_at' => 'datetime',
         'submission_interview_at' => 'datetime',

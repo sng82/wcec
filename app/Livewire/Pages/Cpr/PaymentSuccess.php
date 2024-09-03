@@ -50,10 +50,10 @@ class PaymentSuccess extends Component
                 $user->save();
 
                 Mail::to(config('mail.membership_enquiry_mail_recipient'))
-                    ->send(new CPRFeePaidAdminNotification($order));
+                    ->send(new CPRFeePaidAdminNotification($order, $user));
 
                 Mail::to($user->email)
-                    ->send(new CPRFeePaidUserNotification($order));
+                    ->send(new CPRFeePaidUserNotification($order, $user));
             }
 
             return $this->flash(

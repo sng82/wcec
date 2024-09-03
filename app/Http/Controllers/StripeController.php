@@ -75,10 +75,10 @@ class StripeController extends Controller
                     $user->save();
 
                     Mail::to(config('mail.membership_enquiry_mail_recipient'))
-                        ->send(new CPRFeePaidAdminNotification($order));
+                        ->send(new CPRFeePaidAdminNotification($order, $user));
 
                     Mail::to($user->email)
-                        ->send(new CPRFeePaidUserNotification($order));
+                        ->send(new CPRFeePaidUserNotification($order, $user));
 
                     // TODO: Investigate fetching receipt pdf (if one exists?) using the API, and storing it locally.
                 }

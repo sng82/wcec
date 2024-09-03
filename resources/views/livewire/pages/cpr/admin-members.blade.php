@@ -25,7 +25,7 @@
 
                 <div class="">
                     <div x-show="activeTab===0">
-                        <livewire:component.active-members />
+                        <livewire:component.active-registrants />
                     </div>
                     <div x-show="activeTab===1">
                         <livewire:component.accepted-applicants />
@@ -41,7 +41,7 @@
                         <livewire:component.declined-applicants />
                     </div>
                     <div x-show="activeTab===4">
-                        <livewire:component.lapsed-members />
+                        <livewire:component.lapsed-registrants />
                     </div>
                 </div>
 
