@@ -26,10 +26,13 @@ class AdminPrivateDocuments extends Component
 
     public function mount()
     {
-        // Start with an empty option. This is used when no filtering is being applied...
+        // Populate the Filter buttons that appear above the results table...
+        // Start with an empty option. This is used when no filtering is
+        // being applied...
         $filter_options = [''];
 
-        // ... then add each unique document type that is found within the system
+        // ... then add each unique document type that is found within the
+        // system as a filtering option
         $filter_options2 = Document::select('doc_type')
                                    ->distinct()
                                    ->orderBy('doc_type')
@@ -61,7 +64,6 @@ class AdminPrivateDocuments extends Component
 
     public function downloadFile(Document $document)
     {
-        //        $file_loc = 'public/submitted_documents/'
         $file_loc = 'private/submitted_documents/'
                     . $document->user_id . '/'
                     . $document->file_name;
@@ -85,10 +87,17 @@ class AdminPrivateDocuments extends Component
     {
         return view('livewire.pages.cpr.admin-private-documents', [
             'documents' => Document::with('owner')
+                                   ->select('documents.*')
+                                   ->join('users', 'users.id', '=', 'documents.user_id')
                                    ->search($this->search)
                                    ->where('doc_type', 'like', "%{$this->filter}%")
                                    ->orderBy($this->sort_column_name, $this->sort_column_direction)
                                    ->paginate($this->per_page),
+//            'documents' => Document::with('owner')
+//                                   ->search($this->search)
+//                                   ->where('doc_type', 'like', "%{$this->filter}%")
+//                                   ->orderBy($this->sort_column_name, $this->sort_column_direction)
+//                                   ->paginate($this->per_page),
         ])->layout('layouts.app');
     }
 }

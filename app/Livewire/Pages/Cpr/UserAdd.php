@@ -45,7 +45,7 @@ class UserAdd extends Component
         $this->validate([
             'first_name'    => 'required|min:2',
             'last_name'     => 'required|min:2',
-            'email'         => 'required|email',
+            'email'         => 'required|unique:users|email',
             'phone_main'    => 'required|phone:GB',
             'phone_mobile'  => 'nullable|phone:GB,mobile',
             'role'          => ['required', Rule::in(Role::get()->pluck('name'))],
