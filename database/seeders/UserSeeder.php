@@ -1071,7 +1071,7 @@ class UserSeeder extends Seeder
                 $user->submission_accepted_by  = 1;
                 $user->eoi_status              = 'accepted';
                 $user->registration_pathway    = fake()->randomElement(['personal', 'standard']);
-                $user->registration_expires_at = fake()->dateTimeBetween('-1 days', '-60 days')->format('Y-m-d');
+                $user->registration_expires_at = fake()->dateTimeBetween('-60 days', '-1 days')->format('Y-m-d');
                 $user->became_registrant_at    = Carbon::parse($became_registrant_at)->format('Y-m-d');
                 $user->registration_fee_paid   = true;
                 $user->submission_status       = 'accepted';
