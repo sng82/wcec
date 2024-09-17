@@ -8,6 +8,7 @@ use App\Models\SubmissionDate;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Log;
@@ -23,6 +24,7 @@ class Dashboard extends Component
     public $submitted_eois = '';
     public $submitted_submissions = '';
     public $expiring_registrations = '';
+    public $overdue_registrations = '';
     public $logged_in_user;
     public $submission_fee;
     public $registration_fee;
@@ -30,7 +32,9 @@ class Dashboard extends Component
     public $renewal_due;
     public $renewal_fee_due;
     public $cpd_due;
-    public $renewal_window = 3; //how long, in months, before their registration expires that a user can renew.
+
+//    public $lapsed_can_renew;
+    public $renewal_window = 1; //how long, in months, before their registration expires that a registrant can renew.
 
     public function mount()
     {
@@ -40,6 +44,7 @@ class Dashboard extends Component
         $this->getEOIs();
         $this->getSubmissions();
         $this->getExpiringRegistrations();
+        $this->getOverdueRegistrations();
         $this->getSubmissionFee();
         $this->getRegistrationFee();
         $this->getRenewalFee();
@@ -85,6 +90,17 @@ class Dashboard extends Component
                                           ->where('registration_expires_at', '<', now()->addDays(30))
                                           ->orderBy('registration_expires_at', 'ASC')
                                           ->get();
+    }
+
+    public function getOverdueRegistrations()
+    {
+        // registrants have a grace period between their registration
+        // expiring and having their status changed to 'lapsed registrant'.
+
+        $this->overdue_registrations = User::role('registrant')
+                                           ->where('registration_expires_at', '<', now())
+                                           ->orderBy('registration_expires_at', 'ASC')
+                                           ->get();
     }
 
     public function getRegistrationFee()
@@ -241,6 +257,70 @@ class Dashboard extends Component
         }
     }
 
+    /*
+     * Blocked applicants can reapply 12 months after they're unsuccessful.
+     */
+    public function reApply()
+    {
+        try {
+            if ($this->logged_in_user->hasRole('blocked applicant')) {
+
+                $this->logged_in_user->update([
+                    'registration_fee_paid'     => 0,
+                    'eoi_status'                => null,
+                    'submission_fee_paid'       => 0,
+                    'submission_status'         => null,
+                    'submission_interview_at'   => null,
+                    'submission_accepted_at'    => null,
+                    'submission_accepted_by'    => null,
+                    'registration_pathway'      => null,
+                    'became_registrant_at'      => null,
+                    'cpd_last_submitted_at'     => null,
+                    'renewal_fee_last_paid_at'  => null,
+                    'registration_expires_at'   => null,
+                    'declined_at'               => null,
+                    'declined_by'               => null,
+                ]);
+
+                $this->logged_in_user->removeRole('blocked applicant');
+                $this->logged_in_user->assignRole('applicant');
+
+                return $this->flash(
+                    'success',
+                    'Application status successfully reset',
+                    [
+                        'position' => 'top-end',
+                        'timer' => 2000,
+                        'showConfirmButton' => false,
+                    ],
+                    route('dashboard')
+                );
+            }
+
+            $this->alert(
+                'error',
+                'Unable to reset account',
+                [
+                    'position'           => 'center',
+                    'timer'              => null,
+                    'showConfirmButton'  => true,
+                    'confirmButtonColor' => '#dc2626',
+                ]
+            );
+        } catch (\Exception $e) {
+            $this->alert(
+                'error',
+                'Unable to reset account',
+                [
+                    'position'           => 'center',
+                    'timer'              => null,
+                    'showConfirmButton'  => true,
+                    'confirmButtonColor' => '#dc2626',
+                ]
+            );
+        }
+    }
+
     private function setRegistrationExpiryDate(): void
     {
         $user = Auth::user();
@@ -248,14 +328,24 @@ class Dashboard extends Component
 
         if ($user && $is_registrant) {
 
-            $registration_expires_at    = Carbon::parse($user->registration_expires_at);
-            $cpd_last_submitted_at      = Carbon::parse($user->cpd_last_submitted_at);
-            $renewal_fee_last_paid_at   = Carbon::parse($user->renewal_fee_last_paid_at);
+            $registration_expires_at    = !empty($user->registration_expires_at)
+                                            ? Carbon::parse($user->registration_expires_at)
+                                            : null;
+            $cpd_last_submitted_at      = !empty($user->cpd_last_submitted_at)
+                                            ? Carbon::parse($user->cpd_last_submitted_at)
+                                            : null;
+            $renewal_fee_last_paid_at   = !empty($user->renewal_fee_last_paid_at)
+                                            ? Carbon::parse($user->renewal_fee_last_paid_at)
+                                            : null;
 
             if (
+                $registration_expires_at !== null &&
+                $cpd_last_submitted_at !== null &&
+                $renewal_fee_last_paid_at !== null &&
                 $cpd_last_submitted_at > $registration_expires_at &&
                 $renewal_fee_last_paid_at > $registration_expires_at
             ) {
+                Log::debug('triggered');
                 $user->update([
                     'registration_expires_at' => $registration_expires_at->addYear()
                 ]);

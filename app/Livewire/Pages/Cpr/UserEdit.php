@@ -48,7 +48,7 @@ class UserEdit extends Component
         if (! $this->registrant) {
             return $this->flash(
                 'error',
-                'Member not found',
+                'User not found',
                 [
                     'position' => 'center',
                     'timer' => null,
@@ -56,7 +56,6 @@ class UserEdit extends Component
                     'confirmButtonColor' => '#dc2626',
                 ],
                 route('registrants')
-//                'cpr/members'
             );
         }
 
@@ -90,21 +89,145 @@ class UserEdit extends Component
                 'phone_mobile' => trim($this->phone_mobile),
             ]);
 
-            $this->alert('info', 'Member updated successfully', [
-                'position' => 'top-end',
-                'timer' => 2000,
-                'toast' => true,
-                'showConfirmButton' => false,
-                'confirmButtonColor' => '#06b6d4',
-            ]);
+            $this->alert(
+                'info',
+                'User updated successfully',
+                [
+                    'position' => 'top-end',
+                    'timer' => 2000,
+                    'toast' => true,
+                    'showConfirmButton' => false,
+                    'confirmButtonColor' => '#06b6d4',
+                ]
+            );
 
         } catch(\Exception $e) {
-            $this->alert('error', 'Unable to update. ' . $e->getMessage(), [
-                'position' => 'center',
-                'timer' => null,
-                'showConfirmButton' => true,
-                'confirmButtonColor' => '#dc2626',
+            $this->alert('error',
+                'Unable to update. ' . $e->getMessage(),
+                [
+                    'position' => 'center',
+                    'timer' => null,
+                    'showConfirmButton' => true,
+                    'confirmButtonColor' => '#dc2626',
+                ]
+            );
+        }
+    }
+
+    public function setLapsed()
+    {
+        try {
+            $this->registrant->removeRole('registrant');
+            $this->registrant->assignRole('lapsed registrant');
+
+            return $this->flash(
+                'info',
+                'User demoted',
+                [
+                    'position' => 'top-end',
+                    'timer' => 2000,
+                    'toast' => true,
+                    'showConfirmButton' => false,
+                    'confirmButtonColor' => '#06b6d4',
+                ],
+                route('user-edit', [$this->registrant->id])
+            );
+
+        } catch (\Exception $e) {
+            $this->alert(
+                'error',
+                'Unable to demote. ' . $e->getMessage(),
+                [
+                    'position' => 'center',
+                    'timer' => null,
+                    'showConfirmButton' => true,
+                    'confirmButtonColor' => '#dc2626',
+                ]
+            );
+        }
+    }
+
+    public function setActive()
+    {
+        try {
+            $this->registrant->removeRole('lapsed registrant');
+            $this->registrant->assignRole('registrant');
+
+            return $this->flash(
+                'info',
+                'User promoted',
+                [
+                    'position' => 'top-end',
+                    'timer' => 2000,
+                    'toast' => true,
+                    'showConfirmButton' => false,
+                    'confirmButtonColor' => '#06b6d4',
+                ],
+                route('user-edit', [$this->registrant->id])
+            );
+
+        } catch (\Exception $e) {
+            $this->alert(
+                'error',
+                'Unable to promote. ' . $e->getMessage(),
+                [
+                    'position' => 'center',
+                    'timer' => null,
+                    'showConfirmButton' => true,
+                    'confirmButtonColor' => '#dc2626',
+                ]
+            );
+        }
+    }
+
+    public function setApplicant()
+    {
+        try {
+            $this->registrant->update([
+                'registration_fee_paid'     => 0,
+                'eoi_status'                => null,
+                'submission_count'          => 0,
+                'submission_fee_paid'       => 0,
+                'submission_status'         => null,
+                'submission_interview_at'   => null,
+                'submission_accepted_at'    => null,
+                'submission_accepted_by'    => null,
+                'registration_pathway'      => null,
+                'became_registrant_at'      => null,
+                'cpd_last_submitted_at'     => null,
+                'renewal_fee_last_paid_at'  => null,
+                'registration_expires_at'   => null,
+                'declined_at'               => null,
+                'declined_by'               => null,
             ]);
+
+            $this->registrant->removeRole('lapsed registrant');
+            $this->registrant->assignRole('applicant');
+
+            return $this->flash(
+                'info',
+                'User reset to Applicant status',
+                [
+                    'position' => 'top-end',
+                    'timer' => 2000,
+                    'toast' => true,
+                    'showConfirmButton' => false,
+                    'confirmButtonColor' => '#06b6d4',
+                ],
+                route('user-edit', [$this->registrant->id])
+            );
+
+        } catch (\Exception $e) {
+            $this->alert(
+                'error',
+                'Unable to reset account. ' . $e->getMessage(),
+                [
+                    'position' => 'center',
+                    'timer' => null,
+                    'showConfirmButton' => true,
+                    'confirmButtonColor' => '#dc2626',
+                ]
+            );
         }
     }
 

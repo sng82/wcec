@@ -5,6 +5,7 @@
     'submitted_eois',
     'submitted_submissions',
     'expiring_registrations',
+    'overdue_registrations',
 ])
 
 <div {{ $attributes->class(['bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300']) }}>
@@ -15,12 +16,13 @@
         Welcome to the Admin dashboard!
     </p>
     <p class="mb-4">
-        Everything currently requiring your attention is listed below. Use the menu on the left to delve deeper into the Chartered Practitioners Portal.
+        Everything currently requiring your attention is listed below. Use the menu on the left to delve deeper into the
+        Chartered Practitioners Portal.
     </p>
 
     <p class="mb-4">
         The next Admission Date (when accepted applicants will be admitted to the register) is
-{{--        around {{ $next_admission_date_difference }}:--}}
+        {{--        around {{ $next_admission_date_difference }}:--}}
         <span class="font-bold">{{ $next_admission_date }}</span>.
     </p>
 </div>
@@ -69,7 +71,7 @@
                 <tbody class="bg-white divide-y divide-sky-100">
                     @foreach($submitted_eois as $registrant)
                         <tr wire:key="{{ $registrant->id }}" class="">
-                            <td class="px-4 py-2 " >
+                            <td class="px-4 py-2 ">
                                 <span class="cursor-pointer" wire:click="openMember({{ $registrant->id }})">
                                     {{ $registrant->first_name . ' ' . $registrant->last_name }}
                                 </span>
@@ -78,7 +80,8 @@
                                 {{ $registrant->email }}
                             </td>
                             <td class="px-4 py-1">
-                                <span class="py-1 px-3 inline rounded-full w-96 {{ $registrant->registration_fee_paid ? 'text-emerald-500 bg-emerald-100' : 'text-slate-500 bg-slate-200' }}">
+                                <span
+                                    class="py-1 px-3 inline rounded-full w-96 {{ $registrant->registration_fee_paid ? 'text-emerald-500 bg-emerald-100' : 'text-slate-500 bg-slate-200' }}">
                                     {{ $registrant->registration_fee_paid ? 'Paid' : 'Not Paid' }}
                                 </span>
                             </td>
@@ -89,7 +92,7 @@
                                 <x-edit-button-fuchsia :href="route('assess-eoi',[$registrant->eoi->id])" class="">
                                     EoI
                                 </x-edit-button-fuchsia>
-{{--                                <a href="{{ route('assess-eoi',[$registrant->eoi->id]) }}" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess&nbsp;EoI</a>--}}
+                                {{--                                <a href="{{ route('assess-eoi',[$registrant->eoi->id]) }}" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess&nbsp;EoI</a>--}}
 
                             </td>
                         </tr>
@@ -102,7 +105,8 @@
     @endif
 </div>
 
-<div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300" wire:poll.15s="getSubmissions">
+<div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300"
+     wire:poll.15s="getSubmissions">
     <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2 mb-2">
         Registration Submissions
     </h2>
@@ -165,7 +169,7 @@
                                 <x-edit-button-fuchsia :href="route('assess-submission', [$registrant->id])" class="">
                                     Submission
                                 </x-edit-button-fuchsia>
-{{--                                <a href="{{ route('assess-submission',[$registrant->id]) }}" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess&nbsp;Submission</a>--}}
+                                {{--                                <a href="{{ route('assess-submission',[$registrant->id]) }}" class="z-10 bg-sky-800 hover:bg-sky-900 text-white rounded-full py-1 px-4">Assess&nbsp;Submission</a>--}}
                             </td>
                         </tr>
                     @endforeach
@@ -183,9 +187,7 @@
     </h2>
     @if($expiring_registrations->count() > 0)
         <p class="mb-4">
-            {{ $expiring_registrations->count() . 'x' }}
-            {{ Str::of('registration')->plural($expiring_registrations->count()) }}
-            due to expire within the next 30 days:
+            The following registrations are due to expire within 30 days:
         </p>
         <div class="mt-3 mb-2 overflow-hidden border border-red-100 rounded-lg shadow-sm overflow-x-auto">
             <table class="table-auto w-full divide-y divide-red-100 text-sm">
@@ -200,7 +202,6 @@
                         <th scope="col" class="px-4 py-2 text-left">
                             Registration Expires
                         </th>
-
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-red-100">
@@ -213,7 +214,7 @@
                             <td class="px-4 py-2">
                                 {{ $registrant->email }}
                             </td>
-                            <td class="px-4 py-2 text-sm">
+                            <td class="px-4 py-2">
                                 {{ \Carbon\Carbon::parse($registrant->registration_expires_at)->toFormattedDayDateString() }}
                                 ({{ \Carbon\Carbon::parse(now()->format('y-m-d'))->diff($registrant->registration_expires_at->format('y-m-d'), \Carbon\CarbonInterface::DIFF_ABSOLUTE) }})
                             </td>
@@ -221,9 +222,68 @@
                     @endforeach
                 </tbody>
             </table>
-
         </div>
+        <p>A reminder email is automatically sent 28 days before the expiry date.</p>
     @else
         <p class="mb-4">No registrations are due to expire within the next 30 days.</p>
+    @endif
+</div>
+
+<div class="bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300">
+    <h2 class="text-2xl text-sky-800 border-b-4 border-red-700 pb-2 mb-2">
+        Overdue Registration Renewals
+    </h2>
+    @if($overdue_registrations->count() > 0)
+        <p class="mb-2">
+            The following registration renewals are overdue:
+        </p>
+        <div class="mt-3 mb-2 overflow-hidden border border-red-100 rounded-lg shadow-sm overflow-x-auto">
+            <table class="table-auto w-full divide-y divide-red-100 text-sm">
+                <thead class="bg-red-100">
+                    <tr class="text-red-900 divide-x divide-red-200">
+                        <th scope="col" class="px-4 py-2 text-left">
+                            Name
+                        </th>
+                        <th scope="col" class="px-4 py-2 text-left">
+                            Email
+                        </th>
+                        <th scope="col" class="px-4 py-2 text-left">
+                            Registration Expired
+                        </th>
+{{--                        <th scope="col" class="px-4 py-2 text-left">--}}
+{{--                            Grace Period Ends--}}
+{{--                        </th>--}}
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-red-100">
+                    @foreach($overdue_registrations as $registrant)
+                        <tr wire:key="{{ $registrant->id }}" wire:click="openMember({{ $registrant->id }})"
+                            class="cursor-pointer text-slate-500 hover:text-sky-600 hover:bg-slate-100">
+                            <td class="px-4 py-2">
+                                {{ $registrant->first_name . ' ' . $registrant->last_name }}
+                            </td>
+                            <td class="px-4 py-2">
+                                {{ $registrant->email }}
+                            </td>
+                            <td class="px-4 py-2 text-sm">
+                                {{ \Carbon\Carbon::parse($registrant->registration_expires_at)->toFormattedDayDateString() }}
+                                ({{ \Carbon\Carbon::parse(now()->format('y-m-d'))->diff($registrant->registration_expires_at->format('y-m-d'), \Carbon\CarbonInterface::DIFF_ABSOLUTE) }} ago)
+                            </td>
+{{--                            <td class="px-4 py-2">--}}
+{{--                                {{ \Carbon\Carbon::parse($registrant->registration_expires_at)->addMonths(3)->toFormattedDayDateString() }}--}}
+{{--                                ({{ \Carbon\Carbon::parse(now()->format('y-m-d'))->diff($registrant->registration_expires_at->addMonths(3)->format('y-m-d'), \Carbon\CarbonInterface::DIFF_ABSOLUTE) }})--}}
+{{--                            </td>--}}
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <p>These registrants...</p>
+        <ul class="my-2 ml-12 list-square marker:text-sky-400 space-y-1 max-w-2xl xl:max-w-fit">
+            <li>Will not appear in the public register</li>
+            <li>Are still able to renew their registration until an administrator changes their status from 'Active Registrant' to 'Lapsed Registrant'</li>
+        </ul>
+    @else
+        <p class="mb-4">No registrations have recently expired.</p>
     @endif
 </div>

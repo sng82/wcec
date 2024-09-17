@@ -15,6 +15,10 @@
                 <h2 class="text-center mx-auto mt-6 text-sky-900 text-3xl border-b-4 border-red-700 pb-2">
                     <span class="">Chartered Practitioners Portal</span>
                 </h2>
+{{--                debug--}}
+{{--                @foreach($logged_in_user->getRoleNames() as $role)--}}
+{{--                    {{ $role . ' | ' }}--}}
+{{--                @endforeach--}}
             </div>
 
             @if ($logged_in_user->hasRole('admin'))
@@ -24,6 +28,7 @@
                                    :$submitted_eois
                                    :$submitted_submissions
                                    :$expiring_registrations
+                                   :$overdue_registrations
                 />
             @endif
 
@@ -41,6 +46,13 @@
                                                 :$next_admission_date />
             @endif
 
+            @if($logged_in_user->hasRole('blocked applicant'))
+                <x-dashboard-blocked-applicant :$logged_in_user
+                                               :$renewal_due
+                />
+            @endif
+
+
             @if ($logged_in_user->hasRole('registrant'))
                 <x-dashboard-registrant :$logged_in_user
                                         :$renewal_fee
@@ -48,6 +60,13 @@
                                         :$renewal_fee_due
                                         :$cpd_due
                                         :$renewal_window
+                />
+            @endif
+
+            @if($logged_in_user->hasRole('lapsed registrant'))
+                <x-dashboard-lapsed-registrant :$logged_in_user
+                                               :$renewal_fee
+                                               :$renewal_due
                 />
             @endif
 

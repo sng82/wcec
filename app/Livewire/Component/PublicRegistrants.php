@@ -16,7 +16,7 @@ class PublicRegistrants extends Component
     public $sort_column_name = 'became_registrant_at';
     public $sort_column_direction = 'asc';
     public $search = '';
-    public $per_page = 12;
+    public $per_page = 16;
 
     public function sortBy($column_name): void
     {
@@ -37,8 +37,9 @@ class PublicRegistrants extends Component
     {
         return view('livewire.component.public-registrants', [
 
-            'registrants' => User::select(['id', 'first_name', 'last_name', 'became_registrant_at'])
+            'registrants' => User::select(['id', 'first_name', 'last_name', 'reg_no', 'became_registrant_at'])
                                 ->role('registrant')
+                                ->where('registration_expires_at', '>', now())
                                 ->publicSearch($this->search)
                                 ->orderBy($this->sort_column_name, $this->sort_column_direction)
                                 ->paginate($this->per_page),

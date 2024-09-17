@@ -11,15 +11,18 @@
 
     <div class="mb-4 flex flex-col lg:flex-row gap-4 items-center">
         <div class="flex flex-col lg:flex-row items-center justify-between w-full gap-4">
-            <div class="flex flex-row gap-2 items-center">
+            <div class="flex flex-col lg:flex-row gap-2 items-center">
                 <div>
                     <span>Order by:</span>
                 </div>
-                <button type="button" wire:click="sortBy('became_registrant_at')" class="rounded-full text-white px-6 py-1 {{ $sort_column_name === 'became_registrant_at' ? ' bg-red-800 hover:bg-red-700 ' : ' bg-slate-500 hover:bg-red-700 ' }}">
+                <button type="button" wire:click="sortBy('became_registrant_at')" class="rounded-full text-white px-6 py-1 {{ $sort_column_name === 'became_registrant_at' ? ' bg-red-700 hover:bg-red-800 ' : ' bg-slate-500 hover:bg-red-800 ' }}">
                     Admission Date
                 </button>
-                <button type="button" wire:click="sortBy('last_name')" class="rounded-full text-white px-6 py-1 {{ $sort_column_name === 'last_name' ? ' bg-red-800 hover:bg-red-700 ' : ' bg-slate-500 hover:bg-red-700 ' }}">
+                <button type="button" wire:click="sortBy('last_name')" class="rounded-full text-white px-6 py-1 {{ $sort_column_name === 'last_name' ? ' bg-red-700 hover:bg-red-800 ' : ' bg-slate-500 hover:bg-red-800 ' }}">
                     Last Name
+                </button>
+                <button type="button" wire:click="sortBy('reg_no')" class="rounded-full text-white px-6 py-1 {{ $sort_column_name === 'reg_no' ? ' bg-red-700 hover:bg-red-800 ' : ' bg-slate-500 hover:bg-red-800 ' }}">
+                    Registration Number
                 </button>
             </div>
             <div>
@@ -38,23 +41,27 @@
             </div>
         </div>
     </div>
-    <div class="bg-white rounded-lg border border-slate-300 p-4 pt-6 mb-4 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-4">
         @forelse($registrants as $registrant)
-            <div class="block float-left w-full md:w-1/2 xl:w-1/3 2xl:w-1/4">
-                <p class="pb-1 mb-3 border-b border-slate-100" wire:key="{{ $registrant->id }}">
-                    {{ $registrant->first_name . ' ' . $registrant->last_name }}
-                    <span class="text-slate-400">
-                        {{ ' - ' . \Carbon\Carbon::parse($registrant->became_registrant_at)->toFormattedDayDateString() }}
-                    </span>
+            <div class="bg-gradient-to-br from-sky-700 to-sky-600 p-3 rounded-2xl rounded-tl-md rounded-br-md shadow-lg">
+                <h3 class="font-bold text-lg text-white">
+                    {{ $registrant->first_name }} <span class="">{{ $registrant->last_name }}</span>
+                </h3>
+                <hr class="mb-1 border-b-2 border-red-400">
+                <p class="text-slate-200 mb-0">
+                    <span class="">Registration No: </span>{{ $registrant->reg_no }}
+                </p>
+                <p class="text-slate-200 mb-0">
+                    <span>Admitted: </span>{{ \Carbon\Carbon::parse($registrant->became_registrant_at)->format('d/m/y') }}
                 </p>
             </div>
         @empty
             <p>No results found.</p>
         @endforelse
         <div class="clear-both"></div>
-            <p class="my-4 text-sm text-slate-500">
-                The date next to each name indicates when the individual was admitted to the register.
-            </p>
+{{--        <p class="my-4 text-sm text-slate-500">--}}
+{{--            The date next to each name indicates when the individual was admitted to the register.--}}
+{{--        </p>--}}
     </div>
     <div>
         {{ $registrants->onEachSide(1)->links(data: ['scrollTo' => false]) }}

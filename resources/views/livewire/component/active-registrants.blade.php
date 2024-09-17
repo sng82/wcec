@@ -98,10 +98,26 @@
                                 <td class="px-4 py-2">
                                     {{ $registrant->email }}
                                 </td>
-                                <td class="px-4 py-2 {{ $registrant->registration_expires_at < now()->addDays(30) ? 'text-red-700 font-semibold' : '' }} ">
+                                @php
+                                    $td_style = '';
+                                    if ($registrant->registration_expires_at < now()) {
+                                        $td_style = 'text-red-600 font-semibold bg-gradient-to-l from-red-100 via-transparent ';
+                                    } else if ($registrant->registration_expires_at < now()->addDays(30)) {
+                                        $td_style = 'text-orange-500 font-semibold bg-gradient-to-l from-orange-100 via-transparent ';
+                                    }
+                                @endphp
+                                <td class="px-4 py-2 {{ $td_style }} ">
                                     {{ \Carbon\Carbon::parse($registrant->registration_expires_at)->toFormattedDayDateString() }}
                                 </td>
-                                <td class="px-4 py-1">
+                                @php
+                                    $td_style = '';
+                                    if ($registrant->registration_expires_at < now()) {
+                                        $td_style = 'bg-gradient-to-r from-red-100 to-red-200';
+                                    } else if ($registrant->registration_expires_at < now()->addDays(30)) {
+                                        $td_style = 'bg-gradient-to-r from-orange-100 to-orange-200';
+                                    }
+                                @endphp
+                                <td class="px-4 py-1 {{ $td_style }}">
                                     <x-edit-button :href="route('user-edit', $registrant->id)" class="">
                                         {{ __('View/Edit') }}
                                     </x-edit-button>

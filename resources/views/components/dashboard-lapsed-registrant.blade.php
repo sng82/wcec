@@ -7,64 +7,18 @@
     'renewal_window',
 ])
 
-@php
-use Carbon\Carbon;
-@endphp
-
-@if($logged_in_user->registration_expires_at < now())
-    <div class="flex justify-items-start items-center text-lg w-full bg-red-500 text-white p-2 rounded-md mb-4">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
-        </svg>
-        <span>Your registration renewal is overdue.</span>
-    </div>
-@endif
-
 <div {{ $attributes->class(['bg-slate-50 rounded-lg p-3 xl:p-4 pb-4 mb-4 xl:mb-6 shadow-md shadow-slate-300']) }}>
-
     <p class="my-2">
         Hi, {{ explode(" ", $logged_in_user->first_name)[0] }},
     </p>
     <p class="mb-2">
-        Welcome to the Chartered Practitioners Portal...
+        Your registration expired <span class="font-bold">
+        {{ \Carbon\Carbon::parse($logged_in_user->registration_expires_at)->toFormattedDayDateString() }}</span>
+        so you have been removed from the register.
     </p>
-    <hr class="my-4">
-
-    @if($logged_in_user->registration_expires_at >= now())
-        <p class="mb-2">
-            Your registration expires <span class="font-bold">{{ carbon::parse($logged_in_user->registration_expires_at)->toFormattedDayDateString() }}</span>.
-        </p>
-        @if ($renewal_due)
-            <p>
-                You should submit your CPD (Continual Professional Development) and pay your renewal fee before this
-                date to remain registered.
-            </p>
-        @else
-            <p>
-                You can submit your CPD and pay your renewal fee on or after
-                <span class="font-bold">
-                {{ carbon::parse($logged_in_user->registration_expires_at)->subMonths($renewal_window)->toFormattedDayDateString() }}
-            </span>
-            </p>
-        @endif
-    @else
-        <p class="mb-2">
-            Your registration expired <span class="font-bold text-red-600">
-                {{ carbon::parse($logged_in_user->registration_expires_at)->toFormattedDayDateString() }}</span>.
-            As such, you have been removed from the Chartered Practitioners Register.
-        </p>
-        <p class="mb-2">
-            You have a short grace period to submit your CPD (Continual
-            Professional Development) and pay your renewal fee to reverse this action.
-        </p>
-        <p class="mb-2">
-            Failure to do so will result in your removal from the register becoming permanent.
-            At this point, you would have to go through the application process and pay all
-            associated fees to re-join the register.
-        </p>
-    @endif
-
-
+    <p>
+        Please get in touch if you would like to rejoin.
+    </p>
 
 </div>
 
@@ -111,7 +65,7 @@ use Carbon\Carbon;
                             @endif
                         </td>
                         <td class="px-4 py-2 text-sm">
-                            Last paid: {{ !empty($logged_in_user->renewal_fee_last_paid_at ?: '') ? carbon::parse($logged_in_user->renewal_fee_last_paid_at)->toFormattedDayDateString() : 'N/A' }}
+                            Last paid: {{ !empty($logged_in_user->renewal_fee_last_paid_at ?: '') ? \Carbon\Carbon::parse($logged_in_user->renewal_fee_last_paid_at)->toFormattedDayDateString() : 'N/A' }}
                         </td>
                         <td class="px-4 py-2">
                             @if($renewal_fee_due)
@@ -159,7 +113,7 @@ use Carbon\Carbon;
 
                         </td>
                         <td class="px-4 py-2 text-sm">
-                            Last submitted: {{ !empty($logged_in_user->cpd_last_submitted_at ?: '') ? carbon::parse($logged_in_user->cpd_last_submitted_at)->toFormattedDayDateString() : 'N/A' }}
+                            Last submitted: {{ !empty($logged_in_user->cpd_last_submitted_at ?: '') ? \Carbon\Carbon::parse($logged_in_user->cpd_last_submitted_at)->toFormattedDayDateString() : 'N/A' }}
                         </td>
                         <td class="px-4 py-2">
                             @if($cpd_due)

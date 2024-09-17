@@ -132,13 +132,14 @@ class User extends Authenticatable
             return false;
         }
 
-        // Fail if users registration has lapsed.
-        if (Carbon::parse($this->registration_expires_at)->isPast()) {
-            return false;
-        }
+// NOTE: disabled as it looks like all demotions will be manually handled by admins
+//        // Fail if users registration has lapsed. There's a 3-month grace period.
+//        if (Carbon::parse($this->registration_expires_at)->addMonths(3)->isPast()) {
+//            return false;
+//        }
 
-        // Fail if registration renewal is not due within next 3 months.
-        if (Carbon::parse($this->registration_expires_at)->subMonths(3)->isFuture()) {
+        // Fail if not close enough to expiry to allow renewal.
+        if (Carbon::parse($this->registration_expires_at)->subMonths(1)->isFuture()) {
             return false;
         }
 
@@ -151,10 +152,10 @@ class User extends Authenticatable
             return false;
         }
 
-        // Renewal fee can't be paid if it has previously been paid within the last 3 months.
+        // Renewal fee can't be paid if it has recently been paid already.
         if (
             !empty($this->renewal_fee_last_paid_at) &&
-            Carbon::parse($this->renewal_fee_last_paid_at) > Carbon::now()->subMonths(3)
+            Carbon::parse($this->renewal_fee_last_paid_at) > Carbon::now()->subMonths(1)
         ) {
             return false;
         }
@@ -168,10 +169,10 @@ class User extends Authenticatable
             return false;
         }
 
-        // CPD can't be submitted if the user has submitted one within the last 3 months.
+        // CPD can't be submitted if it has recently been submitted already.
         if (
             !empty($this->cpd_last_submitted_at) &&
-            Carbon::parse($this->cpd_last_submitted_at) > Carbon::now()->subMonths(3)
+            Carbon::parse($this->cpd_last_submitted_at) > Carbon::now()->subMonths(1)
         ) {
             return false;
         }

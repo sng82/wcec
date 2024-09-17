@@ -82,7 +82,6 @@ class RolesAndPermissionsSeeder extends Seeder
         Role::create(['name' => 'lapsed registrant'])
             ->givePermissionTo([
                 'view dashboard',
-                'submit cpd',
             ]);
 
     }

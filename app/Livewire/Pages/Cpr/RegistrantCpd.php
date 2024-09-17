@@ -26,7 +26,7 @@ class RegistrantCpd extends Component
     public $cpd_year_due;
     public $cpd_template_document;
     public $completed_cpd_document;
-    public $renewal_window = 3; //how long, in months, before their registration expires that a user can renew.
+    public $renewal_window = 1; //how long, in months, before their registration expires that a registrant can renew.
 
     public function mount()
     {

@@ -25,11 +25,15 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-// Promote Applicants to Registrants
+/*
+ * Promote Applicants to Registrants
+ * Runs just after midnight to allow for any discrepancy between server
+ * and database clocks.
+ */
 Schedule::call(function () {
     $next_admission_date = SubmissionDate::where('admission_date', '>=', date('Y-m-d'))
-                                          ->orderBy('admission_date', 'asc')
-                                          ->first()->admission_date;
+                                         ->orderBy('admission_date', 'asc')
+                                         ->first()->admission_date;
 
     if ($next_admission_date === date('Y-m-d')) {
         $accepted_applicants = User::role('accepted applicant')
@@ -44,42 +48,66 @@ Schedule::call(function () {
         foreach ($accepted_applicants as $user) {
             $user->removeRole('accepted applicant');
             $user->assignRole('registrant');
-            $user->became_registrant_at = date('Y-m-d');
+            $user->became_registrant_at    = date('Y-m-d');
             $user->registration_expires_at = date('Y-m-d', strtotime('+1 year'));
             $user->save();
         }
     }
-})->dailyAt('00:10'); // run just after midnight to allow for any discrepancy between server and database clocks.
+})->dailyAt('00:10');
 
-// Demote Registrants who have not completed their CPD (Continuous Professional Development)
-// and/or paid their renewal fee.
+/*
+ * Demote Registrants who have not completed their
+ * CPD (Continuous Professional Development)
+ * and/or paid their renewal fee.
+ * Includes a grace period of 3 months.
+ */
 Schedule::call(function () {
-   $expired_users = User::role('registrant')
-                        ->where('registration_expires_at', '<', date('Y-m-d'))
-                        ->get();
+    $grace_date = Carbon::now()->subMonths(3);
+    $expired_users = User::role('registrant')
+                         ->where('registration_expires_at', '<', $grace_date)
+                         ->get();
 
-   foreach ($expired_users as $user) {
-       $user->removeRole('registrant');
-       $user->assignRole('lapsed registrant');
-       Mail::to($user->email)
-           ->send(new RegistrationExpiredNotification($user));
-   }
-})->dailyAt('00:20'); // run a little later than the last call, just to minimise load on server.
+    foreach ($expired_users as $user) {
+        $user->removeRole('registrant');
+        $user->assignRole('lapsed registrant');
+        Mail::to($user->email)
+            ->send(new RegistrationExpiredNotification($user));
+    }
+})->dailyAt('00:20'); // staggered to minimise load on server.
 
-// Send reminder emails to users whose registrations are close to expiring
+/*
+ * Admins can manually set lapsed registrants back to active registrant status.
+ * This scheduled task checks for and resets active registrants whose expiry
+ * date is more than a year ago back to lapsed status. This is necessary as
+ * registrants are only able to add a year to their existing expiry date.
+ * Emails are not sent on this occasion.
+ */
+Schedule::call(function () {
+    $year_ago = Carbon::now()->subYear();
+    $expired_users = User::role('registrant')
+                         ->where('registration_expires_at', '<', $year_ago)
+                         ->get();
+
+    foreach ($expired_users as $user) {
+        $user->removeRole('registrant');
+        $user->assignRole('lapsed registrant');
+    }
+})->dailyAt('00:30'); // staggered to minimise load on server.
+
+/*
+ * Send reminder emails to users whose registrations are close to expiring
+ */
 Schedule::call(function () {
     $four_weeks_from_now = Carbon::now()->addDays(28)->format('Y-m-d');
-    $expiring_users = User::role('registrant')
-                          ->where('registration_expires_at', $four_weeks_from_now)
-                          ->get();
+    $expiring_users      = User::role('registrant')
+                               ->where('registration_expires_at', $four_weeks_from_now)
+                               ->get();
 
     foreach ($expiring_users as $user) {
         Mail::to($user->email)
             ->send(new RegistrationExpiringNotification($user));
     }
-
-})->dailyAt('00:30'); // run a little later than the last call, just to minimise load on server.
-
+})->dailyAt('00:40'); // staggered to minimise load on server.
 
 // Tests
 Artisan::command('send_test_expiring_email', function () {

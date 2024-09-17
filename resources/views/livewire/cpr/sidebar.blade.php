@@ -93,10 +93,10 @@
                 @can('view emails')
                     <x-sidebar-link :href="route('preview-emails')"
                                     :active="request()->routeIs('preview-emails')"
-                                    x-bind:title="sidebar_open ? null : 'Preview Emails'"
+                                    x-bind:title="sidebar_open ? null : 'Emails'"
                                     icon="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
                                     wire:navigate>
-                        {{ __('Preview Emails') }}
+                        {{ __('Emails') }}
                     </x-sidebar-link>
                 @endcan
 
@@ -153,6 +153,7 @@
             </div>
 
             <div class="flex flex-col pb-2">
+                <hr class="my-2 mx-4">
                 <x-sidebar-link href="/" icon="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3">
                     Back to website
                 </x-sidebar-link>

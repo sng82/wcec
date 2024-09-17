@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Validation\Rule;
+//use Illuminate\Validation\Rule;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -103,9 +103,12 @@ class ApplicantSubmission extends Component
                 'user_id'   => $this->user->id,
             ]);
 
+            $new_submission_count = $this->user->submission_count + 1;
+
             User::find($this->user->id)?->update([
                 'submission_status'    => 'submitted',
                 'registration_pathway' => $this->registration_path,
+                'submission_count'     => $new_submission_count,
             ]);
 
             Mail::to(config('mail.membership_enquiry_mail_recipient'))
