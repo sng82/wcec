@@ -1059,6 +1059,26 @@ class UserSeeder extends Seeder
                 $user->save();
             });
 
+            // Active registrants, just passed expiry date
+            User::factory()->count(5)->create()->each(function ($user) {
+                $became_registrant_at   = fake()->dateTimeBetween('-10 years', '-1 days')->format('Y-m-d H:i:s');
+                $submission_accepted_at = Carbon::parse($became_registrant_at)->subDays(
+                    fake()->numberBetween(1, 30)
+                )->format('Y-m-d H:i:s');
+
+                $user->assignRole('registrant');
+                $user->submission_accepted_at  = $submission_accepted_at;
+                $user->submission_accepted_by  = 1;
+                $user->eoi_status              = 'accepted';
+                $user->registration_pathway    = fake()->randomElement(['personal', 'standard']);
+                $user->registration_expires_at = fake()->dateTimeBetween('-1 days', '-60 days')->format('Y-m-d');
+                $user->became_registrant_at    = Carbon::parse($became_registrant_at)->format('Y-m-d');
+                $user->registration_fee_paid   = true;
+                $user->submission_status       = 'accepted';
+                $user->submission_fee_paid     = true;
+                $user->save();
+            });
+
             // Lapsed registrant
             User::factory()->count(5)->create()->each(function ($user) {
                 $became_registrant_at   = fake()->dateTimeBetween('-18 years', '-11 years')->format('Y-m-d H:i:s');
