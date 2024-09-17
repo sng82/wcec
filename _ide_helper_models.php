@@ -58,6 +58,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
+ * @method static \Database\Factories\EOIFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|EOI newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|EOI newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|EOI query()
@@ -93,6 +94,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
+ * @method static \Database\Factories\OrderFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Order query()
@@ -244,6 +246,7 @@ namespace App\Models{
  *
  * @mixin Builder
  * @property int $id
+ * @property int|null $reg_no
  * @property string $first_name
  * @property string $last_name
  * @property string $email
@@ -305,6 +308,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePhoneMain($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePhoneMobile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRegNo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRegistrationExpiresAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRegistrationFeePaid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRegistrationPathway($value)
