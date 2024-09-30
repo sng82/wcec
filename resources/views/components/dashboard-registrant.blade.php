@@ -44,8 +44,8 @@ use Carbon\Carbon;
             <p>
                 You can submit your CPD and pay your renewal fee on or after
                 <span class="font-bold">
-                {{ carbon::parse($logged_in_user->registration_expires_at)->subMonths($renewal_window)->toFormattedDayDateString() }}
-            </span>
+                    {{ carbon::parse($logged_in_user->registration_expires_at)->subMonths($renewal_window)->toFormattedDayDateString() }}
+                </span>
             </p>
         @endif
     @else
