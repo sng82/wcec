@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Cpr;
 
 use App\Models\Order;
 use App\Models\Prices;
+use App\Models\PublicDocument;
 use App\Models\SubmissionDate;
 use App\Models\User;
 use Carbon\Carbon;
@@ -32,6 +33,7 @@ class Dashboard extends Component
     public $renewal_due;
     public $renewal_fee_due;
     public $cpd_due;
+    public $cpd_template_document;
 
 //    public $lapsed_can_renew;
     public $renewal_window = 1; //how long, in months, before their registration expires that a registrant can renew.
@@ -51,6 +53,9 @@ class Dashboard extends Component
         $this->getRenewalDue();
         $this->getRenewalFeeDue(); // must come after getRenewalDue!
         $this->getCpdDue(); // must come after getRenewalDue!
+
+        $this->cpd_template_document = PublicDocument::where('doc_type', 'CPD Form')->first();
+
     }
 
     public function openMember($id)

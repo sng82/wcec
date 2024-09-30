@@ -28,6 +28,8 @@ class Document extends Model
     public function scopeSearch($query, $value)
     {
         $value = trim($value);
+
+        // The submitted search term needs a bit more processing if it contains a space...
         $has_space = str_contains($value, ' ');
 
         if ($has_space) {

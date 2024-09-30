@@ -60,6 +60,7 @@
                                         :$renewal_fee_due
                                         :$cpd_due
                                         :$renewal_window
+                                        :$cpd_template_document
                 />
             @endif
 
