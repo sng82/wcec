@@ -17,6 +17,7 @@ class Order extends Model
         'product_name',
         'price_ex_vat',
         'stripe_session_id',
+        'payment_intent',
         'user_id',
         'updated_at'
     ];
