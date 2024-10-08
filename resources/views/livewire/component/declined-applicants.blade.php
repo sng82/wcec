@@ -79,7 +79,7 @@
                                 {{ $registrant->email }}
                             </td>
                             <td class="px-4 py-2">
-                                {{ \Carbon\Carbon::parse($registrant->declined_at)->toDayDateTimeString() }} by {{ $registrant->declinedBy->first_name . ' ' . $registrant->declinedBy->last_name }}
+                                {{ $registrant->declined_at ? \Carbon\Carbon::parse($registrant->declined_at)->toDayDateTimeString() : 'Unknown' }} {{ $registrant->declinedBy ? 'by ' . $registrant->declinedBy->first_name . ' ' . $registrant->declinedBy->last_name : '' }}
                             </td>
                             <td class="px-4 py-1">
                                 <x-edit-button :href="route('user-edit', $registrant->id)" class="">

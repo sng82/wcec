@@ -12,6 +12,7 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    // base: ''
     server: {
         host: 'localhost'
     }

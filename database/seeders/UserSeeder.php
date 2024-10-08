@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $populate_real_data = false;
+        $populate_real_data = true;
 
         if($populate_real_data) {
 
@@ -31,6 +31,33 @@ class UserSeeder extends Seeder
             $user->assignRole('super admin');
 
             $user = User::create([
+                'reg_no' => null,
+                'first_name' => 'Lynn',
+                'last_name' => 'Webster',
+                'email' => 'lynn@lwc-ltd.co.uk',
+                'password' => Hash::make('TempPassword1^$('),
+            ]);
+            $user->assignRole('admin');
+
+            $user = User::create([
+                'reg_no' => null,
+                'first_name' => 'Lorraine',
+                'last_name' => 'Larman',
+                'email' => 'lsafetysolutions@outlook.com',
+                'password' => Hash::make('TempPassword2*£('),
+            ]);
+            $user->assignRole('admin');
+
+            $user = User::create([
+                'reg_no' => null,
+                'first_name' => 'Mike',
+                'last_name' => 'Jenkins',
+                'email' => 'clerk@wc-ec.com',
+                'password' => Hash::make('TempPassword3)^$'),
+            ]);
+            $user->assignRole('admin');
+
+            $user = User::create([
                 'reg_no'                    => 1,
                 'first_name'                => 'Barrie',
                 'last_name'                 => 'Torbett',
@@ -41,9 +68,9 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2021-09-20',
-                'cpd_last_submitted_at'     => '2023-09-20',
-                'renewal_fee_last_paid_at'  => '2023-09-20',
-                'registration_expires_at'   => '2024-09-20',
+                'cpd_last_submitted_at'     => '2024-09-20',
+                'renewal_fee_last_paid_at'  => '2024-09-20',
+                'registration_expires_at'   => '2025-09-20',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('registrant');
@@ -59,9 +86,9 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2021-09-20',
-                'cpd_last_submitted_at'     => '2023-09-20',
-                'renewal_fee_last_paid_at'  => '2023-09-20',
-                'registration_expires_at'   => '2024-09-20',
+                'cpd_last_submitted_at'     => '2024-09-20',
+                'renewal_fee_last_paid_at'  => '2024-09-20',
+                'registration_expires_at'   => '2025-09-20',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('registrant');
@@ -70,16 +97,16 @@ class UserSeeder extends Seeder
                 'reg_no'                    => 3,
                 'first_name'                => 'Lorraine',
                 'last_name'                 => 'Larman',
-                'email'                     => 'lsafetysolutions@outlook.com',
+                'email'                     => 'lsafetysolutions+registrant@outlook.com',
                 'registration_fee_paid'     => 1,
                 'eoi_status'                => 'accepted',
                 'submission_fee_paid'       => 1,
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2021-09-20',
-                'cpd_last_submitted_at'     => '2023-09-20',
-                'renewal_fee_last_paid_at'  => '2023-09-20',
-                'registration_expires_at'   => '2024-09-20',
+                'cpd_last_submitted_at'     => '2024-09-20',
+                'renewal_fee_last_paid_at'  => '2024-09-20',
+                'registration_expires_at'   => '2025-09-20',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('registrant');
@@ -88,16 +115,16 @@ class UserSeeder extends Seeder
                 'reg_no'                    => 4,
                 'first_name'                => 'Lynn',
                 'last_name'                 => 'Webster',
-                'email'                     => 'lynn@lwc-ltd.co.uk',
+                'email'                     => 'lynn+registrant@lwc-ltd.co.uk',
                 'registration_fee_paid'     => 1,
                 'eoi_status'                => 'accepted',
                 'submission_fee_paid'       => 1,
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2021-09-20',
-                'cpd_last_submitted_at'     => '2023-09-20',
-                'renewal_fee_last_paid_at'  => '2023-09-20',
-                'registration_expires_at'   => '2024-09-20',
+                'cpd_last_submitted_at'     => '2024-09-20',
+                'renewal_fee_last_paid_at'  => '2024-09-20',
+                'registration_expires_at'   => '2025-09-20',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('registrant');
@@ -113,9 +140,9 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2021-09-20',
-                'cpd_last_submitted_at'     => '2023-09-20',
-                'renewal_fee_last_paid_at'  => '2023-09-20',
-                'registration_expires_at'   => '2024-09-20',
+                'cpd_last_submitted_at'     => '2024-09-20',
+                'renewal_fee_last_paid_at'  => '2024-09-20',
+                'registration_expires_at'   => '2025-09-20',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('registrant');
@@ -131,9 +158,9 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2021-09-20',
-                'cpd_last_submitted_at'     => '2023-09-20',
-                'renewal_fee_last_paid_at'  => '2023-09-20',
-                'registration_expires_at'   => '2024-09-20',
+                'cpd_last_submitted_at'     => '2024-09-20',
+                'renewal_fee_last_paid_at'  => '2024-09-20',
+                'registration_expires_at'   => '2025-09-20',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('registrant');
@@ -149,9 +176,9 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2021-09-20',
-                'cpd_last_submitted_at'     => '2023-09-20',
-                'renewal_fee_last_paid_at'  => '2023-09-20',
-                'registration_expires_at'   => '2024-09-20',
+                'cpd_last_submitted_at'     => '2024-09-20',
+                'renewal_fee_last_paid_at'  => '2024-09-20',
+                'registration_expires_at'   => '2025-09-20',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('registrant');
@@ -167,9 +194,9 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2021-09-20',
-                'cpd_last_submitted_at'     => '2023-09-20',
-                'renewal_fee_last_paid_at'  => '2023-09-20',
-                'registration_expires_at'   => '2024-09-20',
+                'cpd_last_submitted_at'     => '2024-09-20',
+                'renewal_fee_last_paid_at'  => '2024-09-20',
+                'registration_expires_at'   => '2025-09-20',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('registrant');
@@ -185,9 +212,9 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2021-09-20',
-                'cpd_last_submitted_at'     => '2023-09-20',
-                'renewal_fee_last_paid_at'  => '2023-09-20',
-                'registration_expires_at'   => '2024-09-20',
+                'cpd_last_submitted_at'     => '2024-09-20',
+                'renewal_fee_last_paid_at'  => '2024-09-20',
+                'registration_expires_at'   => '2025-09-20',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('registrant');
@@ -203,9 +230,9 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2021-09-20',
-                'cpd_last_submitted_at'     => '2023-09-20',
-                'renewal_fee_last_paid_at'  => '2023-09-20',
-                'registration_expires_at'   => '2024-09-20',
+                'cpd_last_submitted_at'     => '2024-09-20',
+                'renewal_fee_last_paid_at'  => '2024-09-20',
+                'registration_expires_at'   => '2025-09-20',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('registrant');
@@ -293,50 +320,32 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2022-05-03',
-                'cpd_last_submitted_at'     => '2023-05-03',
-                'renewal_fee_last_paid_at'  => '2023-05-03',
-                'registration_expires_at'   => '2024-05-03',
+                'cpd_last_submitted_at'     => '2024-05-03',
+                'renewal_fee_last_paid_at'  => '2024-05-03',
+                'registration_expires_at'   => '2025-05-03',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
-            $user->assignRole('lapsed registrant');
+            $user->assignRole('registrant');
 
-            // NOTE: Not added due to incomplete data
-//            $user = User::create([
-//                'reg_no'                    => ,
-//                'first_name'                => 'Paul',
-//                'last_name'                 => 'Pearce',
-//                'email'                     => '',
-//                'registration_fee_paid'     => 1,
-//                'eoi_status'                => 'accepted',
-//                'submission_fee_paid'       => 1,
-//                'submission_status'         => 'accepted',
-//                'registration_pathway'      => 'unknown',
-//                'became_registrant_at'      => '2021-09-20',
-//                'cpd_last_submitted_at'     => '2023-09-20',
-//                'renewal_fee_last_paid_at'  => '2023-09-20',
-//                'registration_expires_at'   => '2024-09-20',
-//                'password'                  => Hash::make(Str::password(12)),
-//            ]);
-//            $user->assignRole('registrant');
+            $user = User::create([
+                'reg_no'                    => 16,
+                'first_name'                => 'Matthew',
+                'last_name'                 => 'Johnson',
+                'email'                     => 'm.johnson@camsupport.co.uk',
+                'registration_fee_paid'     => 1,
+                'eoi_status'                => 'accepted',
+                'submission_fee_paid'       => 1,
+                'submission_status'         => 'accepted',
+                'registration_pathway'      => 'unknown',
+                'became_registrant_at'      => '2024-05-21',
+                'cpd_last_submitted_at'     => '2024-05-06',
+                'renewal_fee_last_paid_at'  => '2024-05-06',
+                'registration_expires_at'   => '2025-05-06',
+                'password'                  => Hash::make(Str::password(12)),
+            ]);
+            $user->assignRole('registrant');
 
-            // NOTE: Not added due to incomplete data
-//            $user = User::create([
-//                'reg_no'                    => 17,
-//                'first_name'                => 'Terry',
-//                'last_name'                 => 'Sullivan',
-//                'email'                     => '',
-//                'registration_fee_paid'     => 1,
-//                'eoi_status'                => 'accepted',
-//                'submission_fee_paid'       => 1,
-//                'submission_status'         => 'accepted',
-//                'registration_pathway'      => 'unknown',
-//                'became_registrant_at'      => '',
-//                'cpd_last_submitted_at'     => '',
-//                'renewal_fee_last_paid_at'  => '',
-//                'registration_expires_at'   => '',
-//                'password'                  => Hash::make(Str::password(12)),
-//            ]);
-//            $user->assignRole('registrant');
+            // 17 deliberately not populated
 
             $user = User::create([
                 'reg_no'                    => 18,
@@ -374,25 +383,23 @@ class UserSeeder extends Seeder
             ]);
             $user->assignRole('registrant');
 
-            // NOTE: Not added due to incomplete data
-//            $user = User::create([
-//                'reg_no'                    => 20,
-//                'first_name'                => 'Paul',
-//                'last_name'                 => 'Castle',
-//                'email'                     => '',
-//                'registration_fee_paid'     => 1,
-//                'eoi_status'                => 'accepted',
-//                'submission_fee_paid'       => 1,
-//                'submission_status'         => 'accepted',
-//                'registration_pathway'      => 'unknown',
-//                'became_registrant_at'      => '',
-//                'cpd_last_submitted_at'     => '',
-//                'renewal_fee_last_paid_at'  => '',
-//                'registration_expires_at'   => '',
-//                'password'                  => Hash::make(Str::password(12)),
-//            ]);
-//            $user->assignRole('registrant');
-
+            $user = User::create([
+                'reg_no'                    => 20,
+                'first_name'                => 'Kevin',
+                'last_name'                 => 'Robson',
+                'email'                     => 'kevin@progresscleaning.co.uk',
+                'registration_fee_paid'     => 1,
+                'eoi_status'                => 'accepted',
+                'submission_fee_paid'       => 1,
+                'submission_status'         => 'accepted',
+                'registration_pathway'      => 'unknown',
+                'became_registrant_at'      => '2024-07-16',
+                'cpd_last_submitted_at'     => '2024-07-16',
+                'renewal_fee_last_paid_at'  => '2024-07-16',
+                'registration_expires_at'   => '2025-07-16',
+                'password'                  => Hash::make(Str::password(12)),
+            ]);
+            $user->assignRole('registrant');
 
             $user = User::create([
                 'reg_no'                    => 21,
@@ -405,31 +412,48 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2022-05-03',
-                'cpd_last_submitted_at'     => '2023-05-03',
-                'renewal_fee_last_paid_at'  => '2023-05-03',
-                'registration_expires_at'   => '2024-05-03',
+                'cpd_last_submitted_at'     => '2024-05-03',
+                'renewal_fee_last_paid_at'  => '2024-05-03',
+                'registration_expires_at'   => '2025-05-03',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
-            $user->assignRole('lapsed registrant');
+            $user->assignRole('registrant');
 
-            // NOTE: Not added due to incomplete data
-//            $user = User::create([
-//                'reg_no'                    => 23,
-//                'first_name'                => 'Nicholas',
-//                'last_name'                 => 'Rastelli',
-//                'email'                     => '',
-//                'registration_fee_paid'     => 1,
-//                'eoi_status'                => 'accepted',
-//                'submission_fee_paid'       => 1,
-//                'submission_status'         => 'accepted',
-//                'registration_pathway'      => 'unknown',
-//                'became_registrant_at'      => '2021-09-20',
-//                'cpd_last_submitted_at'     => '2023-09-20',
-//                'renewal_fee_last_paid_at'  => '2023-09-20',
-//                'registration_expires_at'   => '2024-09-20',
-//                'password'                  => Hash::make(Str::password(12)),
-//            ]);
-//            $user->assignRole('registrant');
+            $user = User::create([
+                'reg_no'                    => 22,
+                'first_name'                => 'Craig',
+                'last_name'                 => 'Robertson',
+                'email'                     => 'craig.robertson@mitie.com',
+                'registration_fee_paid'     => 1,
+                'eoi_status'                => 'accepted',
+                'submission_fee_paid'       => 1,
+                'submission_status'         => 'accepted',
+                'registration_pathway'      => 'unknown',
+                'became_registrant_at'      => '2024-05-21',
+                'cpd_last_submitted_at'     => '2024-05-21',
+                'renewal_fee_last_paid_at'  => '2024-05-21',
+                'registration_expires_at'   => '2025-05-21',
+                'password'                  => Hash::make(Str::password(12)),
+            ]);
+            $user->assignRole('registrant');
+
+            $user = User::create([
+                'reg_no'                    => 23,
+                'first_name'                => 'Ian',
+                'last_name'                 => 'Robson',
+                'email'                     => 'ian@progresscleaning.co.uk',
+                'registration_fee_paid'     => 1,
+                'eoi_status'                => 'accepted',
+                'submission_fee_paid'       => 1,
+                'submission_status'         => 'accepted',
+                'registration_pathway'      => 'unknown',
+                'became_registrant_at'      => '2024-07-16',
+                'cpd_last_submitted_at'     => '2024-07-16',
+                'renewal_fee_last_paid_at'  => '2024-07-16',
+                'registration_expires_at'   => '2025-07-16',
+                'password'                  => Hash::make(Str::password(12)),
+            ]);
+            $user->assignRole('registrant');
 
             $user = User::create([
                 'reg_no'                    => 24,
@@ -442,12 +466,12 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2022-05-03',
-                'cpd_last_submitted_at'     => '2023-05-03',
-                'renewal_fee_last_paid_at'  => '2023-05-03',
-                'registration_expires_at'   => '2024-05-03',
+                'cpd_last_submitted_at'     => '2024-05-03',
+                'renewal_fee_last_paid_at'  => '2024-05-03',
+                'registration_expires_at'   => '2025-05-03',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
-            $user->assignRole('lapsed registrant');
+            $user->assignRole('registrant');
 
             $user = User::create([
                 'reg_no'                    => 25,
@@ -478,49 +502,14 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2022-05-03',
-                'cpd_last_submitted_at'     => '2023-05-03',
-                'renewal_fee_last_paid_at'  => '2023-05-03',
-                'registration_expires_at'   => '2024-05-03',
-                'password'                  => Hash::make(Str::password(12)),
-            ]);
-            $user->assignRole('lapsed registrant');
-
-            $user = User::create([
-                'reg_no'                    => 27,
-                'first_name'                => 'Gary',
-                'last_name'                 => 'Morgan',
-                'email'                     => 'gary@acceleratefacilities.com',
-                'registration_fee_paid'     => 1,
-                'eoi_status'                => 'accepted',
-                'submission_fee_paid'       => 1,
-                'submission_status'         => 'accepted',
-                'registration_pathway'      => 'unknown',
-                'became_registrant_at'      => '2024-05-06',
-                'cpd_last_submitted_at'     => '2024-05-06',
-                'renewal_fee_last_paid_at'  => '2024-05-06',
-                'registration_expires_at'   => '2025-05-06',
+                'cpd_last_submitted_at'     => '2024-05-03',
+                'renewal_fee_last_paid_at'  => '2024-05-03',
+                'registration_expires_at'   => '2025-05-03',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('registrant');
 
-            // NOTE: Not added due to incomplete data
-//            $user = User::create([
-//                'reg_no'                    => 28,
-//                'first_name'                => 'John',
-//                'last_name'                 => 'Norris',
-//                'email'                     => '',
-//                'registration_fee_paid'     => 1,
-//                'eoi_status'                => 'accepted',
-//                'submission_fee_paid'       => 1,
-//                'submission_status'         => 'accepted',
-//                'registration_pathway'      => 'unknown',
-//                'became_registrant_at'      => '',
-//                'cpd_last_submitted_at'     => '',
-//                'renewal_fee_last_paid_at'  => '',
-//                'registration_expires_at'   => '',
-//                'password'                  => Hash::make(Str::password(12)),
-//            ]);
-//            $user->assignRole('registrant');
+            // 27 & 28 deliberately not populated
 
             $user = User::create([
                 'reg_no'                    => 29,
@@ -533,12 +522,12 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2022-07-05',
-                'cpd_last_submitted_at'     => '2023-07-05',
-                'renewal_fee_last_paid_at'  => '2023-07-05',
-                'registration_expires_at'   => '2024-07-05',
+                'cpd_last_submitted_at'     => '2024-07-05',
+                'renewal_fee_last_paid_at'  => '2024-07-05',
+                'registration_expires_at'   => '2025-07-05',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
-            $user->assignRole('lapsed registrant');
+            $user->assignRole('registrant');
 
             $user = User::create([
                 'reg_no'                    => 30,
@@ -558,43 +547,23 @@ class UserSeeder extends Seeder
             ]);
             $user->assignRole('registrant');
 
-            // NOTE: Not added due to incomplete data
-//            $user = User::create([
-//                'reg_no'                    => ,
-//                'first_name'                => 'Lee',
-//                'last_name'                 => 'Armitage',
-//                'email'                     => '',
-//                'registration_fee_paid'     => 1,
-//                'eoi_status'                => 'accepted',
-//                'submission_fee_paid'       => 1,
-//                'submission_status'         => 'accepted',
-//                'registration_pathway'      => 'unknown',
-//                'became_registrant_at'      => '',
-//                'cpd_last_submitted_at'     => '',
-//                'renewal_fee_last_paid_at'  => '',
-//                'registration_expires_at'   => '',
-//                'password'                  => Hash::make(Str::password(12)),
-//            ]);
-//            $user->assignRole('registrant');
-
-            // NOTE: Not added due to incomplete data
-//            $user = User::create([
-//                'reg_no'                    => 31,
-//                'first_name'                => '',
-//                'last_name'                 => '',
-//                'email'                     => '',
-//                'registration_fee_paid'     => 1,
-//                'eoi_status'                => 'accepted',
-//                'submission_fee_paid'       => 1,
-//                'submission_status'         => 'accepted',
-//                'registration_pathway'      => 'unknown',
-//                'became_registrant_at'      => '',
-//                'cpd_last_submitted_at'     => '',
-//                'renewal_fee_last_paid_at'  => '',
-//                'registration_expires_at'   => '',
-//                'password'                  => Hash::make(Str::password(12)),
-//            ]);
-//            $user->assignRole('registrant');
+            $user = User::create([
+                'reg_no'                    => 31,
+                'first_name'                => 'James',
+                'last_name'                 => 'Gates',
+                'email'                     => 'james.gates@nexgengroup.uk',
+                'registration_fee_paid'     => 1,
+                'eoi_status'                => 'accepted',
+                'submission_fee_paid'       => 1,
+                'submission_status'         => 'accepted',
+                'registration_pathway'      => 'unknown',
+                'became_registrant_at'      => '2024-05-06',
+                'cpd_last_submitted_at'     => '2024-05-06',
+                'renewal_fee_last_paid_at'  => '2024-05-06',
+                'registration_expires_at'   => '2025-05-06',
+                'password'                  => Hash::make(Str::password(12)),
+            ]);
+            $user->assignRole('registrant');
 
             $user = User::create([
                 'reg_no'                    => 32,
@@ -625,12 +594,12 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2023-05-23',
-                'cpd_last_submitted_at'     => '2023-05-23',
-                'renewal_fee_last_paid_at'  => '2023-05-23',
-                'registration_expires_at'   => '2024-05-23',
+                'cpd_last_submitted_at'     => '2024-05-23',
+                'renewal_fee_last_paid_at'  => '2024-05-23',
+                'registration_expires_at'   => '2025-05-23',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
-            $user->assignRole('lapsed registrant');
+            $user->assignRole('registrant');
 
             $user = User::create([
                 'reg_no'                    => 34,
@@ -697,12 +666,12 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2023-05-23',
-                'cpd_last_submitted_at'     => '2023-05-23',
-                'renewal_fee_last_paid_at'  => '2023-05-23',
-                'registration_expires_at'   => '2024-05-23',
+                'cpd_last_submitted_at'     => '2024-05-23',
+                'renewal_fee_last_paid_at'  => '2024-05-23',
+                'registration_expires_at'   => '2025-05-23',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
-            $user->assignRole('lapsed registrant');
+            $user->assignRole('registrant');
 
             $user = User::create([
                 'reg_no'                    => 38,
@@ -733,12 +702,12 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2023-07-11',
-                'cpd_last_submitted_at'     => '2023-07-11',
-                'renewal_fee_last_paid_at'  => '2023-07-11',
-                'registration_expires_at'   => '2024-07-11',
+                'cpd_last_submitted_at'     => '2024-07-11',
+                'renewal_fee_last_paid_at'  => '2024-07-11',
+                'registration_expires_at'   => '2025-07-11',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
-            $user->assignRole('lapsed registrant');
+            $user->assignRole('registrant');
 
             $user = User::create([
                 'reg_no'                    => 40,
@@ -751,12 +720,12 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2023-05-23',
-                'cpd_last_submitted_at'     => '2023-05-23',
-                'renewal_fee_last_paid_at'  => '2023-05-23',
-                'registration_expires_at'   => '2024-05-23',
+                'cpd_last_submitted_at'     => '204-05-23',
+                'renewal_fee_last_paid_at'  => '2024-05-23',
+                'registration_expires_at'   => '2025-05-23',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
-            $user->assignRole('lapsed registrant');
+            $user->assignRole('registrant');
 
             $user = User::create([
                 'reg_no'                    => 41,
@@ -830,63 +799,8 @@ class UserSeeder extends Seeder
             ]);
             $user->assignRole('registrant');
 
-            // NOTE: Not added due to incomplete data
-//            $user = User::create([
-//                'reg_no'                    => 45,
-//                'first_name'                => 'Tom',
-//                'last_name'                 => 'Richards',
-//                'email'                     => 'tom.richards@proceed.solutions',
-//                'registration_fee_paid'     => 1,
-//                'eoi_status'                => 'accepted',
-//                'submission_fee_paid'       => 1,
-//                'submission_status'         => 'accepted',
-//                'registration_pathway'      => 'unknown',
-//                'became_registrant_at'      => '',
-//                'cpd_last_submitted_at'     => '',
-//                'renewal_fee_last_paid_at'  => '',
-//                'registration_expires_at'   => '',
-//                'password'                  => Hash::make(Str::password(12)),
-//            ]);
-//            $user->assignRole('registrant');
-
             $user = User::create([
-                'reg_no'                    => 46,
-                'first_name'                => 'Matthew',
-                'last_name'                 => 'Johnson',
-                'email'                     => 'm.johnson@camsupport.co.uk',
-                'registration_fee_paid'     => 1,
-                'eoi_status'                => 'accepted',
-                'submission_fee_paid'       => 1,
-                'submission_status'         => 'accepted',
-                'registration_pathway'      => 'unknown',
-                'became_registrant_at'      => '2024-05-06',
-                'cpd_last_submitted_at'     => '2024-05-06',
-                'renewal_fee_last_paid_at'  => '2024-05-06',
-                'registration_expires_at'   => '2025-05-06',
-                'password'                  => Hash::make(Str::password(12)),
-            ]);
-            $user->assignRole('registrant');
-
-            $user = User::create([
-                'reg_no'                    => 47,
-                'first_name'                => 'James',
-                'last_name'                 => 'Gates',
-                'email'                     => 'james.gates@nexgengroup.uk',
-                'registration_fee_paid'     => 1,
-                'eoi_status'                => 'accepted',
-                'submission_fee_paid'       => 1,
-                'submission_status'         => 'accepted',
-                'registration_pathway'      => 'unknown',
-                'became_registrant_at'      => '2024-05-06',
-                'cpd_last_submitted_at'     => '2024-05-06',
-                'renewal_fee_last_paid_at'  => '2024-05-06',
-                'registration_expires_at'   => '2025-05-06',
-                'password'                  => Hash::make(Str::password(12)),
-            ]);
-            $user->assignRole('registrant');
-
-            $user = User::create([
-                'reg_no'                    => 48,
+                'reg_no'                    => 45,
                 'first_name'                => 'Gareth',
                 'last_name'                 => 'Leverton',
                 'email'                     => 'garethleverton@birkingroup.co.uk',
