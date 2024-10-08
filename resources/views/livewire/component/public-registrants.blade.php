@@ -52,7 +52,7 @@
                     <span class="">Registration No: </span>{{ $registrant->reg_no }}
                 </p>
                 <p class="text-slate-200 mb-0">
-                    <span>Admitted: </span>{{ \Carbon\Carbon::parse($registrant->became_registrant_at)->format('d/m/y') }}
+                    <span>Admitted: </span>{{ \Carbon\Carbon::parse($registrant->became_registrant_at)->format('d/m/Y') }}
                 </p>
             </div>
         @empty
