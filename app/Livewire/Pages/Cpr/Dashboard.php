@@ -243,7 +243,7 @@ class Dashboard extends Component
         } catch (\Exception $e) {
             $err_message = 'Unable to make payment. ';
 
-            if (config('app.env') !== 'Production') {
+            if (config('app.env') !== 'production') {
                 $err_message = $e->getMessage();
             } else {
                 Log::error($e->getMessage());

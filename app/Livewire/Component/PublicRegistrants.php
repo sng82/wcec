@@ -16,7 +16,7 @@ class PublicRegistrants extends Component
     public $sort_column_name = 'became_registrant_at';
     public $sort_column_direction = 'asc';
     public $search = '';
-    public $per_page = 16;
+    public $per_page = 12;
 
     public function sortBy($column_name): void
     {

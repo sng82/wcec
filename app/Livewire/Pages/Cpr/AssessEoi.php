@@ -156,7 +156,7 @@ class AssessEoi extends Component
             Log::error('Admin EoI Files download failed | ' . $e->getMessage());
 
             $err_message = 'Unable to download files';
-            if (config('app.env') !== 'Production') {
+            if (config('app.env') !== 'production') {
                 $err_message = $e->getMessage();
             } else {
                 Log::error($e->getMessage());

@@ -70,8 +70,11 @@ Schedule::call(function () {
     foreach ($expired_users as $user) {
         $user->removeRole('registrant');
         $user->assignRole('lapsed registrant');
-        Mail::to($user->email)
-            ->send(new RegistrationExpiredNotification($user));
+
+        if (config('app.env') === 'production') {
+            Mail::to($user->email)
+                ->send(new RegistrationExpiredNotification($user));
+        }
     }
 })->dailyAt('00:20'); // staggered to minimise load on server.
 
@@ -83,7 +86,7 @@ Schedule::call(function () {
  * Emails are not sent on this occasion.
  */
 Schedule::call(function () {
-    $year_ago = Carbon::now()->subYear();
+    $year_ago      = Carbon::now()->subYear();
     $expired_users = User::role('registrant')
                          ->where('registration_expires_at', '<', $year_ago)
                          ->get();
@@ -94,18 +97,20 @@ Schedule::call(function () {
     }
 })->dailyAt('00:30'); // staggered to minimise load on server.
 
+
 /*
  * Send reminder emails to users whose registrations are close to expiring
  */
 Schedule::call(function () {
-    $four_weeks_from_now = Carbon::now()->addDays(28)->format('Y-m-d');
-    $expiring_users      = User::role('registrant')
-                               ->where('registration_expires_at', $four_weeks_from_now)
-                               ->get();
-
-    foreach ($expiring_users as $user) {
-        Mail::to($user->email)
-            ->send(new RegistrationExpiringNotification($user));
+    if (config('app.env') === 'production') {
+        $four_weeks_from_now = Carbon::now()->addDays(28)->format('Y-m-d');
+        $expiring_users      = User::role('registrant')
+                                   ->where('registration_expires_at', $four_weeks_from_now)
+                                   ->get();
+        foreach ($expiring_users as $user) {
+            Mail::to($user->email)
+                ->send(new RegistrationExpiringNotification($user));
+        }
     }
 })->dailyAt('00:40'); // staggered to minimise load on server.
 

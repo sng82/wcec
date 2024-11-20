@@ -36,13 +36,11 @@ class StripeController extends Controller
             Log::error('Stripe Invalid Payload: ' . $e->getMessage());
             http_response_code(400);
             exit();
-            // return response('', 400);
         } catch (SignatureVerificationException $e) {
             // Invalid signature
             Log::error('Stripe Invalid signature: ' . $e->getMessage());
             http_response_code(400);
             exit();
-            // return response('', 400);
         }
 
         // Useful for debugging:
@@ -106,6 +104,5 @@ class StripeController extends Controller
         }
 
         http_response_code(200);
-//        return response('', 200);
     }
 }

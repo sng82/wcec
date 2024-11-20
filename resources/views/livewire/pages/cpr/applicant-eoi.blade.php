@@ -686,7 +686,7 @@
                         </span>
 
                     </div>
-                    @if (config('app.env') !== 'Production')
+                    @if (config('app.env') !== 'production')
                         @dump($errors)
                     @endif
                 @endif
