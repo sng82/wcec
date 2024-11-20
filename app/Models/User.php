@@ -82,6 +82,7 @@ class User extends Authenticatable
         'submission_interview_at' => 'datetime',
         'became_registrant_at' => 'datetime',
         'registration_expires_at' => 'datetime',
+        'cpd_last_submitted_at' => 'datetime',
         'declined_at' => 'datetime',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
