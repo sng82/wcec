@@ -7,6 +7,7 @@ use Livewire\Volt\Component;
 new #[Layout('layouts.guest')] class extends Component
 {
     public string $email = '';
+    public string $feedback_message = '';
 
 
     public function mount()
@@ -33,15 +34,16 @@ new #[Layout('layouts.guest')] class extends Component
             $this->only('email')
         );
 
-        if ($status != Password::RESET_LINK_SENT) {
-            $this->addError('email', __($status));
-
-            return;
-        }
+//        if ($status != Password::RESET_LINK_SENT) {
+//            $this->addError('email', __($status));
+//
+//            return;
+//        }
 
         $this->reset('email');
 
-        session()->flash('status', __($status));
+//        session()->flash('status', __($status));
+        $this->feedback_message = "We've checked for an account using this email address. If one was found, an email containing further instructions has been sent to it.";
     }
 }; ?>
 
@@ -50,15 +52,18 @@ new #[Layout('layouts.guest')] class extends Component
     <div class="mb-4 text-sm text-gray-600">
         <ul class="mb-3 ml-6 list-disc marker:text-red-700 space-y-2">
             <li class="text-sky-600">
-                First login since the new Chartered Practitioners portal was launched?
+                Forgot your password?
             </li>
             <li class="text-sky-600">
-                Forgot your password?
+                Haven't logged in since the new Chartered Practitioners portal was launched?
+            </li>
+            <li class="text-sky-600">
+                An account was created for you and you've received an email asking you to set a password?
             </li>
         </ul>
         <p>
-            No problem. Just let us know the email address you're registered with and we will email
-            you a password reset link that will allow you to choose a new one.
+            No problem. If any of the above are true, just let us know the email address you're registered with and we will email
+            you a link to set a new password.
         </p>
     </div>
 
@@ -71,15 +76,24 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+
+            {!! $this->feedback_message !== '' ? "<p class='mt-3 text-sky-600 text-sm'>" . $this->feedback_message . '</p>' : '' !!}
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
-                {{ __('Log in') }}
-            </a>
+
             <x-primary-button  class="ms-3">
                 {{ __('Email Password Reset Link') }}
             </x-primary-button>
+        </div>
+        <hr class="mt-4">
+        <div class="flex items-center justify-between mt-4">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500" href="{{ route('login') }}" wire:navigate>
+                {{ __('Log in') }}
+            </a>
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500" href="{{ route('register') }}" wire:navigate>
+                {{ __('Register') }}
+            </a>
         </div>
     </form>
 </div>

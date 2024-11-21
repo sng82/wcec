@@ -1,22 +1,41 @@
 <main>
     <div class="w-full py-12 lg:py-20" >
         <div class="container mx-auto px-5">
-            <div class="flex flex-col gap-8 xl:flex-row 2xl:gap-16 mb-12">
-                <div class="bg-white text-sky-950">
-                    <h1 class="mb-2 lg:mb-4 text-3xl font-brand md:text-4xl lg:text-5xl text-red-700">
-                        Chartered Practitioners
-                    </h1>
-                    <hr class="mb-2 lg:mb-4">
-                    <p>
-                        The Worshipful Company of Environmental Cleaners (WCEC) have developed a register for Environmental Cleaning Professionals as a means of recognising and maintaining high standards and ongoing proficiency for individuals.
-                    </p>
-                    <h2 class="mt-12 mb-2 text-2xl xl:text-3xl ">Applicants</h2>
-                    <hr class="mb-2">
+            <div class="flex flex-col">
+                <h1 class="mb-2 lg:mb-4 text-3xl font-brand md:text-4xl lg:text-5xl text-red-700">
+                    Chartered Practitioners
+                </h1>
+                <hr class="mb-2 lg:mb-4">
+                <p class="mb-12">
+                    The Worshipful Company of Environmental Cleaners (WCEC) have developed a register for Environmental Cleaning Professionals as a means of recognising and maintaining high standards and ongoing proficiency for individuals.
+                </p>
+                @if(config('cpp.active'))
+                    <livewire:component.public-registrants></livewire:component.public-registrants>
+                @endif
+            </div>
+
+        </div>
+    </div>
+    <div class="w-full py-12 lg:py-20 bg-slate-100" >
+        <div class="container mx-auto px-5">
+
+            <div class="flex flex-col gap-8 xl:flex-row xl:items-center 2xl:gap-16 mb-12">
+                <div class="text-sky-950">
+                    <h2 class="mb-2 lg:mb-4 text-2xl font-brand md:text-3xl lg:text-4xl text-red-700">
+                        Joining the Register
+                    </h2>
+                    <hr class="mb-2 lg:mb-4 border-slate-300">
+                    <h3 class="mt-8 mb-4 text-2xl xl:text-3xl ">
+                        Applicants
+                    </h3>
+{{--                    <hr class="mb-2">--}}
                     <p>
                         Those applying must be of integrity and have a good level of general expertise, operating at a strategic or senior level, as defined in the application document. Admittance to the Register demonstrates to clients, employers, peers and the public an ability to perform at a high standard, and a commitment to continuing professional development.
                     </p>
-                    <h2 class="mt-12 mb-2 text-2xl xl:text-3xl ">Requirements</h2>
-                    <hr class="mb-2">
+                    <h3 class="mt-8 mb-4 text-2xl xl:text-3xl ">
+                        Requirements
+                    </h3>
+{{--                    <hr class="mb-2">--}}
                     <p>
                         Registrants will be required to demonstrate good inclusive knowledge and understanding, also proving they have reached a minimum competence level in six defined areas of expertise, which when collated will also prove they have achieved at least 80% of the required overall competency levels.
                     </p>
@@ -31,40 +50,34 @@
                 <!-- Sidebar -->
                 <div class="flex flex-col gap-y-8 xl:max-w-md xl:min-w-96 ">
 
-                    <div class="rounded-2xl bg-red-700 px-9 py-8 text-white">
-                        <h2 class="mb-3 text-2xl">Chartered Practitioner Login</h2>
-                        <hr class="mb-3">
-                        <p class="text-red-100">
-                            Existing members of the Chartered Practitioners Register, and those who have already submitted an Expression of Interest can log in here.
-                        </p>
-                        <a href="/cpr-coming-soon" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-red-700">
-                            Login
-                        </a>
-{{--                        <a href="/login" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-red-700">--}}
-{{--                            Login--}}
-{{--                        </a>--}}
-                    </div>
-
-                    <div class="rounded-2xl bg-sky-800 px-9 py-8 text-white">
+                    <div class="rounded-2xl bg-sky-800 px-9 py-8 text-white shadow-md shadow-slate-300">
                         <h2 class="mb-3 text-2xl">Expression of Interest</h2>
                         <hr class="mb-3">
                         <p class="text-sky-100">
                             Click here to get started joining the Chartered Practitioners Register.
                         </p>
 
-                        <a href="/cpr-coming-soon" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-900">
+                        <a href="/register" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-900">
                             Apply
                         </a>
-{{--                        <a href="#" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-sky-900">--}}
-{{--                            Apply--}}
-{{--                        </a>--}}
+                    </div>
+
+                    <div class="rounded-2xl bg-red-700 px-9 py-8 text-white shadow-md shadow-slate-300">
+                        <h2 class="mb-3 text-2xl">Chartered Practitioner Login</h2>
+                        <hr class="mb-3">
+                        <p class="text-red-100">
+                            Existing registrants of the Chartered Practitioners Register, and those who have already started the application process can log in here.
+                        </p>
+                        <a href="/login" class="mt-4 inline-block rounded-full border-2 border-white px-8 py-2 font-bold uppercase transition-all duration-300 hover:bg-white hover:text-red-700">
+                            Login
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="w-full py-12 lg:py-20 bg-slate-100">
+    <div class="w-full py-12 lg:py-20 bg-slate-200">
         <div class="text-sky-950 px-5">
             <div class="container mx-auto px-5">
                 <div class="flex w-full 2xl:w-2/3 justify-center items-center mx-auto h-auto mb-8">
@@ -78,7 +91,7 @@
                             </template>
                         </ul>
 
-                        <div class="w-full bg-white  mx-auto border rounded-lg">
+                        <div class="w-full bg-white mx-auto rounded-lg shadow-md shadow-slate-400">
                             <div x-show="activeTab===0">
                                 <div class="px-16 py-8">
                                     <h2 class="mt-8 mb-2 text-2xl xl:text-3xl ">Guide for Expression of Interest</h2>
@@ -134,7 +147,7 @@
                                             This application must be made on the official Expression of Interest form, along with copies of qualification certificates, supporting evidence as required at this stage, current CV and photo ID, which should be submitted to the Clerk for formal approval by the Select Committee (downloaded via the web portal)
                                         </li>
                                         <li>
-                                            This should be accompanied by a registration fee of £50 +VAT (non-refundable). This is paid through the web portal.
+                                            This should be accompanied by a registration fee of £{{ $current_registration_fee->amount }} +VAT (non-refundable). This is paid through the web portal.
                                         </li>
                                         <li>
                                             Once this is in place the process of gathering evidence for the application begins.
@@ -142,7 +155,7 @@
                                     </ul>
 
                                     <p>
-                                        On approval an application fee of £500 + VAT will be required. This must be paid prior to acceptance on to the register.
+                                        On approval an application fee of £{{ $current_submission_fee->amount }} + VAT will be required. This must be paid prior to acceptance on to the register.
                                     </p>
                                     <p>
                                         There are two pathways to registration – the Standard path and the Individual path. Download full documentation below.
@@ -153,7 +166,7 @@
                                 <div class="rounded-b-lg bg-sky-800 px-16 pt-8 pb-12 text-white">
                                     <h2 class="mb-3 text-2xl xl:text-3xl">Materials</h2>
                                     <hr class="mb-3">
-                                    <a href="/documents/WCEC-CP-03-05-EXPRESSION-OF-INTEREST-FORM_v5_FEB-2021.docx"
+                                    <a href="/storage/documents/{{ $eoi_form_document->file_name }}"
                                        class="flex text-sky-100 hover:text-white align-center mt-3"
                                        download>
                                         <span class="inline-block w-7">
@@ -162,10 +175,10 @@
                                             </svg>
                                         </span>
                                         <span class="inline-block">
-                                            EXPRESSION OF INTEREST FORM (v5 FEB 2021)
+                                            {{ $eoi_form_document->doc_type }} (v{{ $eoi_form_document->version }} {{ $eoi_form_document->release_month }} {{ $eoi_form_document->release_year }})
                                         </span>
                                     </a>
-                                    <a href="/documents/WCEC-CP-02-04-GUIDE-FOR-EXPRESSION-OF-INTEREST_v4_FEB-2021.docx"
+                                    <a href="/storage/documents/{{ $eoi_guide_document->file_name }}"
                                        class="flex text-sky-100 hover:text-white align-center mt-3"
                                        download>
                                         <span class="inline-block w-7">
@@ -174,7 +187,7 @@
                                             </svg>
                                         </span>
                                         <span class="inline-block">
-                                            GUIDE FOR EXPRESSION OF INTEREST (v4 FEB 2021)
+                                            {{ $eoi_guide_document->doc_type }} (v{{ $eoi_guide_document->version }} {{ $eoi_guide_document->release_month }} {{ $eoi_guide_document->release_year }})
                                         </span>
                                     </a>
                                 </div>
@@ -257,7 +270,7 @@
                                 <div class="rounded-b-lg bg-sky-800 px-16 pt-8 pb-12 text-white">
                                     <h2 class="mb-2 text-2xl xl:text-3xl">Materials</h2>
                                     <hr class="mb-2">
-                                    <a href="/documents/WCEC-CP-05-04-ASSESSMENT-CRITERIA_v4_MAR-2021.pdf"
+                                    <a href="/documents/{{ $assessment_criteria_document->file_name }}"
                                        class="flex text-sky-100 hover:text-white align-center mt-3"
                                        download>
                                         <span class="inline-block w-7">
@@ -266,11 +279,11 @@
                                             </svg>
                                         </span>
                                         <span class="inline-block">
-                                            ASSESSMENT CRITERIA (v4 MAR 2021)
+                                            {{ $assessment_criteria_document->doc_type }} (v{{ $assessment_criteria_document->version }} {{ $assessment_criteria_document->release_month }} {{ $assessment_criteria_document->release_year }})
                                         </span>
                                     </a>
 
-                                    <a href="/documents/APPENDIX-1-to-WCEC-CP-05-04_v2_MAR-2021.pdf"
+                                    <a href="/documents/{{ $appendix_document->file_name }}"
                                        class="flex text-sky-100 hover:text-white align-center mt-3"
                                        download>
                                         <span class="inline-block w-7">
@@ -279,11 +292,11 @@
                                             </svg>
                                         </span>
                                         <span class="inline-block">
-                                            APPENDIX TO ASSESSMENT CRITERIA (v2 MAR 2021)
+                                            {{ $appendix_document->doc_type }} (v{{ $appendix_document->version }} {{ $appendix_document->release_month }} {{ $appendix_document->release_year }})
                                         </span>
                                     </a>
 
-                                    <a href="/documents/WCEC.CP-10-03-DEFINITIONS-_v3_MAR-2021.pdf"
+                                    <a href="/documents/{{ $definitions_document->file_name }}"
                                        class="flex text-sky-100 hover:text-white align-center mt-3"
                                        download>
                                         <span class="inline-block w-7">
@@ -292,11 +305,11 @@
                                             </svg>
                                         </span>
                                         <span class="inline-block">
-                                            DEFINITIONS (v3 MAR 2021)
+                                            {{ $definitions_document->doc_type }} (v{{ $definitions_document->version }} {{ $definitions_document->release_month }} {{ $definitions_document->release_year }})
                                         </span>
                                     </a>
 
-                                    <a href="/documents/WCEC-CP-08-04-APPEALS-PROCEDURES_v4_MAR-2021.pdf"
+                                    <a href="/documents/{{ $appeals_document->file_name }}"
                                        class="flex text-sky-100 hover:text-white align-center mt-3"
                                        download>
                                         <span class="inline-block w-7">
@@ -305,7 +318,7 @@
                                             </svg>
                                         </span>
                                         <span class="inline-block">
-                                            APPEALS PROCEDURES (v4 MAR 2021)
+                                            {{ $appeals_document->doc_type }} (v{{ $appeals_document->version }} {{ $appeals_document->release_month }} {{ $appeals_document->release_year }})
                                         </span>
                                     </a>
                                 </div>
@@ -348,6 +361,6 @@
                     "Award",
                 ]
             };
-        };
+        }
     </script>
 </main>

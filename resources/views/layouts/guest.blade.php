@@ -37,7 +37,7 @@
             <livewire:layout.header />
             <livewire:layout.navigation />
 
-            <div class="flex flex-wrap flex-col content-center w-full bg-slate-100 sm:py-44">
+            <div class="flex flex-wrap flex-col content-center w-full bg-slate-100 sm:py-12">
                 <div class="w-full sm:max-w-md sm:my-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
                     {{ $slot }}
                 </div>

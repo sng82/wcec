@@ -4,11 +4,18 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>{{ isset($title) ? 'WCEC : ' . $title : 'WCEC' }}</title>
+        <title>{{
+            isset($title)
+                ? 'WCEC | ' . $title
+                : 'WCEC | Chartered Practitioners Portal'
+        }}</title>
         @isset($description)
             <meta name="description" content="{{ $description}}">
         @endisset
+{{--        @vite(['resources/scss/app.scss', 'resources/js/app.js'])--}}
         @vite(['resources/scss/app.scss', 'resources/scss/cpr.scss', 'resources/js/app.js'])
+
+
 
         <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
@@ -20,8 +27,11 @@
         <meta name="msapplication-config" content="/icons/browserconfig.xml">
         <meta name="theme-color" content="#ffffff">
     </head>
-    <body class="cpp flex flex-col min-h-screen bg-slate-200">
-        <livewire:layout.cpr-navigation />
+    <body class="cpp flex flex-col h-screen bg-slate-200 overflow-hidden">
         {{ $slot }}
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <x-livewire-alert::scripts />
+
     </body>
 </html>

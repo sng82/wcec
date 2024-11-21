@@ -1,0 +1,50 @@
+{
+    "cinzel": {
+        "normal": "C:\\laragon\\www\\wcec\\storage\/cinzel_normal_4d7c8ca658ccfaba851a02c4acbfe70c",
+        "500": "C:\\laragon\\www\\wcec\\storage\/cinzel_500_c59e84385235ba6b48ea08356576f3a4",
+        "600": "C:\\laragon\\www\\wcec\\storage\/cinzel_600_7fb5865db1bffe415e26e50452b33183",
+        "bold": "C:\\laragon\\www\\wcec\\storage\/cinzel_bold_693336e029ba4e90cc71f59dfc36125b",
+        "800": "C:\\laragon\\www\\wcec\\storage\/cinzel_800_cf5718df4f2f14dfe18256bb3f0a4919",
+        "900": "cinzel_900_0992fd87bfb30605ccdf831fb03673f9"
+    },
+    "noto serif": {
+        "100_italic": "C:\\laragon\\www\\wcec\\storage\/noto_serif_100_italic_426d4c837df2baef7097969df8a30995",
+        "200_italic": "C:\\laragon\\www\\wcec\\storage\/noto_serif_200_italic_9b83e9889b0f57af219120ee184ef081",
+        "300_italic": "C:\\laragon\\www\\wcec\\storage\/noto_serif_300_italic_503b336aa7b7b5cbf64e8e19c22e60ea",
+        "italic": "C:\\laragon\\www\\wcec\\storage\/noto_serif_italic_f4bb8aafc371d53b04ea7d6545f70ab0",
+        "500_italic": "C:\\laragon\\www\\wcec\\storage\/noto_serif_500_italic_ad077fbf0ccfbd6bd20df299bb6cb3d4",
+        "600_italic": "C:\\laragon\\www\\wcec\\storage\/noto_serif_600_italic_9f96a6bcfba66d9c53b0eb1668aef652",
+        "bold_italic": "C:\\laragon\\www\\wcec\\storage\/noto_serif_bold_italic_ca355a3ddf2ccc3ecac528053aa8c4e8",
+        "800_italic": "C:\\laragon\\www\\wcec\\storage\/noto_serif_800_italic_88a5133a29603ffec0132674802c76ab",
+        "900_italic": "C:\\laragon\\www\\wcec\\storage\/noto_serif_900_italic_a2fc4eaa08cca72c46a12a72fcbb4c59",
+        "100": "C:\\laragon\\www\\wcec\\storage\/noto_serif_100_947d6022b354b13534e8d47952950058",
+        "200": "C:\\laragon\\www\\wcec\\storage\/noto_serif_200_b3bdeb8ec44819ad80186f1b671126a2",
+        "300": "C:\\laragon\\www\\wcec\\storage\/noto_serif_300_c4539a1be3045c626762546f40b3e688",
+        "normal": "C:\\laragon\\www\\wcec\\storage\/noto_serif_normal_4d248f52c7445952f4e50930e17af59a",
+        "500": "C:\\laragon\\www\\wcec\\storage\/noto_serif_500_2cb7cfcc7b0d3e2f7557d67ee237cd2c",
+        "600": "C:\\laragon\\www\\wcec\\storage\/noto_serif_600_bce5729c75a332679d6863c5332718ab",
+        "bold": "C:\\laragon\\www\\wcec\\storage\/noto_serif_bold_af4ac55d1ee0e21b861cd0c772410d1d",
+        "800": "C:\\laragon\\www\\wcec\\storage\/noto_serif_800_9ca14b391e1d2e7f85385dbc94e4ddfa",
+        "900": "noto_serif_900_29fa89f55165036fbfe6c8c2f240e9ee"
+    },
+    "poppins": {
+        "100_italic": "C:\\laragon\\www\\wcec\\storage\/poppins_100_italic_fd3879eb3805cf18affce1af234451a5",
+        "200_italic": "C:\\laragon\\www\\wcec\\storage\/poppins_200_italic_157a901b5e1f48c705e9e1d44ffb8969",
+        "300_italic": "C:\\laragon\\www\\wcec\\storage\/poppins_300_italic_3a0bbb61e7beb8a59197c3a1950aed2e",
+        "italic": "C:\\laragon\\www\\wcec\\storage\/poppins_italic_ae4b57e5d05718f255b8db9edf8ef938",
+        "500_italic": "C:\\laragon\\www\\wcec\\storage\/poppins_500_italic_56e96fa83379355962a1c42156b635de",
+        "600_italic": "C:\\laragon\\www\\wcec\\storage\/poppins_600_italic_804d7037cf7d484019577ca58d1828b2",
+        "bold_italic": "C:\\laragon\\www\\wcec\\storage\/poppins_bold_italic_37defacc6033800260111fe1d00a0f47",
+        "800_italic": "C:\\laragon\\www\\wcec\\storage\/poppins_800_italic_09d47fc1ed469c1f6573cd7a49bceed6",
+        "900_italic": "C:\\laragon\\www\\wcec\\storage\/poppins_900_italic_e9c764def7340e143eabc73a2914cb7d",
+        "100": "C:\\laragon\\www\\wcec\\storage\/poppins_100_fe515c3509ac19a01331c85f34f23cac",
+        "200": "C:\\laragon\\www\\wcec\\storage\/poppins_200_e8c3951c97c4286db63d056338166bbb",
+        "300": "C:\\laragon\\www\\wcec\\storage\/poppins_300_87f0a8a73c876e947643eb7d19bec0b7",
+        "normal": "C:\\laragon\\www\\wcec\\storage\/poppins_normal_a62832bf75823019dc29c5a9c470d64d",
+        "500": "C:\\laragon\\www\\wcec\\storage\/poppins_500_a885de0ea35a644243715bf64b6d1a65",
+        "600": "C:\\laragon\\www\\wcec\\storage\/poppins_600_ca6698540fb485d7b756c91a54a37d8e",
+        "bold": "C:\\laragon\\www\\wcec\\storage\/poppins_bold_87c49bf24d72f01a4af573680817521f",
+        "800": "C:\\laragon\\www\\wcec\\storage\/poppins_800_a3f35df90afcc12957674bb493255c2e",
+        "900": "poppins_900_71b6424e9ad5c868ceced6e2a4698840"
+    }
+}

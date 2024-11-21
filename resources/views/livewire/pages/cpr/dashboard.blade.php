@@ -1,50 +1,86 @@
-<div class="flex flex-grow">
+<div class="flex h-full w-full overflow-y-auto">
 
-    <livewire:cpr.sidebar />
+    <livewire:cpr.sidebar/>
 
-    <div class="flex flex-col grow p-6 gap-5">
+    <div class="right w-full flex flex-col grow min-w-80 overflow-y-auto" style="scroll-behavior: smooth;">
 
-        <div class="flex flex-col content-center mt-8 mb-6">
-            <img src="{{ Vite::asset('resources/img/wcec-crest-updated.webp') }}" class="inline-block object-contain h-30 lg:h-[200px]" alt="WCEC Logo">
-            <h2 class="text-center mx-auto mt-6 text-sky-900 text-2xl border-b-4 border-red-700 pb-2">Chartered Practitioners Portal</h2>
-        </div>
+{{--        <livewire:layout.cpr-navigation/>--}}
 
-        @if(session('success'))
-            <div class="w-full font-bold bg-green-100 rounded-2xl text-green-600 px-5 py-2">
-                <span class="text-sm">{{ session('success') }}</span>
-            </div>
-        @endif
+        <div class="flex flex-col p-3 xl:p-6">
 
-        @if(session('error'))
-            <div class="w-full font-bold bg-red-200 rounded-2xl text-red-700 px-5 py-2">
-                <span>{{ session('error') }}</span>
-            </div>
-        @endif
+            <div class="flex flex-col content-center mt-8 mb-4">
+                <img src="{{ Vite::asset('resources/img/wcec-crest-small.webp') }}"
+                     class="inline-block object-contain h-16 lg:h-28" alt="WCEC Logo">
 
-        <div class="w-full font-bold bg-red-200 rounded-2xl text-red-700 px-5 py-2">
-            <span class="text-sm">Dummy Error</span>
-        </div>
-
-        <div class="w-full font-bold bg-green-100 rounded-2xl text-green-700 px-5 py-2">
-            <span class="text-sm">Dummy Success</span>
-        </div>
-
-        @if(Auth::user()->account_type === 'admin')
-
-            <div class="bg-slate-50 rounded-lg p-6 shadow">
-                <p class="mb-4">
-                    Hi, {{ Auth::user()->first_name }},
-                </p>
-                <p>
-                    The next Submission Date is
-                    <span class="font-bold">{{ $nextSubmissionDate }}</span>
-                    ({{ $nextSubmissionDateDifference }}).
-                </p>
+                <h2 class="text-center mx-auto mt-6 text-sky-900 text-3xl border-b-4 border-red-700 pb-2">
+                    <span class="">Chartered Practitioners Portal</span>
+                </h2>
+{{--                debug--}}
+{{--                @foreach($logged_in_user->getRoleNames() as $role)--}}
+{{--                    {{ $role . ' | ' }}--}}
+{{--                @endforeach--}}
             </div>
 
-        @endif
+            @if ($logged_in_user->hasRole('admin'))
+                <x-dashboard-admin :$logged_in_user
+                                   :$next_admission_date
+                                   :$next_admission_date_difference
+                                   :$submitted_eois
+                                   :$submitted_submissions
+                                   :$expiring_registrations
+                                   :$overdue_registrations
+                />
+            @endif
 
+            @if ($logged_in_user->hasRole('applicant'))
+                <x-dashboard-applicant :$logged_in_user
+                                       :$next_admission_date_difference
+                                       :$next_admission_date
+                                       :$registration_fee
+                                       :$submission_fee
+                />
+            @endif
+
+            @if($logged_in_user->hasRole('accepted applicant'))
+                <x-dashboard-accepted-applicant :$logged_in_user
+                                                :$next_admission_date />
+            @endif
+
+            @if($logged_in_user->hasRole('blocked applicant'))
+                <x-dashboard-blocked-applicant :$logged_in_user
+                                               :$renewal_due
+                />
+            @endif
+
+
+            @if ($logged_in_user->hasRole('registrant'))
+                <x-dashboard-registrant :$logged_in_user
+                                        :$renewal_fee
+                                        :$renewal_due
+                                        :$renewal_fee_due
+                                        :$cpd_due
+                                        :$renewal_window
+                                        :$cpd_template_document
+                />
+            @endif
+
+            @if($logged_in_user->hasRole('lapsed registrant'))
+                <x-dashboard-lapsed-registrant :$logged_in_user
+                                               :$renewal_fee
+                                               :$renewal_due
+                />
+            @endif
+
+{{--            <div>--}}
+{{--                {{ $logged_in_user->hasRole('admin') ? 'Admin ' : '' }}--}}
+{{--                {{ $logged_in_user->hasRole('applicant') ? 'applicant ' : '' }}--}}
+{{--                {{ $logged_in_user->hasRole('accepted applicant') ? 'accepted applicant ' : '' }}--}}
+{{--                {{ $logged_in_user->hasRole('blocked applicant') ? 'blocked applicant ' : '' }}--}}
+{{--                {{ $logged_in_user->hasRole('registrant') ? 'registrant ' : '' }}--}}
+{{--                {{ $logged_in_user->hasRole('lapsed registrant') ? 'lapsed registrant ' : '' }}--}}
+{{--            </div>--}}
+
+        </div>
 
     </div>
-
 </div>

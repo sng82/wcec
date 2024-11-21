@@ -1,0 +1,111 @@
+$standard_border_radius: 6px;
+
+.trix-block {
+
+    h1 {
+        font-family: noto, serif;
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    h2 {
+        font-family: noto, serif;
+        font-weight: 500;
+    }
+
+    ul,
+    ol {
+        li {
+            margin-left: 20px;
+        }
+    }
+
+    ul {
+        li {
+            list-style: circle;
+        }
+    }
+
+    ol {
+        li {
+            list-style: decimal;
+        }
+    }
+
+    div {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    a {
+        text-decoration: underline;
+        color: #2563eb;
+
+        &:hover {
+            cursor: pointer;
+            color: #3b82f6 !important;
+        }
+    }
+
+    blockquote {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border-left: 4px solid #94a3b8;
+        padding-left: 10px;
+        //font-style: italic;
+    }
+
+    pre {
+        color: #ffffff;
+        background: #000000;
+        display: inline-block;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+}
+
+trix-toolbar {
+    // hide buttons
+    .trix-button--icon-link,
+    .trix-button--icon-attach,
+    .trix-button--icon-quote,
+    .trix-button--icon-code,
+    .trix-button--icon-increase-nesting-level {
+        display: none;
+    }
+
+    .trix-button-group.trix-button-group--file-tools {
+        border: none !important;
+    }
+
+    .trix-button-group {
+        border-radius: $standard_border_radius;
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+    }
+
+    .trix-button {
+        background: #e0f2fe;
+
+        &:not([disabled]) {
+            &:hover {
+                background: #bae6fd;
+            }
+        }
+
+        &:first-of-type {
+            border-radius: $standard_border_radius 0 0 $standard_border_radius;
+        }
+        &:last-of-type {
+            border-radius: 0 $standard_border_radius $standard_border_radius 0;
+        }
+    }
+
+    // manually round corners where buttons have been hidden
+    .trix-button--icon-strike,
+    .trix-button--icon-decrease-nesting-level {
+        border-radius: 0 $standard_border_radius $standard_border_radius 0;
+    }
+
+}
+
+

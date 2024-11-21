@@ -5,6 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Builder;
+
+/**
+ * @mixin Builder
+ * @mixin IdeHelperSubmissionDate
+ */
 
 class SubmissionDate extends Model
 {
@@ -18,7 +24,8 @@ class SubmissionDate extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'submission_date',
+        'admission_date',
+        'submission_deadline',
         'updated_by',
         'deleted_by',
         'deleted_at',
@@ -37,7 +44,8 @@ class SubmissionDate extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'submission_date' => 'date',
+        'admission_date' => 'date',
+        'submission_deadline' => 'date',
         'deleted_at' => 'datetime',
     ];
 

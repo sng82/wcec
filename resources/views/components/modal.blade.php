@@ -3,26 +3,26 @@
 <div>
     @if($formAction)
         <form wire:submit.prevent="{{ $formAction }}">
-            @endif
-            <div class="bg-white p-4 sm:px-6 sm:pt-5 border-b border-slate-150">
-                @if(isset($title))
-                    <h3 class="text-2xl leading-6 font-medium text-sky-700">
-                        {{ $title }}
-                    </h3>
-                @endif
-            </div>
-            <div class="bg-white p-4 sm:px-6 ">
-                <div class="">
-                    {{ $content }}
-                </div>
-            </div>
+    @endif
+    <div class="bg-white p-4 sm:px-6 sm:pt-5 border-b border-slate-150">
+        @if(isset($title))
+            <h3 class="text-2xl leading-6 font-medium text-sky-700">
+                {{ $title }}
+            </h3>
+        @endif
+    </div>
+    <div class="bg-white p-4 sm:px-6 ">
+        <div class="">
+            {{ $content ?? '' }}
+        </div>
+    </div>
 
-            @if($buttons)
-            <div class="bg-white p-4 sm:px-6 sm:flex border-t border-slate-150">
-                {{ $buttons }}
-            </div>
-            @endif
-            @if($formAction)
+    @if(isset($buttons) && $buttons)
+        <div class="bg-white p-4 sm:px-6 sm:flex border-t border-slate-150">
+            {{ $buttons }}
+        </div>
+    @endif
+    @if($formAction)
         </form>
     @endif
 </div>

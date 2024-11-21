@@ -8,15 +8,20 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
+use Spatie\Honeypot\Http\Livewire\Concerns\UsesSpamProtection;
+use Spatie\Honeypot\Http\Livewire\Concerns\HoneypotData;
 
 new #[Layout('layouts.guest')] class extends Component
 {
+    use UsesSpamProtection;
+
     public string $first_name = '';
     public string $last_name = '';
     public string $email = '';
     public string $password = '';
     public string $password_confirmation = '';
 
+    public HoneypotData $extraFields;
 
     public function mount()
     {
@@ -24,6 +29,8 @@ new #[Layout('layouts.guest')] class extends Component
         if (!Config::get('cpp.active')) {
             Redirect::to('/cpr-coming-soon');
         }
+
+        $this->extraFields = new HoneypotData();
     }
 
     /**
@@ -31,16 +38,20 @@ new #[Layout('layouts.guest')] class extends Component
      */
     public function register(): void
     {
+        $this->protectAgainstSpam();
+
         $validated = $this->validate([
             'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
+            'last_name'  => ['required', 'string', 'max:255'],
+            'email'      => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password'   => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
 
         event(new Registered($user = User::create($validated)));
+
+        $user->assignRole('applicant');
 
         Auth::login($user);
 
@@ -50,9 +61,13 @@ new #[Layout('layouts.guest')] class extends Component
 
 <div>
 
-    <h1 class="text-sky-900 text-2xl mb-4 border-b-4 border-red-700 pb-2">Expression of Interest</h1>
+    <h1 class="text-sky-900 text-2xl mb-4 border-b-4 border-red-700 pb-2">Create Account</h1>
+    <p class="mb-4">
+        The first step to joining the Chartered Practitioners Register is to create an account with us...
+    </p>
 
     <form wire:submit="register">
+        <x-honeypot livewire-model="extraFields" />
         <!-- First Name -->
         <div>
             <x-input-label for="first_name" :value="__('First Name')" />
@@ -61,7 +76,7 @@ new #[Layout('layouts.guest')] class extends Component
         </div>
 
         <!-- First Name -->
-        <div>
+        <div class="mt-4">
             <x-input-label for="last_name" :value="__('Last Name')" />
             <x-text-input wire:model="last_name" id="last_name" class="block mt-1 w-full" type="text" name="last_name" required autofocus autocomplete="last_name" />
             <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
@@ -97,14 +112,14 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}" wire:navigate>
-                {{ __('Already registered?') }}
+        <div class="flex items-center justify-between mt-4">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500" href="{{ route('login') }}" wire:navigate>
+                {{ __('Already have an account?') }}
             </a>
-
             <x-primary-button class="ms-4">
-                {{ __('Register') }}
+                {{ __('Create') }}
             </x-primary-button>
         </div>
+
     </form>
 </div>

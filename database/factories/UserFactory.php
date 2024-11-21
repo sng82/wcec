@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -12,6 +13,7 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     protected static ?string $password;
+    private static int $reg_no = 1;
 
     /**
      * Define the model's default state.
@@ -20,12 +22,45 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+//        $last_reg_no = 0;
+//        $highest_existing_reg_no = User::orderBy('reg_no', 'desc')->first()?->reg_no;
+//        if ($highest_existing_reg_no){
+//            $last_reg_no = (int)$highest_existing_reg_no;
+//        }
+
+        $gender = fake()->randomElement(['male', 'female']);
+        $first_name = fake('en_GB')->firstName($gender);
+        $last_name = fake('en_GB')->lastName();
+        $email = (fake()->numberBetween(1,2) > 1 ? $first_name : $first_name[0])
+                 . (fake()->numberBetween(1,3) > 1
+                        ? fake()->randomElement(['','','','','-','_','.'])
+                        : fake()->randomLetter()
+                 )
+                 . $last_name
+                 . (fake()->numberBetween(1,3) > 1
+                        ? fake()->randomElement(['','','','','','01','1','2','3'])
+                        : fake()->numberBetween(1970,2006)
+                 )
+                 . '@example'
+                 . fake()->randomElement([
+                     '.co.uk','.co.uk','.co.uk','.co.uk',
+                     '.com','.com','.com',
+                     '.org',
+                     '.org.uk'
+                 ]);
+
+        $mobile_phone_no = '07' . fake()->numberBetween(100000000,999999999);
+
         return [
-            'first_name' => fake()->firstName(),
-            'last_name' => fake()->lastName(),
-            'email' => fake()->unique()->safeEmail(),
+//            'title' => fake()->title($gender),
+            'reg_no' => self::$reg_no++,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'email' => strtolower($email),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'phone_main' => fake('en_GB')->phoneNumber(),
+            'phone_mobile' => fake()->numberBetween(1,2) > 1 ? $mobile_phone_no : null,
             'remember_token' => Str::random(10),
         ];
     }
