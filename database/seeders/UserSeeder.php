@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
                 'first_name' => 'Lynn',
                 'last_name' => 'Webster',
                 'email' => 'lynn@lwc-ltd.co.uk',
-                'password' => Hash::make('TempPassword1^$('),
+                'password' => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('admin');
 
@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
                 'first_name' => 'Lorraine',
                 'last_name' => 'Larman',
                 'email' => 'lsafetysolutions@outlook.com',
-                'password' => Hash::make('TempPassword2*£('),
+                'password' => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('admin');
 
@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
                 'first_name' => 'Mike',
                 'last_name' => 'Jenkins',
                 'email' => 'clerk@wc-ec.com',
-                'password' => Hash::make('TempPassword3)^$'),
+                'password' => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('admin');
 
@@ -540,9 +540,9 @@ class UserSeeder extends Seeder
                 'submission_status'         => 'accepted',
                 'registration_pathway'      => 'unknown',
                 'became_registrant_at'      => '2022-11-08',
-                'cpd_last_submitted_at'     => '2023-11-08',
-                'renewal_fee_last_paid_at'  => '2023-11-08',
-                'registration_expires_at'   => '2024-11-08',
+                'cpd_last_submitted_at'     => '2024-11-08',
+                'renewal_fee_last_paid_at'  => '2024-11-08',
+                'registration_expires_at'   => '2025-11-08',
                 'password'                  => Hash::make(Str::password(12)),
             ]);
             $user->assignRole('registrant');
