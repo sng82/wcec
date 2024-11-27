@@ -221,8 +221,8 @@ class UserSeeder extends Seeder
 
             $user = User::create([
                 'reg_no'                    => 10,
-                'first_name'                => 'Callum',
-                'last_name'                 => 'MacLeod',
+                'first_name'                => 'Gary',
+                'last_name'                 => 'Fage',
                 'email'                     => 'gary@janitorialexpress.co.uk',
                 'registration_fee_paid'     => 1,
                 'eoi_status'                => 'accepted',
