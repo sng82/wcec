@@ -166,7 +166,7 @@ class AssessSubmission extends Component
                 $applicant->assignRole('accepted applicant');
 
                 if (empty($this->applicant->reg_no)) {
-                    $applicant->reg_no = User::orderBy('reg_no', 'DESC')->first()->reg_no + 1;
+                    $applicant->reg_no = User::whereNotNull('reg_no')->orderBy('reg_no', 'DESC')->first()->reg_no + 1;
                 }
 
                 if (
