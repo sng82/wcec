@@ -213,7 +213,7 @@ class Dashboard extends Component
                     ],
                     'quantity' => 1,
                     // Tax rates are saved within Stripe account: https://dashboard.stripe.com/tax-rates
-                    'tax_rates' => ['txr_1O6uwNJA8pAMucLLNSw2ghm4'], // VAT @ 20%, exclusive
+//                    'tax_rates' => ['txr_1O6uwNJA8pAMucLLNSw2ghm4'], // VAT @ 20%, exclusive
                 ]],
                 'automatic_tax' => ['enabled' => true],
                 'mode' => 'payment',
